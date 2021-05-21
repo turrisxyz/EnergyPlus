@@ -3297,11 +3297,11 @@ namespace CurveManager {
     }
 
     void checkCurveIsNormalizedToOne(EnergyPlusData &state,
-                                     std::string const callingRoutineObj, // calling routine with object type
-                                     std::string const objectName,        // parent object where curve is used
+                                     std::string const &callingRoutineObj, // calling routine with object type
+                                     std::string const &objectName,        // parent object where curve is used
                                      int const curveIndex,                // index to curve object
-                                     std::string const cFieldName,        // object field name
-                                     std::string const cFieldValue,       // user input curve name
+                                     std::string const &cFieldName,        // object field name
+                                     std::string const &cFieldValue,       // user input curve name
                                      Real64 const Var1,                   // required 1st independent variable
                                      Optional<Real64 const> Var2,         // 2nd independent variable
                                      Optional<Real64 const> Var3,         // 3rd independent variable

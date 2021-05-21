@@ -530,7 +530,7 @@ namespace VariableSpeedCoils {
 
     void setVarSpeedHPWHFanIndex(EnergyPlusData &state, int const dXCoilNum, int const fanIndex);
 
-    void setVarSpeedFanInfo(EnergyPlusData &state, int const dXCoilNum, std::string const fanName, int const fanIndex, int const fanTypeNum);
+    void setVarSpeedFanInfo(EnergyPlusData &state, int const dXCoilNum, std::string const &fanName, int const fanIndex, int const fanTypeNum);
 
 } // namespace VariableSpeedCoils
 

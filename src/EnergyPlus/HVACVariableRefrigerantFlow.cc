@@ -10070,7 +10070,7 @@ void UpdateVRFCondenser(EnergyPlusData &state, int const VRFCond) // index to VR
     state.dataLoopNodes->Node(CondenserOutletNode).MassFlowRateMinAvail = state.dataLoopNodes->Node(CondenserOutletNode).MassFlowRateMinAvail;
 }
 
-void isVRFCoilPresent(EnergyPlusData &state, std::string const VRFTUName, bool &CoolCoilPresent, bool &HeatCoilPresent)
+void isVRFCoilPresent(EnergyPlusData &state, std::string const &VRFTUName, bool &CoolCoilPresent, bool &HeatCoilPresent)
 {
 
     if (state.dataHVACVarRefFlow->GetVRFInputFlag) {
@@ -10894,7 +10894,7 @@ int GetVRFTUZoneInletAirNode(EnergyPlusData &state, int const VRFTUNum)
     }
 }
 
-int GetVRFTUOutAirNodeFromName(EnergyPlusData &state, std::string const VRFTUName, bool &errorsFound)
+int GetVRFTUOutAirNodeFromName(EnergyPlusData &state, std::string const &VRFTUName, bool &errorsFound)
 {
     int NodeNum; // return value of node number
 
@@ -10916,7 +10916,7 @@ int GetVRFTUOutAirNodeFromName(EnergyPlusData &state, std::string const VRFTUNam
     return NodeNum;
 }
 
-int GetVRFTUInAirNodeFromName(EnergyPlusData &state, std::string const VRFTUName, bool &errorsFound)
+int GetVRFTUInAirNodeFromName(EnergyPlusData &state, std::string const &VRFTUName, bool &errorsFound)
 {
     int NodeNum; // return value of node number
 

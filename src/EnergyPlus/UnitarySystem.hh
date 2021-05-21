@@ -808,7 +808,7 @@ namespace UnitarySystems {
             EnergyPlusData &state, std::string const &Name, bool const ZoneEquipment, int const ZoneOAUnitNum, bool &errorsFound);
 
         static HVACSystemData *
-        factory(EnergyPlusData &state, int const object_type_of_num, std::string const objectName, bool const ZoneEquipment, int const ZoneOAUnitNum);
+        factory(EnergyPlusData &state, int const object_type_of_num, std::string const &objectName, bool const ZoneEquipment, int const ZoneOAUnitNum);
 
         void simulateSys(EnergyPlusData &state,
                          std::string const &Name,

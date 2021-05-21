@@ -444,7 +444,7 @@ namespace UnitarySystems {
     } // namespace UnitarySystems
 
     HVACSystemData *UnitarySys::factory(
-        EnergyPlusData &state, int const object_type_of_num, std::string const objectName, bool const ZoneEquipment, int const ZoneOAUnitNum)
+        EnergyPlusData &state, int const object_type_of_num, std::string const &objectName, bool const ZoneEquipment, int const ZoneOAUnitNum)
     {
         if (state.dataUnitarySystems->getInputOnceFlag) {
             UnitarySys::getUnitarySystemInput(state, objectName, ZoneEquipment, ZoneOAUnitNum);
