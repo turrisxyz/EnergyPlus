@@ -114,7 +114,7 @@ Array1D<Real64> const RoughnessMultiplier(6, {2.17, 1.67, 1.52, 1.13, 1.11, 1.0}
 
 void InitInteriorConvectionCoeffs(EnergyPlusData &state,
                                   const Array1D<Real64> &SurfaceTemperatures, // Temperature of surfaces for evaluation of HcIn
-                                  Optional_int_const ZoneToResimulate         // if passed in, then only calculate surfaces that have this zone
+                                  Optional_int_const const &ZoneToResimulate         // if passed in, then only calculate surfaces that have this zone
 )
 {
 

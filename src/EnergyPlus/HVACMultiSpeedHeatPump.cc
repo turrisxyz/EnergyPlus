@@ -4292,7 +4292,7 @@ namespace HVACMultiSpeedHeatPump {
                            int const MSHeatPumpNum,          // Unit index
                            Real64 const PartLoadRatio,       // unit part load ratio
                            Real64 &OnOffAirFlowRatio,        // ratio of compressor ON airflow to average airflow over timestep
-                           Optional_int_const SpeedNum,      // Speed number
+                           Optional_int_const const &SpeedNum,      // Speed number
                            Optional<Real64 const> const &SpeedRatio // Speed ratio
     )
     {

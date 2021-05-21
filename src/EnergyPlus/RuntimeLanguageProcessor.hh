@@ -127,8 +127,8 @@ namespace RuntimeLanguageProcessor {
                        int StackNum,
                        int LineNum,
                        DataRuntimeLanguage::ErlKeywordParam Keyword,
-                       Optional_int_const Argument1 = _, // Erl variable index
-                       Optional_int_const Argument2 = _);
+                       Optional_int_const const &Argument1 = _, // Erl variable index
+                       Optional_int_const const &Argument2 = _);
 
     void AddError(EnergyPlusData &state,
                   int StackNum,            // index pointer to location in ErlStack structure
@@ -175,7 +175,7 @@ namespace RuntimeLanguageProcessor {
 
     void ReportRuntimeLanguage(EnergyPlusData &state);
 
-    ErlValueType SetErlValueNumber(Real64 Number, Optional<ErlValueType const> OrigValue = _);
+    ErlValueType SetErlValueNumber(Real64 Number, Optional<ErlValueType const> const &OrigValue = _);
 
     ErlValueType StringValue(std::string const &String);
 
@@ -185,7 +185,7 @@ namespace RuntimeLanguageProcessor {
                         std::string const &VariableName, // variable name in Erl
                         int StackNum);
 
-    int NewEMSVariable(EnergyPlusData &state, std::string const &VariableName, int StackNum, Optional<ErlValueType const> Value = _);
+    int NewEMSVariable(EnergyPlusData &state, std::string const &VariableName, int StackNum, Optional<ErlValueType const> const &Value = _);
 
     void SetupPossibleOperators(EnergyPlusData &state);
 

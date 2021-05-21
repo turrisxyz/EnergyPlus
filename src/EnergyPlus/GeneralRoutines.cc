@@ -124,15 +124,15 @@ void ControlCompOutput(EnergyPlusData &state,
                        Real64 const ControlOffset,            // really the tolerance
                        int &ControlCompTypeNum,               // Internal type num for CompType
                        int &CompErrIndex,                     // for Recurring error call
-                       Optional_int_const TempInNode,         // inlet node for output calculation
-                       Optional_int_const TempOutNode,        // outlet node for output calculation
+                       Optional_int_const const &TempInNode,         // inlet node for output calculation
+                       Optional_int_const const &TempOutNode,        // outlet node for output calculation
                        Optional<Real64 const> const &AirMassFlow,    // air mass flow rate
-                       Optional_int_const Action,             // 1=reverse; 2=normal
-                       Optional_int_const EquipIndex,         // Identifier for equipment of Outdoor Air Unit "ONLY"
-                       Optional_int_const LoopNum,            // for plant components, plant loop index
-                       Optional_int_const LoopSide,           // for plant components, plant loop side index
-                       Optional_int_const BranchIndex,        // for plant components, plant branch index
-                       Optional_int_const ControlledZoneIndex // controlled zone index for the zone containing the component
+                       Optional_int_const const &Action,             // 1=reverse; 2=normal
+                       Optional_int_const const &EquipIndex,         // Identifier for equipment of Outdoor Air Unit "ONLY"
+                       Optional_int_const const &LoopNum,            // for plant components, plant loop index
+                       Optional_int_const const &LoopSide,           // for plant components, plant loop side index
+                       Optional_int_const const &BranchIndex,        // for plant components, plant branch index
+                       Optional_int_const const &ControlledZoneIndex // controlled zone index for the zone containing the component
 )
 {
 

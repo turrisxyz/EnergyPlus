@@ -139,13 +139,13 @@ namespace DataTimings {
     void epStopTime(
 #ifdef EP_NO_Timings
         [[maybe_unused]] std::string const &ctimingElementstring,
-        [[maybe_unused]] Optional_bool_const printit, // true if it should be printed here.
-        [[maybe_unused]] Optional_string_const wprint // only needed (and assumed, if printit is true)
+        [[maybe_unused]] Optional_bool_const const &printit, // true if it should be printed here.
+        [[maybe_unused]] Optional_string_const const &wprint // only needed (and assumed, if printit is true)
 #endif
 #ifdef EP_Timings
             std::string const &ctimingElementstring,
-        Optional_bool_const printit, // true if it should be printed here.
-        Optional_string_const wprint // only needed (and assumed, if printit is true)
+        Optional_bool_const const &printit, // true if it should be printed here.
+        Optional_string_const const &wprint // only needed (and assumed, if printit is true)
 #endif
     )
     {

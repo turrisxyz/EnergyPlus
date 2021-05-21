@@ -1394,7 +1394,7 @@ void SQLite::createSQLiteReportDictionaryRecord(int const reportVariableReportID
                                                 std::string const &units,
                                                 int const reportingFreq,
                                                 bool isMeter,
-                                                Optional_string_const scheduleName)
+                                                Optional_string_const const &scheduleName)
 {
     if (m_writeOutputToSQLite) {
         sqliteBindInteger(m_reportDictionaryInsertStmt, 1, reportVariableReportID);
@@ -1421,12 +1421,12 @@ void SQLite::createSQLiteReportDictionaryRecord(int const reportVariableReportID
 
 void SQLite::createSQLiteReportDataRecord(int const recordIndex,
                                           Real64 const value,
-                                          Optional_int_const reportingInterval,
+                                          Optional_int_const const &reportingInterval,
                                           Optional<Real64 const> const &minValue,
-                                          Optional_int_const minValueDate,
+                                          Optional_int_const const &minValueDate,
                                           Optional<Real64 const> const &maxValue,
-                                          Optional_int_const maxValueDate,
-                                          Optional_int_const minutesPerTimeStep)
+                                          Optional_int_const const &maxValueDate,
+                                          Optional_int_const const &minutesPerTimeStep)
 {
     if (m_writeOutputToSQLite) {
         ++m_dataIndex;
@@ -1538,13 +1538,13 @@ void SQLite::createSQLiteTimeIndexRecord(int const reportingInterval,
                                          int const cumlativeSimulationDays,
                                          int const curEnvirNum,
                                          int const simulationYear,
-                                         Optional_int_const month,
-                                         Optional_int_const dayOfMonth,
-                                         Optional_int_const hour,
+                                         Optional_int_const const &month,
+                                         Optional_int_const const &dayOfMonth,
+                                         Optional_int_const const &hour,
                                          Optional<Real64 const> const &endMinute,
                                          Optional<Real64 const> const &startMinute,
-                                         Optional_int_const dst,
-                                         Optional_string_const dayType,
+                                         Optional_int_const const &dst,
+                                         Optional_string_const const &dayType,
                                          bool const warmupFlag)
 {
     if (m_writeOutputToSQLite) {

@@ -1065,12 +1065,12 @@ void InputProcessor::rangeCheck(EnergyPlusData &state,
                                 std::string const &WhatFieldString,      // Descriptive field for string
                                 std::string const &WhatObjectString,     // Descriptive field for object, Zone Name, etc.
                                 std::string const &ErrorLevel,           // 'Warning','Severe','Fatal')
-                                Optional_string_const LowerBoundString,  // String for error message, if applicable
-                                Optional_bool_const LowerBoundCondition, // Condition for error condition, if applicable
-                                Optional_string_const UpperBoundString,  // String for error message, if applicable
-                                Optional_bool_const UpperBoundCondition, // Condition for error condition, if applicable
-                                Optional_string_const ValueString,       // Value with digits if to be displayed with error
-                                Optional_string_const WhatObjectName     // ObjectName -- used for error messages
+                                Optional_string_const const &LowerBoundString,  // String for error message, if applicable
+                                Optional_bool_const const &LowerBoundCondition, // Condition for error condition, if applicable
+                                Optional_string_const const &UpperBoundString,  // String for error message, if applicable
+                                Optional_bool_const const &UpperBoundCondition, // Condition for error condition, if applicable
+                                Optional_string_const const &ValueString,       // Value with digits if to be displayed with error
+                                Optional_string_const const &WhatObjectName     // ObjectName -- used for error messages
 )
 {
 

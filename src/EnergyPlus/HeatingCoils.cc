@@ -127,8 +127,8 @@ namespace HeatingCoils {
                                        Optional<Real64 const> const &QCoilReq, // coil load to be met
                                        Optional_int CompIndex,
                                        Optional<Real64> QCoilActual,         // coil load actually delivered returned to calling component
-                                       Optional_bool_const SuppHeat,         // True if current heating coil is a supplemental heating coil
-                                       Optional_int_const FanOpMode,         // fan operating mode, CycFanCycCoil or ContFanCycCoil
+                                       Optional_bool_const const &SuppHeat,         // True if current heating coil is a supplemental heating coil
+                                       Optional_int_const const &FanOpMode,         // fan operating mode, CycFanCycCoil or ContFanCycCoil
                                        Optional<Real64 const> const &PartLoadRatio, // part-load ratio of heating coil
                                        Optional_int StageNum,
                                        Optional<Real64 const> const &SpeedRatio // Speed ratio of MultiStage heating coil

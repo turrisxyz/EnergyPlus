@@ -1344,7 +1344,7 @@ void ParseTime(Real64 const Time, // Time value in seconds
 void ScanForReports(EnergyPlusData &state,
                     std::string const &reportName,
                     bool &DoReport,
-                    Optional_string_const ReportKey,
+                    Optional_string_const const &ReportKey,
                     Optional_string Option1,
                     Optional_string Option2)
 {

@@ -144,7 +144,7 @@ void SimulateWaterCoilComponents(EnergyPlusData &state,
                                  bool const FirstHVACIteration,
                                  int &CompIndex,
                                  Optional<Real64> QActual,
-                                 Optional_int_const FanOpMode,
+                                 Optional_int_const const &FanOpMode,
                                  Optional<Real64 const> const &PartLoadRatio)
 {
 

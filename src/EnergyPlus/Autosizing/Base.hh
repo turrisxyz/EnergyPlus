@@ -297,7 +297,7 @@ public:
                                   std::string const &CompName,
                                   std::string const &VarDesc,
                                   Real64 VarValue,
-                                  Optional_string_const UsrDesc = _,
+                                  Optional_string_const const &UsrDesc = _,
                                   Optional<Real64 const> const &UsrValue = _);
 
     Real64 setOAFracForZoneEqSizing(EnergyPlusData &state, Real64 const &desMassFlow, DataSizing::ZoneEqSizingData const &zoneEqSizing);

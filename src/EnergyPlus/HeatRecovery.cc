@@ -147,11 +147,11 @@ namespace HeatRecovery {
                          int &CompIndex,                          // Pointer to Component
                          int const FanOpMode,                     // Supply air fan operating mode
                          Optional<Real64 const> const &HXPartLoadRatio,  // Part load ratio requested of DX compressor
-                         Optional_bool_const HXUnitEnable,        // Flag to operate heat exchanger
-                         Optional_int_const CompanionCoilIndex,   // index of companion cooling coil
-                         Optional_bool_const RegenInletIsOANode,  // flag to determine if supply inlet is OA node, if so air flow cycles
-                         Optional_bool_const EconomizerFlag,      // economizer operation flag passed by airloop or OA sys
-                         Optional_bool_const HighHumCtrlFlag,     // high humidity control flag passed by airloop or OA sys
+                         Optional_bool_const const &HXUnitEnable,        // Flag to operate heat exchanger
+                         Optional_int_const const &CompanionCoilIndex,   // index of companion cooling coil
+                         Optional_bool_const const &RegenInletIsOANode,  // flag to determine if supply inlet is OA node, if so air flow cycles
+                         Optional_bool_const const &EconomizerFlag,      // economizer operation flag passed by airloop or OA sys
+                         Optional_bool_const const &HighHumCtrlFlag,     // high humidity control flag passed by airloop or OA sys
                          Optional_int_const CompanionCoilType_Num // cooling coil type of coil
     )
     {
@@ -1956,8 +1956,8 @@ namespace HeatRecovery {
     void CalcAirToAirPlateHeatExch(EnergyPlusData &state,
                                    int const ExNum,                    // number of the current heat exchanger being simulated
                                    bool const HXUnitOn,                // flag to simulate heat exchager heat recovery
-                                   Optional_bool_const EconomizerFlag, // economizer flag pass by air loop or OA sys
-                                   Optional_bool_const HighHumCtrlFlag // high humidity control flag passed by airloop or OA sys
+                                   Optional_bool_const const &EconomizerFlag, // economizer flag pass by air loop or OA sys
+                                   Optional_bool_const const &HighHumCtrlFlag // high humidity control flag passed by airloop or OA sys
     )
     {
 
@@ -2184,8 +2184,8 @@ namespace HeatRecovery {
                                      bool const HXUnitOn,                   // flag to simulate heat exchanger heat recovery
                                      bool const FirstHVACIteration,         // first HVAC iteration flag
                                      int const FanOpMode,                   // Supply air fan operating mode (1=cycling, 2=constant)
-                                     Optional_bool_const EconomizerFlag,    // economizer flag pass by air loop or OA sys
-                                     Optional_bool_const HighHumCtrlFlag,   // high humidity control flag passed by airloop or OA sys
+                                     Optional_bool_const const &EconomizerFlag,    // economizer flag pass by air loop or OA sys
+                                     Optional_bool_const const &HighHumCtrlFlag,   // high humidity control flag passed by airloop or OA sys
                                      Optional<Real64 const> const &HXPartLoadRatio //
     )
     {
@@ -2841,8 +2841,8 @@ namespace HeatRecovery {
                                        Real64 const PartLoadRatio,    // Part load ratio requested of DX compressor
                                        int const CompanionCoilIndex,  // index of companion cooling coil
                                        bool const RegenInletIsOANode, // Flag to determine if regen side inlet is OANode, if so this air stream cycles
-                                       Optional_bool_const EconomizerFlag, // economizer flag pass by air loop or OA sys
-                                       Optional_bool_const HighHumCtrlFlag // high humidity control flag passed by airloop or OA sys
+                                       Optional_bool_const const &EconomizerFlag, // economizer flag pass by air loop or OA sys
+                                       Optional_bool_const const &HighHumCtrlFlag // high humidity control flag passed by airloop or OA sys
     )
     {
 

@@ -15432,7 +15432,7 @@ void WriteSubtitle(EnergyPlusData &state, std::string const &subtitle)
     }
 }
 
-void WriteTextLine(EnergyPlusData &state, std::string const &lineOfText, Optional_bool_const isBold)
+void WriteTextLine(EnergyPlusData &state, std::string const &lineOfText, Optional_bool_const const &isBold)
 {
     // SUBROUTINE INFORMATION:
     //       AUTHOR         Jason Glazer
@@ -15491,8 +15491,8 @@ void WriteTable(EnergyPlusData &state,
                 const Array1D_string &rowLabels,
                 const Array1D_string &columnLabels,
                 Array1D_int &widthColumn,
-                Optional_bool_const transposeXML,
-                Optional_string_const footnoteText)
+                Optional_bool_const const &transposeXML,
+                Optional_string_const const &footnoteText)
 {
     // SUBROUTINE INFORMATION:
     //       AUTHOR         Jason Glazer

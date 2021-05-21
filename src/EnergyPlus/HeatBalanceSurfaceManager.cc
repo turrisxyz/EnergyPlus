@@ -5115,7 +5115,7 @@ void UpdateThermalHistories(EnergyPlusData &state)
     } // ...end of loop over all (heat transfer) surfaces
 }
 
-void CalculateZoneMRT(EnergyPlusData &state, Optional_int_const ZoneToResimulate) // if passed in, then only calculate surfaces that have this zone
+void CalculateZoneMRT(EnergyPlusData &state, Optional_int_const const &ZoneToResimulate) // if passed in, then only calculate surfaces that have this zone
 {
 
     // SUBROUTINE INFORMATION:
@@ -5716,7 +5716,7 @@ void ReportIntMovInsInsideSurfTemp(EnergyPlusData &state)
 // Formerly EXTERNAL SUBROUTINES (heavily related to HeatBalanceSurfaceManager) now moved into namespace
 
 void CalcHeatBalanceOutsideSurf(EnergyPlusData &state,
-                                Optional_int_const ZoneToResimulate) // if passed in, then only calculate surfaces that have this zone
+                                Optional_int_const const &ZoneToResimulate) // if passed in, then only calculate surfaces that have this zone
 {
 
     // SUBROUTINE INFORMATION:
@@ -6445,7 +6445,7 @@ Real64 GetQdotConvOutRepPerArea(EnergyPlusData &state, int const SurfNum)
 }
 
 void CalcHeatBalanceInsideSurf(EnergyPlusData &state,
-                               Optional_int_const ZoneToResimulate) // if passed in, then only calculate surfaces that have this zone
+                               Optional_int_const const &ZoneToResimulate) // if passed in, then only calculate surfaces that have this zone
 {
     auto &Surface(state.dataSurface->Surface);
     if (state.dataHeatBalSurfMgr->calcHeatBalInsideSurfFirstTime) {
@@ -6557,7 +6557,7 @@ void CalcHeatBalanceInsideSurf2(EnergyPlusData &state,
                                 const std::vector<int> &IZSurfs,          // Interzone heat transfer surfaces to simulate
                                 const std::vector<int> &HTNonWindowSurfs, // Non-window heat transfer surfaces to simulate
                                 const std::vector<int> &HTWindowSurfs,    // Window heat transfer surfaces to simulate
-                                Optional_int_const ZoneToResimulate)
+                                Optional_int_const const &ZoneToResimulate)
 {
     // SUBROUTINE INFORMATION:
     //       AUTHOR         George Walton
@@ -7466,7 +7466,7 @@ void CalcHeatBalanceInsideSurf2CTFOnly(EnergyPlusData &state,
                                        const int FirstZone,             // First zone to simulate
                                        const int LastZone,              // Last zone to simulate
                                        const std::vector<int> &IZSurfs, // Last zone to simulate
-                                       Optional_int_const ZoneToResimulate)
+                                       Optional_int_const const &ZoneToResimulate)
 {
 
     // This function performs a heat balance on the inside face of each

@@ -1428,7 +1428,7 @@ void RegisterPlantCompDesignFlow(EnergyPlusData &state,
 void SafeCopyPlantNode(EnergyPlusData &state,
                        int const InletNodeNum,
                        int const OutletNodeNum,
-                       Optional_int_const LoopNum,
+                       Optional_int_const const &LoopNum,
                        [[maybe_unused]] Optional<Real64 const> const &OutletTemp // set on outlet node if present and water.
 )
 {
@@ -1645,8 +1645,8 @@ void ScanPlantLoopsForObject(EnergyPlusData &state,
                              Optional<Real64 const> const &LowLimitTemp,
                              Optional<Real64 const> const &HighLimitTemp,
                              Optional_int CountMatchPlantLoops,
-                             Optional_int_const InletNodeNumber,
-                             Optional_int_const SingleLoopSearch)
+                             Optional_int_const const &InletNodeNumber,
+                             Optional_int_const const &SingleLoopSearch)
 {
 
     // SUBROUTINE INFORMATION:
@@ -1950,7 +1950,7 @@ int MyPlantSizingIndex(EnergyPlusData &state,
                        int const NodeNumIn,                   // component water inlet node
                        [[maybe_unused]] int const NodeNumOut, // component water outlet node
                        bool &ErrorsFound,                     // set to true if there's an error, unchanged otherwise
-                       Optional_bool_const SupressErrors      // used for WSHP's where condenser loop may not be on a plant loop
+                       Optional_bool_const const &SupressErrors      // used for WSHP's where condenser loop may not be on a plant loop
 )
 {
 

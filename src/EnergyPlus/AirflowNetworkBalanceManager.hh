@@ -103,8 +103,8 @@ namespace AirflowNetworkBalanceManager {
     // Functions
 
     void ManageAirflowNetworkBalance(EnergyPlusData &state,
-                                     Optional_bool_const FirstHVACIteration = _, // True when solution technique on first iteration
-                                     Optional_int_const Iter = _,                // Iteration number
+                                     Optional_bool_const const &FirstHVACIteration = _, // True when solution technique on first iteration
+                                     Optional_int_const const &Iter = _,                // Iteration number
                                      Optional_bool ResimulateAirZone = _         // True when solution technique on third iteration
     );
 
@@ -153,7 +153,7 @@ namespace AirflowNetworkBalanceManager {
 
     void ReportAirflowNetwork(EnergyPlusData &state);
 
-    void UpdateAirflowNetwork(EnergyPlusData &state, Optional_bool_const FirstHVACIteration = _); // True when solution technique on first iteration
+    void UpdateAirflowNetwork(EnergyPlusData &state, Optional_bool_const const &FirstHVACIteration = _); // True when solution technique on first iteration
 
     void AirflowNetworkVentingControl(EnergyPlusData &state,
                                       int i,             // AirflowNetwork surface number

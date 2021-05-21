@@ -100,8 +100,8 @@ void SimPressureDropSystem(EnergyPlusData &state,
                            int const LoopNum,                       // Plant Loop to update pressure information
                            bool const FirstHVACIteration,           // System flag
                            DataPlant::iPressureCall const CallType, // Enumerated call type
-                           Optional_int_const LoopSideNum,          // Loop side num for specific branch simulation
-                           Optional_int_const BranchNum             // Branch num for specific branch simulation
+                           Optional_int_const const &LoopSideNum,          // Loop side num for specific branch simulation
+                           Optional_int_const const &BranchNum             // Branch num for specific branch simulation
 )
 {
 

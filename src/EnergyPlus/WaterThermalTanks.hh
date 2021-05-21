@@ -674,7 +674,7 @@ namespace WaterThermalTanks {
 
         void MinePlantStructForInfo(EnergyPlusData &state);
 
-        void SizeSupplySidePlantConnections(EnergyPlusData &state, Optional_int_const LoopNum = _);
+        void SizeSupplySidePlantConnections(EnergyPlusData &state, Optional_int_const const &LoopNum = _);
 
         void CalcWaterThermalTank(EnergyPlusData &state);
 

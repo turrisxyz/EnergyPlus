@@ -456,7 +456,7 @@ namespace General {
     void ScanForReports(EnergyPlusData &state,
                         std::string const &reportName,
                         bool &DoReport,
-                        Optional_string_const ReportKey = _,
+                        Optional_string_const const &ReportKey = _,
                         Optional_string Option1 = _,
                         Optional_string Option2 = _);
 

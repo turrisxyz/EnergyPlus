@@ -3119,7 +3119,7 @@ namespace ScheduleManager {
     }
 
     void GetScheduleValuesForDay(
-        EnergyPlusData &state, int const ScheduleIndex, Array2S<Real64> DayValues, Optional_int_const JDay, Optional_int_const CurDayofWeek)
+        EnergyPlusData &state, int const ScheduleIndex, Array2S<Real64> DayValues, Optional_int_const const &JDay, Optional_int_const const &CurDayofWeek)
     {
 
         // SUBROUTINE INFORMATION:
@@ -4426,7 +4426,7 @@ namespace ScheduleManager {
                                      Real64 const Minimum,           // Minimum desired value
                                      std::string const &MinString,   // Minimum indicator ('>', '>=')
                                      Optional<Real64 const> const &Maximum, // Maximum desired value
-                                     Optional_string_const MaxString // Maximum indicator ('<', ',=')
+                                     Optional_string_const const &MaxString // Maximum indicator ('<', ',=')
     )
     {
 
@@ -4518,8 +4518,8 @@ namespace ScheduleManager {
                                      int const ScheduleIndex,        // Which Day Schedule being tested
                                      Real32 const Minimum,           // Minimum desired value
                                      std::string const &MinString,   // Minimum indicator ('>', '>=')
-                                     Optional<Real32 const> Maximum, // Maximum desired value
-                                     Optional_string_const MaxString // Maximum indicator ('<', ',=')
+                                     Optional<Real32 const> const &Maximum, // Maximum desired value
+                                     Optional_string_const const &MaxString // Maximum indicator ('<', ',=')
     )
     {
 

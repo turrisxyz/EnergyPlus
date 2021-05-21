@@ -83,7 +83,7 @@ void RegisterNodeConnection(EnergyPlusData &state,
                             int const FluidStream,               // Count on Fluid Streams
                             bool const IsParent,                 // True when node is a parent node
                             bool &errFlag,                       // Will be True if errors already detected or if errors found here
-                            Optional_string_const InputFieldName // Input Field Name
+                            Optional_string_const const &InputFieldName // Input Field Name
 )
 {
 
@@ -1286,7 +1286,7 @@ void SetUpCompSets(EnergyPlusData &state,
                    std::string const &CompName,      // Component Name
                    std::string const &InletNode,     // Inlet Node Name
                    std::string const &OutletNode,    // Outlet Node Name
-                   Optional_string_const Description // Description
+                   Optional_string_const const &Description // Description
 )
 {
 

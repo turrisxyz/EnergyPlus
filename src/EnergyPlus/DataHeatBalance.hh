@@ -1906,7 +1906,7 @@ namespace DataHeatBalance {
                                  int SurfaceNum,
                                  Optional<Real64 const> const &Phi = _,     // Optional sun altitude relative to surface outward normal (radians)
                                  Optional<Real64 const> const &Theta = _,   // Optional sun azimuth relative to surface outward normal (radians)
-                                 Optional_int_const ScreenNumber = _ // Optional screen number
+                                 Optional_int_const const &ScreenNumber = _ // Optional screen number
     );
 
     std::string DisplayMaterialRoughness(int Roughness); // Roughness String

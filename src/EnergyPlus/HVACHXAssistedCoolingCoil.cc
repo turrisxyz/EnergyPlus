@@ -105,9 +105,9 @@ namespace HVACHXAssistedCoolingCoil {
                                   Real64 const PartLoadRatio,            // Part load ratio of Coil:DX:CoolingBypassFactorEmpirical
                                   int &CompIndex,
                                   int const FanOpMode,                // Allows the parent object to control fan operation
-                                  Optional_bool_const HXUnitEnable,   // flag to enable heat exchanger heat recovery
+                                  Optional_bool_const const &HXUnitEnable,   // flag to enable heat exchanger heat recovery
                                   Optional<Real64 const> const &OnOffAFR,    // Ratio of compressor ON air mass flow rate to AVERAGE over time step
-                                  Optional_bool_const EconomizerFlag, // OA sys or air loop economizer status
+                                  Optional_bool_const const &EconomizerFlag, // OA sys or air loop economizer status
                                   Optional<Real64> QTotOut            // the total cooling output of unit
     )
     {
@@ -916,7 +916,7 @@ namespace HVACHXAssistedCoolingCoil {
                                    bool const HXUnitOn,                 // Flag to enable heat exchanger
                                    int const FanOpMode,                 // Allows parent object to control fan operation
                                    Optional<Real64 const> const &OnOffAirFlow, // Ratio of compressor ON air mass flow to AVERAGE over time step
-                                   Optional_bool_const EconomizerFlag   // OA (or airloop) econommizer status
+                                   Optional_bool_const const &EconomizerFlag   // OA (or airloop) econommizer status
     )
     {
 
@@ -1071,7 +1071,7 @@ namespace HVACHXAssistedCoolingCoil {
     // *****************************************************************************
 
     void GetHXDXCoilIndex(
-        EnergyPlusData &state, std::string const &HXDXCoilName, int &HXDXCoilIndex, bool &ErrorsFound, Optional_string_const CurrentModuleObject)
+        EnergyPlusData &state, std::string const &HXDXCoilName, int &HXDXCoilIndex, bool &ErrorsFound, Optional_string_const const &CurrentModuleObject)
     {
 
         // SUBROUTINE INFORMATION:
@@ -1271,7 +1271,7 @@ namespace HVACHXAssistedCoolingCoil {
                             std::string const &CoilType,     // must match coil types in this module
                             std::string const &CoilName,     // must match coil names for the coil type
                             bool &ErrorsFound,               // set to true if problem
-                            Optional_bool_const PrintWarning // prints warning message if true
+                            Optional_bool_const const &PrintWarning // prints warning message if true
     )
     {
 
@@ -1330,7 +1330,7 @@ namespace HVACHXAssistedCoolingCoil {
                              std::string const &CoilType,     // must match coil types in this module
                              std::string const &CoilName,     // must match coil names for the coil type
                              bool &ErrorsFound,               // set to true if problem
-                             Optional_bool_const PrintWarning // prints warning message if true
+                             Optional_bool_const const &PrintWarning // prints warning message if true
     )
     {
 

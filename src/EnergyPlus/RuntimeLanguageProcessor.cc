@@ -664,8 +664,8 @@ int AddInstruction(EnergyPlusData &state,
                    int const StackNum,
                    int const LineNum,
                    DataRuntimeLanguage::ErlKeywordParam Keyword,
-                   Optional_int_const Argument1, // Erl variable index
-                   Optional_int_const Argument2)
+                   Optional_int_const const &Argument1, // Erl variable index
+                   Optional_int_const const &Argument2)
 {
 
     // SUBROUTINE INFORMATION:
@@ -3682,7 +3682,7 @@ void ReportRuntimeLanguage(EnergyPlusData &state)
     }
 }
 
-ErlValueType SetErlValueNumber(Real64 const Number, Optional<ErlValueType const> OrigValue)
+ErlValueType SetErlValueNumber(Real64 const Number, Optional<ErlValueType const> const &OrigValue)
 {
     // FUNCTION INFORMATION:
     //       AUTHOR         P. Ellis
@@ -3879,7 +3879,7 @@ int FindEMSVariable(EnergyPlusData &state,
     return VariableNum;
 }
 
-int NewEMSVariable(EnergyPlusData &state, std::string const &VariableName, int const StackNum, Optional<ErlValueType const> Value)
+int NewEMSVariable(EnergyPlusData &state, std::string const &VariableName, int const StackNum, Optional<ErlValueType const> const &Value)
 {
 
     // FUNCTION INFORMATION:

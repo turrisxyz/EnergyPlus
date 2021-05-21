@@ -119,8 +119,8 @@ void SimulateFanComponents(EnergyPlusData &state,
                            bool const FirstHVACIteration,
                            int &CompIndex,
                            Optional<Real64 const> const &SpeedRatio,
-                           Optional_bool_const ZoneCompTurnFansOn,  // Turn fans ON signal from ZoneHVAC component
-                           Optional_bool_const ZoneCompTurnFansOff, // Turn Fans OFF signal from ZoneHVAC component
+                           Optional_bool_const const &ZoneCompTurnFansOn,  // Turn fans ON signal from ZoneHVAC component
+                           Optional_bool_const const &ZoneCompTurnFansOff, // Turn Fans OFF signal from ZoneHVAC component
                            Optional<Real64 const> const &PressureRise      // Pressure difference to use for DeltaPress
 )
 {
@@ -2466,7 +2466,7 @@ void ReportFan(EnergyPlusData &state, int const FanNum)
     }
 }
 
-void GetFanIndex(EnergyPlusData &state, std::string const &FanName, int &FanIndex, bool &ErrorsFound, Optional_string_const ThisObjectType)
+void GetFanIndex(EnergyPlusData &state, std::string const &FanName, int &FanIndex, bool &ErrorsFound, Optional_string_const const &ThisObjectType)
 {
 
     // SUBROUTINE INFORMATION:
@@ -2538,8 +2538,8 @@ void GetFanType(EnergyPlusData &state,
                 std::string const &FanName,           // Fan name
                 int &FanType,                         // returned fantype number
                 bool &ErrorsFound,                    // error indicator
-                Optional_string_const ThisObjectType, // parent object type (for error message)
-                Optional_string_const ThisObjectName  // parent object name (for error message)
+                Optional_string_const const &ThisObjectType, // parent object type (for error message)
+                Optional_string_const const &ThisObjectName  // parent object name (for error message)
 )
 {
 
@@ -2583,7 +2583,7 @@ Real64 GetFanDesignVolumeFlowRate(EnergyPlusData &state,
                                   std::string const &FanType, // must match fan types in this module
                                   std::string const &FanName, // must match fan names for the fan type
                                   bool &ErrorsFound,          // set to true if problem
-                                  Optional_int_const FanIndex // index to fan
+                                  Optional_int_const const &FanIndex // index to fan
 )
 {
 

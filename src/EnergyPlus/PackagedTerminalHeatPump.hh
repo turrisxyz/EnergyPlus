@@ -507,7 +507,7 @@ namespace PackagedTerminalHeatPump {
                         int ZoneNum,                          // Zone index
                         Real64 PartLoadRatio,                 // unit part load ratio
                         Real64 &OnOffAirFlowRatio,            // ratio of compressor ON airflow to average airflow over timestep
-                        Optional_int_const SpeedNum = _,      // Speed number
+                        Optional_int_const const &SpeedNum = _,      // Speed number
                         Optional<Real64 const> const &SpeedRatio = _ // Speed ratio
     );
 

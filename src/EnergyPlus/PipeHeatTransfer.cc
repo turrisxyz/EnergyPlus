@@ -1149,7 +1149,7 @@ void PipeHTData::InitPipesHeatTransfer(EnergyPlusData &state, bool const FirstHV
 
 //==============================================================================
 
-void PipeHTData::CalcPipesHeatTransfer(EnergyPlusData &state, Optional_int_const LengthIndex)
+void PipeHTData::CalcPipesHeatTransfer(EnergyPlusData &state, Optional_int_const const &LengthIndex)
 {
 
     //       AUTHOR         Simon Rees

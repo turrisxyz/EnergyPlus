@@ -2144,7 +2144,7 @@ namespace OutputProcessor {
                                          std::string &EndUseSub,                // End Use Sub Type (General Lights, Task Lights, etc.)
                                          std::string &Group,                    // Group key (Facility, Zone, Building, etc.)
                                          bool &ErrorsFound,                     // True if errors in this call
-                                         Optional_string_const ZoneName         // ZoneName when Group=Building
+                                         Optional_string_const const &ZoneName         // ZoneName when Group=Building
     )
     {
 
@@ -3968,13 +3968,13 @@ namespace OutputProcessor {
         std::string const &reportIDString,          // The ID of the time stamp
         std::string const &DayOfSimChr,             // the number of days simulated so far
         bool writeToSQL,
-        Optional_int_const Month,           // the month of the reporting interval
-        Optional_int_const DayOfMonth,      // The day of the reporting interval
-        Optional_int_const Hour,            // The hour of the reporting interval
+        Optional_int_const const &Month,           // the month of the reporting interval
+        Optional_int_const const &DayOfMonth,      // The day of the reporting interval
+        Optional_int_const const &Hour,            // The hour of the reporting interval
         Optional<Real64 const> const &EndMinute,   // The last minute in the reporting interval
         Optional<Real64 const> const &StartMinute, // The starting minute of the reporting interval
-        Optional_int_const DST,             // A flag indicating whether daylight savings time is observed
-        Optional_string_const DayType       // The day tied for the data (e.g., Monday)
+        Optional_int_const const &DST,             // A flag indicating whether daylight savings time is observed
+        Optional_string_const const &DayType       // The day tied for the data (e.g., Monday)
     )
     {
 
@@ -4157,8 +4157,8 @@ namespace OutputProcessor {
                                            std::string const &variableName,          // The variable's actual name
                                            TimeStepType const timeStepType,
                                            OutputProcessor::Unit const &unitsForVar, // The variables units
-                                           Optional_string_const customUnitName,
-                                           Optional_string_const ScheduleName)
+                                           Optional_string_const const &customUnitName,
+                                           Optional_string_const const &ScheduleName)
     {
 
         // SUBROUTINE INFORMATION:
@@ -5413,16 +5413,16 @@ void SetupOutputVariable(EnergyPlusData &state,
                          std::string const &TimeStepTypeKey,        // Zone, HeatBalance=1, HVAC, System, Plant=2
                          std::string const &VariableTypeKey,        // State, Average=1, NonState, Sum=2
                          std::string const &KeyedValue,             // Associated Key for this variable
-                         Optional_string_const ReportFreq,          // Internal use -- causes reporting at this frequency
-                         Optional_string_const ResourceTypeKey,     // Meter Resource Type (Electricity, Gas, etc)
-                         Optional_string_const EndUseKey,           // Meter End Use Key (Lights, Heating, Cooling, etc)
-                         Optional_string_const EndUseSubKey,        // Meter End Use Sub Key (General Lights, Task Lights, etc)
-                         Optional_string_const GroupKey,            // Meter Super Group Key (Building, System, Plant)
-                         Optional_string_const ZoneKey,             // Meter Zone Key (zone name)
-                         Optional_int_const ZoneMult,               // Zone Multiplier, defaults to 1
-                         Optional_int_const ZoneListMult,           // Zone List Multiplier, defaults to 1
-                         Optional_int_const indexGroupKey,          // Group identifier for SQL output
-                         Optional_string_const customUnitName       // the custom name for the units from EMS definition of units
+                         Optional_string_const const &ReportFreq,          // Internal use -- causes reporting at this frequency
+                         Optional_string_const const &ResourceTypeKey,     // Meter Resource Type (Electricity, Gas, etc)
+                         Optional_string_const const &EndUseKey,           // Meter End Use Key (Lights, Heating, Cooling, etc)
+                         Optional_string_const const &EndUseSubKey,        // Meter End Use Sub Key (General Lights, Task Lights, etc)
+                         Optional_string_const const &GroupKey,            // Meter Super Group Key (Building, System, Plant)
+                         Optional_string_const const &ZoneKey,             // Meter Zone Key (zone name)
+                         Optional_int_const const &ZoneMult,               // Zone Multiplier, defaults to 1
+                         Optional_int_const const &ZoneListMult,           // Zone List Multiplier, defaults to 1
+                         Optional_int_const const &indexGroupKey,          // Group identifier for SQL output
+                         Optional_string_const const &customUnitName       // the custom name for the units from EMS definition of units
 )
 {
 
@@ -5663,8 +5663,8 @@ void SetupOutputVariable(EnergyPlusData &state,
                          std::string const &TimeStepTypeKey,        // Zone, HeatBalance=1, HVAC, System, Plant=2
                          std::string const &VariableTypeKey,        // State, Average=1, NonState, Sum=2
                          std::string const &KeyedValue,             // Associated Key for this variable
-                         Optional_string_const ReportFreq,          // Internal use -- causes reporting at this freqency
-                         Optional_int_const indexGroupKey           // Group identifier for SQL output
+                         Optional_string_const const &ReportFreq,          // Internal use -- causes reporting at this freqency
+                         Optional_int_const const &indexGroupKey           // Group identifier for SQL output
 )
 {
 
@@ -5824,15 +5824,15 @@ void SetupOutputVariable(EnergyPlusData &state,
                          std::string const &TimeStepTypeKey,        // Zone, HeatBalance=1, HVAC, System, Plant=2
                          std::string const &VariableTypeKey,        // State, Average=1, NonState, Sum=2
                          int const KeyedValue,                      // Associated Key for this variable
-                         Optional_string_const ReportFreq,          // Internal use -- causes reporting at this freqency
-                         Optional_string_const ResourceTypeKey,     // Meter Resource Type (Electricity, Gas, etc)
-                         Optional_string_const EndUseKey,           // Meter End Use Key (Lights, Heating, Cooling, etc)
-                         Optional_string_const EndUseSubKey,        // Meter End Use Sub Key (General Lights, Task Lights, etc)
-                         Optional_string_const GroupKey,            // Meter Super Group Key (Building, System, Plant)
-                         Optional_string_const ZoneKey,             // Meter Zone Key (zone name)
-                         Optional_int_const ZoneMult,               // Zone Multiplier, defaults to 1
-                         Optional_int_const ZoneListMult,           // Zone List Multiplier, defaults to 1
-                         Optional_int_const indexGroupKey           // Group identifier for SQL output
+                         Optional_string_const const &ReportFreq,          // Internal use -- causes reporting at this freqency
+                         Optional_string_const const &ResourceTypeKey,     // Meter Resource Type (Electricity, Gas, etc)
+                         Optional_string_const const &EndUseKey,           // Meter End Use Key (Lights, Heating, Cooling, etc)
+                         Optional_string_const const &EndUseSubKey,        // Meter End Use Sub Key (General Lights, Task Lights, etc)
+                         Optional_string_const const &GroupKey,            // Meter Super Group Key (Building, System, Plant)
+                         Optional_string_const const &ZoneKey,             // Meter Zone Key (zone name)
+                         Optional_int_const const &ZoneMult,               // Zone Multiplier, defaults to 1
+                         Optional_int_const const &ZoneListMult,           // Zone List Multiplier, defaults to 1
+                         Optional_int_const const &indexGroupKey           // Group identifier for SQL output
 )
 {
 
@@ -8846,7 +8846,7 @@ void AddToOutputVariableList(EnergyPlusData &state,
                              OutputProcessor::StoreType const StateType,
                              int const VariableType,
                              OutputProcessor::Unit const unitsForVar,
-                             Optional_string_const customUnitName // the custom name for the units from EMS definition of units
+                             Optional_string_const const &customUnitName // the custom name for the units from EMS definition of units
 )
 {
 

@@ -143,7 +143,7 @@ namespace InternalHeatGains {
     static std::string const BlankString;
 
     void ManageInternalHeatGains(EnergyPlusData &state,
-                                 Optional_bool_const InitOnly) // when true, just calls the get input, if appropriate and returns.
+                                 Optional_bool_const const &InitOnly) // when true, just calls the get input, if appropriate and returns.
     {
 
         // SUBROUTINE INFORMATION:
@@ -7356,7 +7356,7 @@ namespace InternalHeatGains {
         }
     }
 
-    void UpdateInternalGainValues(EnergyPlusData &state, Optional_bool_const SuppressRadiationUpdate, Optional_bool_const SumLatentGains)
+    void UpdateInternalGainValues(EnergyPlusData &state, Optional_bool_const const &SuppressRadiationUpdate, Optional_bool_const const &SumLatentGains)
     {
 
         // SUBROUTINE INFORMATION:

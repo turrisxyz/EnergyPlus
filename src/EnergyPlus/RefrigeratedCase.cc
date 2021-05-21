@@ -13327,7 +13327,7 @@ void GetRefrigeratedRackIndex(EnergyPlusData &state,
                               int &IndexPtr,
                               int const SysType,
                               bool &ErrorsFound,
-                              Optional_string_const ThisObjectType,
+                              Optional_string_const const &ThisObjectType,
                               const Optional_bool_const &SuppressWarning)
 {
 

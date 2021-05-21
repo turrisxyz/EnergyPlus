@@ -132,15 +132,15 @@ void ControlCompOutput(EnergyPlusData &state,
                        Real64 const ControlOffset,                // really the tolerance
                        int &ControlCompTypeNum,                   // Internal type num for CompType
                        int &CompErrIndex,                         // for Recurring error call
-                       Optional_int_const TempInNode = _,         // inlet node for output calculation
-                       Optional_int_const TempOutNode = _,        // outlet node for output calculation
+                       Optional_int_const const &TempInNode = _,         // inlet node for output calculation
+                       Optional_int_const const &TempOutNode = _,        // outlet node for output calculation
                        Optional<Real64 const> const &AirMassFlow = _,    // air mass flow rate
-                       Optional_int_const Action = _,             // 1=reverse; 2=normal
-                       Optional_int_const EquipIndex = _,         // Identifier for equipment of Outdoor Air Unit "ONLY"
-                       Optional_int_const LoopNum = _,            // for plant components, plant loop index
-                       Optional_int_const LoopSide = _,           // for plant components, plant loop side index
-                       Optional_int_const BranchIndex = _,        // for plant components, plant branch index
-                       Optional_int_const ControlledZoneIndex = _ // controlled zone index for the zone containing the component
+                       Optional_int_const const &Action = _,             // 1=reverse; 2=normal
+                       Optional_int_const const &EquipIndex = _,         // Identifier for equipment of Outdoor Air Unit "ONLY"
+                       Optional_int_const const &LoopNum = _,            // for plant components, plant loop index
+                       Optional_int_const const &LoopSide = _,           // for plant components, plant loop side index
+                       Optional_int_const const &BranchIndex = _,        // for plant components, plant branch index
+                       Optional_int_const const &ControlledZoneIndex = _ // controlled zone index for the zone containing the component
 );
 
 bool BBConvergeCheck(int const SimCompNum, Real64 const MaxFlow, Real64 const MinFlow);

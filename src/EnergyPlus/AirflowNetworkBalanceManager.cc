@@ -150,8 +150,8 @@ namespace AirflowNetworkBalanceManager {
     int constexpr NumOfVentCtrTypes(6); // Number of zone level venting control types
 
     void ManageAirflowNetworkBalance(EnergyPlusData &state,
-                                     Optional_bool_const FirstHVACIteration, // True when solution technique on first iteration
-                                     Optional_int_const Iter,                // Iteration number
+                                     Optional_bool_const const &FirstHVACIteration, // True when solution technique on first iteration
+                                     Optional_int_const const &Iter,                // Iteration number
                                      Optional_bool ResimulateAirZone         // True when solution technique on third iteration
     )
     {
@@ -10026,7 +10026,7 @@ namespace AirflowNetworkBalanceManager {
     }
 
     void UpdateAirflowNetwork(EnergyPlusData &state,
-                              Optional_bool_const FirstHVACIteration) // True when solution technique on first iteration
+                              Optional_bool_const const &FirstHVACIteration) // True when solution technique on first iteration
     {
 
         // SUBROUTINE INFORMATION:

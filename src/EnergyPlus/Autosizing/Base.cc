@@ -308,7 +308,7 @@ void BaseSizer::reportSizerOutput(EnergyPlusData &state,
                                   std::string const &CompName,
                                   std::string const &VarDesc,
                                   Real64 const VarValue,
-                                  Optional_string_const UsrDesc,
+                                  Optional_string_const const &UsrDesc,
                                   Optional<Real64 const> const &UsrValue)
 {
 

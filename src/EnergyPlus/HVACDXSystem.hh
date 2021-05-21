@@ -204,7 +204,7 @@ namespace HVACDXSystem {
                             bool const FirstHVACIteration,             // True when first HVAC iteration
                             int const AirLoopNum,                      // Primary air loop number
                             int &CompIndex,                            // Index to DXSystem:Airloop object
-                            Optional_int_const OAUnitNum = _,          // If the system is an equipment of OutdoorAirUnit
+                            Optional_int_const const &OAUnitNum = _,          // If the system is an equipment of OutdoorAirUnit
                             Optional<Real64 const> const &OAUCoilOutTemp = _, // the coil inlet temperature of OutdoorAirUnit
                             Optional<Real64> QTotOut = _               // the total cooling output of unit
     );
@@ -223,7 +223,7 @@ namespace HVACDXSystem {
     void InitDXCoolingSystem(EnergyPlusData &state,
                              int const DXSystemNum,                    // number of the current DX Sys being simulated
                              int const AirLoopNum,                     // number of the current air loop being simulated
-                             Optional_int_const OAUnitNum = _,         // number of the current outdoor air unit being simulated
+                             Optional_int_const const &OAUnitNum = _,         // number of the current outdoor air unit being simulated
                              Optional<Real64 const> const &OAUCoilOutTemp = _ // the coil inlet temperature of OutdoorAirUnit
     );
 

@@ -453,7 +453,7 @@ namespace ConvectionCoefficients {
 
     void InitInteriorConvectionCoeffs(EnergyPlusData &state,
                                       const Array1D<Real64> &SurfaceTemperatures, // Temperature of surfaces for evaluation of HcIn
-                                      Optional_int_const ZoneToResimulate = _     // if passed in, then only calculate surfaces that have this zone
+                                      Optional_int_const const &ZoneToResimulate = _     // if passed in, then only calculate surfaces that have this zone
     );
 
     void InitExteriorConvectionCoeff(EnergyPlusData &state,

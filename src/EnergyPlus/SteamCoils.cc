@@ -112,7 +112,7 @@ namespace SteamCoils {
                                      int &CompIndex,
                                      Optional<Real64 const> const &QCoilReq, // coil load to be met
                                      Optional<Real64> QCoilActual,    // coil load actually delivered returned to calling component
-                                     Optional_int_const FanOpMode,
+                                     Optional_int_const const &FanOpMode,
                                      Optional<Real64 const> const &PartLoadRatio)
     {
 

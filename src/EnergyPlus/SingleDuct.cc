@@ -5868,7 +5868,7 @@ void GetHVACSingleDuctSysIndex(EnergyPlusData &state,
                                std::string const &SDSName,
                                int &SDSIndex,
                                bool &ErrorsFound,
-                               Optional_string_const ThisObjectType,
+                               Optional_string_const const &ThisObjectType,
                                Optional_int DamperInletNode, // Damper inlet node number
                                Optional_int DamperOutletNode // Damper outlet node number
 )

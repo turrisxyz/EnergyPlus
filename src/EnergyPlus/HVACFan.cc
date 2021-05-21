@@ -118,8 +118,8 @@ namespace HVACFan {
         EnergyPlusData &state,
         Optional<Real64 const> const &flowFraction, // when used, this directs the fan to set the flow at this flow fraction = current flow/ max design flow
                                              // rate.  It is not exactly the same as the legacy speed ratio that was used with SimulateFanComponents.
-        Optional_bool_const zoneCompTurnFansOn,  // can be used as turn fans ON signal from ZoneHVAC component
-        Optional_bool_const zoneCompTurnFansOff, // can be used as turn Fans OFF signal from ZoneHVAC component
+        Optional_bool_const const &zoneCompTurnFansOn,  // can be used as turn fans ON signal from ZoneHVAC component
+        Optional_bool_const const &zoneCompTurnFansOff, // can be used as turn Fans OFF signal from ZoneHVAC component
         Optional<Real64 const> const &pressureRise, // Pressure difference to use for DeltaPress, for rating DX coils at a different pressure without entire duct system
         Optional<Real64 const> const &massFlowRate1,    // Mass flow rate in operating mode 1 [kg/s]
         Optional<Real64 const> const &runTimeFraction1, // Run time fraction in operating mode 1

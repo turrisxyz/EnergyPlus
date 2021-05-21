@@ -230,8 +230,8 @@ namespace Fans {
                                bool FirstHVACIteration,
                                int &CompIndex,
                                Optional<Real64 const> const &SpeedRatio = _,
-                               Optional_bool_const ZoneCompTurnFansOn = _,  // Turn fans ON signal from ZoneHVAC component
-                               Optional_bool_const ZoneCompTurnFansOff = _, // Turn Fans OFF signal from ZoneHVAC component
+                               Optional_bool_const const &ZoneCompTurnFansOn = _,  // Turn fans ON signal from ZoneHVAC component
+                               Optional_bool_const const &ZoneCompTurnFansOff = _, // Turn Fans OFF signal from ZoneHVAC component
                                Optional<Real64 const> const &PressureRise = _      // Pressure difference to use for DeltaPress
     );
 
@@ -258,7 +258,7 @@ namespace Fans {
 
     void ReportFan(EnergyPlusData &state, int FanNum);
 
-    void GetFanIndex(EnergyPlusData &state, std::string const &FanName, int &FanIndex, bool &ErrorsFound, Optional_string_const ThisObjectType = _);
+    void GetFanIndex(EnergyPlusData &state, std::string const &FanName, int &FanIndex, bool &ErrorsFound, Optional_string_const const &ThisObjectType = _);
 
     void GetFanVolFlow(EnergyPlusData &state, int FanIndex, Real64 &FanVolFlow);
 
@@ -268,15 +268,15 @@ namespace Fans {
                     std::string const &FanName,               // Fan name
                     int &FanType,                             // returned fantype number
                     bool &ErrorsFound,                        // error indicator
-                    Optional_string_const ThisObjectType = _, // parent object type (for error message)
-                    Optional_string_const ThisObjectName = _  // parent object name (for error message)
+                    Optional_string_const const &ThisObjectType = _, // parent object type (for error message)
+                    Optional_string_const const &ThisObjectName = _  // parent object name (for error message)
     );
 
     Real64 GetFanDesignVolumeFlowRate(EnergyPlusData &state,
                                       std::string const &FanType,     // must match fan types in this module
                                       std::string const &FanName,     // must match fan names for the fan type
                                       bool &ErrorsFound,              // set to true if problem
-                                      Optional_int_const FanIndex = _ // index to fan
+                                      Optional_int_const const &FanIndex = _ // index to fan
     );
 
     int GetFanInletNode(EnergyPlusData &state,

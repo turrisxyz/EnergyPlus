@@ -95,8 +95,8 @@ void GetNodeNums(EnergyPlusData &state,
                  DataLoopNode::NodeConnectionType const NodeConnectionType, // Node Connection Type (see DataLoopNode)
                  int const NodeFluidStream,                                 // Which Fluid Stream (1,2,3,...)
                  bool const ObjectIsParent,                                 // True/False
-                 Optional_bool_const IncrementFluidStream,                  // True/False
-                 Optional_string_const InputFieldName                       // Input Field Name
+                 Optional_bool_const const &IncrementFluidStream,                  // True/False
+                 Optional_string_const const &InputFieldName                       // Input Field Name
 )
 {
 
@@ -724,7 +724,7 @@ int GetOnlySingleNode(EnergyPlusData &state,
                       DataLoopNode::NodeConnectionType const NodeConnectionType, // Node Connection Type (see DataLoopNode)
                       int const NodeFluidStream,                                 // Which Fluid Stream (1,2,3,...)
                       bool const ObjectIsParent,                                 // True/False
-                      Optional_string_const InputFieldName                       // Input Field Name
+                      Optional_string_const const &InputFieldName                       // Input Field Name
 )
 {
 
@@ -845,9 +845,9 @@ void CheckUniqueNodes(EnergyPlusData &state,
                       std::string const &NodeTypes,
                       std::string const &CheckType,
                       bool &ErrorsFound,
-                      Optional_string_const CheckName,
-                      Optional_int_const CheckNumber,
-                      Optional_string_const ObjectName)
+                      Optional_string_const const &CheckName,
+                      Optional_int_const const &CheckNumber,
+                      Optional_string_const const &ObjectName)
 {
 
     // SUBROUTINE INFORMATION:

@@ -1328,8 +1328,8 @@ Real64 CalcDesignSpecificationOutdoorAir(EnergyPlusData &state,
                                          int const ActualZoneNum,    // Zone index
                                          bool const UseOccSchFlag,   // Zone occupancy schedule will be used instead of using total zone occupancy
                                          bool const UseMinOASchFlag, // Use min OA schedule in DesignSpecification:OutdoorAir object
-                                         Optional_bool_const PerPersonNotSet, // when calculation should not include occupants (e.g., dual duct)
-                                         Optional_bool_const MaxOAVolFlowFlag // TRUE when calculation uses occupancy schedule  (e.g., dual duct)
+                                         Optional_bool_const const &PerPersonNotSet, // when calculation should not include occupants (e.g., dual duct)
+                                         Optional_bool_const const &MaxOAVolFlowFlag // TRUE when calculation uses occupancy schedule  (e.g., dual duct)
 )
 {
 

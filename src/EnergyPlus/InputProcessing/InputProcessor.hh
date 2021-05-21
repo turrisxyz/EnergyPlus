@@ -162,12 +162,12 @@ public:
                     std::string const &WhatFieldString,          // Descriptive field for string
                     std::string const &WhatObjectString,         // Descriptive field for object, Zone Name, etc.
                     std::string const &ErrorLevel,               // 'Warning','Severe','Fatal')
-                    Optional_string_const LowerBoundString = _,  // String for error message, if applicable
-                    Optional_bool_const LowerBoundCondition = _, // Condition for error condition, if applicable
-                    Optional_string_const UpperBoundString = _,  // String for error message, if applicable
-                    Optional_bool_const UpperBoundCondition = _, // Condition for error condition, if applicable
-                    Optional_string_const ValueString = _,       // Value with digits if to be displayed with error
-                    Optional_string_const WhatObjectName = _     // ObjectName -- used for error messages
+                    Optional_string_const const &LowerBoundString = _,  // String for error message, if applicable
+                    Optional_bool_const const &LowerBoundCondition = _, // Condition for error condition, if applicable
+                    Optional_string_const const &UpperBoundString = _,  // String for error message, if applicable
+                    Optional_bool_const const &UpperBoundCondition = _, // Condition for error condition, if applicable
+                    Optional_string_const const &ValueString = _,       // Value with digits if to be displayed with error
+                    Optional_string_const const &WhatObjectName = _     // ObjectName -- used for error messages
     );
 
     void getMaxSchemaArgs(int &NumArgs, int &NumAlpha, int &NumNumeric);

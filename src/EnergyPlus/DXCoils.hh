@@ -556,10 +556,10 @@ namespace DXCoils {
                              Real64 const SpeedRatio,     // = (CompressorSpeed - CompressorSpeedMin) /
                              Real64 const CycRatio,       // cycling part load ratio for variable speed
                              int &CompIndex,
-                             Optional_int_const SpeedNum = _,  // Speed number for multispeed cooling coil onlyn
-                             Optional_int_const FanOpMode = _, // Fan operation mode
-                             Optional_int_const CompOp = _,    // Compressor on/off; 1=on, 0=off
-                             Optional_int_const SingleMode = _ // Single mode operation Yes/No; 1=Yes, 0=No
+                             Optional_int_const const &SpeedNum = _,  // Speed number for multispeed cooling coil onlyn
+                             Optional_int_const const &FanOpMode = _, // Fan operation mode
+                             Optional_int_const const &CompOp = _,    // Compressor on/off; 1=on, 0=off
+                             Optional_int_const const &SingleMode = _ // Single mode operation Yes/No; 1=Yes, 0=No
     );
 
     void SimDXCoilMultiMode(EnergyPlusData &state,
@@ -589,7 +589,7 @@ namespace DXCoils {
                         bool const FirstHVACIteration,                // true if this is the first iteration of HVAC
                         Real64 const PartLoadRatio,                   // sensible cooling load / full load sensible cooling capacity
                         int const FanOpMode,                          // Allows parent object to control fan operation
-                        Optional_int_const PerfMode = _,              // Performance mode for MultiMode DX coil; Always 1 for other coil types
+                        Optional_int_const const &PerfMode = _,              // Performance mode for MultiMode DX coil; Always 1 for other coil types
                         Optional<Real64 const> const &OnOffAirFlowRatio = _, // ratio of compressor on airflow to compressor off airflow
                         Optional<Real64 const> const &CoolingHeatingPLR = _  // used for cycling fan RH control
     );
@@ -601,7 +601,7 @@ namespace DXCoils {
                             Real64 const PartLoadRatio,                   // sensible cooling load / full load sensible cooling capacity
                             int const FanOpMode,                          // Allows parent object to control fan operation
                             Real64 const CompCycRatio,                    // cycling ratio of VRF condenser
-                            Optional_int_const PerfMode = _,              // Performance mode for MultiMode DX coil; Always 1 for other coil types
+                            Optional_int_const const &PerfMode = _,              // Performance mode for MultiMode DX coil; Always 1 for other coil types
                             Optional<Real64 const> const &OnOffAirFlowRatio = _, // ratio of compressor on airflow to compressor off airflow
                             Optional<Real64 const> const &MaxCoolCap = _         // maximum capacity of DX coil
     );
@@ -618,7 +618,7 @@ namespace DXCoils {
                               int const DXCoilNum,     // the number of the DX heating coil to be simulated
                               Real64 const SpeedRatio, // = (CompressorSpeed - CompressorSpeedMin) / (CompressorSpeedMax - CompressorSpeedMin)
                               Real64 const CycRatio,   // cycling part load ratio
-                              Optional_bool_const ForceOn = _);
+                              Optional_bool_const const &ForceOn = _);
 
     void CalcBasinHeaterPowerForMultiModeDXCoil(EnergyPlusData &state,
                                                 int const DXCoilNum,  // Index of coil being simulated
@@ -660,7 +660,7 @@ namespace DXCoils {
                             Real64 const QLatActual,              // Actual latent capacity
                             Real64 const EnteringDB,              // Entering air dry-bulb temperature
                             Real64 const EnteringWB,              // Entering air wet-bulb temperature
-                            Optional_int_const Mode = _,          // Performance mode for MultiMode DX coil; Always 1 for other coil types
+                            Optional_int_const const &Mode = _,          // Performance mode for MultiMode DX coil; Always 1 for other coil types
                             Optional<Real64 const> const &HeatingRTF = _ // Used to recalculate Toff for cycling fan systems
     );
 
@@ -721,11 +721,11 @@ namespace DXCoils {
                         std::string const &DXCoilName,
                         int &DXCoilIndex,
                         bool &ErrorsFound,
-                        Optional_string_const ThisObjectType,
-                        Optional_bool_const SuppressWarning);
+                        Optional_string_const const &ThisObjectType,
+                        Optional_bool_const const &SuppressWarning);
 
     std::string GetDXCoilName(
-        EnergyPlusData &state, int &DXCoilIndex, bool &ErrorsFound, Optional_string_const ThisObjectType, Optional_bool_const SuppressWarning);
+        EnergyPlusData &state, int &DXCoilIndex, bool &ErrorsFound, Optional_string_const const &ThisObjectType, Optional_bool_const const &SuppressWarning);
 
     Real64 GetCoilCapacity(EnergyPlusData &state,
                            std::string const &CoilType, // must match coil types in this module
@@ -743,7 +743,7 @@ namespace DXCoils {
                        std::string const &CoilType,         // must match coil types in this module
                        std::string const &CoilName,         // must match coil names for the coil type
                        bool &ErrorsFound,                   // set to true if problem
-                       Optional_bool_const PrintWarning = _ // prints warning when true
+                       Optional_bool_const const &PrintWarning = _ // prints warning when true
     );
 
     Real64 GetMinOATCompressor(EnergyPlusData &state,
@@ -807,7 +807,7 @@ namespace DXCoils {
                              std::string const &CoilType,     // must match coil types in this module
                              std::string const &CoilName,     // must match coil names for the coil type
                              bool &ErrorsFound,               // set to true if problem
-                             Optional_int_const CoilIndex = _ // Coil index number
+                             Optional_int_const const &CoilIndex = _ // Coil index number
     );
 
     Real64 GetDXCoilAirFlow(EnergyPlusData &state,
@@ -893,7 +893,7 @@ namespace DXCoils {
                                        Real64 const PartLoadRatio,    // sensible cooling load / full load sensible cooling capacity
                                        int const FanOpMode,           // Allows parent object to control fan operation
                                        Real64 const CompCycRatio,     // cycling ratio of VRF condenser
-                                       Optional_int_const PerfMode,   // Performance mode for MultiMode DX coil; Always 1 for other coil types
+                                       Optional_int_const const &PerfMode,   // Performance mode for MultiMode DX coil; Always 1 for other coil types
                                        Optional<Real64 const> const &OnOffAirFlowRatio // ratio of compressor on airflow to compressor off airflow
     );
 
@@ -934,7 +934,7 @@ namespace DXCoils {
 
     void CalcVRFCoilCapModFac(EnergyPlusData &state,
                               int const OperationMode,        // mode 0 for cooling, 1 for heating
-                              Optional<int const> CoilIndex,  // index to VRFTU cooling or heating coil
+                              Optional<int const> const &CoilIndex,  // index to VRFTU cooling or heating coil
                               Optional<std::string> CoilName, // name of VRFTU cooling or heating coil
                               Real64 const Tinlet,            // dry bulb temperature of air entering the coil
                               Optional<Real64 const> const &TeTc,    // evaporating or condensing temperature

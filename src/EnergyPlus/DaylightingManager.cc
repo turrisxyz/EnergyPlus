@@ -1671,7 +1671,7 @@ void FigureDayltgCoeffsAtPointsSetupForWindow(
     Vector3<Real64> &VIEWVC2,                 // Virtual view vector in absolute coordinate system
     bool &is_Rectangle,                       // True if window is rectangular
     bool &is_Triangle,                        // True if window is triangular
-    Optional_int_const MapNum,
+    Optional_int_const const &MapNum,
     // Optional< Real64 > MapWindowSolidAngAtRefPt, //Inactive
     Optional<Real64> MapWindowSolidAngAtRefPtWtd)
 {
@@ -2105,7 +2105,7 @@ void FigureDayltgCoeffsAtPointsForWindowElements(
     bool const is_Triangle,
     Real64 &TVISIntWin,     // Visible transmittance of int win at COSBIntWin for light from ext win
     Real64 &TVISIntWinDisk, // Visible transmittance of int win at COSBIntWin for sun
-    Optional_int_const MapNum,
+    Optional_int_const const &MapNum,
     //        Optional< Real64 > MapWindowSolidAngAtRefPt, //Inactive
     Optional<Real64> MapWindowSolidAngAtRefPtWtd)
 {
@@ -2396,7 +2396,7 @@ void InitializeCFSDaylighting(EnergyPlusData &state,
                               int const NRefPts,               // Number of reference points
                               int const iRefPoint,             // Reference points counter
                               DataDaylighting::iCalledFor const CalledFrom,
-                              Optional_int_const MapNum)
+                              Optional_int_const const &MapNum)
 {
     // SUBROUTINE INFORMATION:
     //       AUTHOR         Simon Vidanovic
@@ -2591,7 +2591,7 @@ void InitializeCFSStateData(EnergyPlusData &state,
                             Vector3<Real64> const &WNorm, // unit vector from window (point towards outside)
                             Real64 const WinElArea,
                             [[maybe_unused]] DataDaylighting::iCalledFor const CalledFrom,
-                            [[maybe_unused]] Optional_int_const MapNum)
+                            [[maybe_unused]] Optional_int_const const &MapNum)
 {
     // SUBROUTINE INFORMATION:
     //       AUTHOR         Simon Vidanovic
@@ -3212,7 +3212,7 @@ void FigureDayltgCoeffsAtPointsForSunPosition(
     DataDaylighting::iCalledFor const CalledFrom,  // indicate  which type of routine called this routine
     Real64 &TVISIntWin,                            // Visible transmittance of int win at COSBIntWin for light from ext win
     Real64 &TVISIntWinDisk,                        // Visible transmittance of int win at COSBIntWin for sun
-    Optional_int_const MapNum,
+    Optional_int_const const &MapNum,
     Optional<Real64 const> const &MapWindowSolidAngAtRefPtWtd)
 {
 
@@ -8487,7 +8487,7 @@ void ComplexFenestrationLuminances(EnergyPlusData &state,
                                    Array1D<Real64> &ElementLuminanceSun,     // sun related luminance at window element (exterior side),
                                    Array1D<Real64> &ElementLuminanceSunDisk, // sun related luminance at window element (exterior side),
                                    DataDaylighting::iCalledFor const CalledFrom,
-                                   Optional_int_const MapNum)
+                                   Optional_int_const const &MapNum)
 {
 
     // SUBROUTINE INFORMATION:
@@ -8663,7 +8663,7 @@ void DayltgInterReflectedIllumComplexFenestration(EnergyPlusData &state,
                                                   int const ZoneNum,   // Zone number
                                                   int const iRefPoint, // reference point counter
                                                   DataDaylighting::iCalledFor const CalledFrom,
-                                                  Optional_int_const MapNum)
+                                                  Optional_int_const const &MapNum)
 {
 
     // SUBROUTINE INFORMATION:
@@ -8819,7 +8819,7 @@ void DayltgDirectIllumComplexFenestration(EnergyPlusData &state,
                                           [[maybe_unused]] int const ZoneNum, // Zone number
                                           int const iRefPoint,                // reference point index
                                           DataDaylighting::iCalledFor const CalledFrom,
-                                          Optional_int_const MapNum)
+                                          Optional_int_const const &MapNum)
 {
 
     // SUBROUTINE INFORMATION:
@@ -8920,7 +8920,7 @@ void DayltgDirectSunDiskComplexFenestration(EnergyPlusData &state,
                                             int const NumEl,                              // Total number of window elements
                                             Real64 const AZVIEW,                          // Azimuth of view vector in absolute coord system for
                                             DataDaylighting::iCalledFor const CalledFrom, // indicate  which type of routine called this routine
-                                            Optional_int_const MapNum,
+                                            Optional_int_const const &MapNum,
                                             Optional<Real64 const> const &MapWindowSolidAngAtRefPtWtd)
 {
 
