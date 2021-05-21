@@ -1429,7 +1429,7 @@ void SafeCopyPlantNode(EnergyPlusData &state,
                        int const InletNodeNum,
                        int const OutletNodeNum,
                        Optional_int_const LoopNum,
-                       [[maybe_unused]] Optional<Real64 const> OutletTemp // set on outlet node if present and water.
+                       [[maybe_unused]] Optional<Real64 const> const &OutletTemp // set on outlet node if present and water.
 )
 {
 
@@ -1642,8 +1642,8 @@ void ScanPlantLoopsForObject(EnergyPlusData &state,
                              int &BranchNum,
                              int &CompNum,
                              bool &errFlag,
-                             Optional<Real64 const> LowLimitTemp,
-                             Optional<Real64 const> HighLimitTemp,
+                             Optional<Real64 const> const &LowLimitTemp,
+                             Optional<Real64 const> const &HighLimitTemp,
                              Optional_int CountMatchPlantLoops,
                              Optional_int_const InletNodeNumber,
                              Optional_int_const SingleLoopSearch)

@@ -112,7 +112,7 @@ namespace HVACHXAssistedCoolingCoil {
                                   int &CompIndex,
                                   int const FanOpMode,                    // Allows the parent object to control fan operation
                                   Optional_bool_const HXUnitEnable = _,   // flag to enable heat exchanger heat recovery
-                                  Optional<Real64 const> OnOffAFR = _,    // Ratio of compressor ON air mass flow rate to AVERAGE over time step
+                                  Optional<Real64 const> const &OnOffAFR = _,    // Ratio of compressor ON air mass flow rate to AVERAGE over time step
                                   Optional_bool_const EconomizerFlag = _, // OA sys or air loop economizer status
                                   Optional<Real64> QTotOut = _            // the total cooling output of unit
     );
@@ -128,7 +128,7 @@ namespace HVACHXAssistedCoolingCoil {
                                    Real64 const PartLoadRatio,              // Cooling coil part load ratio
                                    bool const HXUnitOn,                     // Flag to enable heat exchanger
                                    int const FanOpMode,                     // Allows parent object to control fan operation
-                                   Optional<Real64 const> OnOffAirFlow = _, // Ratio of compressor ON air mass flow to AVERAGE over time step
+                                   Optional<Real64 const> const &OnOffAirFlow = _, // Ratio of compressor ON air mass flow to AVERAGE over time step
                                    Optional_bool_const EconomizerFlag = _   // OA (or airloop) econommizer status
     );
 

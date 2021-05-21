@@ -159,11 +159,11 @@ namespace CurveManager {
     Real64 CurveValue(EnergyPlusData &state,
                       int const CurveIndex,        // index of curve in curve array
                       Real64 const Var1,           // 1st independent variable
-                      Optional<Real64 const> Var2, // 2nd independent variable
-                      Optional<Real64 const> Var3, // 3rd independent variable
-                      Optional<Real64 const> Var4, // 4th independent variable
-                      Optional<Real64 const> Var5, // 5th independent variable
-                      Optional<Real64 const> Var6  // 6th independent variable
+                      Optional<Real64 const> const &Var2, // 2nd independent variable
+                      Optional<Real64 const> const &Var3, // 3rd independent variable
+                      Optional<Real64 const> const &Var4, // 4th independent variable
+                      Optional<Real64 const> const &Var5, // 5th independent variable
+                      Optional<Real64 const> const &Var6  // 6th independent variable
     )
     {
 
@@ -2551,11 +2551,11 @@ namespace CurveManager {
     Real64 PerformanceCurveObject(EnergyPlusData &state,
                                   int const CurveIndex,                        // index of curve in curve array
                                   Real64 const Var1,                           // 1st independent variable
-                                  Optional<Real64 const> Var2,                 // 2nd independent variable
-                                  Optional<Real64 const> Var3,                 // 3rd independent variable
-                                  Optional<Real64 const> Var4,                 // 4th independent variable
-                                  Optional<Real64 const> Var5,                 // 5th independent variable
-                                  [[maybe_unused]] Optional<Real64 const> Var6 // 6th independent variable
+                                  Optional<Real64 const> const &Var2,                 // 2nd independent variable
+                                  Optional<Real64 const> const &Var3,                 // 3rd independent variable
+                                  Optional<Real64 const> const &Var4,                 // 4th independent variable
+                                  Optional<Real64 const> const &Var5,                 // 5th independent variable
+                                  [[maybe_unused]] Optional<Real64 const> const &Var6 // 6th independent variable
     )
     {
 
@@ -2676,11 +2676,11 @@ namespace CurveManager {
     Real64 BtwxtTableInterpolation(EnergyPlusData &state,
                                    int const CurveIndex,        // index of curve in curve array
                                    Real64 const Var1,           // 1st independent variable
-                                   Optional<Real64 const> Var2, // 2nd independent variable
-                                   Optional<Real64 const> Var3, // 3rd independent variable
-                                   Optional<Real64 const> Var4, // 4th independent variable
-                                   Optional<Real64 const> Var5, // 5th independent variable
-                                   Optional<Real64 const> Var6  // 6th independent variable
+                                   Optional<Real64 const> const &Var2, // 2nd independent variable
+                                   Optional<Real64 const> const &Var3, // 3rd independent variable
+                                   Optional<Real64 const> const &Var4, // 4th independent variable
+                                   Optional<Real64 const> const &Var5, // 5th independent variable
+                                   Optional<Real64 const> const &Var6  // 6th independent variable
     )
     {
         // TODO: Generalize for N-dims
@@ -2961,8 +2961,8 @@ namespace CurveManager {
     void SetCurveOutputMinMaxValues(EnergyPlusData &state,
                                     int const CurveIndex,            // index of curve in curve array
                                     bool &ErrorsFound,               // TRUE when errors occur
-                                    Optional<Real64 const> CurveMin, // Minimum value of curve output
-                                    Optional<Real64 const> CurveMax  // Maximum values of curve output
+                                    Optional<Real64 const> const &CurveMin, // Minimum value of curve output
+                                    Optional<Real64 const> const &CurveMax  // Maximum values of curve output
     )
     {
 
@@ -3303,11 +3303,11 @@ namespace CurveManager {
                                      std::string const &cFieldName,        // object field name
                                      std::string const &cFieldValue,       // user input curve name
                                      Real64 const Var1,                   // required 1st independent variable
-                                     Optional<Real64 const> Var2,         // 2nd independent variable
-                                     Optional<Real64 const> Var3,         // 3rd independent variable
-                                     Optional<Real64 const> Var4,         // 4th independent variable
-                                     Optional<Real64 const> Var5,         // 5th independent variable
-                                     Optional<Real64 const> Var6          // 6th independent variable
+                                     Optional<Real64 const> const &Var2,         // 2nd independent variable
+                                     Optional<Real64 const> const &Var3,         // 3rd independent variable
+                                     Optional<Real64 const> const &Var4,         // 4th independent variable
+                                     Optional<Real64 const> const &Var5,         // 5th independent variable
+                                     Optional<Real64 const> const &Var6          // 6th independent variable
     )
     {
 

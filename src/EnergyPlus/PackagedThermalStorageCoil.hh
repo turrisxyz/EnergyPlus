@@ -423,7 +423,7 @@ namespace PackagedThermalStorageCoil {
                     int &CompIndex,
                     int const FanOpMode, // allows parent object to control fan mode
                     int &TESOpMode,
-                    Optional<Real64 const> PartLoadRatio = _ // part load ratio (for single speed cycling unit)
+                    Optional<Real64 const> const &PartLoadRatio = _ // part load ratio (for single speed cycling unit)
     );
 
     void GetTESCoilInput(EnergyPlusData &state);

@@ -207,10 +207,10 @@ bool CoilCoolingDXCurveFitSpeed::processCurve(EnergyPlus::EnergyPlusData &state,
                                               const std::string &routineName,
                                               const std::string &fieldName,
                                               Real64 const Var1,           // required 1st independent variable
-                                              Optional<Real64 const> Var2, // 2nd independent variable
-                                              Optional<Real64 const> Var3, // 3rd independent variable
-                                              Optional<Real64 const> Var4, // 4th independent variable
-                                              Optional<Real64 const> Var5) // 5th independent variable
+                                              Optional<Real64 const> const &Var2, // 2nd independent variable
+                                              Optional<Real64 const> const &Var3, // 3rd independent variable
+                                              Optional<Real64 const> const &Var4, // 4th independent variable
+                                              Optional<Real64 const> const &Var5) // 5th independent variable
 {
     if (curveName.empty()) {
         return false;

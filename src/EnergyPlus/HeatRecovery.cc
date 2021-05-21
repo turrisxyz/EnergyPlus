@@ -146,7 +146,7 @@ namespace HeatRecovery {
                          bool const FirstHVACIteration,           // TRUE if 1st HVAC simulation of system timestep
                          int &CompIndex,                          // Pointer to Component
                          int const FanOpMode,                     // Supply air fan operating mode
-                         Optional<Real64 const> HXPartLoadRatio,  // Part load ratio requested of DX compressor
+                         Optional<Real64 const> const &HXPartLoadRatio,  // Part load ratio requested of DX compressor
                          Optional_bool_const HXUnitEnable,        // Flag to operate heat exchanger
                          Optional_int_const CompanionCoilIndex,   // index of companion cooling coil
                          Optional_bool_const RegenInletIsOANode,  // flag to determine if supply inlet is OA node, if so air flow cycles
@@ -2186,7 +2186,7 @@ namespace HeatRecovery {
                                      int const FanOpMode,                   // Supply air fan operating mode (1=cycling, 2=constant)
                                      Optional_bool_const EconomizerFlag,    // economizer flag pass by air loop or OA sys
                                      Optional_bool_const HighHumCtrlFlag,   // high humidity control flag passed by airloop or OA sys
-                                     Optional<Real64 const> HXPartLoadRatio //
+                                     Optional<Real64 const> const &HXPartLoadRatio //
     )
     {
 

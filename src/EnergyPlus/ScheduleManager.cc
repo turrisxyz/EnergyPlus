@@ -4425,7 +4425,7 @@ namespace ScheduleManager {
                                      int const ScheduleIndex,        // Which Day Schedule being tested
                                      Real64 const Minimum,           // Minimum desired value
                                      std::string const &MinString,   // Minimum indicator ('>', '>=')
-                                     Optional<Real64 const> Maximum, // Maximum desired value
+                                     Optional<Real64 const> const &Maximum, // Maximum desired value
                                      Optional_string_const MaxString // Maximum indicator ('<', ',=')
     )
     {

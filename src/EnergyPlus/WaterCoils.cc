@@ -145,7 +145,7 @@ void SimulateWaterCoilComponents(EnergyPlusData &state,
                                  int &CompIndex,
                                  Optional<Real64> QActual,
                                  Optional_int_const FanOpMode,
-                                 Optional<Real64 const> PartLoadRatio)
+                                 Optional<Real64 const> const &PartLoadRatio)
 {
 
     // SUBROUTINE INFORMATION:

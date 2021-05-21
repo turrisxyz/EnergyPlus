@@ -269,7 +269,7 @@ namespace WaterCoils {
                                      int &CompIndex,
                                      Optional<Real64> QActual = _,
                                      Optional_int_const FanOpMode = _,
-                                     Optional<Real64 const> PartLoadRatio = _);
+                                     Optional<Real64 const> const &PartLoadRatio = _);
 
     void GetWaterCoilInput(EnergyPlusData &state);
 

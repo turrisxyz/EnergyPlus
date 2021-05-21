@@ -175,7 +175,7 @@ namespace ThermalComfort {
 
     void CalcThermalComfortFanger(EnergyPlusData &state,
                                   Optional_int_const PNum = _,     // People number for thermal comfort control
-                                  Optional<Real64 const> Tset = _, // Temperature setpoint for thermal comfort control
+                                  Optional<Real64 const> const &Tset = _, // Temperature setpoint for thermal comfort control
                                   Optional<Real64> PMVResult = _   // PMV value for thermal comfort control
     );
     Real64 CalcFangerPMV(
@@ -232,14 +232,14 @@ namespace ThermalComfort {
         EnergyPlusData &state,
         bool const initiate,                  // true if supposed to initiate
         Optional_bool_const wthrsim = _,      // true if this is a weather simulation
-        Optional<Real64 const> avgdrybulb = _ // approximate avg drybulb for design day.  will be used as previous period in design day
+        Optional<Real64 const> const &avgdrybulb = _ // approximate avg drybulb for design day.  will be used as previous period in design day
     );
 
     void CalcThermalComfortAdaptiveCEN15251(
         EnergyPlusData &state,
         bool const initiate,                  // true if supposed to initiate
         Optional_bool_const wthrsim = _,      // true if this is a weather simulation
-        Optional<Real64 const> avgdrybulb = _ // approximate avg drybulb for design day.  will be used as previous period in design day
+        Optional<Real64 const> const &avgdrybulb = _ // approximate avg drybulb for design day.  will be used as previous period in design day
     );
 
     void DynamicClothingModel(EnergyPlusData &state);

@@ -643,7 +643,7 @@ namespace WindowEquivalentLayer {
     bool RB_SWP(EnergyPlusData &state,
                 CFSLAYER const &L,               // RB layer
                 CFSSWP &LSWP,                    // returned: equivalent layer properties set
-                Optional<Real64 const> THETA = _ // incident angle, 0 <= theta <= PI/2
+                Optional<Real64 const> const &THETA = _ // incident angle, 0 <= theta <= PI/2
     );
 
     bool IS_LWP(CFSLAYER const &L, // IS layer
@@ -653,7 +653,7 @@ namespace WindowEquivalentLayer {
     bool IS_SWP(EnergyPlusData &state,
                 CFSLAYER const &L,               // PD layer
                 CFSSWP &LSWP,                    // returned: equivalent layer properties set
-                Optional<Real64 const> THETA = _ // incident angle, 0 <= theta <= PI/2
+                Optional<Real64 const> const &THETA = _ // incident angle, 0 <= theta <= PI/2
     );
 
     void Fabric_EstimateDiffuseProps(EnergyPlusData &state, CFSSWP &SWP); // fabric short wave properties
@@ -678,7 +678,7 @@ namespace WindowEquivalentLayer {
     bool VB_SWP(EnergyPlusData &state,
                 CFSLAYER const &L,               // VB layer
                 CFSSWP &LSWP,                    // returned: equivalent off-normal properties
-                Optional<Real64 const> OMEGA = _ // incident profile angle (radians)
+                Optional<Real64 const> const &OMEGA = _ // incident profile angle (radians)
     );
 
     bool VB_ShadeControl(EnergyPlusData &state,
@@ -710,8 +710,8 @@ namespace WindowEquivalentLayer {
                   CFSGAP &G,                        // returned
                   int const GType,                  // gap type (gtyOPENin, gtyOPENout or gtySEALED)
                   Real64 &TAS,                      // gap thickness, m
-                  Optional<Real64 const> xTMan = _, // re density calc -- temp (C) and pressure (Pa)
-                  Optional<Real64 const> xPMan = _  // re density calc -- temp (C) and pressure (Pa)
+                  Optional<Real64 const> const &xTMan = _, // re density calc -- temp (C) and pressure (Pa)
+                  Optional<Real64 const> const &xPMan = _  // re density calc -- temp (C) and pressure (Pa)
     );
 
     void AdjustVBGap(CFSGAP &G,        // gap, returned updated

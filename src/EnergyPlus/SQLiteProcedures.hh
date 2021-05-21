@@ -173,9 +173,9 @@ public:
     void createSQLiteReportDataRecord(int const recordIndex,
                                       Real64 const value,
                                       Optional_int_const reportingInterval = _,
-                                      Optional<Real64 const> minValue = _,
+                                      Optional<Real64 const> const &minValue = _,
                                       Optional_int_const minValueDate = _,
-                                      Optional<Real64 const> maxValue = _,
+                                      Optional<Real64 const> const &maxValue = _,
                                       Optional_int_const maxValueDate = _,
                                       Optional_int_const minutesPerTimeStep = _);
 
@@ -187,8 +187,8 @@ public:
                                      Optional_int_const Month = _,
                                      Optional_int_const DayOfMonth = _,
                                      Optional_int_const Hour = _,
-                                     Optional<Real64 const> EndMinute = _,
-                                     Optional<Real64 const> StartMinute = _,
+                                     Optional<Real64 const> const &EndMinute = _,
+                                     Optional<Real64 const> const &StartMinute = _,
                                      Optional_int_const DST = _,
                                      Optional_string_const DayType = _,
                                      bool const warmupFlag = false);

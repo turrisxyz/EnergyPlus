@@ -7094,7 +7094,7 @@ bool RB_LWP(CFSLAYER const &L, // RB layer
 bool RB_SWP(EnergyPlusData &state,
             CFSLAYER const &L,           // RB layer
             CFSSWP &LSWP,                // returned: equivalent layer properties set
-            Optional<Real64 const> THETA // incident angle, 0 <= theta <= PI/2
+            Optional<Real64 const> const &THETA // incident angle, 0 <= theta <= PI/2
 )
 {
     // FUNCTION INFORMATION:
@@ -7182,7 +7182,7 @@ bool IS_LWP(CFSLAYER const &L, // IS layer
 bool IS_SWP(EnergyPlusData &state,
             CFSLAYER const &L,           // PD layer
             CFSSWP &LSWP,                // returned: equivalent layer properties set
-            Optional<Real64 const> THETA // incident angle, 0 <= theta <= PI/2
+            Optional<Real64 const> const &THETA // incident angle, 0 <= theta <= PI/2
 )
 {
     // FUNCTION INFORMATION:
@@ -7427,7 +7427,7 @@ bool VB_LWP(EnergyPlusData &state,
 bool VB_SWP(EnergyPlusData &state,
             CFSLAYER const &L,           // VB layer
             CFSSWP &LSWP,                // returned: equivalent off-normal properties
-            Optional<Real64 const> OMEGA // incident profile angle (radians)
+            Optional<Real64 const> const &OMEGA // incident profile angle (radians)
 )
 {
     // FUNCTION INFORMATION:
@@ -7779,8 +7779,8 @@ void BuildGap(EnergyPlusData &state,
               CFSGAP &G,                    // returned
               int const GType,              // gap type (gtyOPENin, gtyOPENout or gtySEALED)
               Real64 &TAS,                  // gap thickness, m
-              Optional<Real64 const> xTMan, // re density calc -- temp (C) and pressure (Pa)
-              Optional<Real64 const> xPMan  // re density calc -- temp (C) and pressure (Pa)
+              Optional<Real64 const> const &xTMan, // re density calc -- temp (C) and pressure (Pa)
+              Optional<Real64 const> const &xPMan  // re density calc -- temp (C) and pressure (Pa)
 )
 {
 

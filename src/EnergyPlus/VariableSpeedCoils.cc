@@ -112,7 +112,7 @@ namespace VariableSpeedCoils {
                                Real64 const SpeedRatio,               // compressor speed ratio
                                Real64 const SensLoad,                 // Sensible demand load [W]
                                Real64 const LatentLoad,               // Latent demand load [W]
-                               Optional<Real64 const> OnOffAirFlowRat // ratio of comp on to comp off air flow rate
+                               Optional<Real64 const> const &OnOffAirFlowRat // ratio of comp on to comp off air flow rate
     )
     {
 

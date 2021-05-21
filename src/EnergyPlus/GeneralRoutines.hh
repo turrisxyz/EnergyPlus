@@ -134,7 +134,7 @@ void ControlCompOutput(EnergyPlusData &state,
                        int &CompErrIndex,                         // for Recurring error call
                        Optional_int_const TempInNode = _,         // inlet node for output calculation
                        Optional_int_const TempOutNode = _,        // outlet node for output calculation
-                       Optional<Real64 const> AirMassFlow = _,    // air mass flow rate
+                       Optional<Real64 const> const &AirMassFlow = _,    // air mass flow rate
                        Optional_int_const Action = _,             // 1=reverse; 2=normal
                        Optional_int_const EquipIndex = _,         // Identifier for equipment of Outdoor Air Unit "ONLY"
                        Optional_int_const LoopNum = _,            // for plant components, plant loop index

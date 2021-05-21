@@ -4293,7 +4293,7 @@ namespace HVACMultiSpeedHeatPump {
                            Real64 const PartLoadRatio,       // unit part load ratio
                            Real64 &OnOffAirFlowRatio,        // ratio of compressor ON airflow to average airflow over timestep
                            Optional_int_const SpeedNum,      // Speed number
-                           Optional<Real64 const> SpeedRatio // Speed ratio
+                           Optional<Real64 const> const &SpeedRatio // Speed ratio
     )
     {
 
@@ -4417,7 +4417,7 @@ namespace HVACMultiSpeedHeatPump {
                                Real64 const HeatingLoad,      // supplemental coil load to be met by unit (watts)
                                int const FanMode,             // fan operation mode
                                Real64 &HeatCoilLoadmet,       // Heating Load Met
-                               Optional<Real64 const> PartLoadFrac)
+                               Optional<Real64 const> const &PartLoadFrac)
     {
 
         // SUBROUTINE INFORMATION:

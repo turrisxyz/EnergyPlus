@@ -2025,7 +2025,7 @@ namespace DataPlant {
 
     void HalfLoopData::SimulateAllLoopSidePumps(EnergyPlusData &state,
                                                 Optional<PlantLocation const> SpecificPumpLocation,
-                                                Optional<Real64 const> SpecificPumpFlowRate)
+                                                Optional<Real64 const> const &SpecificPumpFlowRate)
     {
 
         // SUBROUTINE INFORMATION:

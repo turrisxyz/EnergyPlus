@@ -309,7 +309,7 @@ void BaseSizer::reportSizerOutput(EnergyPlusData &state,
                                   std::string const &VarDesc,
                                   Real64 const VarValue,
                                   Optional_string_const UsrDesc,
-                                  Optional<Real64 const> UsrValue)
+                                  Optional<Real64 const> const &UsrValue)
 {
 
     static constexpr auto Format_990("! <Component Sizing Information>, Component Type, Component Name, Input Field Description, Value\n");

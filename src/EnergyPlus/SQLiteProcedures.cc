@@ -1422,9 +1422,9 @@ void SQLite::createSQLiteReportDictionaryRecord(int const reportVariableReportID
 void SQLite::createSQLiteReportDataRecord(int const recordIndex,
                                           Real64 const value,
                                           Optional_int_const reportingInterval,
-                                          Optional<Real64 const> minValue,
+                                          Optional<Real64 const> const &minValue,
                                           Optional_int_const minValueDate,
-                                          Optional<Real64 const> maxValue,
+                                          Optional<Real64 const> const &maxValue,
                                           Optional_int_const maxValueDate,
                                           Optional_int_const minutesPerTimeStep)
 {
@@ -1541,8 +1541,8 @@ void SQLite::createSQLiteTimeIndexRecord(int const reportingInterval,
                                          Optional_int_const month,
                                          Optional_int_const dayOfMonth,
                                          Optional_int_const hour,
-                                         Optional<Real64 const> endMinute,
-                                         Optional<Real64 const> startMinute,
+                                         Optional<Real64 const> const &endMinute,
+                                         Optional<Real64 const> const &startMinute,
                                          Optional_int_const dst,
                                          Optional_string_const dayType,
                                          bool const warmupFlag)

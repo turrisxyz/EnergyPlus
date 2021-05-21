@@ -141,7 +141,7 @@ namespace WaterToAirHeatPumpSimple {
                                int const CompOp,
                                Real64 const PartLoadRatio,
                                bool const FirstHVACIteration,
-                               Optional<Real64 const> OnOffAirFlowRat // ratio of comp on to comp off air flow rate
+                               Optional<Real64 const> const &OnOffAirFlowRat // ratio of comp on to comp off air flow rate
     )
     {
 

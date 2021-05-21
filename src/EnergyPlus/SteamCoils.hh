@@ -150,10 +150,10 @@ namespace SteamCoils {
                                      std::string const &CompName,
                                      bool const FirstHVACIteration,
                                      int &CompIndex,
-                                     Optional<Real64 const> QCoilReq = _, // coil load to be met
+                                     Optional<Real64 const> const &QCoilReq = _, // coil load to be met
                                      Optional<Real64> QCoilActual = _,    // coil load actually delivered returned to calling component
                                      Optional_int_const FanOpMode = _,
-                                     Optional<Real64 const> PartLoadRatio = _);
+                                     Optional<Real64 const> const &PartLoadRatio = _);
 
     void GetSteamCoilInput(EnergyPlusData &state);
 

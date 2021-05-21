@@ -173,7 +173,7 @@ namespace PlantUtilities {
                            int InletNodeNum,
                            int OutletNodeNum,
                            Optional_int_const LoopNum = _,
-                           Optional<Real64 const> OutletTemp = _ // set on outlet node if present and water.
+                           Optional<Real64 const> const &OutletTemp = _ // set on outlet node if present and water.
     );
 
     Real64 BoundValueToNodeMinMaxAvail(EnergyPlusData &state, Real64 ValueToBound, int NodeNumToBoundWith);
@@ -194,8 +194,8 @@ namespace PlantUtilities {
                                  int &BranchNum,
                                  int &CompNum,
                                  bool &errFlag,
-                                 Optional<Real64 const> LowLimitTemp = _,
-                                 Optional<Real64 const> HighLimitTemp = _,
+                                 Optional<Real64 const> const &LowLimitTemp = _,
+                                 Optional<Real64 const> const &HighLimitTemp = _,
                                  Optional_int CountMatchPlantLoops = _,
                                  Optional_int_const InletNodeNumber = _,
                                  Optional_int_const SingleLoopSearch = _);

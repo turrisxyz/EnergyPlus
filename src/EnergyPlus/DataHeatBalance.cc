@@ -1006,8 +1006,8 @@ void AddVariableSlatBlind(EnergyPlusData &state,
 
 void CalcScreenTransmittance(EnergyPlusData &state,
                              int const SurfaceNum,
-                             Optional<Real64 const> Phi,     // Optional sun altitude relative to surface outward normal (radians)
-                             Optional<Real64 const> Theta,   // Optional sun azimuth relative to surface outward normal (radians)
+                             Optional<Real64 const> const &Phi,     // Optional sun altitude relative to surface outward normal (radians)
+                             Optional<Real64 const> const &Theta,   // Optional sun azimuth relative to surface outward normal (radians)
                              Optional_int_const ScreenNumber // Optional screen number
 )
 {

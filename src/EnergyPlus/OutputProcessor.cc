@@ -3971,8 +3971,8 @@ namespace OutputProcessor {
         Optional_int_const Month,           // the month of the reporting interval
         Optional_int_const DayOfMonth,      // The day of the reporting interval
         Optional_int_const Hour,            // The hour of the reporting interval
-        Optional<Real64 const> EndMinute,   // The last minute in the reporting interval
-        Optional<Real64 const> StartMinute, // The starting minute of the reporting interval
+        Optional<Real64 const> const &EndMinute,   // The last minute in the reporting interval
+        Optional<Real64 const> const &StartMinute, // The starting minute of the reporting interval
         Optional_int_const DST,             // A flag indicating whether daylight savings time is observed
         Optional_string_const DayType       // The day tied for the data (e.g., Monday)
     )

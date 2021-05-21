@@ -8963,7 +8963,7 @@ void SetVSHPAirFlow(EnergyPlusData &state,
                     Real64 const PartLoadRatio,         // unit part load ratio
                     Real64 &OnOffAirFlowRatio,          // ratio of compressor ON airflow to average airflow over timestep
                     Optional_int_const SpeedNum,        // Speed number
-                    Optional<Real64 const> SpeedRatio   // Speed ratio
+                    Optional<Real64 const> const &SpeedRatio   // Speed ratio
 )
 {
 

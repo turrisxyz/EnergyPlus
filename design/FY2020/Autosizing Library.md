@@ -198,7 +198,7 @@ The base class will be inherited by all sizer classes to minimize the coding eff
                                std::string const &VarDesc,
                                Real64 VarValue,
                                Optional_string_const UsrDesc = _,
-                               Optional<Real64 const> UsrValue = _);
+                               Optional<Real64 const> const &UsrValue = _);
 
         void selectSizerOutput();
 

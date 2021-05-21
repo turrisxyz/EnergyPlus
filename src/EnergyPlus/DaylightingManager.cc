@@ -3213,7 +3213,7 @@ void FigureDayltgCoeffsAtPointsForSunPosition(
     Real64 &TVISIntWin,                            // Visible transmittance of int win at COSBIntWin for light from ext win
     Real64 &TVISIntWinDisk,                        // Visible transmittance of int win at COSBIntWin for sun
     Optional_int_const MapNum,
-    Optional<Real64 const> MapWindowSolidAngAtRefPtWtd)
+    Optional<Real64 const> const &MapWindowSolidAngAtRefPtWtd)
 {
 
     // SUBROUTINE INFORMATION:
@@ -8921,7 +8921,7 @@ void DayltgDirectSunDiskComplexFenestration(EnergyPlusData &state,
                                             Real64 const AZVIEW,                          // Azimuth of view vector in absolute coord system for
                                             DataDaylighting::iCalledFor const CalledFrom, // indicate  which type of routine called this routine
                                             Optional_int_const MapNum,
-                                            Optional<Real64 const> MapWindowSolidAngAtRefPtWtd)
+                                            Optional<Real64 const> const &MapWindowSolidAngAtRefPtWtd)
 {
 
     // SUBROUTINE INFORMATION:

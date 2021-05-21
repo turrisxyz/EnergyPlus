@@ -9262,7 +9262,7 @@ namespace Furnaces {
                            Real64 &LatentLoadMet,          // Latent cooling load met (furnace outlet with respect to control zone humidity ratio)
                            Real64 &OnOffAirFlowRatio,      // Ratio of compressor ON mass flow rate to AVERAGE
                            bool const HXUnitOn,            // flag to enable HX based on zone moisture load
-                           Optional<Real64 const> CoolingHeatingPLRRat // cooling PLR to heating PLR ratio, used for cycling fan RH control
+                           Optional<Real64 const> const &CoolingHeatingPLRRat // cooling PLR to heating PLR ratio, used for cycling fan RH control
     )
     {
 
@@ -12254,7 +12254,7 @@ namespace Furnaces {
                         Real64 const PartLoadRatio,       // unit part load ratio
                         Real64 &OnOffAirFlowRatio,        // ratio of compressor ON airflow to average airflow over timestep
                         Optional_int_const SpeedNum,      // Speed number
-                        Optional<Real64 const> SpeedRatio // Speed ratio
+                        Optional<Real64 const> const &SpeedRatio // Speed ratio
     )
     {
 

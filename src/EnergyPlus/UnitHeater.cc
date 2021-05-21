@@ -1773,7 +1773,7 @@ namespace UnitHeater {
                                   bool const FirstHVACIteration,       // flag for 1st HVAV iteration in the time step
                                   Real64 &LoadMet,                     // load met by unit (watts)
                                   Optional_int_const OpMode,           // fan operating mode
-                                  Optional<Real64 const> PartLoadRatio // part-load ratio
+                                  Optional<Real64 const> const &PartLoadRatio // part-load ratio
     )
     {
 

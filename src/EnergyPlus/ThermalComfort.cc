@@ -492,7 +492,7 @@ namespace ThermalComfort {
 
     void CalcThermalComfortFanger(EnergyPlusData &state,
                                   Optional_int_const PNum,     // People number for thermal comfort control
-                                  Optional<Real64 const> Tset, // Temperature setpoint for thermal comfort control
+                                  Optional<Real64 const> const &Tset, // Temperature setpoint for thermal comfort control
                                   Optional<Real64> PMVResult   // PMV value for thermal comfort control
     )
     {
@@ -2714,7 +2714,7 @@ namespace ThermalComfort {
         EnergyPlusData &state,
         bool const initiate,              // true if supposed to initiate
         Optional_bool_const wthrsim,      // true if this is a weather simulation
-        Optional<Real64 const> avgdrybulb // approximate avg drybulb for design day.  will be used as previous period in design day
+        Optional<Real64 const> const &avgdrybulb // approximate avg drybulb for design day.  will be used as previous period in design day
     )
     {
 
@@ -2959,7 +2959,7 @@ namespace ThermalComfort {
         EnergyPlusData &state,
         bool const initiate,              // true if supposed to initiate
         Optional_bool_const wthrsim,      // true if this is a weather simulation
-        Optional<Real64 const> avgdrybulb // approximate avg drybulb for design day.  will be used as previous period in design day
+        Optional<Real64 const> const &avgdrybulb // approximate avg drybulb for design day.  will be used as previous period in design day
     )
     {
 

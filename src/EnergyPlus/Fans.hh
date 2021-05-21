@@ -229,10 +229,10 @@ namespace Fans {
                                std::string const &CompName,
                                bool FirstHVACIteration,
                                int &CompIndex,
-                               Optional<Real64 const> SpeedRatio = _,
+                               Optional<Real64 const> const &SpeedRatio = _,
                                Optional_bool_const ZoneCompTurnFansOn = _,  // Turn fans ON signal from ZoneHVAC component
                                Optional_bool_const ZoneCompTurnFansOff = _, // Turn Fans OFF signal from ZoneHVAC component
-                               Optional<Real64 const> PressureRise = _      // Pressure difference to use for DeltaPress
+                               Optional<Real64 const> const &PressureRise = _      // Pressure difference to use for DeltaPress
     );
 
     void GetFanInput(EnergyPlusData &state);
@@ -246,9 +246,9 @@ namespace Fans {
 
     void SimSimpleFan(EnergyPlusData &state, int FanNum);
 
-    void SimVariableVolumeFan(EnergyPlusData &state, int FanNum, Optional<Real64 const> PressureRise = _);
+    void SimVariableVolumeFan(EnergyPlusData &state, int FanNum, Optional<Real64 const> const &PressureRise = _);
 
-    void SimOnOffFan(EnergyPlusData &state, int FanNum, Optional<Real64 const> SpeedRatio = _);
+    void SimOnOffFan(EnergyPlusData &state, int FanNum, Optional<Real64 const> const &SpeedRatio = _);
 
     void SimZoneExhaustFan(EnergyPlusData &state, int FanNum);
 
@@ -312,8 +312,8 @@ namespace Fans {
                     int FanNum,                               // Index of fan
                     bool &ErrorsFound,                        // Set to true if certain errors found
                     std::string const &FanName,               // Name of fan
-                    Optional<Real64 const> MaxAirVolFlow = _, // Fan air volumetric flow rate    [m3/s]
-                    Optional<Real64 const> MinAirVolFlow = _  // Fan air volumetric flow rate    [m3/s]
+                    Optional<Real64 const> const &MaxAirVolFlow = _, // Fan air volumetric flow rate    [m3/s]
+                    Optional<Real64 const> const &MinAirVolFlow = _  // Fan air volumetric flow rate    [m3/s]
     );
 
     [[maybe_unused]] Real64 FanDesDT(EnergyPlusData &state,
