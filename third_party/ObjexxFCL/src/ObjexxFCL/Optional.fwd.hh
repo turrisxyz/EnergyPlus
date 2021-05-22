@@ -21,7 +21,7 @@
 namespace ObjexxFCL {
 
 // Forward
-template< typename > class Optional;
+template< typename, typename = void > class Optional;
 
 // Types
 typedef  Optional< bool >                Optional_bool;

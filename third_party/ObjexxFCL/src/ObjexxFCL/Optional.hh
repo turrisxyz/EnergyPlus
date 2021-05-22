@@ -20,17 +20,19 @@
 // C++ Headers
 #include <cassert>
 #include <type_traits>
+#include <optional>
 
 namespace ObjexxFCL {
 
+
 // Optional Argument Wrapper
 template< typename T >
-class Optional
+class Optional<T, std::enable_if_t<!(std::is_trivial_v<T> && std::is_const_v<T>)>>
 {
 
 private: // Friend
 
-	template< typename > friend class Optional;
+	template< typename, typename > friend class Optional;
 
 public: // Types
 
@@ -254,6 +256,56 @@ private: // Data
 	bool own_{false}; // Own the object?
 
 }; // Optional
+
+template< typename Contained >
+class Optional<Contained, std::enable_if_t<std::is_trivial_v<Contained> && std::is_const_v<Contained>>> : public std::optional<Contained> {
+public:
+  // Omit Constructor
+  constexpr Optional() = default;
+
+  constexpr Optional(Omit) noexcept: Optional() {}
+
+  using std::optional<Contained>::optional;
+
+  constexpr operator Contained() const noexcept {
+    return *(*this);
+  }
+
+  constexpr Contained &operator ()() noexcept {
+    return *(*this);
+  }
+
+  constexpr const Contained &operator ()() const noexcept {
+    return *(*this);
+  }
+
+  [[nodiscard]] constexpr bool present() const noexcept {
+    return this->has_value();
+  }
+};
+
+template<>
+class Optional<bool const, std::enable_if_t<std::is_trivial_v<bool const>>> : public std::optional<bool const> {
+public:
+  // Omit Constructor
+  constexpr Optional() = default;
+
+  constexpr Optional(Omit) noexcept: Optional() {}
+
+  using std::optional<bool const>::optional;
+
+  constexpr operator bool() const noexcept {
+    return *(*this);
+  }
+
+  constexpr const bool &operator ()() const noexcept {
+    return *(*this);
+  }
+
+  [[nodiscard]] constexpr bool present() const noexcept {
+    return this->has_value();
+  }
+};
 
 
 // Argument Present?
