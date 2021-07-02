@@ -482,12 +482,13 @@ namespace CrossVentMgr {
 
         // Calculate the opening area for all apertures
         for (Ctd = 1; Ctd <= state.dataRoomAirMod->AirflowNetworkSurfaceUCSDCV(0, ZoneNum); ++Ctd) {
-            int cCompNum = state.dataAirflowNetwork->AirflowNetworkLinkageData(Ctd).CompNum;
-            if (state.dataAirflowNetwork->AirflowNetworkCompData(cCompNum).CompTypeNum == AirflowNetwork::ComponentType::DOP) {
+            //int cCompNum = state.dataAirflowNetwork->AirflowNetworkLinkageData(Ctd).CompNum;
+            auto type = state.dataAirflowNetwork->AirflowNetworkLinkageData(Ctd).element->type();
+            if (type == AirflowNetwork::ComponentType::DOP) {
                 state.dataRoomAirMod->CVJetRecFlows(Ctd, ZoneNum).Area = state.dataRoomAirMod->SurfParametersCVDV(Ctd).Width *
                                                                          state.dataRoomAirMod->SurfParametersCVDV(Ctd).Height *
                                                                          state.dataAirflowNetwork->MultizoneSurfaceData(Ctd).OpenFactor;
-            } else if (state.dataAirflowNetwork->AirflowNetworkCompData(cCompNum).CompTypeNum == AirflowNetwork::ComponentType::SCR) {
+            } else if (type == AirflowNetwork::ComponentType::SCR) {
                 state.dataRoomAirMod->CVJetRecFlows(Ctd, ZoneNum).Area =
                     state.dataRoomAirMod->SurfParametersCVDV(Ctd).Width * state.dataRoomAirMod->SurfParametersCVDV(Ctd).Height;
             } else {
