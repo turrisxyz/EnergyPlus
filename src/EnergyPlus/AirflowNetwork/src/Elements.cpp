@@ -821,7 +821,7 @@ namespace AirflowNetwork {
                     }
                 }
                 if (state.dataAirflowNetwork->AirflowNetworkCompData(state.dataAirflowNetwork->AirflowNetworkLinkageData(k).CompNum).CompTypeNum ==
-                    iComponentTypeNum::ELR) {
+                    ComponentType::ELR) {
                     // Calculate supply leak sensible losses
                     Node1 = state.dataAirflowNetwork->AirflowNetworkLinkageData(k).NodeNums[0];
                     Node2 = state.dataAirflowNetwork->AirflowNetworkLinkageData(k).NodeNums[1];

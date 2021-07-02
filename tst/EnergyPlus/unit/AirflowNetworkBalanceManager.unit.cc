@@ -13239,7 +13239,7 @@ TEST_F(EnergyPlusFixture, AirflowNetwork_MultiAirLoopTest)
     EXPECT_NEAR(state->dataAirflowNetwork->AirflowNetworkReportData(1).MultiZoneInfiLatLossW, 0.969147, 0.001);
 
     state->dataAirflowNetwork->AirflowNetworkCompData(state->dataAirflowNetwork->AirflowNetworkLinkageData(2).CompNum).CompTypeNum =
-        AirflowNetwork::iComponentTypeNum::DOP;
+        AirflowNetwork::ComponentType::DOP;
     ReportAirflowNetwork(*state);
 
     EXPECT_NEAR(state->dataAirflowNetwork->AirflowNetworkReportData(1).MultiZoneVentSenLossW, 95.89575, 0.001);
@@ -13257,7 +13257,7 @@ TEST_F(EnergyPlusFixture, AirflowNetwork_MultiAirLoopTest)
     EXPECT_NEAR(state->dataAirflowNetworkBalanceManager->AirflowNetworkZnRpt(1).VentilMass, 0.85114, 0.001);
     // Infiltration
     state->dataAirflowNetwork->AirflowNetworkCompData(state->dataAirflowNetwork->AirflowNetworkLinkageData(2).CompNum).CompTypeNum =
-        AirflowNetwork::iComponentTypeNum::SCR;
+        AirflowNetwork::ComponentType::SCR;
     UpdateAirflowNetwork(*state);
     ReportAirflowNetwork(*state);
     EXPECT_NEAR(state->dataAirflowNetworkBalanceManager->exchangeData(1).SumMCp, 2.38012, 0.001);

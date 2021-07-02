@@ -101,33 +101,10 @@ namespace AirflowNetwork {
     // all variables in this module must be PUBLIC.
 
     // MODULE PARAMETER DEFINITIONS:
-    enum class iComponentTypeNum : int
-    {
-        Unassigned = 0,
-        DOP = 1,  // Detailed large opening component
-        SOP = 2,  // Simple opening component
-        SCR = 3,  // Surface crack component
-        SEL = 4,  // Surface effective leakage ratio component
-        PLR = 5,  // Distribution system crack component
-        DWC = 6,  // Distribution system duct component
-        CVF = 7,  // Distribution system constant volume fan component
-        FAN = 8,  // Distribution system detailed fan component
-        MRR = 9,  // Distribution system multiple curve fit power law resistant flow component
-        DMP = 10, // Distribution system damper component
-        ELR = 11, // Distribution system effective leakage ratio component
-        CPD = 12, // Distribution system constant pressure drop component
-        COI = 13, // Distribution system coil component
-        TMU = 14, // Distribution system terminal unit component
-        EXF = 15, // Zone exhaust fan
-        HEX = 16, // Distribution system heat exchanger
-        HOP = 17, // Horizontal opening component
-        RVD = 18, // Reheat VAV terminal damper
-        OAF = 19, // Distribution system OA
-        REL = 20  // Distribution system relief air
-    };
 
     enum class ComponentType
     {
+        Unassigned = 0, // Add this in until the duplicate is gone
         DOP = 1, // Detailed large opening component
         SOP,     // Simple opening component
         SCR,     // Surface crack component
@@ -1282,7 +1259,7 @@ namespace AirflowNetwork {
     {
         // Members
         std::string Name;                 // Provide a unique element name
-        iComponentTypeNum CompTypeNum;    // Provide numeric equivalent for AirflowNetworkCompType
+        ComponentType CompTypeNum;    // Provide numeric equivalent for AirflowNetworkCompType
         int TypeNum;                      // Component number under same component type
         int CompNum;                      // General component number
         std::string EPlusName;            // Provide a unique element name
@@ -1291,7 +1268,7 @@ namespace AirflowNetwork {
         iEPlusComponentType EPlusTypeNum; // Provide EPlus component type
 
         // Default Constructor
-        AirflowNetworkCompProp() : CompTypeNum(iComponentTypeNum::Unassigned), TypeNum(0), CompNum(0), EPlusTypeNum(iEPlusComponentType::Unassigned)
+        AirflowNetworkCompProp() : CompTypeNum(ComponentType::Unassigned), TypeNum(0), CompNum(0), EPlusTypeNum(iEPlusComponentType::Unassigned)
         {
         }
     };
