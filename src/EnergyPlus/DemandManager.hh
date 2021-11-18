@@ -229,21 +229,7 @@ struct DemandManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NumDemandManagerList = 0;
-        NumDemandMgr = 0;
-        DemandManagerExtIterations = 0;
-        DemandManagerHBIterations = 0;
-        DemandManagerHVACIterations = 0;
-        GetInput = true;
-        DemandManagerList.deallocate();
-        DemandMgr.deallocate();
-        UniqueDemandMgrNames.clear();
-        ClearHistory = true;
-        BeginDemandSim = true;
-        ResimHVAC = true;
-        ResimHB = true;
-        ResimExt = true;
-        firstTime = true;
+        *this = DemandManagerData();
     }
 };
 

@@ -285,26 +285,7 @@ struct DataZoneControlsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumTempControlledZones = 0;
-        this->NumHumidityControlZones = 0;
-        this->NumComfortControlledZones = 0;
-        this->NumTStatStatements = 0;
-        this->NumComfortTStatStatements = 0;
-        this->NumOpTempControlledZones = 0;
-        this->NumTempAndHumidityControlledZones = 0;
-        this->AnyOpTempControl = false;
-        this->AnyZoneTempAndHumidityControl = false;
-        this->StageZoneLogic.deallocate();
-        this->OccRoomTSetPointHeat.deallocate();
-        this->OccRoomTSetPointCool.deallocate();
-        this->GetZoneAirStatsInputFlag = true;
-        this->HumidityControlZone.deallocate();
-        this->TempControlledZone.deallocate();
-        this->ComfortControlledZone.deallocate();
-        this->TStatObjects.deallocate();
-        this->ComfortTStatObjects.deallocate();
-        this->StagedTStatObjects.deallocate();
-        this->StageControlledZone.deallocate();
+        *this = DataZoneControlsData();
     }
 };
 

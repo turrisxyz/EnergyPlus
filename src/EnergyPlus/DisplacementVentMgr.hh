@@ -134,20 +134,7 @@ struct DisplacementVentMgrData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->HAT_MX = 0.0;
-        this->HA_MX = 0.0;
-        this->HAT_OC = 0.0;
-        this->HA_OC = 0.0;
-        this->HAT_FLOOR = 0.0;
-        this->HA_FLOOR = 0.0;
-        this->HeightFloorSubzoneTop = 0.2;
-        this->ThickOccupiedSubzoneMin = 0.2;
-        this->HeightIntMass = 0.0;
-        this->HeightIntMassDefault = 2.0;
-        this->InitUCSDDVMyOneTimeFlag = true;
-        this->MyEnvrnFlag.clear();
-        this->TempDepCoef = 0.0;
-        this->TempIndCoef = 0.0;
+        *this = DisplacementVentMgrData();
     }
 };
 

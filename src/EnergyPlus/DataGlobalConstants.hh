@@ -184,6 +184,7 @@ namespace DataGlobalConstants {
 
 struct DataGlobalConstantsData : BaseGlobalStruct
 {
+    // TODO: This looks like it needs to be cleaned up...
     std::map<DataGlobalConstants::EndUse, int> iEndUse = {
         {DataGlobalConstants::EndUse::Heating, 1},
         {DataGlobalConstants::EndUse::Cooling, 2},
@@ -252,7 +253,7 @@ struct DataGlobalConstantsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        // nothing to clear
+        *this = DataGlobalConstantsData();
     }
 };
 

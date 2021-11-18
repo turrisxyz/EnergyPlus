@@ -85,7 +85,7 @@ struct ShadowCombData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->ShadowComb.deallocate();
+        *this = ShadowCombData();
     }
 };
 

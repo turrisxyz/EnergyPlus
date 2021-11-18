@@ -327,8 +327,7 @@ struct DataInputProcessing : BaseGlobalStruct
     std::unique_ptr<InputProcessor> inputProcessor = InputProcessor::factory();
     void clear_state() override
     {
-        inputProcessor.reset();
-        inputProcessor = EnergyPlus::InputProcessor::factory();
+        *this = DataInputProcessing();
     }
 };
 

@@ -255,9 +255,7 @@ struct ChillerIndirectAbsoprtionData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumIndirectAbsorbers = 0;
-        this->GetInput = true;
-        this->IndirectAbsorber.deallocate();
+        *this = ChillerIndirectAbsoprtionData();
     }
 };
 

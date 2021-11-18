@@ -343,17 +343,7 @@ struct GeneratorsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NumFuelConstit = 0;
-        NumGeneratorFuelSups = 0;
-        NumGensWDynamics = 0;
-        GasPhaseThermoChemistryData.deallocate();
-        FuelSupply.deallocate();
-        GeneratorDynamics.deallocate();
-        this->InletCWnode = 0;
-        this->InternalFlowControl = false;
-        this->TcwIn = 0.0;
-        this->TrialMdotcw = 0.0;
-        this->LimitMinMdotcw = 0.0;
+        *this = GeneratorsData();
     }
 };
 

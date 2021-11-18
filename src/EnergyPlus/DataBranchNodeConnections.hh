@@ -148,20 +148,7 @@ struct BranchNodeConnectionsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumCompSets = 0;
-        this->NumNodeConnectionErrors = 0;
-        this->NumOfNodeConnections = 0;
-        this->MaxNumOfNodeConnections = 0;
-        this->NodeConnectionAlloc = 1000;
-        this->NumOfActualParents = 0;
-        this->NumOfAirTerminalNodes = 0;
-        this->MaxNumOfAirTerminalNodes = 0;
-        this->EqNodeConnectionAlloc = 100;
-        this->CompSets.deallocate();
-        this->ParentNodeList.deallocate();
-        this->NodeConnections.deallocate();
-        this->AirTerminalNodeConnections.deallocate();
-        this->NonConnectedNodes.deallocate();
+        *this = BranchNodeConnectionsData();
     }
 };
 

@@ -166,11 +166,7 @@ struct BaseboardRadiatorData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumBaseboards = 0;
-        this->getInputFlag = true;
-        this->ZoneEquipmentListChecked = false;
-        this->Baseboard.deallocate();
-        this->BaseboardParamsNumericFields.deallocate();
+        *this = BaseboardRadiatorData();
     }
 };
 

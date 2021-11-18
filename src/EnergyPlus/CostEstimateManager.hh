@@ -183,14 +183,7 @@ struct CostEstimateManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetCostInput = true;
-        this->NumLineItems = 0;
-        this->DoCostEstimate = false;
-        this->numMonetaryUnit = 0;
-        this->selectedMonetaryUnit = 0;
-        this->CurntBldg = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0};
-        this->RefrncBldg = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0};
-        this->monetaryUnit.deallocate();
+        *this = CostEstimateManagerData();
     }
 };
 

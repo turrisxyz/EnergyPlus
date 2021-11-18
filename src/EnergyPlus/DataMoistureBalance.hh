@@ -95,27 +95,7 @@ struct MoistureBalanceData : BaseGlobalStruct
     Array1D<Real64> HAirFD;         // Air Convection Coefficient
     void clear_state() override
     {
-        this->FluxH.deallocate();
-        this->IcoefH.deallocate();
-        this->Icoef.deallocate();
-        this->DiffC.deallocate();
-        this->mtinc.deallocate();
-        this->S1.deallocate();
-        this->R2.deallocate();
-        this->TempOutsideAirFD.deallocate();
-        this->mhstry.deallocate();
-        this->CMTF.deallocate();
-        this->Nmrf.deallocate();
-        this->RhoVaporAirOut.deallocate();
-        this->RhoVaporAirIn.deallocate();
-        this->HConvExtFD.deallocate();
-        this->HMassConvExtFD.deallocate();
-        this->HConvInFD.deallocate();
-        this->HMassConvInFD.deallocate();
-        this->RhoVaporSurfIn.deallocate();
-        this->HSkyFD.deallocate();
-        this->HGrndFD.deallocate();
-        this->HAirFD.deallocate();
+        *this = MoistureBalanceData();
     }
 };
 

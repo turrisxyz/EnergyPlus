@@ -267,6 +267,7 @@ protected:
 
 public:
     EnergyPlusData *state;
+    bool stateConstructed = false;
 
 private:
     friend class InputProcessorFixture;

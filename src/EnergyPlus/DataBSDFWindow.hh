@@ -448,13 +448,7 @@ struct BSDFWindowData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->TotComplexFenStates = 0;
-        this->FirstBSDF = 0;
-        this->MaxBkSurf = 20;
-        this->TotThermalModels = 0;
-        this->SUNCOSTS = Array2D<Vector3<Real64>>(60, 24);
-        this->BSDFTempMtrx.deallocate();
-        this->ComplexWind.deallocate();
+        *this = BSDFWindowData();
     }
 };
 

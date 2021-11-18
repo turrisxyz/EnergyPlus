@@ -180,21 +180,7 @@ struct ElectricBaseboardRadiatorData : BaseGlobalStruct
     Array1D_bool MyEnvrnFlag;
     void clear_state() override
     {
-        this->MyEnvrnFlag.clear();
-        this->NumElecBaseboards = 0;
-        this->GetInputFlag = true;
-        this->MyOneTimeFlag = true;
-        this->ZoneEquipmentListChecked = false;
-        this->QBBElecRadSource.clear();     // Need to keep the last value in case we are still iterating
-        this->QBBElecRadSrcAvg.clear();     // Need to keep the last value in case we are still iterating
-        this->ZeroSourceSumHATsurf.clear(); // Equal to the SumHATsurf for all the walls in a zone with no source
-        this->LastQBBElecRadSrc.clear();    // Need to keep the last value in case we are still iterating
-        this->LastSysTimeElapsed.clear();   // Need to keep the last value in case we are still iterating
-        this->LastTimeStepSys.clear();      // Need to keep the last value in case we are still iterating
-        this->MySizeFlag.clear();
-        this->CheckEquipName.clear();
-        this->ElecBaseboard.clear();
-        this->ElecBaseboardNumericFields.clear();
+        // TODO: need to fix the const string above first *this = ElectricBaseboardRadiatorData();
     }
 };
 

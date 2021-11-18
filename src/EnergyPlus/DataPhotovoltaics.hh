@@ -348,12 +348,7 @@ struct PhotovoltaicsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NumPVs = 0;
-        Num1DiodePVModuleTypes = 0;
-        NumSimplePVModuleTypes = 0;
-        NumSNLPVModuleTypes = 0;
-        ShuntResistance = 0.0;
-        PVarray.deallocate();
+        *this = PhotovoltaicsData();
     }
 };
 

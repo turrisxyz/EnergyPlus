@@ -132,11 +132,7 @@ struct DataZoneEnergyDemandsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->DeadBandOrSetback.deallocate();
-        this->Setback.deallocate();
-        this->CurDeadBandOrSetback.deallocate();
-        this->ZoneSysEnergyDemand.deallocate();
-        this->ZoneSysMoistureDemand.deallocate();
+        *this = DataZoneEnergyDemandsData();
     }
 };
 

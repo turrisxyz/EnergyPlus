@@ -167,58 +167,7 @@ struct EcoRoofManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->EcoRoofbeginFlag = true;
-        this->CalcEcoRoofMyEnvrnFlag = true;
-        this->FirstEcoSurf = 0;
-        this->QuickConductionSurf = false;
-        this->LAI = 0.2;
-        this->epsilonf = 0.95;
-        this->epsilong = 0.95;
-        this->Alphag = 0.3;
-        this->Alphaf = 0.2;
-        this->e0 = 2.0;
-        this->RH = 50.0;
-        this->Pa = 101325.0;
-        this->Tg = 10.0;
-        this->Tf = 10.0;
-        this->Zf = 0.2;
-        this->Moisture = 0.0;
-        this->MoistureResidual = 0.05;
-        this->MoistureMax = 0.5;
-        this->MeanRootMoisture = 0.0;
-        this->SoilThickness = 0.2;
-        this->StomatalResistanceMin = 0.0;
-        this->f3 = 1.0;
-        this->Zog = 0.001;
-        this->Za = 2.0;
-        this->Lf = 0.0;
-        this->Vfluxf = 0.0;
-        this->Qsoil = 0.0;
-        this->sheatf = 0.0;
-        this->sensiblef = 0.0;
-        this->sheatg = 0.0;
-        this->sensibleg = 0.0;
-        this->Lg = 0.0;
-        this->Vfluxg = 0.0;
-        this->TopDepth = 0.0;
-        this->RootDepth = 0.0;
-        // Note TopDepth+RootDepth = thickness of e
-        this->TimeStepZoneSec = 0.0;
-        this->DryCond = 0.0;
-        this->DryDens = 0.0;
-        this->DryAbsorp = 0.0;
-        this->DrySpecHeat = 0.0;
-        this->UpdatebeginFlag = true;
-        this->CapillaryPotentialTop = -3.8997;
-        this->CapillaryPotentialRoot = -3.8997;
-        this->SoilHydroConductivityTop = 8.72e-6;
-        this->SoilHydroConductivityRoot = 8.72e-6;
-        this->SoilConductivityAveTop = 8.72e-6;
-        this->SoilConductivityAveRoot = 8.72e-6;
-        this->RelativeSoilSaturationTop = 0.0;
-        this->RelativeSoilSaturationRoot = 0.0;
-        this->TestMoisture = 0.15;
-        this->ErrIndex = 0;
+        *this = EcoRoofManagerData();
     }
 };
 

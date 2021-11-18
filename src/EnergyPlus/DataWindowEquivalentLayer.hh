@@ -287,11 +287,7 @@ struct WindowEquivLayerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->TotWinEquivLayerConstructs = 0;
-        this->SWP_ROOMBLK = {};
-        this->CFSLayers.clear();
-        this->CFS.clear();
-        this->CFSGaps.clear();
+        *this = WindowEquivLayerData();
     }
 };
 

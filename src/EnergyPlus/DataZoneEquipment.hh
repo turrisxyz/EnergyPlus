@@ -524,24 +524,7 @@ struct DataZoneEquipmentData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetZoneEquipmentDataErrorsFound = false;
-        this->GetZoneEquipmentDataFound = 0;
-        this->NumSupplyAirPaths = 0;
-        this->NumReturnAirPaths = 0;
-        this->ZoneEquipInputsFilled = false;
-        this->ZoneEquipSimulatedOnce = false;
-        this->NumOfZoneEquipLists = 0;
-        this->ZoneEquipAvail.deallocate();
-        this->CrossMixingReportFlag.deallocate();
-        this->MixingReportFlag.deallocate();
-        this->VentMCP.deallocate();
-        this->ZMAT.deallocate();
-        this->ZHumRat.deallocate();
-        this->ZoneEquipConfig.deallocate();
-        this->UniqueZoneEquipListNames.clear();
-        this->ZoneEquipList.deallocate();
-        this->SupplyAirPath.deallocate();
-        this->ReturnAirPath.deallocate();
+        *this = DataZoneEquipmentData();
     }
 };
 

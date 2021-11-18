@@ -333,24 +333,7 @@ struct DaylightingData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->totDaylightingControls = 0;
-        this->TotRefPoints = 0;
-        this->maxRefPointsPerControl = 0;
-        this->TotIllumMaps = 0;
-        this->mapResultsToReport = false;
-        this->mapResultsReported = false;
-        this->MapColSep = char();
-        this->DFSReportSizingDays = false;
-        this->DFSReportAllShadowCalculationDays = false;
-        this->TotDElightCFS = 0;
-        this->enclDaylight.deallocate();
-        this->ZoneDaylight.deallocate();
-        this->daylightControl.deallocate();
-        this->IllumMap.deallocate();
-        this->IllumMapCalc.deallocate();
-        this->DaylRefPt.deallocate();
-        this->DElightComplexFene.deallocate();
-        this->spacePowerReductionFactor.deallocate();
+        *this = DaylightingData();
     }
 };
 

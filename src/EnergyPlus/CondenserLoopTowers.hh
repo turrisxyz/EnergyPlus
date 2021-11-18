@@ -497,10 +497,7 @@ struct CondenserLoopTowersData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumSimpleTowers = 0;
-        this->GetInput = true;
-        this->towers.deallocate();
-        this->UniqueSimpleTowerNames.clear();
+        *this = CondenserLoopTowersData();
     }
 };
 

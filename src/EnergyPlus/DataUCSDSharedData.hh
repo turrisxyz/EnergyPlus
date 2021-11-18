@@ -84,25 +84,7 @@ struct UCSDSharedData : BaseGlobalStruct
     Array1D<Real64> HDoor;
     void clear_state() override
     {
-        this->APos_Wall.clear();
-        this->APos_Floor.clear();
-        this->APos_Ceiling.clear();
-        this->PosZ_Wall.clear();
-        this->PosZ_Floor.clear();
-        this->PosZ_Ceiling.clear();
-        this->APos_Window.clear();
-        this->APos_Door.clear();
-        this->APos_Internal.clear();
-        this->PosZ_Window.clear();
-        this->PosZ_Door.clear();
-        this->PosZ_Internal.clear();
-        // Convection coeficients for the various surfaces
-        this->HCeiling.clear();
-        this->HWall.clear();
-        this->HFloor.clear();
-        this->HInternal.clear();
-        this->HWindow.clear();
-        this->HDoor.clear();
+        *this = UCSDSharedData();
     }
 };
 

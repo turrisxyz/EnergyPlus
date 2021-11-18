@@ -121,8 +121,7 @@ struct DataBranchAirLoopPlantData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumPressureCurves = 0;
-        this->PressureCurve.deallocate();
+        *this = DataBranchAirLoopPlantData();
     }
 };
 

@@ -584,56 +584,7 @@ struct RuntimeLanguageData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumProgramCallManagers = 0;
-        this->NumSensors = 0;
-        this->numActuatorsUsed = 0;
-        this->numEMSActuatorsAvailable = 0;
-        this->maxEMSActuatorsAvailable = 0;
-        this->NumInternalVariablesUsed = 0;
-        this->numEMSInternalVarsAvailable = 0;
-        this->maxEMSInternalVarsAvailable = 0;
-        this->varsAvailableAllocInc = 1000;
-        this->NumErlPrograms = 0;
-        this->NumErlSubroutines = 0;
-        this->NumUserGlobalVariables = 0;
-        this->NumErlVariables = 0;
-        this->NumErlStacks = 0;
-        this->NumExpressions = 0;
-        this->NumEMSOutputVariables = 0;
-        this->NumEMSMeteredOutputVariables = 0;
-        this->NumErlTrendVariables = 0;
-        this->NumEMSCurveIndices = 0;
-        this->NumEMSConstructionIndices = 0;
-        this->NumExternalInterfaceGlobalVariables = 0;
-        this->NumExternalInterfaceFunctionalMockupUnitImportGlobalVariables = 0;
-        this->NumExternalInterfaceFunctionalMockupUnitExportGlobalVariables = 0;
-        this->NumExternalInterfaceActuatorsUsed = 0;
-        this->NumExternalInterfaceFunctionalMockupUnitImportActuatorsUsed = 0;
-        this->NumExternalInterfaceFunctionalMockupUnitExportActuatorsUsed = 0;
-        this->OutputEDDFile = false;
-        this->OutputFullEMSTrace = false;
-        this->OutputEMSErrors = false;
-        this->OutputEMSActuatorAvailFull = false;
-        this->OutputEMSActuatorAvailSmall = false;
-        this->OutputEMSInternalVarsFull = false;
-        this->OutputEMSInternalVarsSmall = false;
-        this->EMSConstructActuatorChecked.deallocate();
-        this->EMSConstructActuatorIsOkay.deallocate();
-        this->ErlVariable.deallocate();
-        this->ErlStack.deallocate();
-        this->ErlExpression.deallocate();
-        this->PossibleOperators.deallocate();
-        this->TrendVariable.deallocate();
-        this->Sensor.deallocate();
-        this->EMSActuatorAvailable.deallocate();
-        this->EMSActuatorUsed.deallocate();
-        this->EMSInternalVarsAvailable.deallocate();
-        this->EMSInternalVarsUsed.deallocate();
-        this->EMSProgramCallManager.deallocate();
-        this->EMSActuator_lookup.clear();
-        this->Null = DataRuntimeLanguage::ErlValueType(DataRuntimeLanguage::Value::Null, 0.0, "", 0, 0, false, 0, "", true);
-        this->False = DataRuntimeLanguage::ErlValueType(DataRuntimeLanguage::Value::Null, 0.0, "", 0, 0, false, 0, "", true);
-        this->True = DataRuntimeLanguage::ErlValueType(DataRuntimeLanguage::Value::Null, 0.0, "", 0, 0, false, 0, "", true);
+        *this = RuntimeLanguageData();
     }
 };
 

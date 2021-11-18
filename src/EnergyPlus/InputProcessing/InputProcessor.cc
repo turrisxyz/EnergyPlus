@@ -101,8 +101,6 @@ namespace EnergyPlus {
 // input file and (2) the simulation input data file will be processed
 // with the data therein being supplied to the actual simulation routines.
 
-static std::string const BlankString;
-
 using json = nlohmann::json;
 
 InputProcessor::InputProcessor() : idf_parser(std::make_unique<IdfParser>()), data(std::make_unique<DataStorage>())
@@ -182,15 +180,6 @@ json const &InputProcessor::getPatternProperties(EnergyPlusData &state, json con
 }
 
 // Functions
-
-// void InputProcessor::clear_state() {
-//    idf_parser = std::make_unique<IdfParser>();
-//    data = std::make_unique<DataStorage>();
-//    epJSON = json::object();
-//    objectCacheMap.clear();
-//    unusedInputs.clear();
-//    validation = std::make_unique<Validation>(&schema);
-//}
 
 std::vector<std::string> const &InputProcessor::validationErrors()
 {
@@ -1752,12 +1741,13 @@ void InputProcessor::preProcessorCheck(EnergyPlusData &state, bool &PreP_Fatal) 
     int CountP;
     int CountM;
     std::string Multiples;
+    static constexpr std::string_view const BlankString;
 
     state.dataIPShortCut->cCurrentModuleObject = "Output:PreprocessorMessage";
     NumPrePM = getNumObjectsFound(state, state.dataIPShortCut->cCurrentModuleObject);
     if (NumPrePM > 0) {
         getObjectDefMaxArgs(state, state.dataIPShortCut->cCurrentModuleObject, NumParams, NumAlphas, NumNumbers);
-        state.dataIPShortCut->cAlphaArgs({1, NumAlphas}) = BlankString;
+        state.dataIPShortCut->cAlphaArgs({1, NumAlphas}) = std::string(BlankString);
         for (CountP = 1; CountP <= NumPrePM; ++CountP) {
             getObjectItem(state,
                           state.dataIPShortCut->cCurrentModuleObject,
@@ -1775,7 +1765,7 @@ void InputProcessor::preProcessorCheck(EnergyPlusData &state, bool &PreP_Fatal) 
             if (NumAlphas > 3) {
                 Multiples = "s";
             } else {
-                Multiples = BlankString;
+                Multiples = std::string(BlankString);
             }
             if (state.dataIPShortCut->cAlphaArgs(2).empty()) state.dataIPShortCut->cAlphaArgs(2) = "Unknown";
             {

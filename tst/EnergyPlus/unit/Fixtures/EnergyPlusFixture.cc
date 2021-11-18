@@ -93,11 +93,13 @@ void EnergyPlusFixture::openOutputFiles(EnergyPlusData &state)
 
 void EnergyPlusFixture::SetUp()
 {
-    //    if (this->state) {
-    //        this->state->clear_state();
-    //    } else {
-    this->state = new EnergyPlusData;
-    //    }
+    if (this->stateConstructed) {
+        std::cout << "STATE READY? " << this->state->ready << std::endl;
+        this->state->clear_state();
+    } else {
+        this->state = new EnergyPlusData;
+        this->stateConstructed = true;
+    }
 
     show_message();
 
@@ -133,7 +135,7 @@ void EnergyPlusFixture::TearDown()
     state->files.bnd.del();
     state->files.shade.del();
     //    state->clear_state();
-    delete this->state;
+    // delete this->state;
 }
 
 void EnergyPlusFixture::show_message()

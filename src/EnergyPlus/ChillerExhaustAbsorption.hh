@@ -257,8 +257,7 @@ struct ChillerExhaustAbsorptionData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->Sim_GetInput = true;
-        this->ExhaustAbsorber.deallocate();
+        *this = ChillerExhaustAbsorptionData();
     }
 };
 

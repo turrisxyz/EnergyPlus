@@ -72,15 +72,7 @@ struct ReportFlagData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumOfWarmupDays = 0;
-        this->cWarmupDay.clear();
-        this->DisplayPerfSimulationFlag = false;
-        this->DoWeatherInitReporting = false;
-        this->PrintEndDataDictionary = false;
-        this->MakeMirroredDetachedShading = true;
-        this->MakeMirroredAttachedShading = true;
-        this->DebugOutput = false;
-        this->EvenDuringWarmup = false;
+        *this = ReportFlagData();
     }
 };
 

@@ -178,9 +178,7 @@ struct BoilerSteamData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->numBoilers = 0;
-        this->getSteamBoilerInput = true;
-        this->Boiler.deallocate();
+        *this = BoilerSteamData();
     }
 };
 

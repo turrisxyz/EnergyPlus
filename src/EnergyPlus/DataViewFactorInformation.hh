@@ -98,10 +98,7 @@ struct ViewFactorInfoData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NumOfRadiantEnclosures = 0;
-        NumOfSolarEnclosures = 0;
-        EnclRadInfo.clear();
-        EnclSolInfo.clear();
+        *this = ViewFactorInfoData();
     }
 };
 

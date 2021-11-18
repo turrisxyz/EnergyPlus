@@ -223,15 +223,7 @@ struct AirLoopHVACDOASData : BaseGlobalStruct
     bool WinterDesignDayFlag = true;
     void clear_state() override
     {
-        this->GetInputOnceFlag = true;
-        this->getAirLoopMixerInputOnceFlag = true;
-        this->getAirLoopSplitterInputOnceFlag = true;
-        this->numAirLoopDOAS = 0;
-        this->airloopDOAS.clear();
-        this->airloopMixer.clear();
-        this->airloopSplitter.clear();
-        this->SummerDesignDayFlag = true;
-        this->WinterDesignDayFlag = true;
+        *this = AirLoopHVACDOASData();
     }
 };
 

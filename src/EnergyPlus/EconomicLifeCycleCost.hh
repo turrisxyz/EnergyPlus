@@ -521,52 +521,7 @@ struct EconomicLifeCycleCostData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->LCCparamPresent = false;
-        this->LCCname.clear();
-        this->discountConvention = EconomicLifeCycleCost::DiscConv::EndOfYear;
-        this->inflationApproach = EconomicLifeCycleCost::InflAppr::ConstantDollar;
-        this->realDiscountRate = 0.0;
-        this->nominalDiscountRate = 0.0;
-        this->inflation = 0.0;
-        this->baseDateMonth = 0;
-        this->baseDateYear = 0;
-        this->serviceDateMonth = 0;
-        this->serviceDateYear = 0;
-        this->lengthStudyYears = 0;
-        this->lengthStudyTotalMonths = 0;
-        this->taxRate = 0.0;
-        this->depreciationMethod = EconomicLifeCycleCost::DeprMethod::None;
-        this->lastDateYear = 0;
-        this->numRecurringCosts = 0;
-        this->numNonrecurringCost = 0;
-        this->numUsePriceEscalation = 0;
-        this->numUseAdjustment = 0;
-        this->numCashFlow = 0;
-        this->numResourcesUsed = 0;
-        this->GetInput_GetLifeCycleCostInput = true;
-        this->UsePriceEscalation_escStartYear = 0;
-        this->UsePriceEscalation_escNumYears = 0;
-        this->UsePriceEscalation_escEndYear = 0;
-        this->UsePriceEscalation_earlierEndYear = 0;
-        this->UsePriceEscalation_laterStartYear = 0;
-        this->UsePriceEscalation_curEsc = 0;
-        this->UsePriceEscalation_curFld = 0;
-        this->ExpressAsCashFlows_baseMonths1900 = 0;
-        this->ExpressAsCashFlows_serviceMonths1900 = 0;
-        this->SPV.deallocate();
-        this->energySPV.clear();
-        this->DepreciatedCapital.deallocate();
-        this->TaxableIncome.deallocate();
-        this->Taxes.deallocate();
-        this->AfterTaxCashFlow.deallocate();
-        this->AfterTaxPresentValue.deallocate();
-        this->EscalatedTotEnergy.deallocate();
-        this->EscalatedEnergy.clear();
-        this->RecurringCosts.clear();
-        this->NonrecurringCost.clear();
-        this->UsePriceEscalation.deallocate();
-        this->UseAdjustment.deallocate();
-        this->CashFlow.clear();
+        *this = EconomicLifeCycleCostData();
     }
 };
 

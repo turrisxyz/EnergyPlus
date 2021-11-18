@@ -114,11 +114,7 @@ struct DaylightingDevicesData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->COSAngle = Array1D<Real64>(DataDaylightingDevices::NumOfAngles);
-        this->ShelfReported = false;
-        this->GetTDDInputErrorsFound = false;
-        this->GetShelfInputErrorsFound = false;
-        this->MyEnvrnFlag = true;
+        *this = DaylightingDevicesData();
     }
 };
 

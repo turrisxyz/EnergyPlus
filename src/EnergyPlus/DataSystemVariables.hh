@@ -147,52 +147,7 @@ struct SystemVarsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        shadingMethod = DataSystemVariables::ShadingMethod::PolygonClipping;
-        DDOnly = false;
-        ReverseDD = false;
-        DisableGLHECaching = false;
-        FullAnnualRun = false;
-        DeveloperFlag = false;
-        TimingFlag = false;
-
-        firstTime = true;
-
-        SutherlandHodgman = true;
-        SlaterBarsky = false;
-        DetailedSkyDiffuseAlgorithm = false;
-        DetailedSolarTimestepIntegration = false;
-
-        ReportExtShadingSunlitFrac = false;
-        DisableGroupSelfShading = false;
-        DisableAllSelfShading = false;
-
-        TrackAirLoopEnvFlag = false;
-        TraceAirLoopEnvFlag = false;
-        TraceHVACControllerEnvFlag = false;
-
-        ReportDuringWarmup = false;
-        ReportDuringHVACSizingSimulation = false;
-        ReportDetailedWarmupConvergence = false;
-        UpdateDataDuringWarmupExternalInterface = false;
-
-        Elapsed_Time = 0.0;
-        Time_Start = 0.0;
-        Time_Finish = 0.0;
-        SortedIDD = true;
-        lMinimalShadowing = false;
-        TestAllPaths = false;
-        iEnvSetThreads = 0;
-        lEnvSetThreadsInput = false;
-        iepEnvSetThreads = 0;
-        lepSetThreadsInput = false;
-        iIDFSetThreads = 0;
-        lIDFSetThreadsInput = false;
-        inumActiveSims = 1;
-        lnumActiveSims = false;
-        MaxNumberOfThreads = 1;
-        NumberIntRadThreads = 1;
-        iNominalTotSurfaces = 0;
-        Threading = false;
+        *this = SystemVarsData();
     }
 };
 

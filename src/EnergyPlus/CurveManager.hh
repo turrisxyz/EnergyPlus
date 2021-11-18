@@ -411,13 +411,7 @@ struct CurveManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumCurves = 0;
-        this->GetCurvesInputFlag = true;
-        this->CurveValueMyBeginTimeStepFlag = false;
-        this->FrictionFactorErrorHasOccurred = false;
-        PerfCurve.deallocate();
-        btwxtManager.clear();
-        UniqueCurveNames.clear();
+        *this = CurveManagerData();
     }
 };
 

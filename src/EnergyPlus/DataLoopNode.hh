@@ -453,62 +453,7 @@ struct LoopNodeData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumOfNodes = 0;
-        this->NumofSplitters = 0;
-        this->NumofMixers = 0;
-        this->NodeID.deallocate();
-        this->Node.deallocate();
-        this->DefaultNodeValues = DataLoopNode::NodeData(DataLoopNode::NodeFluidType::blank,
-                                                         0,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         DataLoopNode::SensedNodeFlagValue,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         DataLoopNode::SensedNodeFlagValue,
-                                                         DataLoopNode::SensedNodeFlagValue,
-                                                         DataLoopNode::SensedNodeFlagValue,
-                                                         DataLoopNode::SensedNodeFlagValue,
-                                                         DataLoopNode::SensedNodeFlagValue,
-                                                         -1.0,
-                                                         false,
-                                                         0,
-                                                         0,
-                                                         0,
-                                                         0,
-                                                         0.0,
-                                                         false,
-                                                         0.0,
-                                                         0.0,
-                                                         false,
-                                                         0.0,
-                                                         0.0,
-                                                         false,
-                                                         0.0,
-                                                         0.0,
-                                                         false,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         0.0,
-                                                         false,
-                                                         false);
-        this->MoreNodeInfo.deallocate();
-        this->MarkedNode.deallocate();
-        this->NodeSetpointCheck.deallocate();
+        *this = LoopNodeData();
     }
 };
 

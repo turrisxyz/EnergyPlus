@@ -157,40 +157,7 @@ struct DataTimingsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumTimingElements = 0;
-        this->MaxTimingElements = 0;
-        this->dailyWeatherTime = 0.0;
-        this->dailyExteriorEnergyUseTime = 0.0;
-        this->dailyHeatBalanceTime = 0.0;
-        this->hbdailyInit = 0.0;
-        this->hbdailyOutSurf = 0.0;
-        this->hbdailyInSurf = 0.0;
-        this->hbdailyHVAC = 0.0;
-        this->hbdailyRep = 0.0;
-        this->clockrate = 0.0;
-        this->lprocessingInputTiming = false;
-        this->lmanageSimulationTiming = false;
-        this->lcloseoutReportingTiming = false;
-        this->Timing.deallocate();
-
-#ifdef EP_Count_Calls
-        this->NumShadow_Calls = 0;
-        this->NumShadowAtTS_Calls = 0;
-        this->NumClipPoly_Calls = 0;
-        this->NumInitSolar_Calls = 0;
-        this->NumAnisoSky_Calls = 0;
-        this->NumDetPolyOverlap_Calls = 0;
-        this->NumCalcPerSolBeam_Calls = 0;
-        this->NumDetShadowCombs_Calls = 0;
-        this->NumIntSolarDist_Calls = 0;
-        this->NumIntRadExchange_Calls = 0;
-        this->NumIntRadExchangeZ_Calls = 0;
-        this->NumIntRadExchangeMain_Calls = 0;
-        this->NumIntRadExchangeOSurf_Calls = 0;
-        this->NumIntRadExchangeISurf_Calls = 0;
-        this->NumMaxInsideSurfIterations = 0;
-        this->NumCalcScriptF_Calls = 0;
-#endif
+        *this = DataTimingsData();
     }
 };
 

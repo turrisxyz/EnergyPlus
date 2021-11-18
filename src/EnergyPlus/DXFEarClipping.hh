@@ -145,8 +145,7 @@ struct DXFEarClippingData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->trackit = false;
-        this->errcount = 0;
+        *this = DXFEarClippingData();
     }
 };
 

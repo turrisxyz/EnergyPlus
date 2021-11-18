@@ -179,10 +179,7 @@ struct EarthTubeData : BaseGlobalStruct
 
     void clear_state() override
     {
-        TotEarthTube = 0;
-        GetInputFlag = true;
-        EarthTubeSys.deallocate();
-        ZnRptET.deallocate();
+        *this = EarthTubeData();
     }
 };
 

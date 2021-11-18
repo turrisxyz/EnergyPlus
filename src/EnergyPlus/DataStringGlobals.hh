@@ -133,24 +133,7 @@ struct DataStringGlobalsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        outputErrFilePath.clear();
-        eplusADSFilePath.clear();
-        idfFilePathNameOnly.clear();
-        idfDirPath.clear();
-        outDirPath.clear();
-        inputFilePathNameOnly.clear();
-        inputDirPath.clear();
-        exeDirectoryPath.clear();
-        inputFilePath.clear();
-        inputIddFilePath.clear();
-        inputEpJSONSchemaFilePath.clear();
-        FullPath.clear();
-        weatherFilePathNameOnly.clear();
-        ProgramPath.clear();
-        CurrentWorkingFolder.clear();
-        CurrentDateTime.clear();
-        IDDVerString.clear();
-        VerStringVar.clear();
+        *this = DataStringGlobalsData();
     }
 };
 

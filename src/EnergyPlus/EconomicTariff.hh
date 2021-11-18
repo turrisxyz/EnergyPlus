@@ -777,33 +777,7 @@ struct EconomicTariffData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->numEconVar = 0;
-        this->sizeEconVar = 0;
-        this->operand.deallocate();
-        this->numOperand = 0;
-        this->sizeOperand = 0;
-        this->numTariff = 0;
-        this->numQualify = 0;
-        this->numChargeSimple = 0;
-        this->numChargeBlock = 0;
-        this->numRatchet = 0;
-        this->numComputation = 0;
-        this->steps.deallocate();
-        this->stepsCopy.deallocate();
-        this->numSteps = 0;
-        this->sizeSteps = 0;
-        this->topOfStack = 0;
-        this->sizeStack = 0;
-        this->Update_GetInput = true;
-        this->addOperand_prevVarMe = 0;
-        this->econVar.deallocate();
-        this->tariff.deallocate();
-        this->qualify.deallocate();
-        this->chargeSimple.deallocate();
-        this->chargeBlock.deallocate();
-        this->ratchet.deallocate();
-        this->computation.deallocate();
-        this->stack.deallocate();
+        *this = EconomicTariffData();
     }
 };
 

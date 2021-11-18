@@ -119,11 +119,7 @@ struct SurfaceListsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumOfSurfaceLists = 0;
-        this->NumOfSurfListVentSlab = 0;
-        this->SurfaceListInputsFilled = false;
-        this->SurfList.deallocate();
-        this->SlabList.deallocate();
+        *this = SurfaceListsData();
     }
 };
 

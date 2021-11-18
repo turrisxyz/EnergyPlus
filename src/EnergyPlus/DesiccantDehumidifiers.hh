@@ -346,26 +346,7 @@ struct DesiccantDehumidifiersData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumDesicDehums = 0;
-        this->NumSolidDesicDehums = 0;
-        this->NumGenericDesicDehums = 0;
-        this->TempSteamIn = 100.0;
-        this->GetInputDesiccantDehumidifier = true;
-        this->InitDesiccantDehumidifierOneTimeFlag = true;
-        this->DesicDehum.deallocate();
-        this->UniqueDesicDehumNames.clear();
-        this->MySetPointCheckFlag = true;
-        this->CalcSolidDesiccantDehumidifierMyOneTimeFlag = true;
-        this->CalcGenericDesiccantDehumidifierMyOneTimeFlag = true;
-        this->MaxNums = 0;
-        this->MaxAlphas = 0;
-        this->TotalArgs = 0;
-        this->SteamDensity = 0.0;
-        this->MyEnvrnFlag.deallocate();
-        this->MyPlantScanFlag.deallocate();
-        this->RhoAirStdInit = 0.0;
-        this->QRegen = 0.0;
-        this->RhoAirStdInitCGDD = 0.0;
+        *this = DesiccantDehumidifiersData();
     }
 };
 

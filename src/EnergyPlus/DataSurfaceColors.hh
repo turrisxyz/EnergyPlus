@@ -102,7 +102,7 @@ struct SurfaceColorData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->DXFcolorno = DataSurfaceColors::defaultcolorno;
+        *this = SurfaceColorData();
     }
 };
 

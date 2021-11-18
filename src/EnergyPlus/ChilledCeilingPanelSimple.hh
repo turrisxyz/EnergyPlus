@@ -229,22 +229,7 @@ struct ChilledCeilingPanelSimpleData : BaseGlobalStruct
     Array1D_bool MyEnvrnFlag;
     void clear_state() override
     {
-        this->GetInputFlag = true;
-        this->MyOneTimeFlag = true;
-        this->NumCoolingPanels = 0;
-        this->CoolingPanelSource.deallocate();
-        this->CoolingPanelSrcAvg.deallocate();
-        this->ZeroSourceSumHATsurf.deallocate();
-        this->LastCoolingPanelSrc.deallocate();
-        this->LastSysTimeElapsed.deallocate();
-        this->LastTimeStepSys.deallocate();
-        this->CheckEquipName.deallocate();
-        this->SetLoopIndexFlag.deallocate();
-        this->MySizeFlagCoolPanel.deallocate();
-        this->CoolingPanel.deallocate();
-        this->CoolingPanelSysNumericFields.deallocate();
-        this->ZoneEquipmentListChecked = false;
-        this->MyEnvrnFlag.clear();
+        *this = ChilledCeilingPanelSimpleData();
     }
 };
 

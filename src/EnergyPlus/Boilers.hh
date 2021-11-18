@@ -204,9 +204,7 @@ struct BoilersData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->numBoilers = 0;
-        this->getBoilerInputFlag = true;
-        this->Boiler.deallocate();
+        *this = BoilersData();
     }
 };
 

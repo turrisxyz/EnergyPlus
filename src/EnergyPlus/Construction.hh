@@ -335,9 +335,7 @@ struct ConstructionData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->Construct.deallocate();
-        this->LayerPoint.deallocate();
-        this->LayerPoint.dimension(Construction::MaxLayersInConstruct, 0);
+        *this = ConstructionData();
     }
 };
 

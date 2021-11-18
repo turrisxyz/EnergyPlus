@@ -1008,52 +1008,7 @@ struct DXCoilsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetCoilsInputFlag = true;
-        this->MyOneTimeFlag = true;
-        this->CalcTwoSpeedDXCoilStandardRatingOneTimeEIOHeaderWrite = true;
-        this->CrankcaseHeaterReportVarFlag = true;
-        this->NumVRFHeatingCoils = 0;
-        this->NumVRFCoolingCoils = 0;
-        this->NumDXCoils = 0;
-        this->NumVRFHeatingFluidTCtrlCoils = 0;
-        this->NumVRFCoolingFluidTCtrlCoils = 0;
-        this->NumDXHeatingCoils = 0;
-        this->NumDoe2DXCoils = 0;
-        this->NumDXHeatPumpWaterHeaterPumpedCoils = 0;
-        this->NumDXHeatPumpWaterHeaterWrappedCoils = 0;
-        this->NumDXMulSpeedCoils = 0;
-        this->NumDXMulModeCoils = 0;
-        this->NumDXMulSpeedCoolCoils = 0;
-        this->NumDXMulSpeedHeatCoils = 0;
-        this->HPWHHeatingCapacity = 0.0;
-        this->HPWHHeatingCOP = 0.0;
-        this->CheckEquipName.deallocate();
-        this->DXCoilOutletTemp.deallocate();
-        this->DXCoilOutletHumRat.deallocate();
-        this->DXCoilPartLoadRatio.deallocate();
-        this->DXCoilFanOpMode.deallocate();
-        this->DXCoilFullLoadOutAirTemp.deallocate();
-        this->DXCoilFullLoadOutAirHumRat.deallocate();
-        this->DXCoilTotalCooling.deallocate();
-        this->DXCoilTotalHeating.deallocate();
-        this->DXCoilCoolInletAirWBTemp.deallocate();
-        this->DXCoilHeatInletAirDBTemp.deallocate();
-        this->DXCoilHeatInletAirWBTemp.deallocate();
-        this->DXCoil.deallocate();
-        this->DXCoilNumericFields.deallocate();
-        this->MyEnvrnFlag.clear();
-        this->MySizeFlag.clear();
-        this->CurrentEndTime = 0.0;
-        this->CalcVRFCoolingCoilCurrentEndTime = 0.0;
-        this->CalcVRFCoolingCoil_FluidTCtrlCurrentEndTime = 0.0;
-        this->NetCoolingCapRated = 0.0;
-        this->EER = 0.0;
-        this->IEER = 0.0;
-        this->TotCapTempModFac = 0.0;
-        this->TotCapFlowModFac = 0.0;
-        this->EIRTempModFac = 0.0;
-        this->EIRFlowModFac = 0.0;
-        this->TempDryBulb_Leaving_Apoint = 0.0;
+        *this = DXCoilsData();
     }
 };
 

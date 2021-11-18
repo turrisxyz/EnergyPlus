@@ -130,13 +130,7 @@ struct BaseboardElectricData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumBaseboards = 0;
-        this->getInputFlag = true;
-        this->Baseboard.deallocate();
-        this->BaseboardNumericFields.deallocate();
-        this->MyOneTimeFlag = true;
-        this->ZoneEquipmentListChecked = false;
-        this->MyEnvrnFlag.clear();
+        *this = BaseboardElectricData();
     }
 };
 

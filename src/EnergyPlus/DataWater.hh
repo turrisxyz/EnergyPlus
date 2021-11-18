@@ -313,18 +313,7 @@ struct DataWaterData : BaseGlobalStruct
 
     void clear_state() override
     {
-        RainFall = {};
-        Irrigation = {};
-        WaterStorage.deallocate();
-        RainCollector.deallocate();
-        GroundwaterWell.deallocate();
-        NumWaterStorageTanks = 0;
-        NumRainCollectors = 0;
-        NumGroundWaterWells = 0;
-        NumSiteRainFall = 0;
-        AnyWaterSystemsInModel = false;
-        WaterSystemGetInputCalled = false;
-        AnyIrrigationInModel = false;
+        *this = DataWaterData();
     }
 };
 
