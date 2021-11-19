@@ -78,7 +78,7 @@ struct ReturnAirPathMgr : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetInputFlag = true;
+        *this = ReturnAirPathMgr();
     }
 };
 

@@ -313,34 +313,9 @@ struct SurfaceGroundHeatExchangersData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NoSurfaceGroundTempObjWarning = true;
-        FlowRate = 0.0;
-        TopSurfTemp = 0.0;
-        BtmSurfTemp = 0.0;
-        TopSurfFlux = 0.0;
-        BtmSurfFlux = 0.0;
-        SourceFlux = 0.0;
-        CheckEquipName.clear();
-        PastBeamSolarRad = 0.0;
-        PastSolarDirCosVert = 0.0;
-        PastDifSolarRad = 0.0;
-        PastGroundTemp = 0.0;
-        PastIsRain = false;
-        PastIsSnow = false;
-        PastOutDryBulbTemp = 0.0;
-        PastOutWetBulbTemp = 0.0;
-        PastSkyTemp = 0.0;
-        PastWindSpeed = 0.0;
-        GetInputFlag = true;
-        QRadSysSrcAvg.clear();
-        LastSysTimeElapsed.clear();
-        LastTimeStepSys.clear();
-        InitializeTempTop = false;
-        SurfaceGHE.clear();
+        *this = SurfaceGroundHeatExchangersData();
     }
 
-    // Default Constructor
-    SurfaceGroundHeatExchangersData() = default;
 };
 } // namespace EnergyPlus
 

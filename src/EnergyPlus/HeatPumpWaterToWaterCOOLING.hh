@@ -184,12 +184,7 @@ struct HeatPumpWaterToWaterCOOLINGData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumGSHPs = 0;
-        this->GSHPRefrigIndex = 0;
-        this->GetWWHPCoolingInput = true;
-        this->GSHP.deallocate();
-        this->CurrentSimTime = 0.0;
-        this->PrevSimTime = 0.0;
+        *this = HeatPumpWaterToWaterCOOLINGData();
     }
 };
 

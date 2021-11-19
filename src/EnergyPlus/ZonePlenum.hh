@@ -213,15 +213,7 @@ struct ZonePlenumData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetInputFlag = true;
-        this->InitAirZoneReturnPlenumEnvrnFlag = true;
-        this->InitAirZoneReturnPlenumOneTimeFlag = true;
-        this->NumZonePlenums = 0;
-        this->NumZoneReturnPlenums = 0;
-        this->NumZoneSupplyPlenums = 0;
-        this->ZoneRetPlenCond.deallocate();
-        this->ZoneSupPlenCond.deallocate();
-        this->MyEnvrnFlag = true;
+        *this = ZonePlenumData();
     }
 
     // Default Constructor

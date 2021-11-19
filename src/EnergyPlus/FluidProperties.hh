@@ -787,36 +787,7 @@ struct FluidPropertiesData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetInput = true;
-        this->NumOfRefrigerants = 0;
-        this->NumOfGlycols = 0;
-        this->DebugReportGlycols = false;
-        this->DebugReportRefrigerants = false;
-        this->GlycolErrorLimitTest = 1;
-        this->RefrigerantErrorLimitTest = 1;
-        this->RefrigUsed.deallocate();
-        this->GlycolUsed.deallocate();
-
-        this->RefrigData.deallocate();
-        this->RefrigErrorTracking.deallocate();
-        this->GlyRawData.deallocate();
-        this->GlycolData.deallocate();
-        this->GlycolErrorTracking.deallocate();
-
-        this->SatErrCountGetSupHeatEnthalpyRefrig = 0;
-        this->SatErrCountGetSupHeatDensityRefrig = 0;
-        this->HighTempLimitErrGetSpecificHeatGlycol_raw = 0;
-        this->LowTempLimitErrGetSpecificHeatGlycol_raw = 0;
-        this->HighTempLimitErrGetDensityGlycol = 0;
-        this->LowTempLimitErrGetDensityGlycol = 0;
-        this->HighTempLimitErrGetConductivityGlycol = 0;
-        this->LowTempLimitErrGetConductivityGlycol = 0;
-        this->HighTempLimitErrGetViscosityGlycol = 0;
-        this->LowTempLimitErrGetViscosityGlycol = 0;
-        this->TempLoRangeErrIndexGetQualityRefrig = 0;
-        this->TempHiRangeErrIndexGetQualityRefrig = 0;
-        this->TempRangeErrCountGetInterpolatedSatProp = 0;
-        this->TempRangeErrIndexGetInterpolatedSatProp = 0;
+        *this = FluidPropertiesData();
     }
 };
 

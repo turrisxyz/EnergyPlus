@@ -610,36 +610,7 @@ struct MixedAirData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumControllerLists = 0;
-        this->NumOAControllers = 0;
-        this->NumERVControllers = 0;
-        this->NumOAMixers = 0;
-        this->NumVentMechControllers = 0;
-        this->MyOneTimeErrorFlag.deallocate();
-        this->MyOneTimeCheckUnitarySysFlag.deallocate();
-        this->initOASysFlag.deallocate();
-        this->GetOASysInputFlag = true;
-        this->GetOAMixerInputFlag = true;
-        this->GetOAControllerInputFlag = true;
-        this->InitOAControllerOneTimeFlag = true;
-        this->InitOAControllerSetPointCheckFlag.deallocate();
-        this->InitOAControllerSetUpAirLoopHVACVariables = true;
-        this->AllocateOAControllersFlag = true;
-        this->DesignSpecOAObjName.deallocate();
-        this->DesignSpecOAObjIndex.deallocate();
-        this->VentMechZoneOrListName.deallocate();
-        this->DesignSpecZoneADObjName.deallocate();
-        this->DesignSpecZoneADObjIndex.deallocate();
-        this->ControllerLists.deallocate();
-        this->OAController.deallocate();
-        this->OAMixer.deallocate();
-        this->VentilationMechanical.deallocate();
-        this->ControllerListUniqueNames.clear();
-        this->OAControllerUniqueNames.clear();
-        this->OAControllerMyOneTimeFlag.clear();
-        this->OAControllerMyEnvrnFlag.clear();
-        this->OAControllerMySizeFlag.clear();
-        this->MechVentCheckFlag.clear();
+        *this = MixedAirData();
     }
 };
 

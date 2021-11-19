@@ -187,15 +187,7 @@ struct ZoneEquipmentManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->SizeZoneEquipmentOneTimeFlag = true;
-        this->InitZoneEquipmentOneTimeFlag = true;
-        this->InitZoneEquipmentEnvrnFlag = true;
-        this->AvgData.deallocate();   // scratch array for storing averaged data
-        this->NumOfTimeStepInDay = 0; // number of zone time steps in a day
-        this->GetZoneEquipmentInputFlag = true;
-        this->PrioritySimOrder.deallocate();
-        this->FirstPassZoneEquipFlag = true;
-        this->reportDOASZoneSizingHeader = true;
+        *this = ZoneEquipmentManagerData();
     }
 
     // Default Constructor

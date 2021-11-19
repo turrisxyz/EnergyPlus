@@ -194,14 +194,14 @@ namespace EIRPlantLoopHeatPumps {
 
 } // namespace EIRPlantLoopHeatPumps
 
-struct EIRPlantLoopHeatPumpsData
+struct EIRPlantLoopHeatPumpsData : BaseGlobalStruct
 {
     std::vector<EIRPlantLoopHeatPumps::EIRPlantLoopHeatPump> heatPumps;
     bool getInputsPLHP = true;
-    void clear_state()
+
+    void clear_state() override
     {
-        getInputsPLHP = true;
-        heatPumps.clear();
+        *this = EIRPlantLoopHeatPumpsData();
     }
 };
 

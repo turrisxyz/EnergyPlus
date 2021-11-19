@@ -137,15 +137,9 @@ struct SplitterComponentData : BaseGlobalStruct
 
     void clear_state() override
     {
-        GetSplitterInputFlag = true;
-        NumSplitters = 0;
-        CheckEquipName.deallocate();
-        SplitterCond.deallocate();
-        MyEnvrnFlag = true;
+        *this = SplitterComponentData();
     }
 
-    // Default Constructor
-    SplitterComponentData() = default;
 };
 } // namespace EnergyPlus
 

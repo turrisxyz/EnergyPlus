@@ -1075,14 +1075,7 @@ struct PlantPipingSysMgrData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetInputFlag = true;
-        this->GetSegmentInputFlag = true;
-        this->GetCircuitInputFlag = true;
-        this->WriteEIOFlag = true;
-        this->domains.clear();
-        this->circuits.clear();
-        this->segments.clear();
-        this->GroundDomainUniqueNames.clear();
+        *this = PlantPipingSysMgrData();
     }
 };
 

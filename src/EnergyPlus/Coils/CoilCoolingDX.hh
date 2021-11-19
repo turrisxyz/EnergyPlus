@@ -79,7 +79,6 @@ struct CoilCoolingDX
     CoilCoolingDX() = default;
     static int factory(EnergyPlusData &state, std::string const &coilName);
     static void getInput(EnergyPlusData &state);
-    static void clear_state();
     static void reportAllStandardRatings(EnergyPlusData &state);
     void instantiateFromInputSpec(EnergyPlusData &state, const CoilCoolingDXInputSpecification &input_data);
     void oneTimeInit(EnergyPlusData &state);
@@ -181,6 +180,7 @@ struct CoilCoolingDXData : BaseGlobalStruct
     bool stillNeedToReportStandardRatings = true; // standard ratings flag for all coils to report at the same time
     void clear_state() override
     {
+        // TODO: Remove the const string
         coilCoolingDXs.clear();
         coilCoolingDXGetInputFlag = true;
         stillNeedToReportStandardRatings = true;

@@ -247,44 +247,7 @@ struct RuntimeLanguageProcessorData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->AlreadyDidOnce = false;
-        this->GetInput = true;
-        this->InitializeOnce = true;
-        this->MyEnvrnFlag = true;
-        this->NullVariableNum = 0;
-        this->FalseVariableNum = 0;
-        this->TrueVariableNum = 0;
-        this->OffVariableNum = 0;
-        this->OnVariableNum = 0;
-        this->PiVariableNum = 0;
-        this->CurveIndexVariableNums.clear();
-        this->ConstructionIndexVariableNums.clear();
-        this->YearVariableNum = 0;
-        this->MonthVariableNum = 0;
-        this->DayOfMonthVariableNum = 0;
-        this->DayOfWeekVariableNum = 0;
-        this->DayOfYearVariableNum = 0;
-        this->HourVariableNum = 0;
-        this->TimeStepsPerHourVariableNum = 0;
-        this->TimeStepNumVariableNum = 0;
-        this->MinuteVariableNum = 0;
-        this->HolidayVariableNum = 0;
-        this->DSTVariableNum = 0;
-        this->CurrentTimeVariableNum = 0;
-        this->SunIsUpVariableNum = 0;
-        this->IsRainingVariableNum = 0;
-        this->SystemTimeStepVariableNum = 0;
-        this->ZoneTimeStepVariableNum = 0;
-        this->CurrentEnvironmentPeriodNum = 0;
-        this->ActualDateAndTimeNum = 0;
-        this->ActualTimeNum = 0;
-        this->WarmUpFlagNum = 0;
-        this->RuntimeReportVar.clear();
-        this->ErlStackUniqueNames.clear();
-        this->RuntimeReportVarUniqueNames.clear();
-        this->WriteTraceMyOneTimeFlag = false;
-        this->PEToken.clear();
-        this->Token.clear();
+        *this = RuntimeLanguageProcessorData();
     }
 };
 

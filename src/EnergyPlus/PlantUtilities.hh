@@ -249,7 +249,7 @@ struct PlantUtilitiesData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->CriteriaChecks.deallocate();
+        *this = PlantUtilitiesData();
     }
 };
 

@@ -197,16 +197,9 @@ struct TranspiredCollectorData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumUTSC = 0;
-        this->GetInputFlag = true;
-        this->UTSC.deallocate();
-        this->MyOneTimeFlag = true;
-        this->MySetPointCheckFlag = true;
-        this->MyEnvrnFlag.deallocate();
+        *this = TranspiredCollectorData();
     }
 
-    // Default Constructor
-    TranspiredCollectorData() = default;
 };
 } // namespace EnergyPlus
 

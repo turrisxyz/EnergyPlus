@@ -185,30 +185,7 @@ struct MundtSimMgrData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->FloorSurfSetIDs.clear();   // fixed variable for floors
-        this->TheseSurfIDs.clear();      // temporary working variable
-        this->MundtCeilAirID = 0;        // air node index in AirDataManager
-        this->MundtFootAirID = 0;        // air node index in AirDataManager
-        this->SupplyNodeID = 0;          // air node index in AirDataManager
-        this->TstatNodeID = 0;           // air node index in AirDataManager
-        this->ReturnNodeID = 0;          // air node index in AirDataManager
-        this->NumRoomNodes = 0;          // number of nodes connected to walls
-        this->NumFloorSurfs = 0;         // total number of surfaces for floor
-        this->RoomNodeIDs.clear();       // ids of the first NumRoomNode Air Nodes
-        this->ID1dSurf.clear();          // numbers used to identify surfaces
-        this->MundtZoneNum = 0;          // index of zones using Mundt model
-        this->ZoneHeight = 0.0;          // zone height
-        this->ZoneFloorArea = 0.0;       // zone floor area
-        this->QventCool = 0.0;           // heat gain due to ventilation
-        this->ConvIntGain = 0.0;         // heat gain due to internal gains
-        this->SupplyAirTemp = 0.0;       // supply air temperature
-        this->SupplyAirVolumeRate = 0.0; // supply air volume flowrate
-        this->ZoneAirDensity = 0.0;      // zone air density
-        this->QsysCoolTot = 0.0;         // zone sensible cooling load
-        this->ZoneData.clear();          // zone data
-        this->LineNode.clear();          // air nodes
-        this->MundtAirSurf.clear();      // surfaces
-        this->FloorSurf.clear();         // floor
+        *this = MundtSimMgrData();
     }
 };
 

@@ -113,9 +113,7 @@ struct PipesData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetPipeInputFlag = true;
-        this->LocalPipe.deallocate();
-        this->LocalPipeUniqueNames.clear();
+        *this = PipesData();
     }
 };
 

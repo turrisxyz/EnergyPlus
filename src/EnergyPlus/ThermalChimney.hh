@@ -149,14 +149,9 @@ struct ThermalChimneysData : BaseGlobalStruct
 
     void clear_state() override
     {
-        ThermalChimneyGetInputFlag = true;
-        ZnRptThermChim.deallocate();
-        ThermalChimneySys.deallocate();
-        ThermalChimneyReport.deallocate();
+        *this = ThermalChimneysData();
     }
 
-    // Default Constructor
-    ThermalChimneysData() = default;
 };
 } // namespace EnergyPlus
 

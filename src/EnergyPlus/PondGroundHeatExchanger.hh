@@ -164,9 +164,7 @@ struct PondGroundHeatExchangerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetInputFlag = true;
-        this->NumOfPondGHEs = 0;
-        this->PondGHE.deallocate();
+        *this = PondGroundHeatExchangerData();
     }
 };
 

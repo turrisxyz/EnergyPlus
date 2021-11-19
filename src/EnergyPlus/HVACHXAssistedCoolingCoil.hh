@@ -245,15 +245,7 @@ struct HVACHXAssistedCoolingCoilData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->TotalNumHXAssistedCoils = 0;
-        this->HXAssistedCoilOutletTemp.clear();
-        this->HXAssistedCoilOutletHumRat.clear();
-        this->GetCoilsInputFlag = true;
-        this->CheckEquipName.clear();
-        this->HXAssistedCoil.clear();
-        this->UniqueHXAssistedCoilNames.clear();
-        this->ErrCount = 0;
-        this->ErrCount2 = 0;
+        *this = HVACHXAssistedCoolingCoilData();
     }
 };
 

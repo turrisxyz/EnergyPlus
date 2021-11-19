@@ -337,7 +337,7 @@ namespace SolarShading {
 
 struct SolarShadingData : BaseGlobalStruct
 {
-    Array1D_string const cOverLapStatus;
+    Array1D_string cOverLapStatus;  // TODO: This is a const and needs to be pulled from state
     int MaxHCV = 15;             // Maximum number of HC vertices
                                  // (needs to be based on maxnumvertices)
     int MaxHCS = 15000;          // 200      ! Maximum number of HC surfaces (was 56)
@@ -503,130 +503,7 @@ struct SolarShadingData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->MaxHCV = 15;
-        this->MaxHCS = 1500;
-        this->MAXHCArrayBounds = 0;
-        this->MAXHCArrayIncrement = 0;
-        this->NVS = 0;
-        this->NumVertInShadowOrClippedSurface = 0;
-        this->CurrentSurfaceBeingShadowed = 0;
-        this->CurrentShadowingSurface = 0;
-        this->OverlapStatus = 0;
-        this->SurfSunCosTheta.deallocate();
-        this->SurfAnisoSkyMult.deallocate();
-        this->SurfDifShdgRatioIsoSky.deallocate();
-        this->SurfDifShdgRatioIsoSkyHRTS.deallocate();
-        this->SurfCurDifShdgRatioIsoSky.deallocate();
-        this->SurfDifShdgRatioHoriz.deallocate();
-        this->SurfDifShdgRatioHorizHRTS.deallocate();
-        this->SurfWithShdgIsoSky.deallocate();
-        this->SurfWoShdgIsoSky.deallocate();
-        this->SurfWithShdgHoriz.deallocate();
-        this->SurfWoShdgHoriz.deallocate();
-        this->SurfMultIsoSky.deallocate();
-        this->SurfMultCircumSolar.deallocate();
-        this->SurfMultHorizonZenith.deallocate();
-        this->FBKSHC = 0;
-        this->FGSSHC = 0;
-        this->FINSHC = 0;
-        this->FRVLHC = 0;
-        this->FSBSHC = 0;
-        this->LOCHCA = 0;
-        this->NBKSHC = 0;
-        this->NGSSHC = 0;
-        this->NINSHC = 0;
-        this->NRVLHC = 0;
-        this->NSBSHC = 0;
-        this->CalcSkyDifShading = false;
-        this->ShadowingCalcFrequency = 0; // Frequency for Shadowing Calculations
-        this->ShadowingDaysLeft = 0;      // Days left in current shadowing period
-        this->debugging = false;
-        this->GetInputFlag = true;
-        this->firstTime = true;
-        this->HCNS.deallocate();
-        this->HCNV.deallocate();
-        this->HCA.deallocate();
-        this->HCB.deallocate();
-        this->HCC.deallocate();
-        this->HCX.deallocate();
-        this->HCY.deallocate();
-        this->SurfWinRevealStatus.deallocate();
-        this->HCAREA.deallocate();
-        this->HCT.deallocate();
-        this->SurfIntAbsFac.deallocate();
-        this->SurfSunlitArea.deallocate();
-        this->NumTooManyFigures = 0;
-        this->NumTooManyVertices = 0;
-        this->NumBaseSubSurround = 0;
-        this->XShadowProjection = 0.0;
-        this->YShadowProjection = 0.0;
-        this->XTEMP.deallocate();
-        this->XVC.deallocate();
-        this->XVS.deallocate();
-        this->YTEMP.deallocate();
-        this->YVC.deallocate();
-        this->YVS.deallocate();
-        this->ZVC.deallocate();
-        this->ATEMP.deallocate();
-        this->BTEMP.deallocate();
-        this->CTEMP.deallocate();
-        this->XTEMP1.deallocate();
-        this->YTEMP1.deallocate();
-        this->maxNumberOfFigures = 0;
-        this->TrackTooManyFigures.deallocate();
-        this->TrackTooManyVertices.deallocate();
-        this->TrackBaseSubSurround.deallocate();
-        this->InitComplexOnce = true;
-        this->ShadowOneTimeFlag = true;
-        this->CHKSBSOneTimeFlag = true;
-        this->ORDERFirstTimeFlag = true;
-        this->TooManyFiguresMessage = false;
-        this->TooManyVerticesMessage = false;
-        this->SHDBKSOneTimeFlag = true;
-        this->SHDGSSOneTimeFlag = true;
-        this->TolValue = 0.0003;
-        this->XVT.deallocate();
-        this->YVT.deallocate();
-        this->ZVT.deallocate();
-        this->SLOPE.deallocate();
-        this->MaxGSS = 50;
-        this->MaxBKS = 50;
-        this->MaxSBS = 50;
-        this->MaxDim = 0;
-        this->XVrt.deallocate();
-        this->YVrt.deallocate();
-        this->ZVrt.deallocate();
-        this->XVrtx.deallocate();
-        this->YVrtx.deallocate();
-        this->ZVrtx.deallocate();
-        this->XVert.deallocate();
-        this->YVert.deallocate();
-        this->ZVert.deallocate();
-        this->SurfWinAbsBeam.deallocate();
-        this->SurfWinAbsBeamEQL = Array1D<Real64>(DataWindowEquivalentLayer::CFSMAXNL + 1);
-        this->SurfWinExtBeamAbsByShadFac.deallocate();
-        this->SurfWinIntBeamAbsByShadFac.deallocate();
-        this->SurfWinTransBmSolar.deallocate();
-        this->SurfWinTransDifSolar.deallocate();
-        this->SurfWinTransDifSolarGnd.deallocate();
-        this->SurfWinTransDifSolarSky.deallocate();
-        this->SurfWinAbsSolBeamEQL = Array2D<Real64>(2, DataWindowEquivalentLayer::CFSMAXNL + 1);
-        this->SurfWinAbsSolDiffEQL = Array2D<Real64>(2, DataWindowEquivalentLayer::CFSMAXNL + 1);
-        this->SurfWinAbsSolBeamBackEQL = Array2D<Real64>(2, DataWindowEquivalentLayer::CFSMAXNL + 1);
-        this->SurfWinTransBmBmSolar.deallocate();
-        this->SurfWinTransBmDifSolar.deallocate();
-        this->ThetaBig = 0.0;
-        this->ThetaSmall = 0.0;
-        this->ThetaMin = 0.0;
-        this->ThetaMax = 0.0;
-        this->XVertex.deallocate();
-        this->YVertex.deallocate();
-        this->ZVertex.deallocate();
-        this->sin_Phi.clear();
-        this->cos_Phi.clear();
-        this->sin_Theta.clear();
-        this->cos_Theta.clear();
-        this->shd_stream.reset();
+        *this = SolarShadingData();
     }
 
     // Default Constructor

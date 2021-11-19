@@ -126,12 +126,7 @@ struct WaterManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->MyOneTimeFlag = true;
-        this->GetInputFlag = true;
-        this->MyEnvrnFlag = true;
-        this->MyWarmupFlag = false;
-        this->MyTankDemandCheckFlag = true;
-        this->overflowTwater = 0.0;
+        *this = WaterManagerData();
     }
 
     // Default Constructor

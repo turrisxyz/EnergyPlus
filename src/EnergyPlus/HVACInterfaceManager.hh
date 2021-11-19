@@ -165,12 +165,7 @@ struct HVACInterfaceManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->CommonPipeSetupFinished = false;
-        this->PlantCommonPipe.deallocate();
-        this->MyEnvrnFlag_SingleCommonPipe.deallocate();
-        this->MyEnvrnFlag_TwoWayCommonPipe.deallocate();
-        this->OneTimeData_SingleCommonPipe = true;
-        this->OneTimeData_TwoWayCommonPipe = true;
+        *this = HVACInterfaceManagerData();
     }
 };
 

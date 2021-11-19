@@ -184,7 +184,7 @@ struct OutputReportTabularAnnualData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->annualTables.clear();
+        *this = OutputReportTabularAnnualData();
     }
 };
 

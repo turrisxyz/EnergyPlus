@@ -217,14 +217,7 @@ struct InternalHeatGainsData : BaseGlobalStruct
 
     void clear_state() override
     {
-
-        this->GetInternalHeatGainsInputFlag = true;
-        this->ErrorsFound = false;
-        this->UsingThermalComfort = false;
-        this->sumArea = 0.0;
-        this->sumPower = 0.0;
-        this->curQL = 0.0;
-        this->adjQL = 0.0;
+        *this = InternalHeatGainsData();
     }
 };
 

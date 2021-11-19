@@ -178,54 +178,9 @@ struct SolarReflectionManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->IHr = 0;
-        this->SunVec = 0.0;
-        this->RecSurfNum = 0;
-        this->SurfNum = 0;
-        this->RecPtNum = 0;
-        this->NumRecPts = 0;
-        this->HitPtSurfNum = 0;
-        this->RayNum = 0;
-        this->OriginThisRay = 0.0;
-        this->ObsHitPt = 0.0;
-        this->ObsSurfNum = 0;
-        this->CosIncBmAtHitPt = 0.0;
-        this->CosIncBmAtHitPt2 = 0.0;
-        this->BmReflSolRadiance = 0.0;
-        this->dReflBeamToDiffSol = 0.0;
-        this->SunLitFract = 0.0;
-        this->NumHr = 0;
-        this->SunVect = 0.0;
-        this->SunVecMir = 0.0;
-        this->RecPt = 0.0;
-        this->HitPtRefl = 0.0;
-        this->HitPtObs = 0.0;
-        this->ReflNorm = 0.0;
-        this->SpecReflectance = 0.0;
-        this->ConstrNumRefl = 0;
-        this->CosIncAngRefl = 0.0;
-        this->CosIncAngRec = 0.0;
-        this->ReflFac = 0.0;
-        this->CosIncWeighted = 0.0;
-        this->iRecSurfNum = 0;
-        this->iSurfNum = 0;
-        this->iObsSurfNum = 0;
-        this->iRecPtNum = 0;
-        this->iNumRecPts = 0;
-        this->HitPntSurfNum = 0;
-        this->HitPtSurfNumX = 0;
-        this->iRayNum = 0;
-        this->HitPntRefl = 0.0;
-        this->HitPntObs = 0.0;
-        this->SkyReflSolRadiance = 0.0;
-        this->dReflSkySol = 0.0;
-        this->URay = 0.0;
-        this->SurfVertToGndPt = 0.0;
-        this->SurfVert = 0.0;
+        *this = SolarReflectionManagerData();
     }
 
-    // Default Constructor
-    SolarReflectionManagerData() = default;
 };
 } // namespace EnergyPlus
 

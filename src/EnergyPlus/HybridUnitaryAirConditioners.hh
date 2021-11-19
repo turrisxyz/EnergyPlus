@@ -116,16 +116,7 @@ struct HybridUnitaryAirConditionersData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumZoneHybridEvap = 0;
-        this->GetInputZoneHybridEvap = true;
-        this->ZoneEquipmentListChecked = false;
-        this->HybridCoolOneTimeFlag = true;
-        this->CheckZoneHybridEvapName.deallocate();
-        this->ZoneHybridUnitaryAirConditioner.deallocate();
-        this->MySizeFlag.clear();
-        this->MyEnvrnFlag.clear();
-        this->MyFanFlag.clear();
-        this->MyZoneEqFlag.clear();
+        *this = HybridUnitaryAirConditionersData();
     }
 };
 

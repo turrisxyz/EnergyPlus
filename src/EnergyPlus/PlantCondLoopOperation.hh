@@ -185,7 +185,6 @@ namespace PlantCondLoopOperation {
 
 struct PlantCondLoopOperationData : BaseGlobalStruct
 {
-
     bool GetPlantOpInput = true;
     bool InitLoadDistributionOneTimeFlag = true;
     bool LoadEquipListOneTimeFlag = true;
@@ -194,16 +193,10 @@ struct PlantCondLoopOperationData : BaseGlobalStruct
     Array1D<DataPlant::LoopType> EquipListsTypeList;
     Array1D_int EquipListsIndexList;
     bool lDummy = false; // for User-defined component load dispatch
+
     void clear_state() override
     {
-        this->GetPlantOpInput = true;
-        this->InitLoadDistributionOneTimeFlag = true;
-        this->LoadEquipListOneTimeFlag = true;
-        this->TotNumLists = 0;
-        this->EquipListsNameList.clear();
-        this->EquipListsTypeList.clear();
-        this->EquipListsIndexList.clear();
-        this->lDummy = false;
+        *this = PlantCondLoopOperationData();
     }
 };
 

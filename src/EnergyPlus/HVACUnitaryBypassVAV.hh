@@ -423,25 +423,7 @@ struct HVACUnitaryBypassVAVData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->CBVAV.deallocate();
-        this->NumCBVAV = 0;
-        this->CompOnMassFlow = 0.0;
-        this->OACompOnMassFlow = 0.0;
-        this->CompOffMassFlow = 0.0;
-        this->OACompOffMassFlow = 0.0;
-        this->CompOnFlowRatio = 0.0;
-        this->CompOffFlowRatio = 0.0;
-        this->FanSpeedRatio = 0.0;
-        this->BypassDuctFlowFraction = 0.0;
-        this->PartLoadFrac = 0.0;
-        this->SaveCompressorPLR = 0.0;
-        this->TempSteamIn = 100.0;
-        this->CheckEquipName.deallocate();
-        this->GetInputFlag = true;
-        this->MyOneTimeFlag = true;
-        this->MyEnvrnFlag.deallocate();
-        this->MySizeFlag.deallocate();
-        this->MyPlantScanFlag.deallocate();
+        *this = HVACUnitaryBypassVAVData();
     }
 };
 

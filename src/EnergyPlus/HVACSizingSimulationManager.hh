@@ -108,8 +108,7 @@ struct HVACSizingSimMgrData : BaseGlobalStruct
     std::unique_ptr<HVACSizingSimulationManager> hvacSizingSimulationManager;
     void clear_state() override
     {
-        this->hvacSizingSimulationManager
-            .reset(); // not sure if this is necessary, but it should be fine to destroy it here, it is recreated in ManageHVACSizingSimulation
+        *this = HVACSizingSimMgrData();
     }
 };
 

@@ -757,47 +757,7 @@ struct HeatRecoveryData : BaseGlobalStruct
 
     void clear_state() override
     {
-        MyOneTimeAllocate = true;
-        HeatExchangerUniqueNames.clear();
-        NumHeatExchangers = 0;
-        NumAirToAirPlateExchs = 0;
-        NumAirToAirGenericExchs = 0;
-        NumDesiccantBalancedExchs = 0;
-        NumDesBalExchsPerfDataType1 = 0;
-        FullLoadOutAirTemp = 0.0;
-        FullLoadOutAirHumRat = 0.0;
-        GetInputFlag = true;
-        CalledFromParentObject = true;
-        CheckEquipName.clear();
-        ExchCond.clear();
-        BalDesDehumPerfData.clear();
-        HeatExchCondNumericFields.clear();
-        BalDesDehumPerfNumericFields.clear();
-        TimeStepSysLast = 0.0;
-        CurrentEndTime = 0.0;
-        CurrentEndTimeLast = 0.0;
-        TimeStepSysLast2 = 0.0;
-        CurrentEndTime2 = 0.0;
-        CurrentEndTimeLast2 = 0.0;
-        TimeStepSysLast3 = 0.0;
-        CurrentEndTime3 = 0.0;
-        CurrentEndTimeLast3 = 0.0;
-        TimeStepSysLast4 = 0.0;
-        CurrentEndTime4 = 0.0;
-        CurrentEndTimeLast4 = 0.0;
-        TimeStepSysLast5 = 0.0;
-        CurrentEndTime5 = 0.0;
-        CurrentEndTimeLast5 = 0.0;
-        TimeStepSysLast6 = 0.0;
-        CurrentEndTime6 = 0.0;
-        CurrentEndTimeLast6 = 0.0;
-        RegenInletRH = 0.0;
-        ProcInletRH = 0.0;
-        RegenInletRH2 = 0.0;
-        ProcInletRH2 = 0.0;
-        // static variables
-        MySetPointTest.clear();
-        MySizeFlag.clear();
+        *this = HeatRecoveryData();
     }
 };
 

@@ -184,14 +184,7 @@ struct HeatBalanceIntRadExchgData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->MaxNumOfRadEnclosureSurfs = 0;
-        this->CarrollMethod = false;
-        this->CalcInteriorRadExchangefirstTime = true;
-        this->SurfaceTempRad.deallocate();
-        this->SurfaceTempInKto4th.deallocate();
-        this->SurfaceEmiss.deallocate();
-        this->ViewFactorReport = false;
-        this->LargestSurf = 0;
+        *this = HeatBalanceIntRadExchgData();
     }
 };
 

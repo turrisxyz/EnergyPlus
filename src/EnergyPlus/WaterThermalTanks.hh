@@ -921,11 +921,11 @@ namespace WaterThermalTanks {
 
 struct WaterThermalTanksData : BaseGlobalStruct
 {
-
-    int const heatMode;  // heating source is on, source will not turn off until setpoint temp is reached
-    int const floatMode; // heating source is off, source will not turn on until cut-in temp is reached
-    int const ventMode;  // tank temp is above maximum temperature and water is venting
-    int const coolMode;  // cooling source is on, source will not turn off until setpoint temp is reached
+    // TODO: These are consts that need to be extracted -- probably into an enum
+    int heatMode;  // heating source is on, source will not turn off until setpoint temp is reached
+    int floatMode; // heating source is off, source will not turn on until cut-in temp is reached
+    int ventMode;  // tank temp is above maximum temperature and water is venting
+    int coolMode;  // cooling source is on, source will not turn off until setpoint temp is reached
 
     int numChilledWaterMixed;        // number of mixed chilled water tanks
     int numChilledWaterStratified;   // number of stratified chilled water tanks
@@ -950,23 +950,7 @@ struct WaterThermalTanksData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->numChilledWaterMixed = 0;
-        this->numChilledWaterStratified = 0;
-        this->numWaterHeaterMixed = 0;
-        this->numWaterHeaterStratified = 0;
-        this->numWaterThermalTank = 0;
-        this->numWaterHeaterDesuperheater = 0;
-        this->numHeatPumpWaterHeater = 0;
-        this->numWaterHeaterSizing = 0;
-        this->hpPartLoadRatio = 0.0;
-        this->mixerInletAirSchedule = 0.0;
-        this->mdotAir = 0.0;
-        this->WaterThermalTank.deallocate();
-        this->HPWaterHeater.deallocate();
-        this->WaterHeaterDesuperheater.deallocate();
-        this->UniqueWaterThermalTankNames.clear();
-        this->getWaterThermalTankInputFlag = true;
-        this->calcWaterThermalTankZoneGainsMyEnvrnFlag = true;
+        *this = WaterThermalTanksData();
     }
 
     // Default Constructor

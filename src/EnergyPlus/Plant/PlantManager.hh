@@ -143,16 +143,7 @@ struct PlantMgrData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetCompSizFac = true;
-        this->SupplyEnvrnFlag = true;
-        this->MySetPointCheckFlag = true;
-        this->PlantLoopSetPointInitFlag.clear();
-        this->MyEnvrnFlag = true;
-        this->OtherLoopCallingIndex = 0;
-        this->OtherLoopDemandSideCallingIndex = 0;
-        this->NewOtherDemandSideCallingIndex = 0;
-        this->newCallingIndex = 0;
-        this->dummyPlantComponent = {};
+        *this = PlantMgrData();
     }
 };
 

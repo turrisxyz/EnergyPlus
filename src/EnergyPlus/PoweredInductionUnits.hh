@@ -226,18 +226,7 @@ struct PoweredInductionUnitsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->CheckEquipName.deallocate();
-        this->GetPIUInputFlag = true;
-        this->MyOneTimeFlag = true;
-        this->ZoneEquipmentListChecked = false;
-        this->NumPIUs = 0;
-        this->NumSeriesPIUs = 0;
-        this->NumParallelPIUs = 0;
-        this->PIU.deallocate();
-        this->PiuUniqueNames.clear();
-        this->MyEnvrnFlag.clear();
-        this->MySizeFlag.clear();
-        this->MyPlantScanFlag.clear();
+        *this = PoweredInductionUnitsData();
     }
 };
 

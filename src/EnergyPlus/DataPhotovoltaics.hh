@@ -333,11 +333,11 @@ namespace DataPhotovoltaics {
 
 struct PhotovoltaicsData : BaseGlobalStruct
 {
-
-    std::string const cPVGeneratorObjectName = "Generator:Photovoltaic";
-    std::string const cPVSimplePerfObjectName = "PhotovoltaicPerformance:Simple";
-    std::string const cPVEquiv1DiodePerfObjectName = "PhotovoltaicPerformance:EquivalentOne-Diode";
-    std::string const cPVSandiaPerfObjectName = "PhotovoltaicPerformance:Sandia";
+    // TODO: These are const and need to be pulled out
+    std::string cPVGeneratorObjectName = "Generator:Photovoltaic";
+    std::string cPVSimplePerfObjectName = "PhotovoltaicPerformance:Simple";
+    std::string cPVEquiv1DiodePerfObjectName = "PhotovoltaicPerformance:EquivalentOne-Diode";
+    std::string cPVSandiaPerfObjectName = "PhotovoltaicPerformance:Sandia";
 
     int NumPVs = 0;                 // count of number of PV generators
     int Num1DiodePVModuleTypes = 0; // count for Equivalent one-diode model

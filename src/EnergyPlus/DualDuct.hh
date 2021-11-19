@@ -263,9 +263,10 @@ struct DualDuctData : BaseGlobalStruct
     bool ZoneEquipmentListChecked = false; // True after the Zone Equipment List has been checked for items
     bool GetDualDuctOutdoorAirRecircUseFirstTimeOnly = true;
 
-    std::string const cCMO_DDConstantVolume = "AirTerminal:DualDuct:ConstantVolume";
-    std::string const cCMO_DDVariableVolume = "AirTerminal:DualDuct:VAV";
-    std::string const cCMO_DDVarVolOA = "AirTerminal:DualDuct:VAV:OutdoorAir";
+    // TODO: These 3 are const and need to be taken from state
+    std::string cCMO_DDConstantVolume = "AirTerminal:DualDuct:ConstantVolume";
+    std::string cCMO_DDVariableVolume = "AirTerminal:DualDuct:VAV";
+    std::string cCMO_DDVarVolOA = "AirTerminal:DualDuct:VAV:OutdoorAir";
 
     Array1D_bool RecircIsUsedARR;
     Array1D_string DamperNamesARR;

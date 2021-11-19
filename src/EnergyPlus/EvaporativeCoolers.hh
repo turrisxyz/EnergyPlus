@@ -517,18 +517,7 @@ struct EvaporativeCoolersData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumEvapCool = 0;
-        this->EvapCond.clear();
-        this->NumZoneEvapUnits = 0;
-        this->ZoneEvapUnit.clear();
-        this->ZoneEvapCoolerUnitFields.clear();
-        this->GetInputEvapComponentsFlag = true;
-        this->GetInputZoneEvapUnit = true;
-        this->CheckEquipName.clear();
-        this->CheckZoneEvapUnitName.clear();
-        this->UniqueEvapCondNames.clear();
-        this->MySetPointCheckFlag = true;
-        this->ZoneEquipmentListChecked = false;
+        *this = EvaporativeCoolersData();
     }
 };
 

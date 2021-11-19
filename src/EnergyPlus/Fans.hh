@@ -371,21 +371,7 @@ struct FansData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumFans = 0;
-        this->NumNightVentPerf = 0;
-        this->GetFanInputFlag = true;
-        this->LocalTurnFansOn = false;
-        this->LocalTurnFansOff = false;
-        this->MyOneTimeFlag = true;
-        this->ZoneEquipmentListChecked = false;
-        this->MySizeFlag.deallocate();
-        this->MyEnvrnFlag.deallocate();
-        this->CheckEquipName.deallocate();
-        this->Fan.deallocate();
-        this->UniqueFanNames.clear();
-        this->NightVentPerf.deallocate();
-        this->FanNumericFields.deallocate();
-        this->ErrCount = 0;
+        *this = FansData();
     }
 };
 

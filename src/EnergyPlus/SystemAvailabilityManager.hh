@@ -569,46 +569,7 @@ struct SystemAvailabilityManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NumSchedSysAvailMgrs = 0;
-        NumSchedOnSysAvailMgrs = 0;
-        NumSchedOffSysAvailMgrs = 0;
-        NumNCycSysAvailMgrs = 0;
-        NumDiffTSysAvailMgrs = 0;
-        NumHiTurnOffSysAvailMgrs = 0;
-        NumHiTurnOnSysAvailMgrs = 0;
-        NumLoTurnOffSysAvailMgrs = 0;
-        NumLoTurnOnSysAvailMgrs = 0;
-        NumNVentSysAvailMgrs = 0;
-        NumAvailManagerLists = 0;
-        GetAvailListsInput = true;
-        GetAvailMgrInputFlag = true;
-        GetHybridInputFlag = true;
-        InitSysAvailManagers_MyOneTimeFlag = true;
-        CalcNCycSysAvailMgr_OneTimeFlag = true;
-        NumOptStartSysAvailMgrs = 0;
-        SchedSysAvailMgrData.deallocate();
-        SchedOnSysAvailMgrData.deallocate();
-        SchedOffSysAvailMgrData.deallocate();
-        NCycSysAvailMgrData.deallocate();
-        DiffTSysAvailMgrData.deallocate();
-        HiTurnOffSysAvailMgrData.deallocate();
-        HiTurnOnSysAvailMgrData.deallocate();
-        LoTurnOffSysAvailMgrData.deallocate();
-        LoTurnOnSysAvailMgrData.deallocate();
-        NVentSysAvailMgrData.deallocate();
-        HybridVentSysAvailMgrData.deallocate();
-        SysAvailMgrListData.deallocate();
-        OptStartSysAvailMgrData.deallocate();
-        ASHRAEOptSCoeffCooling.deallocate();
-        ASHRAEOptSCoeffHeating.deallocate();
-        BeginOfDayResetFlag = true;
-        OptStart_AdaTempGradTrdHeat.deallocate();
-        OptStart_AdaTempGradTrdCool.deallocate();
-        MyOneTimeFlag = true;
-        MyEnvrnFlag = true;
-        CurrentEndTime = 0.0;
-        CurrentEndTimeLast = 0.0;
-        TimeStepSysLast = 0.0;
+        *this = SystemAvailabilityManagerData();
     }
 };
 } // namespace EnergyPlus

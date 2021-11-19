@@ -615,14 +615,9 @@ struct UtilityRoutinesData : BaseGlobalStruct
 
     void clear_state() override
     {
-        outputErrorHeader = true;
-        appendPerfLog_headerRow.clear();
-        appendPerfLog_valuesRow.clear();
-        GetMatrixInputFlag = true;
+        *this = UtilityRoutinesData();
     }
 
-    // Default Constructor
-    UtilityRoutinesData() = default;
 };
 } // namespace EnergyPlus
 

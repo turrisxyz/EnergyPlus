@@ -132,8 +132,7 @@ struct MatrixDataManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        MatData.clear();
-        NumMats = int();
+        *this = MatrixDataManagerData();
     }
 };
 

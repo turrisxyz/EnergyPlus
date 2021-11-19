@@ -218,14 +218,9 @@ struct SwimmingPoolsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NumSwimmingPools = 0;
-        getSwimmingPoolInput = true;
-        CheckEquipName.deallocate();
-        Pool.deallocate();
+        *this = SwimmingPoolsData();
     }
 
-    // Default Constructor
-    SwimmingPoolsData() = default;
 };
 } // namespace EnergyPlus
 

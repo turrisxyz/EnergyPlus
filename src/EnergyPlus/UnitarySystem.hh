@@ -985,41 +985,9 @@ struct UnitarySystemsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        numUnitarySystems = 0;
-        HeatingLoad = false;
-        CoolingLoad = false;
-        MoistureLoad = 0.0;
-        SuppHeatingCoilFlag = false;
-        CompOnMassFlow = 0.0;
-        CompOffMassFlow = 0.0;
-        CompOnFlowRatio = 0.0;
-        CompOffFlowRatio = 0.0;
-        FanSpeedRatio = 0.0;
-        CoolHeatPLRRat = 1.0;
-        OnOffAirFlowRatioSave = 0.0;
-        QToCoolSetPt = 0.0;
-        QToHeatSetPt = 0.0;
-        m_massFlow1 = 0.0;
-        m_massFlow2 = 0.0;
-        m_runTimeFraction1 = 0.0;
-        m_runTimeFraction2 = 0.0;
-
-        initUnitarySystemsErrFlag = false;
-        initUnitarySystemsErrorsFound = false;
-        initLoadBasedControlFlowFracFlagReady = true;
-        initLoadBasedControlCntrlZoneTerminalUnitMassFlowRateMax = 0.0;
-        initUnitarySystemsQActual = 0.0;
-        getMSHPInputOnceFlag = true;
-        getInputOnceFlag = true;
-        reportVariablesAreSetup = false;
-        unitarySys.clear();
-        if (designSpecMSHP.size() > 0) designSpecMSHP.clear();
-        myOneTimeFlag = true;
-        getInputFlag = true;
+        *this = UnitarySystemsData();
     }
 
-    // Default Constructor
-    UnitarySystemsData() = default;
 };
 } // namespace EnergyPlus
 #endif // ENERGYPLUS_UNITARYSYSTEM_HH

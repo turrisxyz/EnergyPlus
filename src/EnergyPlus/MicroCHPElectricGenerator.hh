@@ -283,13 +283,7 @@ struct MicroCHPElectricGeneratorData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumMicroCHPs = 0;
-        this->NumMicroCHPParams = 0;
-        this->getMicroCHPInputFlag = true;
-        this->MicroCHP.deallocate();
-        this->MicroCHPParamInput.deallocate();
-        this->MyOneTimeFlag = true;
-        this->MyEnvrnFlag = true;
+        *this = MicroCHPElectricGeneratorData();
     }
 };
 

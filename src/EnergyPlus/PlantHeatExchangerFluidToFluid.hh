@@ -236,9 +236,7 @@ struct PlantHeatExchangerFluidToFluidData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumberOfPlantFluidHXs = 0;
-        this->GetInput = true;
-        this->FluidHX.deallocate();
+        *this = PlantHeatExchangerFluidToFluidData();
     }
 };
 

@@ -435,29 +435,7 @@ struct FaultsManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        RunFaultMgrOnceFlag = false;
-        ErrorsFound = false;
-        AnyFaultsInModel = false;
-        NumFaults = 0;
-        NumFaultyEconomizer = 0;
-        NumFouledCoil = 0;
-        NumFaultyThermostat = 0;
-        NumFaultyHumidistat = 0;
-        NumFaultyAirFilter = 0;
-        NumFaultyChillerSWTSensor = 0;
-        NumFaultyCondenserSWTSensor = 0;
-        NumFaultyTowerFouling = 0;
-        NumFaultyCoilSATSensor = 0;
-
-        FaultsEconomizer.deallocate();
-        FouledCoils.deallocate();
-        FaultsThermostatOffset.deallocate();
-        FaultsHumidistatOffset.deallocate();
-        FaultsFouledAirFilters.deallocate();
-        FaultsChillerSWTSensor.deallocate();
-        FaultsCondenserSWTSensor.deallocate();
-        FaultsTowerFouling.deallocate();
-        FaultsCoilSATSensor.deallocate();
+        *this = FaultsManagerData();
     }
 };
 

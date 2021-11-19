@@ -646,10 +646,7 @@ struct FuelCellElectricGeneratorData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumFuelCellGenerators = 0;
-        this->getFuelCellInputFlag = true;
-        this->MyEnvrnFlag = true;
-        this->FuelCell.deallocate();
+        *this = FuelCellElectricGeneratorData();
     }
 };
 

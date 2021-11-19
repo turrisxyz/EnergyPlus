@@ -216,36 +216,7 @@ struct HVACDXHeatPumpSystemData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetInputFlag = true;
-        this->NumDXHeatPumpSystems = 0;
-        this->EconomizerFlag = false;
-        this->CheckEquipName.deallocate();
-        this->DXHeatPumpSystem.deallocate();
-        this->QZnReq = 0.001;
-        this->QLatReq = 0.0;
-        this->MaxONOFFCyclesperHour = 4.0;
-        this->HPTimeConstant = 0.0;
-        this->FanDelayTime = 0.0;
-        this->OnOffAirFlowRatio = 1.0;
-        this->ErrorsFound = false;
-        this->TotalArgs = 0;
-        this->MySetPointCheckFlag = true;
-        this->SpeedNum = 1;
-        this->QZnReq = 0.001;
-        this->QLatReq = 0.0;
-        this->MaxONOFFCyclesperHour = 4.0;
-        this->HPTimeConstant = 0.0;
-        this->FanDelayTime = 0.0;
-        this->OnOffAirFlowRatio = 1.0;
-        this->SpeedRatio = 0.0;
-        this->SpeedNumber = 1;
-        this->QZoneReq = 0.001;
-        this->QLatentReq = 0.0;
-        this->MaxONOFFCyclesperHr = 4.0;
-        this->HPTimeConst = 0.0;
-        this->HPFanDelayTime = 0.0;
-        this->AirFlowOnOffRatio = 1.0;
-        this->SpeedPartLoadRatio = 1.0;
+        *this = HVACDXHeatPumpSystemData();
     }
 };
 

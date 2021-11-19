@@ -85,8 +85,7 @@ struct OutputReportsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->optiondone = false;
-        this->lastoption.clear();
+        *this = OutputReportsData();
     }
 };
 

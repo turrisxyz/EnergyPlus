@@ -371,29 +371,7 @@ struct HeatingCoilsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumDesuperheaterCoil = 0;
-        this->NumElecCoil = 0;
-        this->NumElecCoilMultiStage = 0;
-        this->NumFuelCoil = 0;
-        this->NumGasCoilMultiStage = 0;
-        this->NumHeatingCoils = 0;
-        this->MySizeFlag.deallocate();
-        this->ValidSourceType.deallocate();
-        this->GetCoilsInputFlag = true;
-        this->CoilIsSuppHeater = false;
-        this->CheckEquipName.deallocate();
-        this->HeatingCoil.deallocate();
-        this->HeatingCoilNumericFields.deallocate();
-        this->MyOneTimeFlag = true;
-        this->InputErrorsFound = false;
-        this->MaxNums = 0;
-        this->MaxAlphas = 0;
-        this->TotalArgs = 0;
-        this->ValidSourceTypeCounter = 0;
-        this->HeatingCoilFatalError = false;
-        this->MySPTestFlag.clear();
-        this->ShowSingleWarning.clear();
-        this->MyEnvrnFlag.clear();
+        *this = HeatingCoilsData();
     }
 };
 

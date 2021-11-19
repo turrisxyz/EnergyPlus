@@ -103,10 +103,7 @@ struct SimulationManagerData : BaseGlobalStruct
     bool WarningOut = true;
     void clear_state() override
     {
-        this->RunPeriodsInInput = false;
-        this->RunControlInInput = false;
-        this->PreP_Fatal = false;
-        this->WarningOut = true;
+        *this = SimulationManagerData();
     }
 };
 

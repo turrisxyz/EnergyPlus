@@ -175,10 +175,7 @@ struct SizingManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NumAirLoops = 0;
-        ReportZoneSizingMyOneTimeFlag = true;
-        ReportSysSizingMyOneTimeFlag = true;
-        runZeroingOnce = true;
+        *this = SizingManagerData();
     }
 };
 

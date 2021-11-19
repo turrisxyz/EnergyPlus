@@ -253,12 +253,13 @@ struct GeneralRoutinesData : BaseGlobalStruct
 {
 
     bool MyICSEnvrnFlag = true;
+    // TODO: These two were not reset in the clear_state, did they need to be?
     IntervalHalf ZoneInterHalf = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, false, false, false, false};
     ZoneEquipControllerProps ZoneController = {0.0, 0.0, 0.0, 0.0, 0.0};
 
     void clear_state() override
     {
-        this->MyICSEnvrnFlag = true;
+        *this = GeneralRoutinesData();
     }
 };
 

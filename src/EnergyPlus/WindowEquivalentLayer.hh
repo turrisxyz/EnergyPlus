@@ -773,25 +773,26 @@ namespace WindowEquivalentLayer {
 struct WindowEquivalentLayerData : BaseGlobalStruct
 {
 
-    // Data
-    Real64 const RadiansToDeg; // Conversion for Radians to Degrees: Not using DataGlobalConstants::Pi() to avoid initialization order bug
-    Real64 const PAtmSeaLevel; // Standard atmospheric pressure at sea level (Pa)
-    int const hipRHO;          // return reflectance
-    int const hipTAU;          // return transmittance
-    Real64 const SMALL_ERROR;  // small number
+    // EVERYTHING FROM HERE....
+    Real64 RadiansToDeg; // Conversion for Radians to Degrees: Not using DataGlobalConstants::Pi() to avoid initialization order bug
+    Real64 PAtmSeaLevel; // Standard atmospheric pressure at sea level (Pa)
+    int hipRHO;          // return reflectance
+    int hipTAU;          // return transmittance
+    Real64 SMALL_ERROR;  // small number
                                // CFSGAP: space between layers (gap types)
-    int const gtySEALED;       // sealed
-    int const gtyOPENin;       // open to indoor air  (re Open Channel Flow (OCF))
-    int const gtyOPENout;      // open to outdoor air (re Open Channel Flow (OCF))
+    int gtySEALED;       // sealed
+    int gtyOPENin;       // open to indoor air  (re Open Channel Flow (OCF))
+    int gtyOPENout;      // open to outdoor air (re Open Channel Flow (OCF))
                                // shade control options
-    int const lscNONE;         // no control
-    int const lscVBPROF;       // VB slatA = ProfA (max gain)
-    int const lscVBNOBM;       // VB slatA just exclude beam
+    int lscNONE;         // no control
+    int lscVBPROF;       // VB slatA = ProfA (max gain)
+    int lscVBNOBM;       // VB slatA just exclude beam
                                // Constants
-    int const hipRHO_BT0;
-    int const hipTAU_BT0;
-    int const hipTAU_BB0;
-    int const hipDIM; // dimension of parameter array
+    int hipRHO_BT0;
+    int hipTAU_BT0;
+    int hipTAU_BB0;
+    int hipDIM; // dimension of parameter array
+    // ... TO HERE needs to be pulled from state and made constexpr
 
     Array3D<Real64> CFSDiffAbsTrans;
     Array1D_bool EQLDiffPropFlag;
@@ -799,12 +800,9 @@ struct WindowEquivalentLayerData : BaseGlobalStruct
     Real64 X1MRDiff = -1.0;
     Real64 XTAUDiff = -1.0;
 
-    void clear_state()
+    void clear_state() override
     {
-        this->CFSDiffAbsTrans.deallocate();
-        this->EQLDiffPropFlag.deallocate();
-        this->X1MRDiff = -1.0;
-        this->XTAUDiff = -1.0;
+        *this = WindowEquivalentLayerData();
     }
     // Default Constructor
     WindowEquivalentLayerData()

@@ -121,11 +121,7 @@ struct RoomAirModelAirflowNetworkData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->InitRoomAirModelAirflowNetworkOneTimeFlag = true;
-        this->InitRoomAirModelAirflowNetworkOneTimeFlagConf = true;
-        this->InitRoomAirModelAirflowNetworkEnvrnFlag = true;
-        this->LoadPredictionRoomAirModelAirflowNetworkOneTimeFlag = true;
-        this->RAFN.clear();
+        *this = RoomAirModelAirflowNetworkData();
     }
 };
 

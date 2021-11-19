@@ -829,7 +829,7 @@ struct ElectPwrSvcMgrData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->facilityElectricServiceObj.release();
+        *this = ElectPwrSvcMgrData();
     }
 };
 

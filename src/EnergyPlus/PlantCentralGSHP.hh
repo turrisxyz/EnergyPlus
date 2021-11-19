@@ -450,17 +450,7 @@ struct PlantCentralGSHPData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->getWrapperInputFlag = true;
-        this->numWrappers = 0;
-        this->numChillerHeaters = 0;
-        this->ChillerCapFT = 0.0;
-        this->ChillerEIRFT = 0.0;
-        this->ChillerEIRFPLR = 0.0;
-        this->ChillerPartLoadRatio = 0.0;
-        this->ChillerCyclingRatio = 0.0;
-        this->ChillerFalseLoadRate = 0.0;
-        this->Wrapper.deallocate();
-        this->ChillerHeater.deallocate();
+        *this = PlantCentralGSHPData();
     }
 };
 

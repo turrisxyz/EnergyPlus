@@ -126,10 +126,7 @@ struct RoomAirModelUserTempPatternData : BaseGlobalStruct
 
     void clear_state() override
     {
-        MyOneTimeFlag = true;
-        MyOneTimeFlag2 = true;
-        MyEnvrnFlag.clear();
-        SetupOutputFlag.clear();
+        *this = RoomAirModelUserTempPatternData();
     }
 };
 

@@ -206,16 +206,12 @@ struct PhotovoltaicThermalCollectorsData : BaseGlobalStruct
 {
 
     bool GetInputFlag = true; // First time, input is "gotten"
-
     int NumPVT = 0; // count of all types of PVT in input file
-
     Array1D<PhotovoltaicThermalCollectors::PVTCollectorStruct> PVT;
 
     void clear_state() override
     {
-        GetInputFlag = true;
-        NumPVT = 0;
-        PVT.deallocate();
+        *this = PhotovoltaicThermalCollectorsData();
     }
 };
 

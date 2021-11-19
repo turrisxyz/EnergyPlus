@@ -249,46 +249,7 @@ struct HeatBalSurfMgr : BaseGlobalStruct
 
     void clear_state() override
     {
-        QExt1.clear();
-        QInt1.clear();
-        TempInt1.clear();
-        TempExt1.clear();
-        Qsrc1.clear();
-        Tsrc1.clear();
-        Tuser1.clear();
-        SumTime.clear();
-
-        SurfaceAE.clear();
-        ZoneAESum.clear();
-
-        DiffuseArray.clear();
-        curQL = 0.0;
-        adjQL = 0.0;
-
-        ManageSurfaceHeatBalancefirstTime = true;
-        InitSurfaceHeatBalancefirstTime = true;
-        UpdateThermalHistoriesFirstTimeFlag = true;
-        CalculateZoneMRTfirstTime = true;
-        reportThermalResilienceFirstTime = true;
-        reportVarHeatIndex = false;
-        reportVarHumidex = false;
-        hasPierceSET = true;
-        reportCO2ResilienceFirstTime = true;
-        reportVisualResilienceFirstTime = true;
-        lowSETLongestHours.clear();
-        highSETLongestHours.clear();
-        lowSETLongestStart.clear();
-        highSETLongestStart.clear();
-        calcHeatBalInsideSurfFirstTime = true;
-        calcHeatBalInsideSurfCTFOnlyFirstTime = true;
-        calcHeatBalInsideSurfErrCount = 0;
-        calcHeatBalInsideSurfErrPointer = 0;
-        calcHeatBalInsideSurfWarmupErrCount = 0;
-        calcHeatBalInsideSurEnvrnFlag = true;
-        RefAirTemp.clear();
-        AbsDiffWin = Array1D<Real64>(DataWindowEquivalentLayer::CFSMAXNL);
-        AbsDiffWinGnd = Array1D<Real64>(DataWindowEquivalentLayer::CFSMAXNL);
-        AbsDiffWinSky = Array1D<Real64>(DataWindowEquivalentLayer::CFSMAXNL);
+        *this = HeatBalSurfMgr();
     }
 };
 

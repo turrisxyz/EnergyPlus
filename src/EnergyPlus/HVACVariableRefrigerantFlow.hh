@@ -1047,57 +1047,7 @@ struct HVACVarRefFlowData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetVRFInputFlag = true;
-        this->MyOneTimeFlag = true;
-        this->MyOneTimeSizeFlag = true;
-        this->ZoneEquipmentListNotChecked = true;
-        this->NumVRFCond = 0;
-        this->NumVRFCond_SysCurve = 0;
-        this->NumVRFCond_FluidTCtrl_HP = 0;
-        this->NumVRFCond_FluidTCtrl_HR = 0;
-        this->NumVRFTU = 0;
-        this->NumVRFTULists = 0;
-        this->CompOnMassFlow = 0.0;
-        this->OACompOnMassFlow = 0.0;
-        this->CompOffMassFlow = 0.0;
-        this->OACompOffMassFlow = 0.0;
-        this->CompOnFlowRatio = 0.0;
-        this->CompOffFlowRatio = 0.0;
-        this->FanSpeedRatio = 0.0;
-        this->LoopDXCoolCoilRTF = 0.0;
-        this->LoopDXHeatCoilRTF = 0.0;
-        this->CondenserWaterMassFlowRate = 0.0;
-        this->CurrentEndTimeLast = 0.0;
-        this->HeatingLoad.deallocate();
-        this->CoolingLoad.deallocate();
-        this->LastModeHeating.deallocate();
-        this->LastModeCooling.deallocate();
-        this->CheckEquipName.deallocate();
-        this->MyEnvrnFlag.deallocate();
-        this->MySizeFlag.deallocate();
-        this->MyBeginTimeStepFlag.deallocate();
-        this->MyVRFFlag.deallocate();
-        this->MyVRFCondFlag.deallocate();
-        this->MyZoneEqFlag.deallocate();
-        this->NumCoolingLoads.deallocate();
-        this->NumHeatingLoads.deallocate();
-        this->MaxCoolingCapacity.deallocate();
-        this->MaxHeatingCapacity.deallocate();
-        this->CoolCombinationRatio.deallocate();
-        this->HeatCombinationRatio.deallocate();
-        this->MaxDeltaT.deallocate();
-        this->MinDeltaT.deallocate();
-        this->SumCoolingLoads.deallocate();
-        this->SumHeatingLoads.deallocate();
-        this->VRF.deallocate();
-        this->VrfUniqueNames.clear();
-        this->VRFTU.deallocate();
-        this->TerminalUnitList.deallocate();
-        this->VRFTUNumericFields.deallocate();
-        this->CheckVRFCombinationRatio.clear();
-        this->MyOneTimeEIOFlag = true;
-        this->ATMixOutNode = 0;
-        this->ATMixOutNode2 = 0;
+        *this = HVACVarRefFlowData();
     }
 };
 

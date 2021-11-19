@@ -519,15 +519,7 @@ struct PackagedThermalStorageCoilData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumTESCoils = 0;
-        this->CheckEquipName.deallocate();
-        this->GetTESInputFlag = true;
-        this->MyOneTimeFlag = true;
-        this->TESCoil.deallocate();
-        this->MyFlag.clear();
-        this->MySizeFlag.clear();
-        this->MyEnvrnFlag.clear();
-        this->MyWarmupFlag.clear();
+        *this = PackagedThermalStorageCoilData();
     }
 };
 

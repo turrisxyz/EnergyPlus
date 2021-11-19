@@ -202,11 +202,7 @@ struct HVACCooledBeamData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->CheckEquipName.clear();
-        this->NumCB = 0;
-        this->CoolBeam.clear();
-        this->GetInputFlag = true;
-        this->ZoneEquipmentListChecked = false;
+        *this = HVACCooledBeamData();
     }
 };
 

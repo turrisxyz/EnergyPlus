@@ -259,10 +259,10 @@ namespace WaterToAirHeatPump {
 
 struct WaterToAirHeatPumpData : BaseGlobalStruct
 {
-
-    int const CompressorType_Reciprocating;
-    int const CompressorType_Rotary;
-    int const CompressorType_Scroll;
+    // TODO: These 3 are const ints that need to become an enum outside of state
+    int CompressorType_Reciprocating;
+    int CompressorType_Rotary;
+    int CompressorType_Scroll;
 
     int NumWatertoAirHPs; // The Number of Water to Air Heat Pumps found in the Input
     Array1D_bool CheckEquipName;
@@ -292,24 +292,7 @@ struct WaterToAirHeatPumpData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumWatertoAirHPs = 0;
-        this->CheckEquipName.clear();
-        this->RefrigIndex = 0;
-        this->WaterIndex = 0;
-        this->GetCoilsInputFlag = true;
-        this->MyOneTimeFlag = true;
-        this->firstTime = true;
-        this->WatertoAirHP.clear();
-        this->initialQSource = 0.0;
-        this->initialQLoad = 0.0;
-        this->MyPlantScanFlag.deallocate();
-        this->MyEnvrnFlag.deallocate();
-        this->initialQSource_calc = 0.0;
-        this->initialQLoadTotal_calc = 0.0;
-        this->CompSuctionTemp = 0.0;
-        this->LoadSideInletDBTemp_Init = 0.0;
-        this->LoadSideInletHumRat_Init = 0.0;
-        this->LoadSideAirInletEnth_Init = 0.0;
+        *this = WaterToAirHeatPumpData();
     }
 
     // Default Constructor

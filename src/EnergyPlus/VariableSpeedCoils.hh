@@ -601,62 +601,9 @@ struct VariableSpeedCoilsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumVarSpeedCoils = 0;
-        this->MyOneTimeFlag = true;
-        this->GetCoilsInputFlag = true;
-        this->SourceSideMassFlowRate = 0.0;
-        this->SourceSideInletTemp = 0.0;
-        this->SourceSideInletEnth = 0.0;
-        this->LoadSideMassFlowRate = 0.0;
-        this->LoadSideInletDBTemp = 0.0;
-        this->LoadSideInletWBTemp = 0.0;
-        this->LoadSideInletHumRat = 0.0;
-        this->LoadSideInletEnth = 0.0;
-        this->LoadSideOutletDBTemp = 0.0;
-        this->LoadSideOutletHumRat = 0.0;
-        this->LoadSideOutletEnth = 0.0;
-        this->QSensible = 0.0;
-        this->QLoadTotal = 0.0;
-        this->QLatRated = 0.0;
-        this->QLatActual = 0.0;
-        this->QSource = 0.0;
-        this->Winput = 0.0;
-        this->PLRCorrLoadSideMdot = 0.0;
-        this->VSHPWHHeatingCapacity = 0.0;
-        this->VSHPWHHeatingCOP = 0.0;
-        this->VarSpeedCoil.deallocate();
-        this->firstTime = true;
-        this->MyEnvrnFlag.deallocate();
-        this->MySizeFlag.deallocate();
-        this->MyPlantScanFlag.deallocate();
-        this->LoadSideInletDBTemp_Init = 0.0;
-        this->LoadSideInletWBTemp_Init = 0.0;
-        this->LoadSideInletHumRat_Init = 0.0;
-        this->LoadSideInletEnth_Init = 0.0;
-        this->CpAir_Init = 0.0;
-        this->OutdoorCoilT = 0.0;
-        this->OutdoorCoildw = 0.0;
-        this->OutdoorDryBulb = 0.0;
-        this->OutdoorWetBulb = 0.0;
-        this->OutdoorHumRat = 0.0;
-        this->OutdoorPressure = 0.0;
-        this->FractionalDefrostTime = 0.0;
-        this->HeatingCapacityMultiplier = 0.0;
-        this->InputPowerMultiplier = 0.0;
-        this->LoadDueToDefrost = 0.0;
-        this->CrankcaseHeatingPower = 0.0;
-        this->DefrostEIRTempModFac = 0.0;
-        this->TotRatedCapacity = 0.0;
-        this->OutdoorDryBulb_CalcVarSpeedCoilCooling = 0.0;
-        this->OutdoorWetBulb_CalcVarSpeedCoilCooling = 0.0;
-        this->OutdoorHumRat_CalcVarSpeedCoilCooling = 0.0;
-        this->OutdoorPressure_CalcVarSpeedCoilCooling = 0.0;
-        this->CrankcaseHeatingPower_CalcVarSpeedCoilCooling = 0.0;
-        this->CompAmbTemp_CalcVarSpeedCoilCooling = 0.0;
+        *this = VariableSpeedCoilsData();
     }
 
-    // Default Constructor
-    VariableSpeedCoilsData() = default;
 };
 } // namespace EnergyPlus
 

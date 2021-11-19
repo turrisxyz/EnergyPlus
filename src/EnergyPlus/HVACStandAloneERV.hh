@@ -220,20 +220,7 @@ struct HVACStandAloneERVData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NumStandAloneERVs = 0;
-        GetERVInputFlag = true;
-        MySizeFlag.deallocate();
-        CheckEquipName.deallocate();
-        StandAloneERV.deallocate();
-        HeatExchangerUniqueNames.clear();
-        SupplyAirFanUniqueNames.clear();
-        ExhaustAirFanUniqueNames.clear();
-        ControllerUniqueNames.clear();
-        MySizeFlag_InitStandAloneERV.deallocate();
-        MyOneTimeFlag = true;
-        MyEnvrnFlag.deallocate();
-        MyZoneEqFlag.deallocate();
-        ZoneEquipmentListChecked = false;
+        *this = HVACStandAloneERVData();
     }
 };
 

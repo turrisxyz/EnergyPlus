@@ -164,13 +164,7 @@ struct MixerComponentData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumMixers = 0;
-        this->LoopInletNode = 0;
-        this->LoopOutletNode = 0;
-        this->GetZoneMixerIndexInputFlag = true;
-        this->SimAirMixerInputFlag = true;
-        this->CheckEquipName.deallocate();
-        this->MixerCond.deallocate();
+        *this = MixerComponentData();
     }
 };
 

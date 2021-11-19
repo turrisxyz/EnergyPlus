@@ -126,10 +126,7 @@ struct PlantValvesData : BaseGlobalStruct
 
     void clear_state() override
     {
-        GetTemperingValves = true;
-        OneTimeInitFlag = true;
-        NumTemperingValves = 0;
-        TemperValve.deallocate();
+        *this = PlantValvesData();
     }
 };
 

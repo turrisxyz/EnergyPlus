@@ -211,14 +211,15 @@ namespace WindowAC {
 struct WindowACData : BaseGlobalStruct
 {
 
-    // MODULE PARAMETER DEFINITIONS
-    int const WindowAC_UnitType;
-    std::string const cWindowAC_UnitType;
-    Array1D_string const cWindowAC_UnitTypes;
+    // TODO: These three are const and need to leave state
+    int WindowAC_UnitType;
+    std::string cWindowAC_UnitType;
+    Array1D_string cWindowAC_UnitTypes;
 
+    // TODO: THese two are const and need to be an enum
     // Compressor operation
-    int const On;  // normal compressor operation
-    int const Off; // signal DXCoil that compressor shouldn't run
+    int On;  // normal compressor operation
+    int Off; // signal DXCoil that compressor shouldn't run
 
     bool MyOneTimeFlag;
     bool ZoneEquipmentListChecked;
@@ -238,18 +239,7 @@ struct WindowACData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumWindAC = 0;
-        this->NumWindACCyc = 0;
-        this->GetWindowACInputFlag = true;
-        this->CoolingLoad = false;
-        this->MyOneTimeFlag = true;
-        this->ZoneEquipmentListChecked = false;
-        this->MySizeFlag.deallocate();
-        this->CheckEquipName.deallocate();
-        this->WindAC.deallocate();
-        this->WindACNumericFields.deallocate();
-        this->MyEnvrnFlag.deallocate();
-        this->MyZoneEqFlag.deallocate();
+        *this = WindowACData();
     }
 
     // Default Constructor

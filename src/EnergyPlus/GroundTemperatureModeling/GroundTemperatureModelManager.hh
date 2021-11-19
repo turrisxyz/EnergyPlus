@@ -74,7 +74,8 @@ namespace GroundTemperatureManager {
 
 struct GroundTemperatureManagerData : BaseGlobalStruct
 {
-    Array1D_string const CurrentModuleObjects = Array1D_string({0, 6},
+    // TODO: This string is const and needs to be pulled from state
+    Array1D_string CurrentModuleObjects = Array1D_string({0, 6},
                                                                {"Site:GroundTemperature:Undisturbed:KusudaAchenbach",
                                                                 "Site:GroundTemperature:Undisturbed:FiniteDifference",
                                                                 "Site:GroundTemperature:BuildingSurface",
@@ -87,7 +88,7 @@ struct GroundTemperatureManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->groundTempModels.clear();
+        *this = GroundTemperatureManagerData();
     }
 };
 

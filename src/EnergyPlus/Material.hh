@@ -291,7 +291,7 @@ struct MaterialData : BaseGlobalStruct
 
     void clear_state() override
     {
-        Material.deallocate();
+        *this = MaterialData();
     }
 };
 

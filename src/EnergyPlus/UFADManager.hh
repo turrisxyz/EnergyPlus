@@ -105,12 +105,9 @@ struct UFADManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->MyOneTimeFlag = true;
-        this->MySizeFlag.deallocate();
+        *this = UFADManagerData();
     }
 
-    // Default Constructor
-    UFADManagerData() = default;
 };
 } // namespace EnergyPlus
 

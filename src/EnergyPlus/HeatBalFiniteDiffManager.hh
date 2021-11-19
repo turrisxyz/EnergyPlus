@@ -329,22 +329,7 @@ struct HeatBalFiniteDiffMgr : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->SigmaR.deallocate();
-        this->SigmaC.deallocate();
-        this->QHeatInFlux.deallocate();
-        this->QHeatOutFlux.deallocate();
-        this->CondFDSchemeType = HeatBalFiniteDiffManager::CondFDScheme::FullyImplicitFirstOrder;
-        this->SpaceDescritConstant = 3.0;
-        this->MinTempLimit = -100.0;
-        this->MaxTempLimit = 100.0;
-        this->MaxGSiter = 30;
-        this->fracTimeStepZone_Hour = 0.0;
-        this->GetHBFiniteDiffInputFlag = true;
-        this->WarmupSurfTemp = 0;
-        this->ConstructFD.deallocate();
-        this->SurfaceFD.deallocate();
-        this->MaterialFD.deallocate();
-        this->MyEnvrnFlag = true;
+        *this = HeatBalFiniteDiffMgr();
     }
 };
 

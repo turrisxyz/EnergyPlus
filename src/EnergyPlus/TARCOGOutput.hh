@@ -307,8 +307,7 @@ struct TARCOGOutputData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->winID = 0;
-        this->iguID = 0;
+        *this = TARCOGOutputData();
     }
 };
 

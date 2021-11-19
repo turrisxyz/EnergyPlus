@@ -336,11 +336,7 @@ struct PhotovoltaicStateData : BaseGlobalStruct
 
     void clear_state() override
     {
-        CheckEquipName.clear();
-        GetInputFlag = true;
-        MyOneTimeFlag = true;
-        firstTime = true;
-        MyEnvrnFlag.clear();
+        *this = PhotovoltaicStateData();
     }
 };
 

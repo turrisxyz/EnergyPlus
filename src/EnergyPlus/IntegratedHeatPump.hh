@@ -348,8 +348,7 @@ struct IntegratedHeatPumpGlobalData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetCoilsInputFlag = true;
-        this->IntegratedHeatPumps.deallocate();
+        *this = IntegratedHeatPumpGlobalData();
     }
 };
 

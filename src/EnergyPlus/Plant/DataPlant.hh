@@ -326,23 +326,7 @@ struct DataPlantData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->TotNumLoops = 0;
-        this->TotNumHalfLoops = 0;
-        this->PlantFirstSizeCompleted = false;
-        this->PlantFirstSizesOkayToFinalize = false;
-        this->PlantReSizingCompleted = false;
-        this->PlantFirstSizesOkayToReport = false;
-        this->PlantFinalSizesOkayToReport = false;
-        this->AnyEMSPlantOpSchemesInModel = false;
-        this->PlantManageSubIterations = 0;
-        this->PlantManageHalfLoopCalls = 0;
-        this->PlantLoop.deallocate();
-        this->PlantAvailMgr.deallocate();
-        this->VentRepPlantSupplySide.deallocate();
-        this->VentRepPlantDemandSide.deallocate();
-        this->VentRepCondSupplySide.deallocate();
-        this->VentRepCondDemandSide.deallocate();
-        this->PlantCallingOrderInfo.deallocate();
+        *this = DataPlantData();
     }
 };
 

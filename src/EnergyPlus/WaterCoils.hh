@@ -553,23 +553,24 @@ namespace WaterCoils {
 struct WaterCoilsData : BaseGlobalStruct
 {
 
+    // TODO: All 10 of the following are const and need to be extracted out into enums
     // Parameters for Heat Exchanger Configuration
-    int const CounterFlow;
-    int const CrossFlow;
-    int const SimpleAnalysis;
-    int const DetailedAnalysis;
+    int CounterFlow;
+    int CrossFlow;
+    int SimpleAnalysis;
+    int DetailedAnalysis;
 
     // Water Systems
-    int const CondensateDiscarded; // default mode where water is "lost"
-    int const CondensateToTank;    // collect coil condensate from air and store in water storage tank
+    int CondensateDiscarded; // default mode where water is "lost"
+    int CondensateToTank;    // collect coil condensate from air and store in water storage tank
 
     // Parameters for COIL:Water:SimpleHeating Coil Performance Input Method
-    int const UAandFlow; // for Coil Performance Input Method = UA and Design Water Flow Rate
-    int const NomCap;    // for Coil Performance Input Method = Nominal Capacity
+    int UAandFlow; // for Coil Performance Input Method = UA and Design Water Flow Rate
+    int NomCap;    // for Coil Performance Input Method = Nominal Capacity
 
     // Parameters Subroutine CoolingCoil: design calc or simulation calc.
-    int const DesignCalc; // ignore on/off check in CoolingCoil
-    int const SimCalc;    // pay attention to on/off check in CoolingCoil
+    int DesignCalc; // ignore on/off check in CoolingCoil
+    int SimCalc;    // pay attention to on/off check in CoolingCoil
 
     // DERIVED TYPE DEFINITIONS
 
@@ -617,43 +618,7 @@ struct WaterCoilsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumWaterCoils = 0;
-        this->InitWaterCoilOneTimeFlag = true;
-        this->MySizeFlag.deallocate();
-        this->MyUAAndFlowCalcFlag.deallocate();
-        this->MyCoilDesignFlag.deallocate();
-        this->CoilWarningOnceFlag.deallocate();
-        this->WaterTempCoolCoilErrs.deallocate();
-        this->PartWetCoolCoilErrs.deallocate();
-        this->GetWaterCoilsInputFlag = true;
-        this->CheckEquipName.deallocate();
-        this->WaterCoil.deallocate();
-        this->WaterCoilNumericFields.deallocate();
-        this->WaterCoilControllerCheckOneTimeFlag = true;
-        this->TOutNew = 0.0;
-        this->WOutNew = 0.0;
-        this->DesCpAir.deallocate();
-        this->DesUARangeCheck.deallocate();
-        this->MyEnvrnFlag.deallocate();
-        this->MyCoilReportFlag.deallocate();
-        this->PlantLoopScanFlag.deallocate();
-        this->CoefSeries = Array1D<Real64>(5);
-        this->Par = Array1D<Real64>(4);
-        this->NoSatCurveIntersect = false;
-        this->BelowInletWaterTemp = false;
-        this->CBFTooLarge = false;
-        this->NoExitCondReset = false;
-        this->RatedLatentCapacity = 0.0;
-        this->RatedSHR = 0.0;
-        this->CapacitanceWater = 0.0;
-        this->CMin = 0.0;
-        this->CoilEffectiveness = 0.0;
-        this->SurfaceArea = 0.0;
-        this->UATotal = 0.0;
-        this->RptCoilHeaderFlag = Array1D_bool(2, true);
-        this->OrderedPair = Array2D<Real64>(WaterCoils::MaxOrderedPairs, 2);
-        this->OrdPairSum = Array2D<Real64>(10, 2);
-        this->OrdPairSumMatrix = Array2D<Real64>(10, 10);
+        *this = WaterCoilsData();
     }
 
     // Default Constructor

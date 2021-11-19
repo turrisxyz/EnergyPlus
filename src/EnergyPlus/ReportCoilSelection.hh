@@ -450,7 +450,7 @@ struct ReportCoilSelectionData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->coilSelectionReportObj.release();
+        *this = ReportCoilSelectionData();
     }
 };
 

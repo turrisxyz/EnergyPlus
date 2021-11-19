@@ -154,9 +154,7 @@ struct PlantCompTempSrcData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumSources = 0;
-        this->getWaterSourceInput = true;
-        this->WaterSource.deallocate();
+        *this = PlantCompTempSrcData();
     }
 };
 

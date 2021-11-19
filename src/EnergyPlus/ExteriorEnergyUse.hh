@@ -163,13 +163,7 @@ struct ExteriorEnergyUseData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumExteriorLights = 0;
-        this->NumExteriorEqs = 0;
-        this->ExteriorLights.deallocate();
-        this->ExteriorEquipment.deallocate();
-        this->UniqueExteriorEquipNames.clear();
-        this->GetExteriorEnergyInputFlag = true;
-        this->sumDesignLevel = 0.0;
+        *this = ExteriorEnergyUseData();
     }
 };
 

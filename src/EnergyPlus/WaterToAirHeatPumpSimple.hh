@@ -277,7 +277,7 @@ namespace WaterToAirHeatPumpSimple {
 struct WaterToAirHeatPumpSimpleData : BaseGlobalStruct
 {
 
-    Real64 const CelsiustoKelvin; // Conversion from Celsius to Kelvin
+    Real64 CelsiustoKelvin; // Conversion from Celsius to Kelvin // TODO: This is a const that needs to be constexpr outside of state
 
     int NumWatertoAirHPs; // The Number of Water to Air Heat Pumps found in the Input
                           // INTEGER        :: WaterIndex = 0                   ! Water index
@@ -315,21 +315,7 @@ struct WaterToAirHeatPumpSimpleData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumWatertoAirHPs = 0;
-        this->AirflowErrPointer = 0;
-        this->MyOneTimeFlag = true;
-        this->GetCoilsInputFlag = true;
-        this->MySizeFlag.clear();
-        this->SimpleHPTimeStepFlag.clear();
-        this->SimpleWatertoAirHP.deallocate();
-        this->firstTime = true;
-        this->MyEnvrnFlag.deallocate();
-        this->MyPlantScanFlag.deallocate();
-        this->LoadSideInletDBTemp_Init = 0;
-        this->LoadSideInletWBTemp_Init = 0;
-        this->LoadSideInletHumRat_Init = 0;
-        this->LoadSideInletEnth_Init = 0;
-        this->CpAir_Init = 0;
+        *this = WaterToAirHeatPumpSimpleData();
     }
 
     // Default Constructor

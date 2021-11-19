@@ -587,38 +587,7 @@ struct PackagedTerminalHeatPumpData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->CheckEquipName.deallocate();
-        this->SupHeaterLoad = 0.0;
-        this->NumPTHP = 0;
-        this->NumPTAC = 0;
-        this->NumPTWSHP = 0;
-        this->NumPTUs = 0;
-        this->CompOnMassFlow = 0.0;
-        this->OACompOnMassFlow = 0.0;
-        this->CompOffMassFlow = 0.0;
-        this->OACompOffMassFlow = 0.0;
-        this->CompOnFlowRatio = 0.0;
-        this->CompOffFlowRatio = 0.0;
-        this->FanSpeedRatio = 0.0;
-        this->GetPTUnitInputFlag = true;
-        this->SaveCompressorPLR = 0.0;
-        this->SteamDensity = 0.0;
-        this->HeatingLoad = false;
-        this->CoolingLoad = false;
-        this->MinWaterFlow = 0.0;
-        this->TempSteamIn = 100.0;
-        this->MyOneTimeFlag = true;
-        this->ZoneEquipmentListNotChecked = true;
-        this->PTUnit.deallocate();
-        this->PTUnitUniqueNames.clear();
-        this->PTUnitUNumericFields.deallocate();
-        this->MyEnvrnFlag.clear();
-        this->MySizeFlag.clear();
-        this->MyFanFlag.clear();
-        this->MyPlantScanFlag.clear();
-        this->MyZoneEqFlag.clear();
-        this->ErrCountCyc = 0;
-        this->ErrCountVar = 0;
+        *this = PackagedTerminalHeatPumpData();
     }
 };
 

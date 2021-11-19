@@ -386,7 +386,8 @@ struct ExternalInterfaceData : BaseGlobalStruct
     bool FirstCallTStep = true;        // Flag for first call during time stepping
     int fmiEndSimulation = 0;          // Flag to indicate end of simulation
 
-    fs::path const socCfgFilPath = "socket.cfg"; // socket configuration file
+    // TODO: This socket path is const and needs to be pulled out of state
+    fs::path socCfgFilPath = "socket.cfg"; // socket configuration file
     std::unordered_map<std::string, std::string> UniqueFMUInputVarNames;
 
     int nOutVal; // Number of output values (E+ -> ExternalInterface)
@@ -394,58 +395,7 @@ struct ExternalInterfaceData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->tComm = 0.0;
-        this->tStop = 3600.0;
-        this->tStart = 0.0;
-        this->hStep = 15.0;
-        this->FlagReIni = false;
-        this->FMURootWorkingFolder.clear();
-        this->nInKeys = 3; // Number of input variables available in ExternalInterface (=highest index* number)
-
-        this->FMU.clear();               // Variable Types structure
-        this->FMUTemp.clear();           // Variable Types structure
-        this->checkInstanceName.clear(); // Variable Types structure for checking instance names
-
-        this->NumExternalInterfaces = 0;              // Number of ExternalInterface objects
-        this->NumExternalInterfacesBCVTB = 0;         // Number of BCVTB ExternalInterface objects
-        this->NumExternalInterfacesFMUImport = 0;     // Number of FMU ExternalInterface objects
-        this->NumExternalInterfacesFMUExport = 0;     // Number of FMU ExternalInterface objects
-        this->NumFMUObjects = 0;                      // Number of FMU objects
-        this->FMUExportActivate = 0;                  // FMU Export flag
-        this->haveExternalInterfaceBCVTB = false;     // Flag for BCVTB interface
-        this->haveExternalInterfaceFMUImport = false; // Flag for FMU-Import interface
-        this->haveExternalInterfaceFMUExport = false; // Flag for FMU-Export interface
-        this->simulationStatus = 1; // Status flag. Used to report during which phase an error occurred. (1=initialization, 2=time stepping)
-
-        this->keyVarIndexes.clear(); // Array index for specific key name
-        this->varTypes.clear();      // Types of variables in keyVarIndexes
-        this->varInd.clear();        // Index of ErlVariables for ExternalInterface
-        this->socketFD = -1;         // socket file descriptor
-        this->ErrorsFound = false;   // Set to true if errors are found
-        this->noMoreValues = false;  // Flag, true if no more values will be sent by the server
-
-        this->varKeys.clear();     // Keys of report variables used for data exchange
-        this->varNames.clear();    // Names of report variables used for data exchange
-        this->inpVarTypes.clear(); // Names of report variables used for data exchange
-        this->inpVarNames.clear(); // Names of report variables used for data exchange
-
-        this->configuredControlPoints = false; // True if control points have been configured
-        this->useEMS = false;                  // Will be set to true if ExternalInterface writes to EMS variables or actuators
-        this->firstCall = true;
-        this->showContinuationWithoutUpdate = true;
-        this->GetInputFlag = true; // First time, input is "gotten"
-        this->InitExternalInterfacefirstCall = true;
-        this->FirstCallGetSetDoStep = true; // Flag to check when External Interface is called first time
-        this->FirstCallIni = true;          // First time, input has been read
-        this->FirstCallDesignDays = true;   // Flag fo first call during warmup
-        this->FirstCallWUp = true;          // Flag fo first call during warmup
-        this->FirstCallTStep = true;        // Flag for first call during time stepping
-        this->fmiEndSimulation = 0;         // Flag to indicate end of simulation
-        this->UniqueFMUInputVarNames.clear();
-
-        // these were statics without an initial value
-        //        int nOutVal;       // Number of output values (E+ -> ExternalInterface)
-        //        int nInpVar;       // Number of input values (ExternalInterface -> E+)
+        *this = ExternalInterfaceData();
     }
 };
 

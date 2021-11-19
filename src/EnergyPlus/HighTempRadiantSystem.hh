@@ -220,23 +220,7 @@ struct HighTempRadiantSystemData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NumOfHighTempRadSys = 0;
-        QHTRadSource.clear();
-        QHTRadSrcAvg.clear();
-        ZeroSourceSumHATsurf.clear();
-        LastQHTRadSrc.clear();
-        LastSysTimeElapsed.clear();
-        LastTimeStepSys.clear();
-        MySizeFlag.clear();
-        CheckEquipName.clear();
-
-        HighTempRadSys.clear();
-        HighTempRadSysNumericFields.clear();
-
-        GetInputFlag = true;
-        firstTime = true;
-        MyEnvrnFlag = true;
-        ZoneEquipmentListChecked = false;
+        *this = HighTempRadiantSystemData();
     }
 };
 

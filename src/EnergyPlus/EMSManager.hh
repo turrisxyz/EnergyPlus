@@ -215,11 +215,7 @@ struct EMSManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        GetEMSUserInput = true;
-        ZoneThermostatActuatorsHaveBeenSetup = false;
-        FinishProcessingUserInput = true;
-        this->lDummy = false;
-        this->lDummy2 = false;
+        *this = EMSManagerData();
     }
 };
 

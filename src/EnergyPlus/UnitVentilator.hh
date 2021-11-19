@@ -293,7 +293,7 @@ struct UnitVentilatorsData : BaseGlobalStruct
 {
 
     // Current Module Unit type
-    std::string const cMO_UnitVentilator = "ZoneHVAC:UnitVentilator";
+    std::string cMO_UnitVentilator = "ZoneHVAC:UnitVentilator"; // TODO: This string is const and needs to leave state
 
     bool HCoilOn = false;        // TRUE if the heating coil  = gas or electric especially) should be running
     int NumOfUnitVents = 0;      // Number of unit ventilators in the input file
@@ -322,29 +322,9 @@ struct UnitVentilatorsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->HCoilOn = false;
-        this->NumOfUnitVents = 0;
-        this->OAMassFlowRate = 0.0;
-        this->QZnReq = 0.0;
-        this->GetUnitVentilatorInputFlag = true;
-        this->MySizeFlag.deallocate();
-        this->CheckEquipName.deallocate();
-        this->UnitVent.deallocate();
-        this->UnitVentNumericFields.deallocate();
-        this->MyOneTimeFlag = true;
-        this->ZoneEquipmentListChecked = false;
-        this->MyEnvrnFlag.deallocate();
-        this->MyPlantScanFlag.deallocate();
-        this->MyZoneEqFlag.deallocate();
-        this->RefrigIndex = 0;
-        this->DummyWaterIndex = 1;
-        this->ATMixOutNode = 0;
-        this->ATMixerPriNode = 0;
-        this->ZoneNode = 0;
+        *this = UnitVentilatorsData();
     }
 
-    // Default Constructor
-    UnitVentilatorsData() = default;
 };
 } // namespace EnergyPlus
 

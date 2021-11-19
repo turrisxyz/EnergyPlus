@@ -133,10 +133,7 @@ struct OutsideEnergySourcesData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumDistrictUnits = 0;
-        this->SimOutsideEnergyGetInputFlag = true;
-        this->EnergySource.deallocate();
-        this->EnergySourceUniqueNames.clear();
+        *this = OutsideEnergySourcesData();
     }
 };
 

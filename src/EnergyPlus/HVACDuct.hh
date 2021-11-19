@@ -122,10 +122,7 @@ struct HVACDuctData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NumDucts = 0;
-        CheckEquipName.clear();
-        Duct.clear();
-        GetInputFlag = true; // First time, input is "gotten"
+        *this = HVACDuctData();
     }
 };
 

@@ -123,7 +123,7 @@ struct TARCOGCommonData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->vv = Array1D<Real64>(TARCOGCommon::NMAX);
+        *this = TARCOGCommonData();
     }
 };
 

@@ -458,26 +458,7 @@ struct HVACMultiSpeedHeatPumpData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumMSHeatPumps = 0;
-        this->AirLoopPass = 0;
-        this->TempSteamIn = 100.0;
-        this->CurrentModuleObject = "";
-        this->CompOnMassFlow = 0.0;
-        this->CompOffMassFlow = 0.0;
-        this->CompOnFlowRatio = 0.0;
-        this->CompOffFlowRatio = 0.0;
-        this->FanSpeedRatio = 0.0;
-        this->SupHeaterLoad = 0.0;
-        this->SaveLoadResidual = 0.0;
-        this->SaveCompressorPLR = 0.0;
-        this->CheckEquipName.clear();
-        this->MSHeatPump.clear();
-        this->MSHeatPumpReport.clear();
-        this->GetInputFlag = true; // Get input flag
-        this->FlowFracFlagReady = true;
-        this->ErrCountCyc = 0;
-        this->ErrCountVar = 0;
-        this->HeatCoilName = "";
+        *this = HVACMultiSpeedHeatPumpData();
     }
 };
 

@@ -147,18 +147,7 @@ struct GlobalNamesData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumChillers = 0;
-        this->NumBoilers = 0;
-        this->NumBaseboards = 0;
-        this->NumCoils = 0;
-        this->CurMaxChillers = 0;
-        this->CurMaxCoils = 0;
-        this->numAirDistUnits = 0;
-        this->ChillerNames.clear();
-        this->BoilerNames.clear();
-        this->BaseboardNames.clear();
-        this->CoilNames.clear();
-        this->aDUNames.clear();
+        *this = GlobalNamesData();
     }
 };
 

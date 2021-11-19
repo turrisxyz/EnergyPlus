@@ -192,9 +192,7 @@ struct HeatBalHAMTMgrData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->OneTimeFlag = true;
-        this->qvpErrCount = 0;
-        this->qvpErrReport = 0;
+        *this = HeatBalHAMTMgrData();
     }
 };
 

@@ -350,11 +350,10 @@ namespace ZoneTempPredictorCorrector {
 
 struct ZoneTempPredictorCorrectorData : BaseGlobalStruct
 {
-    Array1D_string const ValidControlTypes;
-
-    Array1D_string const ValidComfortControlTypes;
-
-    Array1D_string const cZControlTypes;
+    // TODO: These 3 are const arrays and need to be pulled from state
+    Array1D_string ValidControlTypes;
+    Array1D_string ValidComfortControlTypes;
+    Array1D_string cZControlTypes;
 
     int NumSingleTempHeatingControls;
     int NumSingleTempCoolingControls;
@@ -420,57 +419,7 @@ struct ZoneTempPredictorCorrectorData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->HumidityControlZoneUniqueNames.clear();
-        this->NumSingleTempHeatingControls = 0;
-        this->NumSingleTempCoolingControls = 0;
-        this->NumSingleTempHeatCoolControls = 0;
-        this->NumDualTempHeatCoolControls = 0;
-        this->NumSingleFangerHeatingControls = 0;
-        this->NumSingleFangerCoolingControls = 0;
-        this->NumSingleFangerHeatCoolControls = 0;
-        this->NumDualFangerHeatCoolControls = 0;
-        this->NumStageCtrZone = 0;
-        this->InitZoneAirSetPointsOneTimeFlag = true;
-        this->SetupOscillationOutputFlag = true;
-        this->OscillationVariablesNeeded = false;
-        this->ZoneSetPointLast.deallocate();
-        this->TempIndZnLd.deallocate();
-        this->TempDepZnLd.deallocate();
-        this->ZoneAirRelHum.deallocate();
-        this->ZoneTempHist.deallocate();
-        this->ZoneTempOscillate.deallocate();
-        this->AnyZoneTempOscillate = 0.0;
-        this->AnyZoneTempOscillateDuringOccupancy = 0.0;
-        this->AnyZoneTempOscillateInDeadband = 0.0;
-        this->AnnualAnyZoneTempOscillate = 0.0;
-        this->AnnualAnyZoneTempOscillateDuringOccupancy = 0.0;
-        this->AnnualAnyZoneTempOscillateInDeadband = 0.0;
-        this->SetPointSingleHeating.deallocate();
-        this->SetPointSingleCooling.deallocate();
-        this->SetPointSingleHeatCool.deallocate();
-        this->SetPointDualHeatCool.deallocate();
-        this->SetPointSingleHeatingFanger.deallocate();
-        this->SetPointSingleCoolingFanger.deallocate();
-        this->SetPointSingleHeatCoolFanger.deallocate();
-        this->SetPointDualHeatCoolFanger.deallocate();
-        this->AdapComfortDailySetPointSchedule.ThermalComfortAdaptiveASH55_Central.deallocate();
-        this->AdapComfortDailySetPointSchedule.ThermalComfortAdaptiveASH55_Upper_90.deallocate();
-        this->AdapComfortDailySetPointSchedule.ThermalComfortAdaptiveASH55_Upper_80.deallocate();
-        this->AdapComfortDailySetPointSchedule.ThermalComfortAdaptiveCEN15251_Central.deallocate();
-        this->AdapComfortDailySetPointSchedule.ThermalComfortAdaptiveCEN15251_Upper_I.deallocate();
-        this->AdapComfortDailySetPointSchedule.ThermalComfortAdaptiveCEN15251_Upper_II.deallocate();
-        this->AdapComfortDailySetPointSchedule.ThermalComfortAdaptiveCEN15251_Upper_III.deallocate();
-        this->NumOnOffCtrZone = 0;
-        this->AdapComfortSetPointSummerDesDay = Array1D<Real64>(7, -1);
-        this->CalcZoneAirComfortSetPointsFirstTimeFlag = true;
-        this->MyEnvrnFlag = true;
-        this->MyDayFlag = true;
-        this->ErrorsFound = false;
-        this->ControlledZonesChecked = false;
-        this->IterLimitExceededNum1 = 0;
-        this->IterLimitErrIndex1 = 0;
-        this->IterLimitExceededNum2 = 0;
-        this->IterLimitErrIndex2 = 0;
+        *this = ZoneTempPredictorCorrectorData();
     }
 
     // Default Constructor

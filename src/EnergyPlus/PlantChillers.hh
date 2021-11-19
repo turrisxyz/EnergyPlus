@@ -526,18 +526,7 @@ struct PlantChillersData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NumElectricChillers = 0;
-        NumEngineDrivenChillers = 0;
-        NumGTChillers = 0;
-        NumConstCOPChillers = 0;
-        GetEngineDrivenInput = true;
-        GetElectricInput = true;
-        GetGasTurbineInput = true;
-        GetConstCOPInput = true;
-        ElectricChiller.deallocate();
-        EngineDrivenChiller.deallocate();
-        GTChiller.deallocate();
-        ConstCOPChiller.deallocate();
+        *this = PlantChillersData();
     }
 };
 

@@ -113,13 +113,7 @@ struct PlantPressureSysData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->InitPressureDropOneTimeInit = true;
-        this->LoopInit.clear();
-        this->FullParallelBranchSetFound.clear();
-        this->CommonPipeErrorEncountered = false;
-        this->ErrorCounter = 0;
-        this->ZeroKWarningCounter = 0;
-        this->MaxIterWarningCounter = 0;
+        *this = PlantPressureSysData();
     }
 };
 

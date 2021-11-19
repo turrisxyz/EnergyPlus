@@ -111,8 +111,6 @@ namespace WindowComplexManager {
 
     // Functions
 
-    // void clear_state();
-
     void InitBSDFWindows(EnergyPlusData &state);
 
     void AllocateCFSStateHourlyData(EnergyPlusData &state,
@@ -246,20 +244,22 @@ namespace WindowComplexManager {
 struct WindowComplexManagerData : BaseGlobalStruct
 {
 
-    Real64 const sigma; // Stefan-Boltzmann constant
-    Real64 const PressureDefault;
+    // FROM HERE...
+    Real64 sigma; // Stefan-Boltzmann constant
+    Real64 PressureDefault;
 
-    int const Calculate_Geometry;
-    int const Copy_Geometry;
+    int Calculate_Geometry;
+    int Copy_Geometry;
 
-    int const TmpLen; // Length increment of temporary arrays
+    int TmpLen; // Length increment of temporary arrays
 
-    int const Front_Incident; // Ray identification types
-    int const Front_Transmitted;
-    int const Front_Reflected;
-    int const Back_Incident;
-    int const Back_Transmitted;
-    int const Back_Reflected;
+    int Front_Incident; // Ray identification types
+    int Front_Transmitted;
+    int Front_Reflected;
+    int Back_Incident;
+    int Back_Transmitted;
+    int Back_Reflected;
+    // ... TO HERE are all const and needs to be made constexpr out of state
 
     int NumComplexWind; // Total number of complex windows
 
@@ -377,15 +377,7 @@ struct WindowComplexManagerData : BaseGlobalStruct
 
     void clear_state() // override
     {
-        this->NumComplexWind = 0;
-        this->BasisList.deallocate();
-        this->WindowList.deallocate();
-        this->WindowStateList.deallocate();
-        this->InitComplexWindowsOnce = true;
-        this->InitBSDFWindowsOnce = true;
-        this->NumBasis = 0;
-        this->MatrixNo = 0;
-        this->LayerType = Array1D<TARCOGParams::TARCOGLayerType>(TARCOGParams::maxlay, TARCOGParams::TARCOGLayerType::SPECULAR);
+        *this = WindowComplexManagerData();
     }
 
     // Default Constructor

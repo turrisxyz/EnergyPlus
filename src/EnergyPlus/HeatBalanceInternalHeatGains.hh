@@ -90,6 +90,7 @@ struct HeatBalInternalHeatGainsData : BaseGlobalStruct
 
     void clear_state() override
     {
+        *this = HeatBalInternalHeatGainsData();
     }
 };
 

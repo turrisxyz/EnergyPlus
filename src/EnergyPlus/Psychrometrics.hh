@@ -1698,15 +1698,7 @@ struct PsychrometricsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        iPsyErrIndex.fill(0);
-        iconvTol = 0.0001;
-        last_Patm = -99999.0;  // barometric pressure {Pascals}  (last)
-        last_tBoil = -99999.0; // Boiling temperature of water at given pressure (last)
-        Press_Save = -99999.0;
-        tSat_Save = -99999.0;
-        String = "";
-        ReportErrors = true;
-        useInterpolationPsychTsatFnPb = false;
+        *this = PsychrometricsData();
     }
 };
 

@@ -113,8 +113,7 @@ struct DataAFNProps : BaseGlobalStruct
     int upperLimitErrIdx = 0;
     void clear_state() override
     {
-        lowerLimitErrIdx = 0;
-        upperLimitErrIdx = 0;
+        *this = DataAFNProps();
     }
 };
 

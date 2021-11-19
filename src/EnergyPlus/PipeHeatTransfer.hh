@@ -286,22 +286,7 @@ struct PipeHeatTransferData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->nsvNumOfPipeHT = 0;
-        this->nsvInletNodeNum = 0;
-        this->nsvOutletNodeNum = 0;
-        this->nsvMassFlowRate = 0.0;
-        this->nsvVolumeFlowRate = 0.0;
-        this->nsvDeltaTime = 0.0;
-        this->nsvInletTemp = 0.0;
-        this->nsvOutletTemp = 0.0;
-        this->nsvEnvironmentTemp = 0.0;
-        this->nsvEnvHeatLossRate = 0.0;
-        this->nsvFluidHeatLossRate = 0.0;
-        this->nsvNumInnerTimeSteps = 0;
-        this->GetPipeInputFlag = true;
-        this->MyEnvrnFlag = true;
-        this->PipeHT.deallocate();
-        this->PipeHTUniqueNames.clear();
+        *this = PipeHeatTransferData();
     }
 };
 

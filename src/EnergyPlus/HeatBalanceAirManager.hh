@@ -95,9 +95,7 @@ struct HeatBalanceAirMgrData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->ManageAirHeatBalanceGetInputFlag = true;
-        this->UniqueZoneNames.clear();
-        this->UniqueInfiltrationNames.clear();
+        *this = HeatBalanceAirMgrData();
     }
 };
 

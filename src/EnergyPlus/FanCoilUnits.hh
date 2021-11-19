@@ -438,7 +438,8 @@ namespace FanCoilUnits {
 struct FanCoilUnitsData : BaseGlobalStruct
 {
 
-    std::string const cMO_FanCoil = "ZoneHVAC:FourPipeFanCoil";
+    // TODO: This string is a const and needs to be pulled from state
+    std::string cMO_FanCoil = "ZoneHVAC:FourPipeFanCoil";
     int NumFanCoils = 0;
     int Num4PipeFanCoils = 0;
     Array1D_bool MySizeFlag;
@@ -473,35 +474,7 @@ struct FanCoilUnitsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumFanCoils = 0;
-        this->Num4PipeFanCoils = 0;
-        this->MySizeFlag.deallocate();
-        this->CheckEquipName.deallocate();
-        this->GetFanCoilInputFlag = true;
-        this->FanFlowRatio = 0.0;
-        this->HeatingLoad = false;
-        this->CoolingLoad = false;
-        this->FanCoil.deallocate();
-        this->FanCoilNumericFields.deallocate();
-        this->InitFanCoilUnitsOneTimeFlag = true;
-        this->InitFanCoilUnitsCheckInZoneEquipmentListFlag = false;
-        this->ErrorsFound = false;
-        this->errFlag = false;
-        this->TotalArgs = 0;
-        this->ZoneExNodeNotFound = false;
-        this->ZoneInNodeNotFound = false;
-        this->ATMixerNum = 0;
-        this->ATMixerType = 0;
-        this->ATMixerPriNode = 0;
-        this->ATMixerSecNode = 0;
-        this->ATMixerOutNode = 0;
-        this->MyEnvrnFlag.clear();
-        this->MyPlantScanFlag.clear();
-        this->MyZoneEqFlag.clear();
-        this->CoilWaterInletNode = 0;
-        this->CoilWaterOutletNode = 0;
-        this->ATMixOutNode = 0;
-        this->ZoneNode = 0;
+        *this = FanCoilUnitsData();
     }
 };
 

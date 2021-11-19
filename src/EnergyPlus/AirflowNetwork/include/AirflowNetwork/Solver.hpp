@@ -328,22 +328,7 @@ struct AirflowNetworkSolverData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NetworkNumOfLinks = 0;
-        NetworkNumOfNodes = 0;
-        AFECTL.clear();
-        AFLOW2.clear();
-        AFLOW.clear();
-        PS.clear();
-        PW.clear();
-        PB = 0.0;
-        LIST = 0;
-        SUMAF.clear();
-        PZ.clear();
-        ID.clear();
-        IK.clear();
-        AD.clear();
-        AU.clear();
-        solver.clear();
+        *this = AirflowNetworkSolverData();
     }
 };
 

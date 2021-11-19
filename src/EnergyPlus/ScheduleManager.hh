@@ -358,26 +358,7 @@ struct ScheduleManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        CheckScheduleValueMinMaxRunOnceOnly = true;
-        UniqueDayScheduleNames.clear();
-        UniqueWeekScheduleNames.clear();
-        UniqueScheduleNames.clear();
-        UniqueProcessedExternalFiles.clear();
-        DoScheduleReportingSetup = true;
-
-        NumScheduleTypes = 0;
-        NumDaySchedules = 0;
-        NumWeekSchedules = 0;
-        NumSchedules = 0;
-
-        ScheduleInputProcessed = false;
-        ScheduleDSTSFileWarningIssued = false;
-        ScheduleFileShadingProcessed = false;
-
-        ScheduleType.clear(); // Allowed Schedule Types
-        DaySchedule.clear();  // Day Schedule Storage
-        WeekSchedule.clear(); // Week Schedule Storage
-        Schedule.clear();     // Schedule Storage
+        *this = ScheduleManagerData();
     }
 };
 

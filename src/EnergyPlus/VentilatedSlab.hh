@@ -382,36 +382,9 @@ struct VentilatedSlabData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->MyOneTimeFlag = true;
-        this->GetInputFlag = true;
-        this->HCoilOn = false;
-        this->NumOfVentSlabs = 0;
-        this->OAMassFlowRate = 0.0;
-        this->MaxCloNumOfSurfaces = 0;
-        this->QZnReq = 0.0;
-        this->QRadSysSrcAvg.deallocate();
-        this->ZeroSourceSumHATsurf.deallocate();
-        this->LastQRadSysSrc.deallocate();
-        this->LastSysTimeElapsed.deallocate();
-        this->LastTimeStepSys.deallocate();
-        this->CheckEquipName.deallocate();
-        this->MySizeFlag.deallocate();
-        this->VentSlab.deallocate();
-        this->VentSlabNumericFields.deallocate();
-        this->ZoneEquipmentListChecked = false;
-        this->MyEnvrnFlag.deallocate();
-        this->MyPlantScanFlag.deallocate();
-        this->MyZoneEqFlag.deallocate();
-        this->AirTempOut.deallocate();
-        this->CondensationErrorCount = 0;
-        this->EnergyImbalanceErrorCount = 0;
-        this->FirstTimeFlag = true;
+        *this = VentilatedSlabData();
     }
 
-    // Default Constructor
-    VentilatedSlabData()
-    {
-    }
 };
 
 } // namespace EnergyPlus

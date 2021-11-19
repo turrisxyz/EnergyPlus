@@ -407,18 +407,7 @@ struct PurchasedAirManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NumPurchAir = 0;
-        NumPlenumArrays = 0;
-        GetPurchAirInputFlag = true;
-        CheckEquipName.deallocate();
-        PurchAir.deallocate();
-        PurchAirNumericFields.deallocate();
-        InitPurchasedAirMyOneTimeFlag = true;
-        InitPurchasedAirZoneEquipmentListChecked = false; // True after the Zone Equipment List has been checked for items
-        InitPurchasedAirMyEnvrnFlag.deallocate();
-        InitPurchasedAirMySizeFlag.deallocate();
-        InitPurchasedAirOneTimeUnitInitsDone.deallocate(); // True if one-time inits for PurchAirNum are completed
-        TempPurchAirPlenumArrays.deallocate();
+        *this = PurchasedAirManagerData();
     }
 };
 

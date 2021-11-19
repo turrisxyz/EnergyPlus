@@ -313,17 +313,9 @@ struct SolarCollectorsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NumOfCollectors = 0;
-        NumOfParameters = 0;
-        GetInputFlag = true;
-        Parameters.deallocate();
-        Collector.deallocate();
-        UniqueCollectorNames.clear();
-        UniqueParametersNames.clear();
+        *this = SolarCollectorsData();
     }
 
-    // Default Constructor
-    SolarCollectorsData() = default;
 };
 } // namespace EnergyPlus
 

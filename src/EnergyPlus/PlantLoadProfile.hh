@@ -142,9 +142,7 @@ struct PlantLoadProfileData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetPlantLoadProfileInputFlag = true;
-        this->NumOfPlantProfile = 0;
-        this->PlantProfile.deallocate();
+        *this = PlantLoadProfileData();
     }
 };
 

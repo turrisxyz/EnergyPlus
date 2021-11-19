@@ -125,23 +125,7 @@ struct HVACManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        HVACManageIteration = 0;
-        RepIterAir = 0;
-        SimHVACIterSetup = false;
-        TriggerGetAFN = true;
-        ReportAirHeatBalanceFirstTimeFlag = true;
-        MyOneTimeFlag = true;
-        PrintedWarmup = false;
-        MyEnvrnFlag = true;
-        DebugNamesReported = false;
-        MySetPointInit = true;
-        MyEnvrnFlag2 = true;
-        FlowMaxAvailAlreadyReset = false;
-        FlowResolutionNeeded = false;
-        this->ErrCount = 0;
-        this->MaxErrCount = 0;
-        this->MixSenLoad.clear();
-        this->MixLatLoad.clear();
+        *this = HVACManagerData();
     }
 };
 

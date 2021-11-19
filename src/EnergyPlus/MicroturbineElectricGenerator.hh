@@ -238,9 +238,7 @@ struct MicroturbineElectricGeneratorData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumMTGenerators = 0;
-        this->GetMTInput = true;
-        this->MTGenerator.clear();
+        *this = MicroturbineElectricGeneratorData();
     }
 };
 

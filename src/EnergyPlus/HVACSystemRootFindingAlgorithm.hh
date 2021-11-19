@@ -70,7 +70,7 @@ struct RootFindingData : BaseGlobalStruct
     HVACSystemRootFindingAlgorithm HVACSystemRootFinding;
     void clear_state() override
     {
-        this->HVACSystemRootFinding = {};
+        *this = RootFindingData();
     }
 };
 

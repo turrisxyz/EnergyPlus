@@ -135,7 +135,7 @@ struct VectorsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->p0 = Vectors::Vector(0.0, 0.0, 0.0);
+        *this = VectorsData();
     }
 };
 

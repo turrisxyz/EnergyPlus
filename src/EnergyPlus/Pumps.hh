@@ -296,17 +296,7 @@ struct PumpsData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumPumps = 0;
-        this->NumPumpsRunning = 0;
-        this->NumPumpsFullLoad = 0;
-        this->GetInputFlag = true;
-        this->PumpMassFlowRate = 0.0;
-        this->PumpHeattoFluid = 0.0;
-        this->Power = 0.0;
-        this->ShaftPower = 0.0;
-        this->PumpEquip.deallocate();
-        this->PumpEquipReport.deallocate();
-        this->PumpUniqueNames.clear();
+        *this = PumpsData();
     }
 };
 

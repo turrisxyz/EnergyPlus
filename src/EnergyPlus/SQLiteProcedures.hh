@@ -1008,7 +1008,7 @@ struct SQLiteProceduresData : BaseGlobalStruct
     std::unique_ptr<SQLite> sqlite;
     void clear_state() override
     {
-        sqlite.reset(); // probably not necessary, as it is recreated in ManageSimulation, but it should be fine to delete it here
+        *this = SQLiteProceduresData();
     }
 };
 

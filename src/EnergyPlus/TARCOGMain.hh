@@ -188,12 +188,7 @@ struct TARCOGMainData : BaseGlobalStruct
 
     void clear_state() override
     {
-        sconTemp = Array1D<Real64>(TARCOGParams::maxlay);
-        thickTemp = Array1D<Real64>(TARCOGParams::maxlay);
-        converged = false;
-        told = Array1D<Real64>(TARCOGParams::maxlay2);
-        CurGap = Array1D<Real64>(TARCOGParams::MaxGap);
-        GapDefMean = Array1D<Real64>(TARCOGParams::MaxGap);
+        *this = TARCOGMainData();
     };
 };
 } // namespace EnergyPlus

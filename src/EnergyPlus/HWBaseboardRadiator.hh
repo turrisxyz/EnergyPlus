@@ -248,28 +248,7 @@ struct HWBaseboardRadiatorData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->QBBRadSource.clear();
-        this->QBBRadSrcAvg.clear();
-        this->ZeroSourceSumHATsurf.clear();
-        this->LastQBBRadSrc.clear();
-        this->LastSysTimeElapsed.clear();
-        this->LastTimeStepSys.clear();
-        this->MySizeFlag.clear();
-        this->CheckEquipName.clear();
-        this->SetLoopIndexFlag.clear();
-        this->HWBaseboardDesignNames.clear();
-        this->NumHWBaseboards = 0;
-        this->NumHWBaseboardDesignObjs = 0;
-        this->HWBaseboard.clear();
-        this->HWBaseboardDesignObject.clear();
-        this->HWBaseboardNumericFields.clear();
-        this->HWBaseboardDesignNumericFields.clear();
-        this->GetInputFlag = true;
-        this->MyOneTimeFlag = true;
-        this->ZoneEquipmentListChecked = false;
-        this->MyEnvrnFlag.clear();
-        this->Iter = 0;
-        this->MyEnvrnFlag2 = true;
+        *this = HWBaseboardRadiatorData();
     }
 };
 

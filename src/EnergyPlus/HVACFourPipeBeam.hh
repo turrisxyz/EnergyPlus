@@ -233,7 +233,7 @@ struct FourPipeBeamData : BaseGlobalStruct
 
     void clear_state() override
     {
-        FourPipeBeams.clear();
+        *this = FourPipeBeamData();
     }
 };
 

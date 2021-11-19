@@ -145,13 +145,7 @@ struct HybridModelData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->FlagHybridModel = false;
-        this->FlagHybridModel_TM = false;
-        this->FlagHybridModel_AI = false;
-        this->FlagHybridModel_PC = false;
-        this->NumOfHybridModelZones = 0;
-        this->CurrentModuleObject.clear();
-        this->HybridModelZone.deallocate();
+        *this = HybridModelData();
     }
 };
 

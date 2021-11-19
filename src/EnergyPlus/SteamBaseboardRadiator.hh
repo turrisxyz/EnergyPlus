@@ -208,9 +208,9 @@ namespace SteamBaseboardRadiator {
 
 struct SteamBaseboardRadiatorData : BaseGlobalStruct
 {
-
-    std::string const cCMO_BBRadiator_Steam = "ZoneHVAC:Baseboard:RadiantConvective:Steam";
-    std::string const cCMO_BBRadiator_Steam_Design = "ZoneHVAC:Baseboard:RadiantConvective:Steam:Design";
+    // TODO: these two strings are const and need to be pulled from state
+    std::string cCMO_BBRadiator_Steam = "ZoneHVAC:Baseboard:RadiantConvective:Steam";
+    std::string cCMO_BBRadiator_Steam_Design = "ZoneHVAC:Baseboard:RadiantConvective:Steam:Design";
     int NumSteamBaseboards = 0;
     int NumSteamBaseboardsDesign = 0;
     int SteamIndex = 0;
@@ -242,28 +242,9 @@ struct SteamBaseboardRadiatorData : BaseGlobalStruct
 
     void clear_state() override
     {
-        NumSteamBaseboards = 0;
-        SteamIndex = 0;
-        QBBSteamRadSource.clear();
-        QBBSteamRadSrcAvg.clear();
-        ZeroSourceSumHATsurf.clear();
-        LastQBBSteamRadSrc.clear();
-        LastSysTimeElapsed.clear();
-        LastTimeStepSys.clear();
-        MySizeFlag.clear();
-        MyEnvrnFlag.clear();
-        CheckEquipName.clear();
-        SetLoopIndexFlag.clear();
-        GetInputFlag = true;
-        MyOneTimeFlag = true;
-        ZoneEquipmentListChecked = false;
-        SteamBaseboard.clear();
-        SteamBaseboardNumericFields.clear();
-        SteamBaseboardDesignNames.clear();
+        *this = SteamBaseboardRadiatorData();
     }
 
-    // Default Constructor
-    SteamBaseboardRadiatorData() = default;
 };
 } // namespace EnergyPlus
 

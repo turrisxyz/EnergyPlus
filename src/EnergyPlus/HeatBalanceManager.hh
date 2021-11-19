@@ -244,44 +244,7 @@ struct HeatBalanceMgrData : BaseGlobalStruct
 
     void clear_state() override
     {
-
-        ManageHeatBalanceGetInputFlag = true;
-        UniqueMaterialNames.clear();
-        UniqueConstructNames.clear();
-        DoReport = false;
-        ChangeSet = true;
-        FirstWarmupWrite = true;
-        WarmupConvergenceWarning = false;
-        SizingWarmupConvergenceWarning = false;
-        ReportWarmupConvergenceFirstWarmupWrite = true;
-
-        CurrentModuleObject = std::string();
-        MaxCoolLoadPrevDay.clear();
-        MaxCoolLoadZone.clear();
-        MaxHeatLoadPrevDay.clear();
-        MaxHeatLoadZone.clear();
-        MaxTempPrevDay.clear();
-        MaxTempZone.clear();
-        MinTempPrevDay.clear();
-        MinTempZone.clear();
-        WarmupTempDiff.clear();
-        WarmupLoadDiff.clear();
-        TempZoneSecPrevDay.clear();
-        LoadZoneSecPrevDay.clear();
-        TempZonePrevDay.clear();
-        LoadZonePrevDay.clear();
-        TempZone.clear();
-        LoadZone.clear();
-        TempZoneRpt.clear();
-        TempZoneRptStdDev.clear();
-        LoadZoneRpt.clear();
-        LoadZoneRptStdDev.clear();
-        MaxLoadZoneRpt.clear();
-
-        CountWarmupDayPoints = int();
-
-        WarmupConvergenceValues.clear();
-        surfaceOctree = SurfaceOctreeCube();
+        *this = HeatBalanceMgrData();
     }
 };
 

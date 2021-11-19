@@ -204,13 +204,7 @@ struct HumidifiersData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumHumidifiers = 0;
-        this->NumElecSteamHums = 0;
-        this->NumGasSteamHums = 0;
-        this->CheckEquipName.clear();
-        this->GetInputFlag = true;
-        this->Humidifier.clear();
-        this->HumidifierUniqueNames.clear();
+        *this = HumidifiersData();
     }
 };
 

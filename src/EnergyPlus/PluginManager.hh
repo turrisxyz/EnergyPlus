@@ -87,8 +87,6 @@ namespace PluginManagement {
     void onBeginEnvironment(EnergyPlusData &state);
     std::string pythonStringForUsage(EnergyPlusData &state);
 
-    void clear_state();
-
     struct PluginInstance
     {
         PluginInstance(const fs::path &_modulePath, const std::string &_className, std::string emsName, bool runPluginDuringWarmup)
@@ -241,10 +239,13 @@ struct PluginManagerData : BaseGlobalStruct
     std::vector<Real64> globalVariableValues;
     bool fullyReady = false;
     bool apiErrorFlag = false;
+    // TODO: Take this const out
     std::vector<std::string> const objectsToFind = {
         "PythonPlugin:OutputVariable", "PythonPlugin:SearchPaths", "PythonPlugin:Instance", "PythonPlugin:Variables", "PythonPlugin:TrendVariable"};
+
     void clear_state() override
     {
+        // TODO: Evaluate how to reinitialize this best
         callbacks.clear();
 #if LINK_WITH_PYTHON == 1
         for (auto &plugin : plugins) {

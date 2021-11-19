@@ -188,20 +188,7 @@ struct NodeInputManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->CalcMoreNodeInfoMyOneTimeFlag = true;
-        this->NumOfNodeLists = 0;
-        this->NumOfUniqueNodeNames = 0;
-        this->GetNodeInputFlag = true;
-        this->NodeRef.deallocate();
-        this->CurCheckContextName = std::string();
-        this->UniqueNodeNames.deallocate();
-        this->NumCheckNodes = 0;
-        this->MaxCheckNodes = 0;
-        this->NodeVarsSetup = false;
-        this->NodeLists.deallocate();
-        this->GetOnlySingleNodeNodeNums.deallocate();
-        this->GetOnlySingleNodeFirstTime = true;
-        this->NodeWetBulbRepReq.deallocate();
+        *this = NodeInputManagerData();
     }
 };
 

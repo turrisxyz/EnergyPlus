@@ -436,10 +436,11 @@ struct SurfaceGeometryData : BaseGlobalStruct
     bool noTransform = true;
     bool CheckConvexityFirstTime = true;
 
-    Array1D_string const BaseSurfCls;
-    Array1D_string const SubSurfCls;
-    Array1D<DataSurfaces::SurfaceClass> const BaseSurfIDs;
-    Array1D<DataSurfaces::SurfaceClass> const SubSurfIDs;
+    // TODO: The first four of these are const and need to be pulled out
+    Array1D_string BaseSurfCls;
+    Array1D_string SubSurfCls;
+    Array1D<DataSurfaces::SurfaceClass> BaseSurfIDs;
+    Array1D<DataSurfaces::SurfaceClass> SubSurfIDs;
     Array1D<SurfaceGeometry::SurfaceData> SurfaceTmp; // Allocated/Deallocated during input processing
     HeatBalanceKivaManager::KivaManager kivaManager;
     SurfaceGeometry::ExposedFoundationPerimeter exposedFoundationPerimeter;
@@ -467,38 +468,7 @@ struct SurfaceGeometryData : BaseGlobalStruct
 
     void clear_state() override
     {
-        ProcessSurfaceVerticesOneTimeFlag = true;
-        checkSubSurfAzTiltNormErrCount = 0;
-        Xpsv.deallocate();
-        Ypsv.deallocate();
-        Zpsv.deallocate();
-        // Following are used only during getting vertices, so are module variables here.
-        CosBldgRelNorth = 0.0;
-        SinBldgRelNorth = 0.0;
-        CosBldgRotAppGonly = 0.0;
-        SinBldgRotAppGonly = 0.0;
-        CosZoneRelNorth.deallocate();
-        SinZoneRelNorth.deallocate();
-        NoGroundTempObjWarning = true;
-        NoFCGroundTempObjWarning = true;
-        RectSurfRefWorldCoordSystem = false;
-        Warning1Count = 0;
-        Warning2Count = 0;
-        Warning3Count = 0;
-        SurfaceTmp.deallocate();
-        GetSurfaceDataOneTimeFlag = false;
-        UniqueSurfaceNames.clear();
-        kivaManager = HeatBalanceKivaManager::KivaManager();
-        firstTime = true;
-        noTransform = true;
-        CheckConvexityFirstTime = true;
-        ErrCount = 0;
-        WarningDisplayed = false;
-        ErrCount2 = 0;
-        ErrCount3 = 0;
-        ErrCount4 = 0;
-        ErrCount5 = 0;
-        ShowZoneSurfaceHeaders = true;
+        *this = SurfaceGeometryData();
     }
 
     // Default Constructor

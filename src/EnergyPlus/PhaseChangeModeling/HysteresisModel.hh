@@ -147,9 +147,7 @@ struct HysteresisPhaseChangeData : BaseGlobalStruct
 
     void clear_state() override
     {
-        numHysteresisModels = 0;
-        getHysteresisModels = true;
-        hysteresisPhaseChangeModels.clear();
+        *this = HysteresisPhaseChangeData();
     }
 };
 

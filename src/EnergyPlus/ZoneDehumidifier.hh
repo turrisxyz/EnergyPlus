@@ -187,13 +187,7 @@ struct ZoneDehumidifierData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumDehumidifiers = 0;
-        this->GetInputFlag = true;
-        this->CheckEquipName.deallocate();
-        this->ZoneDehumid.deallocate();
-        this->MyOneTimeFlag = true;
-        this->ZoneEquipmentListChecked = false;
-        this->MyEnvrnFlag.deallocate();
+        *this = ZoneDehumidifierData();
     }
 
     // Default Constructor

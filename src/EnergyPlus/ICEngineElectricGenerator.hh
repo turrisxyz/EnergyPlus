@@ -190,9 +190,7 @@ struct ICEngineElectricGeneratorData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->getICEInput = true;
-        this->NumICEngineGenerators = 0;
-        this->ICEngineGenerator.deallocate();
+        *this = ICEngineElectricGeneratorData();
     }
 };
 

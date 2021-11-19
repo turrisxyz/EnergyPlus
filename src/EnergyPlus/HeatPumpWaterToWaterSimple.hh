@@ -221,12 +221,7 @@ struct HeatPumpWaterToWaterSimpleData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumGSHPs = 0;
-        this->GetInputFlag = true;
-        this->GSHP.deallocate();
-        this->HeatPumpWaterUniqueNames.clear();
-        this->CurrentSimTime = 0.0;
-        this->PrevSimTime = 0.0;
+        *this = HeatPumpWaterToWaterSimpleData();
     }
 };
 

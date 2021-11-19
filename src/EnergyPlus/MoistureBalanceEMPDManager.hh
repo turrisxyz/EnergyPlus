@@ -118,10 +118,7 @@ struct MoistureBalanceEMPDManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->EMPDReportVars.deallocate();
-        this->InitEnvrnFlag = true;
-        this->ErrCount = 0;
-        this->OneTimeFlag = true;
+        *this = MoistureBalanceEMPDManagerData();
     }
 };
 

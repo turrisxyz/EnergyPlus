@@ -382,18 +382,7 @@ struct HVACControllersData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumControllers = 0;
-        this->NumAirLoopStats = 0;
-        this->CheckEquipName.deallocate();
-        this->GetControllerInputFlag = true;
-        this->InitControllerOneTimeFlag = true;
-        this->InitControllerSetPointCheckFlag = true;
-        this->ControllerProps.deallocate();
-        this->RootFinders.deallocate();
-        this->AirLoopStats.deallocate();
-        this->MyEnvrnFlag.deallocate();
-        this->MySizeFlag.deallocate();
-        this->MyPlantIndexsFlag.deallocate();
+        *this = HVACControllersData();
     }
 };
 

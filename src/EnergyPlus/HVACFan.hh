@@ -264,7 +264,7 @@ struct HVACFanData : BaseGlobalStruct
 
     void clear_state() override
     {
-        fanObjs.clear();
+        *this = HVACFanData();
     }
 };
 

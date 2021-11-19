@@ -217,6 +217,7 @@ struct HeatBalanceKivaMgrData : BaseGlobalStruct
 
     void clear_state() override
     {
+        *this = HeatBalanceKivaMgrData();
     }
 };
 

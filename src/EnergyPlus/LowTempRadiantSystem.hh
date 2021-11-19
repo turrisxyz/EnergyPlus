@@ -599,57 +599,7 @@ struct LowTempRadiantSystemData : BaseGlobalStruct
 
     void clear_state() override
     {
-        LowTempHeating = -200.0;
-        HighTempCooling = 200.0;
-        NumOfHydrLowTempRadSys = 0;
-        NumOfHydrLowTempRadSysDes = 0;
-        NumOfCFloLowTempRadSys = 0;
-        NumOfCFloLowTempRadSysDes = 0;
-        NumOfElecLowTempRadSys = 0;
-        TotalNumOfRadSystems = 0;
-
-        // These are in the state space for Unit tests to work properly
-        CFloCondIterNum = 0;
-        MaxCloNumOfSurfaces = 0;
-        VarOffCond = false;
-        FirstTimeInit = true;
-        anyRadiantSystemUsingRunningMeanAverage = false;
-        LoopReqTemp = 0.0;
-        LowTempRadUniqueNames.clear();
-        GetInputFlag = true;
-        FirstTimeFlag = true;
-        MyEnvrnFlagGeneral = true;
-        ZoneEquipmentListChecked = false;
-        MyOneTimeFlag = true;
-        warnTooLow = false;
-        warnTooHigh = false;
-        //
-
-        QRadSysSrcAvg.clear();
-        ZeroSourceSumHATsurf.clear();
-        LastQRadSysSrc.clear();
-        LastSysTimeElapsed.clear();
-        LastTimeStepSys.clear();
-        Ckj.clear();
-        Cmj.clear();
-        WaterTempOut.clear();
-        MyEnvrnFlagHydr.clear();
-        MyEnvrnFlagCFlo.clear();
-        MyEnvrnFlagElec.clear();
-        MyPlantScanFlagHydr.clear();
-        MyPlantScanFlagCFlo.clear();
-        MySizeFlagHydr.clear();
-        MySizeFlagCFlo.clear();
-        MySizeFlagElec.clear();
-        CheckEquipName.clear();
-        HydrRadSys.clear(); //
-        CFloRadSys.clear();
-        ElecRadSys.clear();
-        RadSysTypes.clear();
-        ElecRadSysNumericFields.clear();
-        HydronicRadiantSysNumericFields.clear();
-        HydronicRadiantSysDesign.clear();
-        CflowRadiantSysDesign.clear();
+        *this = LowTempRadiantSystemData();
     }
 };
 

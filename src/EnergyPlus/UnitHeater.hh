@@ -215,9 +215,8 @@ namespace UnitHeater {
 
 struct UnitHeatersData : BaseGlobalStruct
 {
-
-    // MODULE PARAMETER DEFINITIONS
-    std::string const cMO_UnitHeater = "ZoneHVAC:UnitHeater";
+    // TODO: This string is const and needs to be pulled from state
+    std::string cMO_UnitHeater = "ZoneHVAC:UnitHeater";
 
     // Character parameters for outside air control types:
 
@@ -244,25 +243,9 @@ struct UnitHeatersData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->HCoilOn = false;
-        this->NumOfUnitHeats = 0;
-        this->QZnReq = 0.0;
-        this->MySizeFlag.deallocate();
-        this->CheckEquipName.deallocate();
-        this->UnitHeat.deallocate();
-        this->UnitHeatNumericFields.deallocate();
-        this->InitUnitHeaterOneTimeFlag = true;
-        this->GetUnitHeaterInputFlag = true;
-        this->ZoneEquipmentListChecked = false;
-        this->SetMassFlowRateToZero = false;
-        this->MyEnvrnFlag.deallocate();
-        this->MyPlantScanFlag.deallocate();
-        this->MyZoneEqFlag.deallocate();
-        this->RefrigIndex = 0;
+        *this = UnitHeatersData();
     }
 
-    // Default Constructor
-    UnitHeatersData() = default;
 };
 
 } // namespace EnergyPlus

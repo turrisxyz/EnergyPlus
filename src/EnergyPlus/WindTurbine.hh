@@ -185,11 +185,7 @@ struct WindTurbineData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->NumWindTurbines = 0;
-        this->GetInputFlag = true;
-        this->MyOneTimeFlag = true;
-        this->AnnualTMYWS = 0.0;
-        this->WindTurbineSys.deallocate();
+        *this = WindTurbineData();
     }
 
     // Default Constructor

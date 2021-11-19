@@ -233,10 +233,7 @@ struct FluidCoolersData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetFluidCoolerInputFlag = true;
-        this->NumSimpleFluidCoolers = 0;
-        this->SimpleFluidCooler.deallocate();
-        this->UniqueSimpleFluidCoolerNames.clear();
+        *this = FluidCoolersData();
     }
 };
 

@@ -72,7 +72,7 @@ struct GeneratorFuelSupplyData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->MyOneTimeFlag = true;
+        *this = GeneratorFuelSupplyData();
     }
 };
 

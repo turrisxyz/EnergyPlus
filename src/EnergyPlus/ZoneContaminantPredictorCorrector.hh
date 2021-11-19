@@ -121,18 +121,7 @@ struct ZoneContaminantPredictorCorrectorData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetZoneAirContamInputFlag = true;
-        this->TotGCGenConstant = 0;
-        this->TotGCGenPDriven = 0;
-        this->TotGCGenCutoff = 0;
-        this->TotGCGenDecay = 0;
-        this->TotGCBLDiff = 0;
-        this->TotGCDVS = 0;
-        this->TotGCDRS = 0;
-        this->MyOneTimeFlag = true;
-        this->MyEnvrnFlag = true;
-        this->MyDayFlag = true;
-        this->MyConfigOneTimeFlag = true;
+        *this = ZoneContaminantPredictorCorrectorData();
     }
 
     // Default Constructor

@@ -183,13 +183,15 @@ struct PsychrometricCacheData : BaseGlobalStruct
 
     void clear_state() override
     {
-#ifdef EP_psych_stats
-        NumTimesCalled.fill(0);
-        NumIterations.fill(0);
-#endif
-#ifdef EP_cache_PsyTsatFnPb
-        tsatprecision_bits = 24;
-#endif
+        *this = PsychrometricCacheData();
+        // TODO: Verify this
+//#ifdef EP_psych_stats
+//        NumTimesCalled.fill(0);
+//        NumIterations.fill(0);
+//#endif
+//#ifdef EP_cache_PsyTsatFnPb
+//        tsatprecision_bits = 24;
+//#endif
     }
 };
 

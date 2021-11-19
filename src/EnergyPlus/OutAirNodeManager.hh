@@ -88,9 +88,7 @@ struct OutAirNodeManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->OutsideAirNodeList.deallocate();
-        this->NumOutsideAirNodes = 0;
-        this->GetOutAirNodesInputFlag = true;
+        *this = OutAirNodeManagerData();
     }
 };
 

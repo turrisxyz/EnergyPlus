@@ -584,49 +584,7 @@ struct FurnacesData : BaseGlobalStruct
 
     void clear_state() override
     {
-        GetFurnaceInputFlag = true;
-        UniqueFurnaceNames.clear();
-        InitFurnaceMyOneTimeFlag = true;
-        FlowFracFlagReady = true; // one time flag for calculating flow fraction through controlled zone
-        MyAirLoopPass = true;
-
-        NumFurnaces = 0;
-        MySizeFlag.clear();
-        CheckEquipName.clear();
-        ModifiedHeatCoilLoad = 0.0;
-        OnOffAirFlowRatioSave = 0.0;
-        OnOffFanPartLoadFractionSave = 0.0;
-        CompOnMassFlow = 0.0;
-        CompOffMassFlow = 0.0;
-        CompOnFlowRatio = 0.0;
-        CompOffFlowRatio = 0.0;
-        FanSpeedRatio = 0.0;
-        CoolHeatPLRRat = 1.0;
-        HeatingLoad = false;
-        CoolingLoad = false;
-        EconomizerFlag = false;
-        AirLoopPass = 0;
-        HPDehumidificationLoadFlag = false;
-        TempSteamIn = 100.0;
-        SaveCompressorPLR = 0.0;
-        CurrentModuleObject = "";
-        Iter = 0;
-        HeatingCoilName.clear();
-        HeatingCoilType.clear();
-        Furnace.clear();
-
-        MyEnvrnFlag.clear();
-        MySecondOneTimeFlag.clear();
-        MyFanFlag.clear();
-        MyCheckFlag.clear();
-        MyFlowFracFlag.clear();
-        MyPlantScanFlag.clear();
-        MySuppCoilPlantScanFlag.clear();
-
-        HumControl = false;
-        Dummy2 = 0.0;
-        SpeedNum = 1;
-        SupHeaterLoad = 0.0;
+        *this = FurnacesData();
     }
 };
 

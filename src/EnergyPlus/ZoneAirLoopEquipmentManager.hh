@@ -99,11 +99,7 @@ struct ZoneAirLoopEquipmentManagerData : BaseGlobalStruct
 
     void clear_state() override
     {
-        this->GetAirDistUnitsFlag = true;
-        this->EachOnceFlag.deallocate();
-        this->MyOneTimeFlag = true;
-        this->InitAirDistUnitsFlag = true;
-        this->numADUInitialized = 0;
+        *this = ZoneAirLoopEquipmentManagerData();
     }
 
     // Default Constructor
