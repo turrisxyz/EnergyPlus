@@ -204,7 +204,31 @@ void InputProcessor::initializeMaps()
 {
     unusedInputs.clear();
     objectCacheMap.clear();
-    objectCacheMap.reserve(epJSON.size());
+    objectCacheMap.reserve(epJSON.size()); // TODO: Valgrind is complaining about this...
+    // ==2147888== 18,185,429 (96 direct, 18,185,333 indirect) bytes in 1 blocks are definitely lost in loss record 62,784 of 62,803
+    //==2147888==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+    //==2147888==    by 0x58E3C4B: allocate (new_allocator.h:114)
+    //==2147888==    by 0x58E3C4B: allocate (alloc_traits.h:444)
+    //==2147888==    by 0x58E3C4B: _M_get_node (stl_tree.h:580)
+    //==2147888==    by 0x58E3C4B: _M_create_node<const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&> (stl_tree.h:630)
+    //==2147888==    by 0x58E3C4B: _M_emplace_unique<const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&> (stl_tree.h:2408)
+    //==2147888==    by 0x58E3C4B: emplace<const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, const std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&> (stl_set.h:463)
+    //==2147888==    by 0x58E3C4B: EnergyPlus::InputProcessor::initializeMaps() (InputProcessor.cc:217)
+    //==2147888==    by 0x455840: EnergyPlus::EnergyPlusFixture::process_idf(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool) (EnergyPlusFixture.cc:340)
+    //==2147888==    by 0x51C108: EnergyPlus::EnergyPlusFixture_AirTerminalSingleDuctSeriesPIUReheat_GetInputtest_Test::TestBody() (AirTerminalSingleDuctPIUReheat.unit.cc:177)
+    //==2147888==    by 0x153C25E: void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) (gtest.cc:2665)
+    //==2147888==    by 0x152F345: Run (gtest.cc:2682)
+    //==2147888==    by 0x152F345: testing::Test::Run() (gtest.cc:2672)
+    //==2147888==    by 0x152F4C4: Run (gtest.cc:2861)
+    //==2147888==    by 0x152F4C4: testing::TestInfo::Run() (gtest.cc:2833)
+    //==2147888==    by 0x152F968: Run (gtest.cc:3015)
+    //==2147888==    by 0x152F968: testing::TestSuite::Run() (gtest.cc:2993)
+    //==2147888==    by 0x153008E: testing::internal::UnitTestImpl::RunAllTests() (gtest.cc:5855)
+    //==2147888==    by 0x153C7CE: bool testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) (gtest.cc:2665)
+    //==2147888==    by 0x152F58B: testing::UnitTest::Run() (gtest.cc:5438)
+    //==2147888==    by 0x44DDE0: RUN_ALL_TESTS (gtest.h:2490)
+    //==2147888==    by 0x44DDE0: main (main.cc:64)
+
     auto const &schema_properties = schema.at("properties");
 
     for (auto epJSON_iter = epJSON.begin(); epJSON_iter != epJSON.end(); ++epJSON_iter) {

@@ -163,23 +163,43 @@ struct PsychrometricCacheData : BaseGlobalStruct
 {
 
 #ifdef EP_cache_PsyTwbFnTdbWPb
-    std::array<cached_twb_t, twbcache_size> cached_Twb;
+    std::vector<cached_twb_t> cached_Twb;
 #endif
 #ifdef EP_cache_PsyPsatFnTemp
-    std::array<cached_psat_t, psatcache_size> cached_Psat;
+    std::vector<cached_psat_t> cached_Psat;
 #endif
 #ifdef EP_cache_PsyTsatFnPb
-    std::array<cached_tsat_h_pb, tsatcache_size> cached_Tsat;
+    std::vector<cached_tsat_h_pb> cached_Tsat;
     int tsatprecision_bits = 24;
 #endif
 #ifdef EP_cache_PsyTsatFnHPb
-    std::array<cached_tsat_h_pb, tsat_hbp_cache_size> cached_Tsat_HPb;
+    std::vector<cached_tsat_h_pb> cached_Tsat_HPb;
 #endif
 
 #ifdef EP_psych_stats
     std::array<std::int64_t, static_cast<int>(PsychrometricFunction::Num)> NumTimesCalled;
     std::array<int, static_cast<int>(PsychrometricFunction::Num)> NumIterations;
 #endif
+
+    PsychrometricCacheData() {
+#ifdef EP_cache_PsyTwbFnTdbWPb
+        cached_Twb.resize(twbcache_size);
+#endif
+#ifdef EP_cache_PsyPsatFnTemp
+        cached_Psat.resize(psatcache_size);
+#endif
+#ifdef EP_cache_PsyTsatFnPb
+        cached_Tsat.resize(tsatcache_size);
+#endif
+#ifdef EP_cache_PsyTsatFnHPb
+        cached_Tsat_HPb.resize(tsat_hbp_cache_size);
+#endif
+
+#ifdef EP_psych_stats
+        std::array<std::int64_t, static_cast<int>(PsychrometricFunction::Num)> NumTimesCalled;
+        std::array<int, static_cast<int>(PsychrometricFunction::Num)> NumIterations;
+#endif
+    }
 
     void clear_state() override
     {

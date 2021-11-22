@@ -1538,7 +1538,7 @@ private:
             // custom allocators? Anyway, this isn't an issue here, because Valijson's
             // JSON Scheme validator does not yet support custom allocators.
             // const std::regex r(patternPropertyStr);
-            auto r = std::make_unique<RE2>(patternPropertyStr);
+            auto r = std::make_unique<RE2>(patternPropertyStr); // TODO: I think this might be leaking
 
             bool matchFound = false;
 

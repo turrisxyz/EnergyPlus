@@ -47,6 +47,7 @@
 
 // C++ Headers
 #include <cstdlib>
+#include <algorithm>
 
 // ObjexxFCL Headers
 #include <ObjexxFCL/Fmath.hh>
@@ -120,16 +121,16 @@ namespace Psychrometrics {
         // Initializes some variables for PsychRoutines
 
 #ifdef EP_cache_PsyTwbFnTdbWPb
-        state.dataPsychCache->cached_Twb.fill(cached_twb_t());
+        std::fill(state.dataPsychCache->cached_Twb.begin(), state.dataPsychCache->cached_Twb.end(), cached_twb_t());
 #endif
 #ifdef EP_cache_PsyPsatFnTemp
-        state.dataPsychCache->cached_Psat.fill(cached_psat_t());
+        std::fill(state.dataPsychCache->cached_Psat.begin(), state.dataPsychCache->cached_Psat.end(), cached_psat_t());
 #endif
 #ifdef EP_cache_PsyTsatFnPb
-        state.dataPsychCache->cached_Tsat.fill(cached_tsat_h_pb());
+        std::fill(state.dataPsychCache->cached_Tsat.begin(), state.dataPsychCache->cached_Tsat.end(), cached_tsat_h_pb());
 #endif
 #ifdef EP_cache_PsyTsatFnHPb
-        state.dataPsychCache->cached_Tsat_HPb.fill(cached_tsat_h_pb());
+        std::fill(state.dataPsychCache->cached_Tsat_HPb.begin(), state.dataPsychCache->cached_Tsat_HPb.end(), cached_tsat_h_pb());
 #endif
     }
 

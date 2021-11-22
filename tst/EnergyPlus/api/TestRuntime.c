@@ -207,5 +207,12 @@ int main(int argc, const char *argv[])
     printf("Setting EnergyPlus root directory for potential runs with auxiliary tools...\n");
     EnergyPlusState state4 = stateNew();
     setEnergyPlusRootDirectory(state4, "/path/to/EnergyPlus/Root");
+
+    // Now doing a loop of many repeated runs of EnergyPlus to test the memory isn't increasing drastically each time
+    EnergyPlusState state5 = stateNew();
+    for (int i = 1; i <= 20; i++) {
+        energyplus(state5, argc, argv);
+        stateReset(state5);
+    }
     return 0;
 }

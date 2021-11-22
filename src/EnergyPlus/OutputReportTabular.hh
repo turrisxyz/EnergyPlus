@@ -1229,6 +1229,10 @@ struct OutputReportTabularData : BaseGlobalStruct
     void clear_state() override
     {
         *this = OutputReportTabularData();
+        // this array of raw pointers appears to need to be reconstructed based on the new fstream addresses...
+        // I actually would've expected this to be done automatically when the new class instance is constructed, but it won't work without this
+        this->TabularOutputFile = Array1D<std::ofstream *>(
+            OutputReportTabular::maxNumStyles, {&this->csv_stream, &this->tab_stream, &this->fix_stream, &this->htm_stream, &this->xml_stream});
     }
 };
 

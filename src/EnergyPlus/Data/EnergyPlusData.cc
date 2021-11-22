@@ -52,8 +52,7 @@
 
 namespace EnergyPlus {
 
-EnergyPlusData::EnergyPlusData()
-{
+EnergyPlusData::EnergyPlusData() {
     this->dataAirLoop = std::make_unique<DataAirLoopData>();
     this->dataAirLoopHVACDOAS = std::make_unique<AirLoopHVACDOASData>();
     this->dataAirSystemsData = std::make_unique<AirSystemsData>();
