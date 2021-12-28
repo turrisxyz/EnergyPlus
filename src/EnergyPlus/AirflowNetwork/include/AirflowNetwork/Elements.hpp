@@ -445,8 +445,7 @@ namespace AirflowNetwork {
                               ) = 0;
 
         // Make this abstract once all the classes implement it
-        virtual int calculate([[maybe_unused]] EnergyPlusData &state,
-                              [[maybe_unused]] const Real64 PDROP,         // Total pressure drop across a component (P1 - P2) [Pa]
+        virtual int calculate([[maybe_unused]] const Real64 PDROP,         // Total pressure drop across a component (P1 - P2) [Pa]
                               [[maybe_unused]] const Real64 multiplier,    // Element multiplier
                               [[maybe_unused]] const Real64 control,       // Element control signal
                               [[maybe_unused]] const AirProperties &propN, // Node 1 properties
@@ -609,6 +608,16 @@ namespace AirflowNetwork {
                       std::array<Real64, 2> &DF                    // Partial derivative:  DF/DP
         );
 
+        int calculate([[maybe_unused]] Real64 const PDROP,         // Total pressure drop across a component (P1 - P2) [Pa]
+                      [[maybe_unused]] int const i,                // Linkage number
+                      const Real64 multiplier,                     // Element multiplier
+                      const Real64 control,                        // Element control signal
+                      [[maybe_unused]] const AirProperties &propN, // Node 1 properties
+                      [[maybe_unused]] const AirProperties &propM, // Node 2 properties
+                      std::array<Real64, 2> &F,                    // Airflow through the component [kg/s]
+                      std::array<Real64, 2> &DF                    // Partial derivative:  DF/DP
+        );
+
         virtual ComponentType type()
         {
             return ComponentType::SMF;
@@ -628,6 +637,16 @@ namespace AirflowNetwork {
         int calculate([[maybe_unused]] EnergyPlusData &state,
                       [[maybe_unused]] bool const LFLAG,   // Initialization flag.If = 1, use laminar relationship
                       [[maybe_unused]] Real64 const PDROP, // Total pressure drop across a component (P1 - P2) [Pa]
+                      [[maybe_unused]] int const i,        // Linkage number
+                      const Real64 multiplier,             // Element multiplier
+                      const Real64 control,                // Element control signal
+                      const AirProperties &propN,          // Node 1 properties
+                      const AirProperties &propM,          // Node 2 properties
+                      std::array<Real64, 2> &F,            // Airflow through the component [kg/s]
+                      std::array<Real64, 2> &DF            // Partial derivative:  DF/DP
+        );
+
+        int calculate([[maybe_unused]] Real64 const PDROP, // Total pressure drop across a component (P1 - P2) [Pa]
                       [[maybe_unused]] int const i,        // Linkage number
                       const Real64 multiplier,             // Element multiplier
                       const Real64 control,                // Element control signal
@@ -689,8 +708,7 @@ namespace AirflowNetwork {
                       std::array<Real64, 2> &DF     // Partial derivative:  DF/DP
         );
 
-        virtual int calculate(EnergyPlusData &state,
-                              const Real64 pdrop,         // Total pressure drop across a component (P1 - P2) [Pa]
+        virtual int calculate(const Real64 pdrop,         // Total pressure drop across a component (P1 - P2) [Pa]
                               const Real64 multiplier,    // Element multiplier
                               const Real64 control,       // Element control signal
                               const AirProperties &propN, // Node 1 properties
@@ -732,8 +750,7 @@ namespace AirflowNetwork {
                       std::array<Real64, 2> &DF                 // Partial derivative:  DF/DP
         );
 
-        int calculate([[maybe_unused]] EnergyPlusData &state,
-                      Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
+        int calculate(Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                       [[maybe_unused]] const Real64 multiplier, // Element multiplier
                       [[maybe_unused]] const Real64 control,    // Element control signal
                       const AirProperties &propN,               // Node 1 properties
@@ -959,8 +976,7 @@ namespace AirflowNetwork {
                       std::array<Real64, 2> &DF                 // Partial derivative:  DF/DP
         );
 
-        int calculate([[maybe_unused]] EnergyPlusData &state,
-                      Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
+        int calculate(Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                       [[maybe_unused]] const Real64 multiplier, // Element multiplier
                       [[maybe_unused]] const Real64 control,    // Element control signal
                       const AirProperties &propN,               // Node 1 properties
@@ -1017,8 +1033,7 @@ namespace AirflowNetwork {
                       std::array<Real64, 2> &DF                 // Partial derivative:  DF/DP
         );
 
-        int calculate([[maybe_unused]] EnergyPlusData &state,
-                      Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
+        int calculate(Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                       [[maybe_unused]] const Real64 multiplier, // Element multiplier
                       [[maybe_unused]] const Real64 control,    // Element control signal
                       const AirProperties &propN,               // Node 1 properties
@@ -1064,8 +1079,7 @@ namespace AirflowNetwork {
                       std::array<Real64, 2> &DF                 // Partial derivative:  DF/DP
         );
 
-        int calculate([[maybe_unused]] EnergyPlusData &state,
-                      Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
+        int calculate(Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                       [[maybe_unused]] const Real64 multiplier, // Element multiplier
                       const Real64 control,                     // Element control signal
                       const AirProperties &propN,               // Node 1 properties
@@ -1189,8 +1203,7 @@ namespace AirflowNetwork {
                       std::array<Real64, 2> &DF                 // Partial derivative:  DF/DP
         );
 
-        int calculate([[maybe_unused]] EnergyPlusData &state,
-                      Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
+        int calculate(Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                       [[maybe_unused]] const Real64 multiplier, // Element multiplier
                       [[maybe_unused]] const Real64 control,    // Element control signal
                       const AirProperties &propN,               // Node 1 properties
@@ -1230,8 +1243,7 @@ namespace AirflowNetwork {
                       std::array<Real64, 2> &DF                 // Partial derivative:  DF/DP
         );
 
-        int calculate([[maybe_unused]] EnergyPlusData &state,
-                      Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
+        int calculate(Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                       [[maybe_unused]] const Real64 multiplier, // Element multiplier
                       [[maybe_unused]] const Real64 control,    // Element control signal
                       const AirProperties &propN,               // Node 1 properties
