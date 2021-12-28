@@ -1194,8 +1194,8 @@ namespace AirflowNetworkBalanceManager {
                 }
 
                 state.dataAirflowNetwork->DisSysCompLeakData(i).name = thisObjectName; // Name of duct leak component
-                state.dataAirflowNetwork->DisSysCompLeakData(i).FlowCoef = coeff;      // Air Mass Flow Coefficient
-                state.dataAirflowNetwork->DisSysCompLeakData(i).FlowExpo = expnt;      // Air Mass Flow exponent
+                state.dataAirflowNetwork->DisSysCompLeakData(i).coefficient = coeff;      // Air Mass Flow Coefficient
+                state.dataAirflowNetwork->DisSysCompLeakData(i).exponent = expnt;      // Air Mass Flow exponent
 
                 // Add the element to the lookup table, check for name overlaps
                 if (solver.elements.find(thisObjectName) == solver.elements.end()) {
