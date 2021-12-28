@@ -526,14 +526,16 @@ namespace AirflowNetwork {
     struct SimpleOpening : public AirflowElement // Large simple opening component
     {
         // Members
-        Real64 FlowCoef;   // Air Mass Flow Coefficient When Window or Door Is Closed [kg/s at 1Pa]
-        Real64 FlowExpo;   // Air Mass Flow exponent When Window or Door Is Closed [dimensionless]
-        Real64 MinRhoDiff; // Minimum density difference for two-way flow
-        Real64 DischCoeff; // Discharge coefficient at full opening
-        Real64 OpenFactor; // Opening factor
+        Real64 coefficient;                 // Air Mass Flow Coefficient When Window or Door Is Closed [kg/s at 1Pa]
+        Real64 exponent;                    // Air Mass Flow exponent When Window or Door Is Closed [dimensionless]
+        Real64 minimum_density_delta;       // Minimum density difference for two-way flow
+        Real64 DischCoeff;                  // Discharge coefficient at full opening
+        Real64 OpenFactor;                  // Opening factor
+        bool compute_minimum_density_delta; // Flag to determine if the density difference has been input
 
         // Default Constructor
-        SimpleOpening() : FlowCoef(0.0), FlowExpo(0.0), MinRhoDiff(0.0), DischCoeff(0.0), OpenFactor(0.0)
+        SimpleOpening()
+            : coefficient(0.0), exponent(0.0), minimum_density_delta(0.0), DischCoeff(0.0), OpenFactor(0.0), compute_minimum_density_delta(true)
         {
         }
 

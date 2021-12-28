@@ -1010,15 +1010,22 @@ namespace AirflowNetworkBalanceManager {
                 if (fields.find("air_mass_flow_exponent_when_opening_is_closed") != fields.end()) {
                     expnt = fields.at("air_mass_flow_exponent_when_opening_is_closed").get<Real64>();
                 }
-                Real64 diff{fields.at("minimum_density_difference_for_two_way_flow")};
+                bool compute_minimum_density_delta{true};
+                Real64 diff{0.0};
+                if (fields.find("minimum_density_difference_for_two_way_flow") != fields.end()) {
+                    diff = fields.at("minimum_density_difference_for_two_way_flow").get<Real64>();
+                    compute_minimum_density_delta = false;
+                }
                 Real64 dischargeCoeff{fields.at("discharge_coefficient")};
 
                 state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(i).name = thisObjectName; // Name of large simple opening component
-                state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(i).FlowCoef =
-                    coeff; // Air Mass Flow Coefficient When Window or Door Is Closed
-                state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(i).FlowExpo = expnt;  // Air Mass Flow exponent When Window or Door Is Closed
-                state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(i).MinRhoDiff = diff; // Minimum density difference for two-way flow
+                // Air Mass Flow Coefficient When Window or Door Is Closed
+                state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(i).coefficient = coeff;
+                state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(i).exponent = expnt;  // Air Mass Flow exponent When Window or Door Is Closed
+                // Minimum density difference for two-way flow
+                state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(i).minimum_density_delta = diff;
                 state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(i).DischCoeff = dischargeCoeff; // Discharge coefficient at full opening
+                state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(i).compute_minimum_density_delta = compute_minimum_density_delta;
 
                 // Add the element to the lookup table, check for name overlaps
                 if (solver.elements.find(thisObjectName) == solver.elements.end()) {

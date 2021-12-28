@@ -45,6 +45,9 @@
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
+#define _USE_MATH_DEFINES 
+#include <cmath>
+
 #include "AirflowNetwork/Elements.hpp"
 #include "AirflowNetwork/Properties.hpp"
 
@@ -158,7 +161,7 @@ namespace AirflowNetwork {
         AA1 = g;
 
         if (LFLAG) {
-            // Initialization by linear relation.
+            // Initialization by laminar relation.
             if (PDROP >= 0.0) {
                 DF[0] = (2.0 * propN.density * A * hydraulicDiameter) / (propN.viscosity * InitLamCoef * ld);
             } else {
@@ -441,7 +444,7 @@ namespace AirflowNetwork {
 
         Real64 coef = coefficient * control * multiplier / upwind_sqrt_density;
 
-        // Laminar calculation
+        // Linear calculation
         Real64 RhoCor{TOKELVIN(upwind_temperature) / TOKELVIN(Tave)};
         Real64 Ctl{std::pow(reference_density / upwind_density / RhoCor, exponent - 1.0) *
                    std::pow(reference_viscosity / VisAve, 2.0 * exponent - 1.0)};
@@ -521,7 +524,7 @@ namespace AirflowNetwork {
 
         Real64 coef = coefficient * control * multiplier / upwind_sqrt_density;
 
-        // Laminar calculation
+        // Linear calculation
         Real64 RhoCor{TOKELVIN(upwind_temperature) / TOKELVIN(Tave)};
         Real64 Ctl{std::pow(reference_density / upwind_density / RhoCor, exponent - 1.0) *
                    std::pow(reference_viscosity / VisAve, 2.0 * exponent - 1.0)};
@@ -726,7 +729,7 @@ namespace AirflowNetwork {
     }
 
     int ConstantVolumeFan::calculate(EnergyPlusData &state,
-                                     bool const LFLAG,                         // Initialization flag.If = 1, use laminar relationship
+                                     bool const LFLAG,                         // Initialization flag. If true, use linear relationship
                                      Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                                      int const i,                              // Linkage number
                                      [[maybe_unused]] const Real64 multiplier, // Element multiplier
@@ -847,7 +850,7 @@ namespace AirflowNetwork {
     }
 
     int DetailedFan::calculate(EnergyPlusData &state,
-                               bool const LFLAG,                         // Initialization flag.If = 1, use laminar relationship
+                               bool const LFLAG,                         // Initialization flag. If true, use linear relationship
                                Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                                int const i,                              // Linkage number
                                [[maybe_unused]] const Real64 multiplier, // Element multiplier
@@ -1107,7 +1110,7 @@ namespace AirflowNetwork {
     }
 
     int Damper::calculate([[maybe_unused]] EnergyPlusData &state,
-                          bool const LFLAG,                         // Initialization flag.If = 1, use laminar relationship
+                          bool const LFLAG,                         // Initialization flag. If true, use linear relationship
                           Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                           int const i,                              // Linkage number
                           [[maybe_unused]] const Real64 multiplier, // Element multiplier
@@ -1231,7 +1234,7 @@ namespace AirflowNetwork {
     }
 
     int EffectiveLeakageRatio::calculate([[maybe_unused]] EnergyPlusData &state,
-                                         bool const LFLAG,                         // Initialization flag.If = 1, use laminar relationship
+                                         bool const LFLAG,                         // Initialization flag. If true, use linear relationship
                                          Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                                          [[maybe_unused]] int const i,             // Linkage number
                                          [[maybe_unused]] const Real64 multiplier, // Element multiplier
@@ -1284,7 +1287,7 @@ namespace AirflowNetwork {
             // Standard calculation.
             if (PDROP >= 0.0) {
                 // Flow in positive direction.
-                // Laminar flow.
+                // Linear flow.
                 CDM = FlowCoef * propN.density / propN.viscosity;
                 FL = CDM * PDROP;
                 // Turbulent flow.
@@ -1295,7 +1298,7 @@ namespace AirflowNetwork {
                 }
             } else {
                 // Flow in negative direction.
-                // Laminar flow.
+                // Linear flow.
                 CDM = FlowCoef * propM.density / propM.viscosity;
                 FL = CDM * PDROP;
                 // Turbulent flow.
@@ -1305,7 +1308,7 @@ namespace AirflowNetwork {
                     FT = -FlowCoef * propM.sqrt_density * std::pow(-PDROP, FlowExpo);
                 }
             }
-            // Select laminar or turbulent flow.
+            // Select linear or turbulent flow.
             // if (LIST >= 4) gio::write(Unit21, Format_901) << " plr: " << i << PDROP << FL << FT;
             if (std::abs(FL) <= std::abs(FT)) {
                 F[0] = FL;
@@ -1360,7 +1363,7 @@ namespace AirflowNetwork {
         // Standard calculation.
         if (PDROP >= 0.0) {
             // Flow in positive direction.
-            // Laminar flow.
+            // Linear flow.
             CDM = FlowCoef * propN.density / propN.viscosity;
             FL = CDM * PDROP;
             // Turbulent flow.
@@ -1371,7 +1374,7 @@ namespace AirflowNetwork {
             }
         } else {
             // Flow in negative direction.
-            // Laminar flow.
+            // Linear flow.
             CDM = FlowCoef * propM.density / propM.viscosity;
             FL = CDM * PDROP;
             // Turbulent flow.
@@ -1381,7 +1384,7 @@ namespace AirflowNetwork {
                 FT = -FlowCoef * propM.sqrt_density * std::pow(-PDROP, FlowExpo);
             }
         }
-        // Select laminar or turbulent flow.
+        // Select linear or turbulent flow.
         // if (LIST >= 4) gio::write(Unit21, Format_901) << " plr: " << i << PDROP << FL << FT;
         if (std::abs(FL) <= std::abs(FT)) {
             F[0] = FL;
@@ -1394,7 +1397,7 @@ namespace AirflowNetwork {
     }
 
     int DetailedOpening::calculate(EnergyPlusData &state,
-                                   [[maybe_unused]] bool const LFLAG,           // Initialization flag.If = 1, use laminar relationship
+                                   [[maybe_unused]] bool const LFLAG,           // Initialization flag. If true, use laminar relationship
                                    Real64 const PDROP,                          // Total pressure drop across a component (P1 - P2) [Pa]
                                    int const IL,                                // Linkage number
                                    [[maybe_unused]] const Real64 multiplier,    // Element multiplier
@@ -1862,7 +1865,7 @@ namespace AirflowNetwork {
     }
 
     int SimpleOpening::calculate(EnergyPlusData &state,
-                                 bool const LFLAG,                         // Initialization flag.If = 1, use laminar relationship
+                                 bool const LFLAG,                         // Initialization flag. If true, use laminar relationship
                                  Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                                  int const i,                              // Linkage number
                                  [[maybe_unused]] const Real64 multiplier, // Element multiplier
@@ -1893,7 +1896,7 @@ namespace AirflowNetwork {
         // na
 
         // SUBROUTINE PARAMETER DEFINITIONS:
-        Real64 constexpr SQRT2(1.414213562373095);
+        //Real64 constexpr SQRT2(1.414213562373095);
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         Real64 DPMID; // pressure drop at mid-height of doorway.
@@ -1910,7 +1913,7 @@ namespace AirflowNetwork {
         Real64 Height;
         Real64 OpenFactor;
 
-        int NF(1);
+        int NF{1};
 
         // Formats
         // static gio::Fmt Format_900("(A5,9X,4E16.7)");
@@ -1918,7 +1921,7 @@ namespace AirflowNetwork {
 
         Width = state.dataAirflowNetwork->MultizoneSurfaceData(i).Width;
         Height = state.dataAirflowNetwork->MultizoneSurfaceData(i).Height;
-        coeff = FlowCoef * 2.0 * (Width + Height);
+        coeff = coefficient * 2.0 * (Width + Height);
         OpenFactor = state.dataAirflowNetwork->MultizoneSurfaceData(i).OpenFactor;
         if (OpenFactor > 0.0) {
             Width *= OpenFactor;
@@ -1941,25 +1944,30 @@ namespace AirflowNetwork {
                 Width *= state.dataAirflowNetwork->MultizoneSurfaceData(i).Multiplier;
         }
 
+        Real64 computed_min_density_diff = minimum_density_delta;
+        if (compute_minimum_density_delta) {
+            computed_min_density_diff = 0.0001 * PDROP;
+        }
+
         DRHO = propN.density - propM.density;
         GDRHO = 9.8 * DRHO;
         // if (LIST >= 4) gio::write(Unit21, Format_903) << " DOR:" << i << n << m << PDROP << std::abs(DRHO) << MinRhoDiff;
         if (OpenFactor == 0.0) {
-            generic_crack(coeff, FlowExpo, LFLAG, PDROP, propN, propM, F, DF);
+            generic_crack(coeff, exponent, LFLAG, PDROP, propN, propM, F, DF);
             return 1;
         }
-        if (std::abs(DRHO) < MinRhoDiff || LFLAG) {
+        if (std::abs(DRHO) < computed_min_density_diff || LFLAG) {
             DPMID = PDROP - 0.5 * Height * GDRHO;
             // Initialization or identical temps: treat as one-way flow.
             NF = 1;
-            generic_crack(coeff, FlowExpo, LFLAG, DPMID, propN, propM, F, DF);
+            generic_crack(coeff, exponent, LFLAG, DPMID, propN, propM, F, DF);
             // if (LIST >= 4) gio::write(Unit21, Format_900) << " Drs:" << DPMID << F[0] << DF[0];
         } else {
             // Possible two-way flow:
             Y = PDROP / GDRHO;
             // if (LIST >= 4) gio::write(Unit21, Format_900) << " DrY:" << PDROP << GDRHO << Y;
             // F0 = lower flow, FH = upper flow.
-            C = SQRT2 * Width * DischCoeff;
+            C = M_SQRT2 * Width * DischCoeff;
             DF0 = C * std::sqrt(std::abs(PDROP)) / std::abs(GDRHO);
             //        F0 = 0.666667d0*C*SQRT(ABS(GDRHO*Y))*ABS(Y)
             F0 = (2.0 / 3.0) * C * std::sqrt(std::abs(GDRHO * Y)) * std::abs(Y);
@@ -2009,7 +2017,7 @@ namespace AirflowNetwork {
     }
 
     int ConstantPressureDrop::calculate([[maybe_unused]] EnergyPlusData &state,
-                                        [[maybe_unused]] bool const LFLAG,           // Initialization flag.If = 1, use laminar relationship
+                                        [[maybe_unused]] bool const LFLAG,           // Initialization flag. If true, use linear relationship
                                         const Real64 PDROP,                          // Total pressure drop across a component (P1 - P2) [Pa]
                                         int const i,                                 // Linkage number
                                         [[maybe_unused]] const Real64 multiplier,    // Element multiplier
@@ -2068,7 +2076,7 @@ namespace AirflowNetwork {
     }
 
     int EffectiveLeakageArea::calculate([[maybe_unused]] EnergyPlusData &state,
-                                        bool const LFLAG,                         // Initialization flag.If = 1, use laminar relationship
+                                        bool const LFLAG,                         // Initialization flag. If true, use linear relationship
                                         Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                                         [[maybe_unused]] int const i,             // Linkage number
                                         [[maybe_unused]] const Real64 multiplier, // Element multiplier
@@ -2124,7 +2132,7 @@ namespace AirflowNetwork {
             // Standard calculation.
             if (PDROP >= 0.0) {
                 // Flow in positive direction.
-                // Laminar flow.
+                // Linear flow.
                 CDM = FlowCoef * propN.density / propN.viscosity;
                 FL = CDM * PDROP;
                 // Turbulent flow.
@@ -2135,7 +2143,7 @@ namespace AirflowNetwork {
                 }
             } else {
                 // Flow in negative direction.
-                // Laminar flow.
+                // Linear flow.
                 CDM = FlowCoef * propM.density / propM.viscosity;
                 FL = CDM * PDROP;
                 // Turbulent flow.
@@ -2145,7 +2153,7 @@ namespace AirflowNetwork {
                     FT = -FlowCoef * propM.sqrt_density * std::pow(-PDROP, FlowExpo);
                 }
             }
-            // Select laminar or turbulent flow.
+            // Select linear or turbulent flow.
             // if (LIST >= 4) gio::write(Unit21, Format_901) << " plr: " << i << PDROP << FL << FT;
             if (std::abs(FL) <= std::abs(FT)) {
                 F[0] = FL;
@@ -2203,7 +2211,7 @@ namespace AirflowNetwork {
         // Standard calculation.
         if (PDROP >= 0.0) {
             // Flow in positive direction.
-            // Laminar flow.
+            // Linear flow.
             CDM = FlowCoef * propN.density / propN.viscosity;
             FL = CDM * PDROP;
             // Turbulent flow.
@@ -2214,7 +2222,7 @@ namespace AirflowNetwork {
             }
         } else {
             // Flow in negative direction.
-            // Laminar flow.
+            // Linear flow.
             CDM = FlowCoef * propM.density / propM.viscosity;
             FL = CDM * PDROP;
             // Turbulent flow.
@@ -2224,7 +2232,7 @@ namespace AirflowNetwork {
                 FT = -FlowCoef * propM.sqrt_density * std::pow(-PDROP, FlowExpo);
             }
         }
-        // Select laminar or turbulent flow.
+        // Select linear or turbulent flow.
         // if (LIST >= 4) gio::write(Unit21, Format_901) << " plr: " << i << PDROP << FL << FT;
         if (std::abs(FL) <= std::abs(FT)) {
             F[0] = FL;
@@ -2386,7 +2394,7 @@ namespace AirflowNetwork {
                     FT = FL;
                 }
             }
-            // Select laminar or turbulent flow.
+            // Select linear or turbulent flow.
             if (std::abs(FL) <= std::abs(FT)) {
                 F[0] = FL;
                 DF[0] = CDM;
@@ -2533,7 +2541,7 @@ namespace AirflowNetwork {
                 FT = FL;
             }
         }
-        // Select laminar or turbulent flow.
+        // Select linear or turbulent flow.
         if (std::abs(FL) <= std::abs(FT)) {
             F[0] = FL;
             DF[0] = CDM;
@@ -2685,7 +2693,7 @@ namespace AirflowNetwork {
                     FT = FL;
                 }
             }
-            // Select laminar or turbulent flow.
+            // Select linear or turbulent flow.
             if (std::abs(FL) <= std::abs(FT)) {
                 F[0] = FL;
                 DF[0] = CDM;
@@ -2842,7 +2850,7 @@ namespace AirflowNetwork {
                     FT = FL;
                 }
             }
-            // Select laminar or turbulent flow.
+            // Select linear or turbulent flow.
             if (std::abs(FL) <= std::abs(FT)) {
                 F[0] = FL;
                 DF[0] = CDM;
@@ -2978,7 +2986,7 @@ namespace AirflowNetwork {
                 FT = FL;
             }
         }
-        // Select laminar or turbulent flow.
+        // Select linear or turbulent flow.
         if (std::abs(FL) <= std::abs(FT)) {
             F[0] = FL;
             DF[0] = CDM;
@@ -2990,7 +2998,7 @@ namespace AirflowNetwork {
     }
 
     int ZoneExhaustFan::calculate(EnergyPlusData &state,
-                                  bool const LFLAG,                         // Initialization flag.If = 1, use laminar relationship
+                                  bool const LFLAG,                         // Initialization flag. If true, use linear relationship
                                   Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                                   int const i,                              // Linkage number
                                   [[maybe_unused]] const Real64 multiplier, // Element multiplier
@@ -3079,7 +3087,7 @@ namespace AirflowNetwork {
                 // Standard calculation.
                 if (PDROP >= 0.0) {
                     // Flow in positive direction.
-                    // Laminar flow.
+                    // Linear flow.
                     RhoCor = TOKELVIN(propN.temperature) / TOKELVIN(Tave);
                     Ctl = std::pow(RhozNorm / propN.density / RhoCor, expn - 1.0) * std::pow(VisczNorm / VisAve, 2.0 * expn - 1.0);
                     CDM = coef * propN.density / propN.viscosity * Ctl;
@@ -3092,7 +3100,7 @@ namespace AirflowNetwork {
                     }
                 } else {
                     // Flow in negative direction.
-                    // Laminar flow.
+                    // Linear flow.
                     RhoCor = TOKELVIN(propM.temperature) / TOKELVIN(Tave);
                     Ctl = std::pow(RhozNorm / propM.density / RhoCor, expn - 1.0) * std::pow(VisczNorm / VisAve, 2.0 * expn - 1.0);
                     CDM = coef * propM.density / propM.viscosity * Ctl;
@@ -3104,7 +3112,7 @@ namespace AirflowNetwork {
                         FT = -coef * propM.sqrt_density * std::pow(-PDROP, expn) * Ctl;
                     }
                 }
-                // Select laminar or turbulent flow.
+                // Select linear or turbulent flow.
                 // if (LIST >= 4) gio::write(Unit21, Format_901) << " scr: " << i << PDROP << FL << FT;
                 if (std::abs(FL) <= std::abs(FT)) {
                     F[0] = FL;
@@ -3191,7 +3199,7 @@ namespace AirflowNetwork {
             // Standard calculation.
             if (PDROP >= 0.0) {
                 // Flow in positive direction.
-                // Laminar flow.
+                // Linear flow.
                 RhoCor = TOKELVIN(propN.temperature) / TOKELVIN(Tave);
                 Ctl = std::pow(RhozNorm / propN.density / RhoCor, expn - 1.0) * std::pow(VisczNorm / VisAve, 2.0 * expn - 1.0);
                 CDM = coef * propN.density / propN.viscosity * Ctl;
@@ -3204,7 +3212,7 @@ namespace AirflowNetwork {
                 }
             } else {
                 // Flow in negative direction.
-                // Laminar flow.
+                // Linear flow.
                 RhoCor = TOKELVIN(propM.temperature) / TOKELVIN(Tave);
                 Ctl = std::pow(RhozNorm / propM.density / RhoCor, expn - 1.0) * std::pow(VisczNorm / VisAve, 2.0 * expn - 1.0);
                 CDM = coef * propM.density / propM.viscosity * Ctl;
@@ -3216,7 +3224,7 @@ namespace AirflowNetwork {
                     FT = -coef * propM.sqrt_density * std::pow(-PDROP, expn) * Ctl;
                 }
             }
-            // Select laminar or turbulent flow.
+            // Select linear or turbulent flow.
             // if (LIST >= 4) gio::write(Unit21, Format_901) << " scr: " << i << PDROP << FL << FT;
             if (std::abs(FL) <= std::abs(FT)) {
                 F[0] = FL;
@@ -3230,7 +3238,7 @@ namespace AirflowNetwork {
     }
 
     int HorizontalOpening::calculate(EnergyPlusData &state,
-                                     bool const LFLAG,                         // Initialization flag.If = 1, use laminar relationship
+                                     bool const LFLAG,                         // Initialization flag. If true, use laminar relationship
                                      Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                                      int const i,                              // Linkage number
                                      [[maybe_unused]] const Real64 multiplier, // Element multiplier
@@ -3364,7 +3372,7 @@ namespace AirflowNetwork {
     }
 
     int SpecifiedMassFlow::calculate([[maybe_unused]] EnergyPlusData &state,
-                                     [[maybe_unused]] bool const LFLAG,           // Initialization flag.If = 1, use laminar relationship
+                                     [[maybe_unused]] bool const LFLAG,           // Initialization flag. If true, use linear relationship
                                      [[maybe_unused]] Real64 const PDROP,         // Total pressure drop across a component (P1 - P2) [Pa]
                                      [[maybe_unused]] int const i,                // Linkage number
                                      const Real64 multiplier,                     // Element multiplier
@@ -3434,7 +3442,7 @@ namespace AirflowNetwork {
     }
 
     int SpecifiedVolumeFlow::calculate([[maybe_unused]] EnergyPlusData &state,
-                                       [[maybe_unused]] bool const LFLAG,   // Initialization flag.If = 1, use laminar relationship
+                                       [[maybe_unused]] bool const LFLAG,   // Initialization flag. If true, use linear relationship
                                        [[maybe_unused]] Real64 const PDROP, // Total pressure drop across a component (P1 - P2) [Pa]
                                        [[maybe_unused]] int const i,        // Linkage number
                                        const Real64 multiplier,             // Element multiplier
@@ -3520,7 +3528,7 @@ namespace AirflowNetwork {
     }
 
     int OutdoorAirFan::calculate(EnergyPlusData &state,
-                                 bool const LFLAG,                         // Initialization flag.If = 1, use laminar relationship
+                                 bool const LFLAG,                         // Initialization flag. If true, use linear relationship
                                  Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                                  int const i,                              // Linkage number
                                  [[maybe_unused]] const Real64 multiplier, // Element multiplier
@@ -3600,7 +3608,7 @@ namespace AirflowNetwork {
                 // Standard calculation.
                 if (PDROP >= 0.0) {
                     // Flow in positive direction.
-                    // Laminar flow.
+                    // linear flow.
                     RhoCor = TOKELVIN(propN.temperature) / TOKELVIN(Tave);
                     Ctl = std::pow(RhozNorm / propN.density / RhoCor, expn - 1.0) * std::pow(VisczNorm / VisAve, 2.0 * expn - 1.0);
                     CDM = coef * propN.density / propN.viscosity * Ctl;
@@ -3613,7 +3621,7 @@ namespace AirflowNetwork {
                     }
                 } else {
                     // Flow in negative direction.
-                    // Laminar flow.
+                    // linear flow.
                     RhoCor = TOKELVIN(propM.temperature) / TOKELVIN(Tave);
                     Ctl = std::pow(RhozNorm / propM.density / RhoCor, expn - 1.0) * std::pow(VisczNorm / VisAve, 2.0 * expn - 1.0);
                     CDM = coef * propM.density / propM.viscosity * Ctl;
@@ -3625,7 +3633,7 @@ namespace AirflowNetwork {
                         FT = -coef * propM.sqrt_density * std::pow(-PDROP, expn) * Ctl;
                     }
                 }
-                // Select laminar or turbulent flow.
+                // Select linear or turbulent flow.
                 if (std::abs(FL) <= std::abs(FT)) {
                     F[0] = FL;
                     DF[0] = CDM;
@@ -3639,7 +3647,7 @@ namespace AirflowNetwork {
     }
 
     int ReliefFlow::calculate(EnergyPlusData &state,
-                              bool const LFLAG,                         // Initialization flag.If = 1, use laminar relationship
+                              bool const LFLAG,                         // Initialization flag. If true, use linear relationship
                               Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                               int const i,                              // Linkage number
                               [[maybe_unused]] const Real64 multiplier, // Element multiplier
@@ -3721,7 +3729,7 @@ namespace AirflowNetwork {
                 // Standard calculation.
                 if (PDROP >= 0.0) {
                     // Flow in positive direction.
-                    // Laminar flow.
+                    // linear flow.
                     RhoCor = TOKELVIN(propN.temperature) / TOKELVIN(Tave);
                     Ctl = std::pow(RhozNorm / propN.density / RhoCor, expn - 1.0) * std::pow(VisczNorm / VisAve, 2.0 * expn - 1.0);
                     CDM = coef * propN.density / propN.viscosity * Ctl;
@@ -3734,7 +3742,7 @@ namespace AirflowNetwork {
                     }
                 } else {
                     // Flow in negative direction.
-                    // Laminar flow.
+                    // linear flow.
                     RhoCor = TOKELVIN(propM.temperature) / TOKELVIN(Tave);
                     Ctl = std::pow(RhozNorm / propM.density / RhoCor, expn - 1.0) * std::pow(VisczNorm / VisAve, 2.0 * expn - 1.0);
                     CDM = coef * propM.density / propM.viscosity * Ctl;
@@ -3746,7 +3754,7 @@ namespace AirflowNetwork {
                         FT = -coef * propM.sqrt_density * std::pow(-PDROP, expn) * Ctl;
                     }
                 }
-                // Select laminar or turbulent flow.
+                // Select linear or turbulent flow.
                 if (std::abs(FL) <= std::abs(FT)) {
                     F[0] = FL;
                     DF[0] = CDM;
