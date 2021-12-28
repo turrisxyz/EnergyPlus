@@ -56,6 +56,7 @@
 #include <EnergyPlus/AirflowNetworkBalanceManager.hh>
 #include <EnergyPlus/Data/EnergyPlusData.hh>
 #include <EnergyPlus/UtilityRoutines.hh>
+#include <EnergyPlus/DataSurfaces.hh>
 
 #include "Fixtures/EnergyPlusFixture.hh"
 
@@ -352,3 +353,50 @@ TEST_F(EnergyPlusFixture, AirflowNetwork_SolverTest_SpecifiedVolumeFlow)
     EXPECT_EQ(0.0, DF[1]);
     EXPECT_EQ(1, NF);
 }
+
+
+TEST_F(EnergyPlusFixture, AirflowNetwork_SolverTest_SimpleOpening)
+{
+    state->dataSurface->Surface.allocate(1);
+    state->dataSurface->Surface(1).Tilt = 90.0;
+
+    state->dataAirflowNetwork->MultizoneSurfaceData.allocate(1);
+    state->dataAirflowNetwork->MultizoneSurfaceData(1).Width = 1.0;
+    state->dataAirflowNetwork->MultizoneSurfaceData(1).Height = 1.0;
+    state->dataAirflowNetwork->MultizoneSurfaceData(1).SurfNum = 1;
+
+    int NF;
+    std::array<Real64, 2> F = {0.0, 0.0};
+    std::array<Real64, 2> DF = {0.0, 0.0};
+
+    AirflowNetwork::SimpleOpening element;
+    element.coefficient = 0.001;
+    element.exponent = 0.667;
+    element.minimum_density_delta = 0.0001;
+    element.discharge_coefficient = 0.55;
+    element.compute_minimum_density_delta = false;
+
+    AirflowNetwork::AirProperties state0, state1;
+
+    Real64 dp{1.0};
+
+    // Linear
+    NF = element.calculate(*state, true, dp, 1, 1.0, 1.0, state0, state1, F, DF);
+    EXPECT_EQ(220.88708252341411, F[0]);
+    EXPECT_EQ(0.0, F[1]);
+    EXPECT_EQ(220.88708252341411, DF[0]);
+    EXPECT_EQ(0.0, DF[1]);
+    EXPECT_EQ(1, NF);
+
+    // Nonlinear
+    NF = element.calculate(*state, false, dp, 1, 1.0, 1.0, state0, state1, F, DF);
+    EXPECT_EQ(0.0036449457929647769, F[0]);
+    EXPECT_EQ(0.0, F[1]);
+    EXPECT_EQ(0.0024311788439075064, DF[0]);
+    EXPECT_EQ(0.0, DF[1]);
+    EXPECT_EQ(1, NF);
+
+    state->dataSurface->Surface.deallocate();
+    state->dataAirflowNetwork->MultizoneSurfaceData.deallocate();
+}
+

@@ -1024,7 +1024,8 @@ namespace AirflowNetworkBalanceManager {
                 state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(i).exponent = expnt;  // Air Mass Flow exponent When Window or Door Is Closed
                 // Minimum density difference for two-way flow
                 state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(i).minimum_density_delta = diff;
-                state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(i).DischCoeff = dischargeCoeff; // Discharge coefficient at full opening
+                // Discharge coefficient at full opening
+                state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(i).discharge_coefficient = dischargeCoeff;
                 state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(i).compute_minimum_density_delta = compute_minimum_density_delta;
 
                 // Add the element to the lookup table, check for name overlaps
@@ -12822,7 +12823,8 @@ namespace AirflowNetworkBalanceManager {
                                                                ->MultizoneExternalNodeData(AFNExtSurfaces(ExtOpenNum).ExtNodeNum -
                                                                                            state.dataAirflowNetwork->AirflowNetworkNumOfZones)
                                                                .curve;
-                        AFNExtSurfaces(ExtOpenNum).DischCoeff = state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(SimOpenNum).DischCoeff;
+                        AFNExtSurfaces(ExtOpenNum).DischCoeff =
+                            state.dataAirflowNetwork->MultizoneCompSimpleOpeningData(SimOpenNum).discharge_coefficient;
                         ++ExtOpenNum;
                     }
                 }

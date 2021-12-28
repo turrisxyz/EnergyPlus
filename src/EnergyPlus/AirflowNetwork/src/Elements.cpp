@@ -1967,7 +1967,7 @@ namespace AirflowNetwork {
             Y = PDROP / GDRHO;
             // if (LIST >= 4) gio::write(Unit21, Format_900) << " DrY:" << PDROP << GDRHO << Y;
             // F0 = lower flow, FH = upper flow.
-            C = M_SQRT2 * Width * DischCoeff;
+            C = M_SQRT2 * Width * discharge_coefficient;
             DF0 = C * std::sqrt(std::abs(PDROP)) / std::abs(GDRHO);
             //        F0 = 0.666667d0*C*SQRT(ABS(GDRHO*Y))*ABS(Y)
             F0 = (2.0 / 3.0) * C * std::sqrt(std::abs(GDRHO * Y)) * std::abs(Y);
