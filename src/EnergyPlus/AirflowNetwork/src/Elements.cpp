@@ -646,8 +646,7 @@ namespace AirflowNetwork {
         return 1;
     }
 
-    int DuctLeak::calculate(EnergyPlusData &state,
-                            Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
+    int DuctLeak::calculate(Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                             [[maybe_unused]] const Real64 multiplier, // Element multiplier
                             [[maybe_unused]] const Real64 control,    // Element control signal
                             const AirProperties &propN,               // Node 1 properties
@@ -683,7 +682,7 @@ namespace AirflowNetwork {
         // static gio::Fmt Format_901("(A5,I3,6X,4E16.7)");
 
         // Crack standard condition: T=20C, p=101325 Pa and 0 g/kg
-        Real64 RhozNorm = AIRDENSITY(state, 101325.0, 20.0, 0.0);
+        Real64 RhozNorm = AIRDENSITY_CONSTEXPR(101325.0, 20.0, 0.0);
         Real64 VisczNorm = 1.71432e-5 + 4.828e-8 * 20.0;
         Real64 coef = FlowCoef;
 
@@ -1894,9 +1893,6 @@ namespace AirflowNetwork {
 
         // REFERENCES:
         // na
-
-        // SUBROUTINE PARAMETER DEFINITIONS:
-        //Real64 constexpr SQRT2(1.414213562373095);
 
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         Real64 DPMID; // pressure drop at mid-height of doorway.
@@ -3411,7 +3407,6 @@ namespace AirflowNetwork {
     }
 
     int SpecifiedMassFlow::calculate([[maybe_unused]] Real64 const PDROP,         // Total pressure drop across a component (P1 - P2) [Pa]
-                                     [[maybe_unused]] int const i,                // Linkage number
                                      const Real64 multiplier,                     // Element multiplier
                                      const Real64 control,                        // Element control signal
                                      [[maybe_unused]] const AirProperties &propN, // Node 1 properties
@@ -3489,7 +3484,6 @@ namespace AirflowNetwork {
     }
 
     int SpecifiedVolumeFlow::calculate([[maybe_unused]] Real64 const PDROP, // Total pressure drop across a component (P1 - P2) [Pa]
-                                       [[maybe_unused]] int const i,        // Linkage number
                                        const Real64 multiplier,             // Element multiplier
                                        const Real64 control,                // Element control signal
                                        const AirProperties &propN,          // Node 1 properties
