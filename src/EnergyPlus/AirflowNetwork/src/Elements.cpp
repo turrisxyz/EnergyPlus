@@ -45,8 +45,8 @@
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#define _USE_MATH_DEFINES 
-#include <cmath>
+//#define _USE_MATH_DEFINES 
+//#include <cmath>
 
 #include "AirflowNetwork/Elements.hpp"
 #include "AirflowNetwork/Properties.hpp"
@@ -646,8 +646,7 @@ namespace AirflowNetwork {
         return 1;
     }
 
-    int DuctLeak::calculate(EnergyPlusData &state,
-                            Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
+    int DuctLeak::calculate(Real64 const PDROP,                       // Total pressure drop across a component (P1 - P2) [Pa]
                             [[maybe_unused]] const Real64 multiplier, // Element multiplier
                             [[maybe_unused]] const Real64 control,    // Element control signal
                             const AirProperties &propN,               // Node 1 properties
@@ -683,7 +682,7 @@ namespace AirflowNetwork {
         // static gio::Fmt Format_901("(A5,I3,6X,4E16.7)");
 
         // Crack standard condition: T=20C, p=101325 Pa and 0 g/kg
-        Real64 RhozNorm = AIRDENSITY(state, 101325.0, 20.0, 0.0);
+        Real64 RhozNorm = AIRDENSITY_CONSTEXPR(101325.0, 20.0, 0.0);
         Real64 VisczNorm = 1.71432e-5 + 4.828e-8 * 20.0;
         Real64 coef = FlowCoef;
 
@@ -1895,9 +1894,6 @@ namespace AirflowNetwork {
         // REFERENCES:
         // na
 
-        // SUBROUTINE PARAMETER DEFINITIONS:
-        //Real64 constexpr SQRT2(1.414213562373095);
-
         // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
         Real64 DPMID; // pressure drop at mid-height of doorway.
         Real64 C;
@@ -1912,6 +1908,9 @@ namespace AirflowNetwork {
         Real64 Width;
         Real64 Height;
         Real64 OpenFactor;
+
+        // Get rid of this later
+        constexpr Real64 SQRT2{1.414213562373095};
 
         int NF{1};
 
@@ -1967,7 +1966,7 @@ namespace AirflowNetwork {
             Y = PDROP / GDRHO;
             // if (LIST >= 4) gio::write(Unit21, Format_900) << " DrY:" << PDROP << GDRHO << Y;
             // F0 = lower flow, FH = upper flow.
-            C = M_SQRT2 * Width * discharge_coefficient;
+            C = SQRT2 * Width * discharge_coefficient;
             DF0 = C * std::sqrt(std::abs(PDROP)) / std::abs(GDRHO);
             //        F0 = 0.666667d0*C*SQRT(ABS(GDRHO*Y))*ABS(Y)
             F0 = (2.0 / 3.0) * C * std::sqrt(std::abs(GDRHO * Y)) * std::abs(Y);
@@ -3408,7 +3407,6 @@ namespace AirflowNetwork {
     }
 
     int SpecifiedMassFlow::calculate([[maybe_unused]] Real64 const PDROP,         // Total pressure drop across a component (P1 - P2) [Pa]
-                                     [[maybe_unused]] int const i,                // Linkage number
                                      const Real64 multiplier,                     // Element multiplier
                                      const Real64 control,                        // Element control signal
                                      [[maybe_unused]] const AirProperties &propN, // Node 1 properties
@@ -3486,7 +3484,6 @@ namespace AirflowNetwork {
     }
 
     int SpecifiedVolumeFlow::calculate([[maybe_unused]] Real64 const PDROP, // Total pressure drop across a component (P1 - P2) [Pa]
-                                       [[maybe_unused]] int const i,        // Linkage number
                                        const Real64 multiplier,             // Element multiplier
                                        const Real64 control,                // Element control signal
                                        const AirProperties &propN,          // Node 1 properties
