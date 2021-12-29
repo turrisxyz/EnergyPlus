@@ -45,8 +45,8 @@
 // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#define _USE_MATH_DEFINES 
-#include <cmath>
+//#define _USE_MATH_DEFINES 
+//#include <cmath>
 
 #include "AirflowNetwork/Elements.hpp"
 #include "AirflowNetwork/Properties.hpp"
@@ -1913,6 +1913,9 @@ namespace AirflowNetwork {
         Real64 Height;
         Real64 OpenFactor;
 
+        // Get rid of this later
+        constexpr Real64 SQRT2{1.414213562373095};
+
         int NF{1};
 
         // Formats
@@ -1967,7 +1970,7 @@ namespace AirflowNetwork {
             Y = PDROP / GDRHO;
             // if (LIST >= 4) gio::write(Unit21, Format_900) << " DrY:" << PDROP << GDRHO << Y;
             // F0 = lower flow, FH = upper flow.
-            C = M_SQRT2 * Width * DischCoeff;
+            C = SQRT2 * Width * DischCoeff;
             DF0 = C * std::sqrt(std::abs(PDROP)) / std::abs(GDRHO);
             //        F0 = 0.666667d0*C*SQRT(ABS(GDRHO*Y))*ABS(Y)
             F0 = (2.0 / 3.0) * C * std::sqrt(std::abs(GDRHO * Y)) * std::abs(Y);
