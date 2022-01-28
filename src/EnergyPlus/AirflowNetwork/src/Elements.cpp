@@ -607,7 +607,7 @@ namespace AirflowNetwork {
                 Ctl = std::pow(RhozNorm / propM.density, FlowExpo - 1.0) * std::pow(VisczNorm / propM.viscosity, 2.0 * FlowExpo - 1.0);
                 DF[0] = coef * propM.density / propM.viscosity * Ctl;
             }
-            F[0] = -DF[0] * PDROP;
+            F[0] = DF[0] * PDROP;
         } else {
             // Standard calculation.
             if (PDROP >= 0.0) {

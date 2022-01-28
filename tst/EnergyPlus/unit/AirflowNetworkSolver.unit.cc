@@ -352,3 +352,80 @@ TEST_F(EnergyPlusFixture, AirflowNetwork_SolverTest_SpecifiedVolumeFlow)
     EXPECT_EQ(0.0, DF[1]);
     EXPECT_EQ(1, NF);
 }
+
+TEST_F(EnergyPlusFixture, AirflowNetwork_SolverTest_DuctLeak)
+{
+
+    int NF;
+    std::array<Real64, 2> F = {0.0, 0.0};
+    std::array<Real64, 2> DF = {0.0, 0.0};
+
+    AirflowNetwork::DuctLeak leak;
+    leak.FlowCoef = 0.001;
+    leak.FlowExpo = 0.65;
+
+    AirflowNetwork::AirProperties state0, state1;
+    Real64 sqrt_density = state0.sqrt_density; // = state1.sqrtDensity
+    Real64 viscosity = state0.viscosity;       // = state1.viscosity
+
+    Real64 dp{10.0};
+
+    // Linear
+    // This should not change the answers, there's no temperature correction
+    state1.temperature -= 5.0; 
+    // This should not change the answers, upwind viscosity is used
+    state1.viscosity = 1.71432e-5 + 4.828e-8 * state1.temperature;
+    NF = leak.calculate(*state, true, dp, 0, 1.0, 1.0, state0, state1, F, DF);
+    EXPECT_EQ(0.01 * sqrt_density / viscosity, F[0]);
+    EXPECT_EQ(0.0, F[1]);
+    EXPECT_EQ(0.001 * sqrt_density / viscosity, DF[0]);
+    EXPECT_EQ(0.0, DF[1]);
+    EXPECT_EQ(1, NF);
+
+    // Reset the properties
+    state1.temperature = state0.temperature;
+    state1.viscosity = state0.viscosity;
+    // This should not change the answers, there's no temperature correction
+    state0.temperature -= 5.0;
+    // This should not change the answers, upwind viscosity is used
+    state0.viscosity = 1.71432e-5 + 4.828e-8 * state0.temperature;
+    NF = leak.calculate(*state, true, -dp, 0, 1.0, 1.0, state0, state1, F, DF);
+    EXPECT_EQ(-0.01 * sqrt_density / viscosity, F[0]);
+    EXPECT_EQ(0.0, F[1]);
+    EXPECT_EQ(0.001 * sqrt_density / viscosity, DF[0]);
+    EXPECT_EQ(0.0, DF[1]);
+    EXPECT_EQ(1, NF);
+    // Reset the properties
+    state0.temperature = state1.temperature;
+    state0.viscosity = state1.viscosity;
+
+    // Nonlinear
+    // This should not change the answers, there's no temperature correction
+    state1.temperature -= 5.0;
+    // This should not change the answers, upwind viscosity is used
+    state1.viscosity = 1.71432e-5 + 4.828e-8 * state1.temperature;
+    NF = leak.calculate(*state, false, dp, 0, 1.0, 1.0, state0, state1, F, DF);
+    EXPECT_EQ(0.001 * std::pow(10.0, 0.65), F[0]);
+    EXPECT_EQ(0.0, F[1]);
+    EXPECT_DOUBLE_EQ(0.000065 * std::pow(10.0, 0.65), DF[0]);
+    EXPECT_EQ(0.0, DF[1]);
+    EXPECT_EQ(1, NF);
+
+    // Reset the properties
+    state1.temperature = state0.temperature;
+    state1.viscosity = state0.viscosity;
+    // This should not change the answers, there's no temperature correction
+    state0.temperature -= 5.0;
+    // This should not change the answers, upwind viscosity is used
+    state0.viscosity = 1.71432e-5 + 4.828e-8 * state0.temperature;
+    NF = leak.calculate(*state, false, -dp, 0, 1.0, 1.0, state0, state1, F, DF);
+    EXPECT_EQ(-0.001 * std::pow(10.0, 0.65), F[0]);
+    EXPECT_EQ(0.0, F[1]);
+    EXPECT_DOUBLE_EQ(0.000065 * std::pow(10.0, 0.65), DF[0]);
+    EXPECT_EQ(0.0, DF[1]);
+    EXPECT_EQ(1, NF);
+    // Reset the properties
+    state0.temperature = state1.temperature;
+    state0.viscosity = state1.viscosity;
+}
+
