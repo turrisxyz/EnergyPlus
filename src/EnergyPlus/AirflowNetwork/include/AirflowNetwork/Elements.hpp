@@ -721,6 +721,19 @@ namespace AirflowNetwork {
         {
             return ComponentType::SCR;
         }
+
+        virtual Real64 correction(const Real64 upwind_temperature,
+                                  const Real64 upwind_density,
+                                  const Real64 upwind_viscosity,
+                                  const AirProperties &propN,
+                                  const AirProperties &propM)
+        {
+            Real64 VisAve{0.5 * (propN.viscosity + propM.viscosity)};
+            Real64 Tave{0.5 * (propN.temperature + propM.temperature)};
+            Real64 RhoCor{TOKELVIN(upwind_temperature) / TOKELVIN(Tave)};
+            return std::pow(reference_density / upwind_density / RhoCor, exponent - 1.0) *
+                   std::pow(reference_viscosity / VisAve, 2.0 * exponent - 1.0);
+        }
     };
 
     struct EffectiveLeakageArea : public AirflowElement // Surface effective leakage area component
@@ -923,6 +936,17 @@ namespace AirflowNetwork {
         {
             return ComponentType::PLR;
         }
+
+        virtual Real64 correction(const Real64 upwind_temperature,
+                                  const Real64 upwind_density,
+                                  const Real64 upwind_viscosity,
+                                  const AirProperties &propN,
+                                  const AirProperties &propM)
+        {
+            return std::pow(reference_density / upwind_density, exponent - 1.0) *
+                   std::pow(reference_viscosity / upwind_viscosity, 2.0 * exponent - 1.0);
+        }
+
     };
 
     struct EffectiveLeakageRatio : public AirflowElement // effective leakage ratio component

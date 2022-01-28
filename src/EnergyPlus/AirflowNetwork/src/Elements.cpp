@@ -417,12 +417,6 @@ namespace AirflowNetwork {
         // REFERENCES:
         // na
 
-        // Real64 rhoz_norm = AIRDENSITY(StandardP, StandardT, StandardW);
-        // Real64 viscz_norm = 1.71432e-5 + 4.828e-8 * StandardT;
-
-        Real64 VisAve{0.5 * (propN.viscosity + propM.viscosity)};
-        Real64 Tave{0.5 * (propN.temperature + propM.temperature)};
-
         Real64 sign{1.0};
         Real64 upwind_temperature{propN.temperature};
         Real64 upwind_density{propN.density};
@@ -442,9 +436,7 @@ namespace AirflowNetwork {
         Real64 coef = coefficient * control * multiplier / upwind_sqrt_density;
 
         // Laminar calculation
-        Real64 RhoCor{TOKELVIN(upwind_temperature) / TOKELVIN(Tave)};
-        Real64 Ctl{std::pow(reference_density / upwind_density / RhoCor, exponent - 1.0) *
-                   std::pow(reference_viscosity / VisAve, 2.0 * exponent - 1.0)};
+        Real64 Ctl = correction(upwind_temperature, upwind_density, upwind_viscosity, propN, propM);
         Real64 CDM{coef * upwind_density / upwind_viscosity * Ctl};
         Real64 FL{CDM * pdrop};
         Real64 abs_FT;
@@ -497,12 +489,6 @@ namespace AirflowNetwork {
         // REFERENCES:
         // na
 
-        // Real64 rhoz_norm = AIRDENSITY(StandardP, StandardT, StandardW);
-        // Real64 viscz_norm = 1.71432e-5 + 4.828e-8 * StandardT;
-
-        Real64 VisAve{0.5 * (propN.viscosity + propM.viscosity)};
-        Real64 Tave{0.5 * (propN.temperature + propM.temperature)};
-
         Real64 sign{1.0};
         Real64 upwind_temperature{propN.temperature};
         Real64 upwind_density{propN.density};
@@ -522,9 +508,7 @@ namespace AirflowNetwork {
         Real64 coef = coefficient * control * multiplier / upwind_sqrt_density;
 
         // Laminar calculation
-        Real64 RhoCor{TOKELVIN(upwind_temperature) / TOKELVIN(Tave)};
-        Real64 Ctl{std::pow(reference_density / upwind_density / RhoCor, exponent - 1.0) *
-                   std::pow(reference_viscosity / VisAve, 2.0 * exponent - 1.0)};
+        Real64 Ctl = correction(upwind_temperature, upwind_density, upwind_viscosity, propN, propM);
         Real64 CDM{coef * upwind_density / upwind_viscosity * Ctl};
         Real64 FL{CDM * pdrop};
         Real64 abs_FT;
@@ -546,6 +530,7 @@ namespace AirflowNetwork {
 
         return 1;
     }
+
 
     int ConstantVolumeFan::calculate(EnergyPlusData &state,
                                      bool const LFLAG,                         // Initialization flag. If true, use laminar relationship
