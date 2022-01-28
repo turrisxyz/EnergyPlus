@@ -1,4 +1,4 @@
-// EnergyPlus, Copyright (c) 1996-2021, The Board of Trustees of the University of Illinois,
+// EnergyPlus, Copyright (c) 1996-2022, The Board of Trustees of the University of Illinois,
 // The Regents of the University of California, through Lawrence Berkeley National Laboratory
 // (subject to receipt of any required approvals from the U.S. Dept. of Energy), Oak Ridge
 // National Laboratory, managed by UT-Battelle, Alliance for Sustainable Energy, LLC, and other
@@ -1156,15 +1156,17 @@ namespace WaterManager {
         state.dataWaterData->WaterStorage(TankNum).VdotToTank = TotVdotSupplyAvail;
         state.dataWaterData->WaterStorage(TankNum).VdotFromTank = TotVdotDemandAvail;
 
-        {
-            auto const SELECT_CASE_var(state.dataWaterData->WaterStorage(TankNum).ThermalMode);
-            if (SELECT_CASE_var == DataWater::TankThermalMode::Scheduled) {
-                state.dataWaterData->WaterStorage(TankNum).Twater =
-                    GetCurrentScheduleValue(state, state.dataWaterData->WaterStorage(TankNum).TempSchedID);
-                state.dataWaterData->WaterStorage(TankNum).TouterSkin = state.dataWaterData->WaterStorage(TankNum).Twater;
-            } else if (SELECT_CASE_var == DataWater::TankThermalMode::ZoneCoupled) {
-                ShowFatalError(state, "WaterUse:Storage (Water Storage Tank) zone thermal model incomplete");
-            }
+        switch (state.dataWaterData->WaterStorage(TankNum).ThermalMode) {
+        case DataWater::TankThermalMode::Scheduled: {
+            state.dataWaterData->WaterStorage(TankNum).Twater =
+                GetCurrentScheduleValue(state, state.dataWaterData->WaterStorage(TankNum).TempSchedID);
+            state.dataWaterData->WaterStorage(TankNum).TouterSkin = state.dataWaterData->WaterStorage(TankNum).Twater;
+        } break;
+        case DataWater::TankThermalMode::ZoneCoupled: {
+            ShowFatalError(state, "WaterUse:Storage (Water Storage Tank) zone thermal model incomplete");
+        } break;
+        default:
+            break;
         }
 
         // set supply avail data from overflows in Receiving tank
@@ -1437,16 +1439,16 @@ namespace WaterManager {
             state.dataWaterData->RainCollector(RainColNum).VolCollected = 0.0;
         } else {
 
-            {
-                auto const SELECT_CASE_var(state.dataWaterData->RainCollector(RainColNum).LossFactorMode);
-
-                if (SELECT_CASE_var == DataWater::RainLossFactor::Constant) {
-                    LossFactor = state.dataWaterData->RainCollector(RainColNum).LossFactor;
-                } else if (SELECT_CASE_var == DataWater::RainLossFactor::Scheduled) {
-                    LossFactor = GetCurrentScheduleValue(state, state.dataWaterData->RainCollector(RainColNum).LossFactorSchedID);
-                } else {
-                    assert(false);
-                }
+            switch (state.dataWaterData->RainCollector(RainColNum).LossFactorMode) {
+            case DataWater::RainLossFactor::Constant: {
+                LossFactor = state.dataWaterData->RainCollector(RainColNum).LossFactor;
+            } break;
+            case DataWater::RainLossFactor::Scheduled: {
+                LossFactor = GetCurrentScheduleValue(state, state.dataWaterData->RainCollector(RainColNum).LossFactorSchedID);
+            } break;
+            default: {
+                assert(false);
+            } break;
             }
 
             VdotAvail = state.dataWaterData->RainFall.CurrentRate * state.dataWaterData->RainCollector(RainColNum).HorizArea * (1.0 - LossFactor);
