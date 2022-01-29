@@ -724,7 +724,7 @@ namespace AirflowNetwork {
 
         virtual Real64 correction(const Real64 upwind_temperature,
                                   const Real64 upwind_density,
-                                  const Real64 upwind_viscosity,
+                                  [[maybe_unused]] const Real64 upwind_viscosity,
                                   const AirProperties &propN,
                                   const AirProperties &propM)
         {
@@ -937,11 +937,11 @@ namespace AirflowNetwork {
             return ComponentType::PLR;
         }
 
-        virtual Real64 correction(const Real64 upwind_temperature,
+        virtual Real64 correction([[maybe_unused]] const Real64 upwind_temperature,
                                   const Real64 upwind_density,
                                   const Real64 upwind_viscosity,
-                                  const AirProperties &propN,
-                                  const AirProperties &propM)
+                                  [[maybe_unused]] const AirProperties &propN,
+                                  [[maybe_unused]] const AirProperties &propM)
         {
             return std::pow(reference_density / upwind_density, exponent - 1.0) *
                    std::pow(reference_viscosity / upwind_viscosity, 2.0 * exponent - 1.0);
