@@ -2612,6 +2612,80 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
     // SUBROUTINE PARAMETER DEFINITIONS:
     auto constexpr RoutineName("GetRuntimeLanguageUserInput: ");
 
+    enum class EndUseType {
+        Invalid = -1,
+        Heating,
+        Cooling,
+        InteriorLights,
+        ExteriorLights,
+        InteriorEquipment,
+        ExteriorEquipment,
+        Fans,
+        Pumps,
+        HeatRejection,
+        Humidifier,
+        HeatRecovery,
+        WaterSystems,
+        Refrigeration,
+        Cogeneration,
+        HeatingCoils,
+        CoolingCoils,
+        Chillers,
+        Boilers,
+        Baseboard,
+        HeatRecoveryForCooling,
+        HeatRecoveryForHeating,
+        Num
+    };
+
+    static constexpr std::array<std::string_view, static_cast<int>(EndUseType::Num)> EndUseTypeNamesUC{
+        "HEATING",
+        "COOLING",
+        "INTERIORLIGHTS",
+        "EXTERIORLIGHTS",
+        "INTERIOREQUIPMENT",
+        "EXTERIOREQUIPMENT",
+        "FANS",
+        "PUMPS",
+        "HEATREJECTION",
+        "HUMIDIFIER",
+        "HEATRECOVERY",
+        "WATERSYSTEMS",
+        "REFRIGERATION",
+        "COGENERATION",
+        "HEATINGCOILS",
+        "COOLINGCOILS",
+        "CHILLERS",
+        "BOILERS",
+        "BASEBOARD",
+        "HEATRECOVERYFORCOOLING",
+        "HEATRECOVERYFORHEATING"
+    };
+
+    static constexpr std::array<std::string_view, static_cast<int>(EndUseType::Num)> EndUseTypeNamesCC{
+        "Heating",
+        "Cooling",
+        "InteriorLights",
+        "ExteriorLights",
+        "InteriorEquipment",
+        "ExteriorEquipment",
+        "Fans",
+        "Pumps",
+        "HeatRejection",
+        "Humidifier",
+        "HeatRecovery",
+        "WaterSystems",
+        "Refrigeration",
+        "Cogeneration",
+        "HeatingCoils",
+        "CoolingCoils",
+        "Chillers",
+        "Boilers",
+        "Baseboard",
+        "HeatRecoveryForCooling",
+        "HeatRecoveryForHeating"
+    };
+
     // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
     int GlobalNum;
     int StackNum;
@@ -2627,7 +2701,7 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
     OutputProcessor::SOVStoreType VarTypeString; // temporary
     std::string ResourceTypeString;
     std::string GroupTypeString;
-    std::string EndUseTypeString;
+    EndUseType endUseType;
     std::string EndUseSubCatString;
 
     int TrendNum;
@@ -3542,63 +3616,15 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                 }
 
                 // End Use Type
-                {
-                    auto const SELECT_CASE_var(cAlphaArgs(7));
 
-                    if (SELECT_CASE_var == "HEATING") {
-                        EndUseTypeString = "Heating";
-                    } else if (SELECT_CASE_var == "COOLING") {
-                        EndUseTypeString = "Cooling";
-                    } else if (SELECT_CASE_var == "INTERIORLIGHTS") {
-                        EndUseTypeString = "InteriorLights";
-                    } else if (SELECT_CASE_var == "EXTERIORLIGHTS") {
-                        EndUseTypeString = "ExteriorLights";
-                    } else if (SELECT_CASE_var == "INTERIOREQUIPMENT") {
-                        EndUseTypeString = "InteriorEquipment";
-                    } else if (SELECT_CASE_var == "EXTERIOREQUIPMENT") {
-                        EndUseTypeString = "ExteriorEquipment";
-                    } else if (SELECT_CASE_var == "FANS") {
-                        EndUseTypeString = "Fans";
-                    } else if (SELECT_CASE_var == "PUMPS") {
-                        EndUseTypeString = "Pumps";
-                    } else if (SELECT_CASE_var == "HEATREJECTION") {
-                        EndUseTypeString = "HeatRejection";
-                    } else if (SELECT_CASE_var == "HUMIDIFIER") {
-                        EndUseTypeString = "Humidifier";
-                    } else if (SELECT_CASE_var == "HEATRECOVERY") {
-                        EndUseTypeString = "HeatRecovery";
-                    } else if (SELECT_CASE_var == "WATERSYSTEMS") {
-                        EndUseTypeString = "WaterSystems";
-                    } else if (SELECT_CASE_var == "REFRIGERATION") {
-                        EndUseTypeString = "Refrigeration";
-                    } else if (SELECT_CASE_var == "ONSITEGENERATION") {
-                        EndUseTypeString = "Cogeneration";
-                    } else if (SELECT_CASE_var == "HEATINGCOILS") {
-                        EndUseTypeString = "HeatingCoils";
-                    } else if (SELECT_CASE_var == "COOLINGCOILS") {
-                        EndUseTypeString = "CoolingCoils";
-                    } else if (SELECT_CASE_var == "CHILLERS") {
-                        EndUseTypeString = "Chillers";
-                    } else if (SELECT_CASE_var == "BOILERS") {
-                        EndUseTypeString = "Boilers";
-                    } else if (SELECT_CASE_var == "BASEBOARD") {
-                        EndUseTypeString = "Baseboard";
-                    } else if (SELECT_CASE_var == "HEATRECOVERYFORCOOLING") {
-                        EndUseTypeString = "HeatRecoveryForCooling";
-                    } else if (SELECT_CASE_var == "HEATRECOVERYFORHEATING") {
-                        EndUseTypeString = "HeatRecoveryForHeating";
-                    } else {
-                        ShowSevereError(state, std::string{RoutineName} + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid field.");
-                        ShowContinueError(state, "Invalid " + cAlphaFieldNames(7) + '=' + cAlphaArgs(7));
-                        ErrorsFound = true;
-                    }
-                }
+                endUseType = static_cast<EndUseType>(
+                    getEnumerationValue(EndUseTypeNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(7))));
 
                 // Additional End Use Types Only Used for EnergyTransfer
                 if ((ResourceTypeString != "EnergyTransfer") &&
-                    (EndUseTypeString == "HeatingCoils" || EndUseTypeString == "CoolingCoils" || EndUseTypeString == "Chillers" ||
-                     EndUseTypeString == "Boilers" || EndUseTypeString == "Baseboard" || EndUseTypeString == "HeatRecoveryForCooling" ||
-                     EndUseTypeString == "HeatRecoveryForHeating")) {
+                    (endUseType == EndUseType::HeatingCoils || endUseType == EndUseType::CoolingCoils || endUseType == EndUseType::Chillers ||
+                     endUseType == EndUseType::Boilers || endUseType == EndUseType::Baseboard || endUseType == EndUseType::HeatRecoveryForCooling ||
+                     endUseType == EndUseType::HeatRecoveryForHeating)) {
                     ShowWarningError(state, std::string{RoutineName} + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid field.");
                     ShowContinueError(state,
                                       "Invalid " + cAlphaFieldNames(5) + "=" + cAlphaArgs(5) + " for " + cAlphaFieldNames(7) + "=" + cAlphaArgs(7));
@@ -3618,7 +3644,7 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                                         "EMS",
                                         _,
                                         ResourceTypeString,
-                                        EndUseTypeString,
+                                        EndUseTypeNamesCC[static_cast<int>(endUseType)],
                                         EndUseSubCatString,
                                         GroupTypeString);
                 } else { // no subcat
@@ -3631,7 +3657,7 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                                         "EMS",
                                         _,
                                         ResourceTypeString,
-                                        EndUseTypeString,
+                                        EndUseTypeNamesCC[static_cast<int>(endUseType)],
                                         _,
                                         GroupTypeString);
                 }
