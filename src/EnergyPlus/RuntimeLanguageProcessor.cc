@@ -2686,6 +2686,87 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
         "HeatRecoveryForHeating"
     };
 
+
+    enum class ResourceType {
+        Invalid = -1,
+        Electricity,
+        NaturalGas,
+        Gasoline,
+        Diesel,
+        Coal,
+        FuelOilNo1,
+        FuelOilNo2,
+        OtherFuel1,
+        OtherFuel2,
+        Propane,
+        Water,
+        OnSiteWater,
+        MainsWater,
+        RainWater,
+        WellWater,
+        Condensate,
+        EnergyTransfer,
+        Steam,
+        DistrictCooling,
+        DistrictHeating,
+        ElectricityProduced,
+        SolarWater,
+        SolarAir,
+        Num
+    };
+
+    static constexpr std::array<std::string_view, static_cast<int>(ResourceType::Num)> ResourceTypeNamesUC{
+        "ELECTRICITY",
+        "NATURALGAS",
+        "GASOLINE",
+        "DIESEL",
+        "COAL",
+        "FUELOILNO1",
+        "FUELOILNO2",
+        "OTHERFUEL1",
+        "OTHERFUEL2",
+        "PROPANE",
+        "WATER",
+        "ONSITEWATER",
+        "MAINSWATER",
+        "RAINWATER",
+        "WELLWATER",
+        "CONDENSATE",
+        "ENERGYTRANSFER",
+        "STEAM",
+        "DISTRICTCOOLING",
+        "DISTRICTHEATING",
+        "ELECTRICITYPRODUCED",
+        "SOLARWATER",
+        "SOLARAIR",
+    };
+
+    static constexpr std::array<std::string_view, static_cast<int>(ResourceType::Num)> ResourceTypeNamesCC{
+        "Electricity",
+        "NaturalGas",
+        "Gasoline",
+        "Diesel",
+        "Coal",
+        "FuelOilNo1",
+        "FuelOilNo2",
+        "OtherFuel1",
+        "OtherFuel2",
+        "Propane",
+        "Water",
+        "OnSiteWater",
+        "MainsWater",
+        "RainWater",
+        "WellWater",
+        "Condensate",
+        "EnergyTransfer",
+        "Steam",
+        "DistrictCooling",
+        "DistrictHeating",
+        "ElectricityProduced",
+        "SolarWater",
+        "SolarAir",
+    };
+
     // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
     int GlobalNum;
     int StackNum;
@@ -2699,7 +2780,7 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
     bool Found;
     OutputProcessor::SOVTimeStepType FreqString; // temporary
     OutputProcessor::SOVStoreType VarTypeString; // temporary
-    std::string ResourceTypeString;
+    ResourceType resourceType;
     std::string GroupTypeString;
     EndUseType endUseType;
     std::string EndUseSubCatString;
@@ -3540,61 +3621,8 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                 }
 
                 // Resource Type
-                {
-                    auto const SELECT_CASE_var(cAlphaArgs(5));
-
-                    if (SELECT_CASE_var == "ELECTRICITY") {
-                        ResourceTypeString = "Electricity";
-                    } else if (SELECT_CASE_var == "NATURALGAS") {
-                        ResourceTypeString = "NaturalGas";
-                    } else if (SELECT_CASE_var == "GASOLINE") {
-                        ResourceTypeString = "Gasoline";
-                    } else if (SELECT_CASE_var == "DIESEL") {
-                        ResourceTypeString = "Diesel";
-                    } else if (SELECT_CASE_var == "COAL") {
-                        ResourceTypeString = "Coal";
-                    } else if (SELECT_CASE_var == "FUELOILNO1") {
-                        ResourceTypeString = "FuelOilNo1";
-                    } else if (SELECT_CASE_var == "FUELOILNO2") {
-                        ResourceTypeString = "FuelOilNo2";
-                    } else if (SELECT_CASE_var == "OTHERFUEL1") {
-                        ResourceTypeString = "OtherFuel1";
-                    } else if (SELECT_CASE_var == "OTHERFUEL2") {
-                        ResourceTypeString = "OtherFuel2";
-                    } else if (SELECT_CASE_var == "PROPANE") {
-                        ResourceTypeString = "Propane";
-                    } else if (SELECT_CASE_var == "WATERUSE") {
-                        ResourceTypeString = "Water";
-                    } else if (SELECT_CASE_var == "ONSITEWATERPRODUCED") {
-                        ResourceTypeString = "OnSiteWater";
-                    } else if (SELECT_CASE_var == "MAINSWATERSUPPLY") {
-                        ResourceTypeString = "MainsWater";
-                    } else if (SELECT_CASE_var == "RAINWATERCOLLECTED") {
-                        ResourceTypeString = "RainWater";
-                    } else if (SELECT_CASE_var == "WELLWATERDRAWN") {
-                        ResourceTypeString = "WellWater";
-                    } else if (SELECT_CASE_var == "CONDENSATEWATERCOLLECTED") {
-                        ResourceTypeString = "Condensate";
-                    } else if (SELECT_CASE_var == "ENERGYTRANSFER") {
-                        ResourceTypeString = "EnergyTransfer";
-                    } else if (SELECT_CASE_var == "STEAM") {
-                        ResourceTypeString = "Steam";
-                    } else if (SELECT_CASE_var == "DISTRICTCOOLING") {
-                        ResourceTypeString = "DistrictCooling";
-                    } else if (SELECT_CASE_var == "DISTRICTHEATING") {
-                        ResourceTypeString = "DistrictHeating";
-                    } else if (SELECT_CASE_var == "ELECTRICITYPRODUCEDONSITE") {
-                        ResourceTypeString = "ElectricityProduced";
-                    } else if (SELECT_CASE_var == "SOLARWATERHEATING") {
-                        ResourceTypeString = "SolarWater";
-                    } else if (SELECT_CASE_var == "SOLARAIRHEATING") {
-                        ResourceTypeString = "SolarAir";
-                    } else {
-                        ShowSevereError(state, std::string{RoutineName} + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid field.");
-                        ShowContinueError(state, "Invalid " + cAlphaFieldNames(5) + '=' + cAlphaArgs(5));
-                        ErrorsFound = true;
-                    }
-                }
+                resourceType = static_cast<ResourceType>(
+                    getEnumerationValue(ResourceTypeNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(5))));
 
                 // Group Type
                 {
@@ -3621,7 +3649,7 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                     getEnumerationValue(EndUseTypeNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(7))));
 
                 // Additional End Use Types Only Used for EnergyTransfer
-                if ((ResourceTypeString != "EnergyTransfer") &&
+                if ((resourceType != ResourceType::EnergyTransfer) &&
                     (endUseType == EndUseType::HeatingCoils || endUseType == EndUseType::CoolingCoils || endUseType == EndUseType::Chillers ||
                      endUseType == EndUseType::Boilers || endUseType == EndUseType::Baseboard || endUseType == EndUseType::HeatRecoveryForCooling ||
                      endUseType == EndUseType::HeatRecoveryForHeating)) {
@@ -3629,7 +3657,7 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                     ShowContinueError(state,
                                       "Invalid " + cAlphaFieldNames(5) + "=" + cAlphaArgs(5) + " for " + cAlphaFieldNames(7) + "=" + cAlphaArgs(7));
                     ShowContinueError(state, "Field " + cAlphaFieldNames(5) + " is reset from " + cAlphaArgs(5) + " to EnergyTransfer");
-                    ResourceTypeString = "EnergyTransfer";
+                    resourceType = ResourceType::EnergyTransfer;
                 }
 
                 if (!lAlphaFieldBlanks(8)) {
@@ -3643,7 +3671,7 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                                         VarTypeString,
                                         "EMS",
                                         _,
-                                        ResourceTypeString,
+                                        ResourceTypeNamesCC[static_cast<int>(resourceType)],
                                         EndUseTypeNamesCC[static_cast<int>(endUseType)],
                                         EndUseSubCatString,
                                         GroupTypeString);
@@ -3656,7 +3684,7 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                                         VarTypeString,
                                         "EMS",
                                         _,
-                                        ResourceTypeString,
+                                        ResourceTypeNamesCC[static_cast<int>(resourceType)],
                                         EndUseTypeNamesCC[static_cast<int>(endUseType)],
                                         _,
                                         GroupTypeString);
