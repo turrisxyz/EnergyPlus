@@ -2767,6 +2767,30 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
         "SolarAir",
     };
 
+    enum class GroupType
+    {
+        Invalid = -1,
+        Building,
+        HVAC,
+        Plant,
+        System,
+        Num
+    };
+
+    static constexpr std::array<std::string_view, static_cast<int>(GroupType::Num)> GroupTypeNamesUC{
+        "BUILDING",
+        "HVAC",
+        "PLANT",
+        "SYSTEM",
+    };
+
+    static constexpr std::array<std::string_view, static_cast<int>(GroupType::Num)> GroupTypeNamesCC{
+        "Building",
+        "HVAC",
+        "Plant",
+        "System",
+    };
+
     // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
     int GlobalNum;
     int StackNum;
@@ -2781,7 +2805,7 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
     OutputProcessor::SOVTimeStepType FreqString; // temporary
     OutputProcessor::SOVStoreType VarTypeString; // temporary
     ResourceType resourceType;
-    std::string GroupTypeString;
+    GroupType groupType;
     EndUseType endUseType;
     std::string EndUseSubCatString;
 
@@ -3625,26 +3649,10 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                     getEnumerationValue(ResourceTypeNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(5))));
 
                 // Group Type
-                {
-                    auto const SELECT_CASE_var(cAlphaArgs(6));
-
-                    if (SELECT_CASE_var == "BUILDING") {
-                        GroupTypeString = "Building";
-                    } else if (SELECT_CASE_var == "HVAC") {
-                        GroupTypeString = "HVAC";
-                    } else if (SELECT_CASE_var == "PLANT") {
-                        GroupTypeString = "Plant";
-                    } else if (SELECT_CASE_var == "SYSTEM") {
-                        GroupTypeString = "System";
-                    } else {
-                        ShowSevereError(state, std::string{RoutineName} + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid field.");
-                        ShowContinueError(state, "Invalid " + cAlphaFieldNames(6) + '=' + cAlphaArgs(6));
-                        ErrorsFound = true;
-                    }
-                }
+                groupType = static_cast<GroupType>(
+                    getEnumerationValue(GroupTypeNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(6))));
 
                 // End Use Type
-
                 endUseType = static_cast<EndUseType>(
                     getEnumerationValue(EndUseTypeNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(7))));
 
@@ -3674,7 +3682,7 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                                         ResourceTypeNamesCC[static_cast<int>(resourceType)],
                                         EndUseTypeNamesCC[static_cast<int>(endUseType)],
                                         EndUseSubCatString,
-                                        GroupTypeString);
+                                        GroupTypeNamesCC[static_cast<int>(groupType)]);
                 } else { // no subcat
                     SetupOutputVariable(state,
                                         cAlphaArgs(1),
@@ -3687,7 +3695,7 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                                         ResourceTypeNamesCC[static_cast<int>(resourceType)],
                                         EndUseTypeNamesCC[static_cast<int>(endUseType)],
                                         _,
-                                        GroupTypeString);
+                                        GroupTypeNamesCC[static_cast<int>(groupType)]);
                 }
             }
         } // NumEMSMeteredOutputVariables > 0
