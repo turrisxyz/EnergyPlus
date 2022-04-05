@@ -3469,22 +3469,8 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                 VarTypeString = static_cast<OutputProcessor::SOVStoreType>(
                     getEnumerationValue(SOVStoreTypeNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(3))));
 
-                if (VarTypeString != OutputProcessor::SOVStoreType::Average && VarTypeString != OutputProcessor::SOVStoreType::Summed) {
-                    ShowSevereError(state, std::string{RoutineName} + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid field.");
-                    ShowContinueError(state, "Invalid " + cAlphaFieldNames(3) + '=' + cAlphaArgs(3));
-                    ShowContinueError(state, "...valid values are Averaged or Summed.");
-                    ErrorsFound = true;
-                }
-
                 FreqString = static_cast<OutputProcessor::SOVTimeStepType>(
                     getEnumerationValue(SOVTimeStepNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(4))));
-
-                if (FreqString != OutputProcessor::SOVTimeStepType::Zone && FreqString != OutputProcessor::SOVTimeStepType::System) {
-                    ShowSevereError(state, std::string{RoutineName} + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid field.");
-                    ShowContinueError(state, "Invalid " + cAlphaFieldNames(4) + '=' + cAlphaArgs(4));
-                    ShowContinueError(state, "...valid values are ZoneTimestep or SystemTimestep.");
-                    ErrorsFound = true;
-                }
 
                 if (curUnit != OutputProcessor::Unit::unknown) {
                     SetupOutputVariable(state,
@@ -3641,13 +3627,6 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
 
                 FreqString = static_cast<OutputProcessor::SOVTimeStepType>(
                     getEnumerationValue(SOVTimeStepNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(3))));
-
-                if (FreqString != OutputProcessor::SOVTimeStepType::Zone && FreqString != OutputProcessor::SOVTimeStepType::System) {
-                    ShowSevereError(state, std::string{RoutineName} + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid field.");
-                    ShowContinueError(state, "Invalid " + cAlphaFieldNames(4) + '=' + cAlphaArgs(4));
-                    ShowContinueError(state, "...valid values are ZoneTimestep or SystemTimestep.");
-                    ErrorsFound = true;
-                }
 
                 // Resource Type
                 resourceType = static_cast<ResourceType>(
