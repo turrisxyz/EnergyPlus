@@ -2807,6 +2807,9 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
         "System",
     };
 
+    static constexpr std::array<std::string_view, static_cast<int>(OutputProcessor::SOVTimeStepType::Num)> SOVTimeStepNamesUC = {
+        "SYSTEMTIMESTEP", "HVACTIMESTEP", "ZONETIMESTEP", "PLANTTIMESTEP"};
+
     // SUBROUTINE LOCAL VARIABLE DECLARATIONS:
     int GlobalNum;
     int StackNum;
@@ -3473,19 +3476,14 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                     ErrorsFound = true;
                 }
 
-                {
-                    auto const SELECT_CASE_var(cAlphaArgs(4));
+                FreqString = static_cast<OutputProcessor::SOVTimeStepType>(
+                    getEnumerationValue(SOVTimeStepNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(4))));
 
-                    if (SELECT_CASE_var == "ZONETIMESTEP") {
-                        FreqString = OutputProcessor::SOVTimeStepType::Zone;
-                    } else if (SELECT_CASE_var == "SYSTEMTIMESTEP") {
-                        FreqString = OutputProcessor::SOVTimeStepType::System;
-                    } else {
-                        ShowSevereError(state, std::string{RoutineName} + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid field.");
-                        ShowContinueError(state, "Invalid " + cAlphaFieldNames(4) + '=' + cAlphaArgs(4));
-                        ShowContinueError(state, "...valid values are ZoneTimestep or SystemTimestep.");
-                        ErrorsFound = true;
-                    }
+                if (FreqString != OutputProcessor::SOVTimeStepType::Zone && FreqString != OutputProcessor::SOVTimeStepType::System) {
+                    ShowSevereError(state, std::string{RoutineName} + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid field.");
+                    ShowContinueError(state, "Invalid " + cAlphaFieldNames(4) + '=' + cAlphaArgs(4));
+                    ShowContinueError(state, "...valid values are ZoneTimestep or SystemTimestep.");
+                    ErrorsFound = true;
                 }
 
                 if (curUnit != OutputProcessor::Unit::unknown) {
@@ -3641,19 +3639,14 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
 
                 VarTypeString = OutputProcessor::SOVStoreType::Summed; // all metered vars are sum type
 
-                {
-                    auto const SELECT_CASE_var(cAlphaArgs(3));
+                FreqString = static_cast<OutputProcessor::SOVTimeStepType>(
+                    getEnumerationValue(SOVTimeStepNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(3))));
 
-                    if (SELECT_CASE_var == "ZONETIMESTEP") {
-                        FreqString = OutputProcessor::SOVTimeStepType::Zone;
-                    } else if (SELECT_CASE_var == "SYSTEMTIMESTEP") {
-                        FreqString = OutputProcessor::SOVTimeStepType::System;
-                    } else {
-                        ShowSevereError(state, std::string{RoutineName} + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid field.");
-                        ShowContinueError(state, "Invalid " + cAlphaFieldNames(4) + '=' + cAlphaArgs(4));
-                        ShowContinueError(state, "...valid values are ZoneTimestep or SystemTimestep.");
-                        ErrorsFound = true;
-                    }
+                if (FreqString != OutputProcessor::SOVTimeStepType::Zone && FreqString != OutputProcessor::SOVTimeStepType::System) {
+                    ShowSevereError(state, std::string{RoutineName} + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid field.");
+                    ShowContinueError(state, "Invalid " + cAlphaFieldNames(4) + '=' + cAlphaArgs(4));
+                    ShowContinueError(state, "...valid values are ZoneTimestep or SystemTimestep.");
+                    ErrorsFound = true;
                 }
 
                 // Resource Type
