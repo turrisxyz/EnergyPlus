@@ -3461,20 +3461,16 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                 } else {
                     state.dataRuntimeLangProcessor->RuntimeReportVar(RuntimeReportVarNum).VariableNum = VariableNum;
                 }
+                static constexpr std::array<std::string_view, static_cast<int>(OutputProcessor::SOVStoreType::Num)> SOVStoreTypeNamesUC = {"STATE", "NONSTATE", "SUMMED", "AVERAGED"};
 
-                {
-                    auto const SELECT_CASE_var(cAlphaArgs(3));
+                VarTypeString = static_cast<OutputProcessor::SOVStoreType>(
+                    getEnumerationValue(SOVStoreTypeNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(3))));
 
-                    if (SELECT_CASE_var == "AVERAGED") {
-                        VarTypeString = OutputProcessor::SOVStoreType::Average;
-                    } else if (SELECT_CASE_var == "SUMMED") {
-                        VarTypeString = OutputProcessor::SOVStoreType::Summed;
-                    } else {
-                        ShowSevereError(state, std::string{RoutineName} + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid field.");
-                        ShowContinueError(state, "Invalid " + cAlphaFieldNames(3) + '=' + cAlphaArgs(3));
-                        ShowContinueError(state, "...valid values are Averaged or Summed.");
-                        ErrorsFound = true;
-                    }
+                if (VarTypeString != OutputProcessor::SOVStoreType::Average && VarTypeString != OutputProcessor::SOVStoreType::Summed) {
+                    ShowSevereError(state, std::string{RoutineName} + cCurrentModuleObject + "=\"" + cAlphaArgs(1) + " invalid field.");
+                    ShowContinueError(state, "Invalid " + cAlphaFieldNames(3) + '=' + cAlphaArgs(3));
+                    ShowContinueError(state, "...valid values are Averaged or Summed.");
+                    ErrorsFound = true;
                 }
 
                 {
