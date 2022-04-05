@@ -75,8 +75,7 @@ namespace DataRuntimeLanguage {
 
     enum class ErlKeywordParam // keyword parameters for types of Erl statements
     {
-        Invalid = -1,
-        None,     // statement type not set
+        Invalid = -1, // statement type not set
         Return,   // Return statement, as in leave program
         Goto,     // Goto statement, used in parsing to manage IF-ElseIf-Else-EndIf and nesting
         Set,      // Set statement, as in assign RHS to LHS
@@ -411,7 +410,7 @@ namespace DataRuntimeLanguage {
         int Argument2;                                // Index to a variable, function, expression, or stack
 
         // Default Constructor
-        InstructionType() : LineNum(0), Keyword(DataRuntimeLanguage::ErlKeywordParam::None), Argument1(0), Argument2(0)
+        InstructionType() : LineNum(0), Keyword(DataRuntimeLanguage::ErlKeywordParam::Invalid), Argument1(0), Argument2(0)
         {
         }
     };
