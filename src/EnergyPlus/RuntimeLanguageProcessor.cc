@@ -2821,8 +2821,8 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
     int VariableNum(0); // temporary
     int RuntimeReportVarNum;
     bool Found;
-    OutputProcessor::SOVTimeStepType FreqString; // temporary
-    OutputProcessor::SOVStoreType VarTypeString; // temporary
+    OutputProcessor::SOVTimeStepType updateFrequency; // temporary
+    OutputProcessor::SOVStoreType varDataType; // temporary
     ResourceType resourceType;
     GroupType groupType;
     EndUseType endUseType;
@@ -3466,10 +3466,10 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                 }
                 static constexpr std::array<std::string_view, static_cast<int>(OutputProcessor::SOVStoreType::Num)> SOVStoreTypeNamesUC = {"STATE", "NONSTATE", "SUMMED", "AVERAGED"};
 
-                VarTypeString = static_cast<OutputProcessor::SOVStoreType>(
+                varDataType = static_cast<OutputProcessor::SOVStoreType>(
                     getEnumerationValue(SOVStoreTypeNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(3))));
 
-                FreqString = static_cast<OutputProcessor::SOVTimeStepType>(
+                updateFrequency = static_cast<OutputProcessor::SOVTimeStepType>(
                     getEnumerationValue(SOVTimeStepNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(4))));
 
                 if (curUnit != OutputProcessor::Unit::unknown) {
@@ -3477,16 +3477,16 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                                         cAlphaArgs(1),
                                         curUnit,
                                         state.dataRuntimeLangProcessor->RuntimeReportVar(RuntimeReportVarNum).Value,
-                                        FreqString,
-                                        VarTypeString,
+                                        updateFrequency,
+                                        varDataType,
                                         "EMS");
                 } else {
                     SetupOutputVariable(state,
                                         cAlphaArgs(1),
                                         OutputProcessor::Unit::customEMS,
                                         state.dataRuntimeLangProcessor->RuntimeReportVar(RuntimeReportVarNum).Value,
-                                        FreqString,
-                                        VarTypeString,
+                                        updateFrequency,
+                                        varDataType,
                                         "EMS",
                                         _,
                                         _,
@@ -3623,9 +3623,9 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                     state.dataRuntimeLangProcessor->RuntimeReportVar(RuntimeReportVarNum).VariableNum = VariableNum;
                 }
 
-                VarTypeString = OutputProcessor::SOVStoreType::Summed; // all metered vars are sum type
+                varDataType = OutputProcessor::SOVStoreType::Summed; // all metered vars are sum type
 
-                FreqString = static_cast<OutputProcessor::SOVTimeStepType>(
+                updateFrequency = static_cast<OutputProcessor::SOVTimeStepType>(
                     getEnumerationValue(SOVTimeStepNamesUC, UtilityRoutines::MakeUPPERCase(cAlphaArgs(3))));
 
                 // Resource Type
@@ -3659,8 +3659,8 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                                         cAlphaArgs(1),
                                         curUnit,
                                         state.dataRuntimeLangProcessor->RuntimeReportVar(RuntimeReportVarNum).Value,
-                                        FreqString,
-                                        VarTypeString,
+                                        updateFrequency,
+                                        varDataType,
                                         "EMS",
                                         _,
                                         ResourceTypeNamesCC[static_cast<int>(resourceType)],
@@ -3672,8 +3672,8 @@ void GetRuntimeLanguageUserInput(EnergyPlusData &state)
                                         cAlphaArgs(1),
                                         curUnit,
                                         state.dataRuntimeLangProcessor->RuntimeReportVar(RuntimeReportVarNum).Value,
-                                        FreqString,
-                                        VarTypeString,
+                                        updateFrequency,
+                                        varDataType,
                                         "EMS",
                                         _,
                                         ResourceTypeNamesCC[static_cast<int>(resourceType)],
