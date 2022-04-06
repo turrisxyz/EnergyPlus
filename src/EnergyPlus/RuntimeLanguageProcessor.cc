@@ -824,8 +824,6 @@ ErlValueType EvaluateStack(EnergyPlusData &state, int const StackNum)
                 ReturnValue =
                     EvaluateExpression(state, state.dataRuntimeLang->ErlStack(StackNum).Instruction(InstructionNum).Argument1, seriousErrorFound);
             WriteTrace(state, StackNum, InstructionNum, ReturnValue, seriousErrorFound);
-            break; // RETURN always terminates an instruction stack
-
         } break;
         case DataRuntimeLanguage::ErlKeywordParam::Set: {
 
@@ -848,7 +846,7 @@ ErlValueType EvaluateStack(EnergyPlusData &state, int const StackNum)
             ReturnValue.String = "";
             WriteTrace(state, StackNum, InstructionNum, ReturnValue, seriousErrorFound);
             ReturnValue = EvaluateStack(state, state.dataRuntimeLang->ErlStack(StackNum).Instruction(InstructionNum).Argument1);
-        }
+        } break;
         case DataRuntimeLanguage::ErlKeywordParam::If:
         case DataRuntimeLanguage::ErlKeywordParam::Else: { // same???
             ExpressionNum = state.dataRuntimeLang->ErlStack(StackNum).Instruction(InstructionNum).Argument1;
@@ -874,8 +872,6 @@ ErlValueType EvaluateStack(EnergyPlusData &state, int const StackNum)
             // For debug purposes only...
             ReturnValue.Type = Value::String;
             ReturnValue.String = ""; // IntegerToString(InstructionNum)
-
-            continue;
             // PE if this ever went out of bounds, would the DO loop save it?  or need check here?
 
         } break;
@@ -928,6 +924,8 @@ ErlValueType EvaluateStack(EnergyPlusData &state, int const StackNum)
             ShowFatalError(state, "Fatal error in RunStack:  Unknown keyword.");
         } break;
         }
+        if (state.dataRuntimeLang->ErlStack(StackNum).Instruction(InstructionNum).Keyword == DataRuntimeLanguage::ErlKeywordParam::Return)
+            break; // RETURN always terminates an instruction stack - while loop break
 
         ++InstructionNum;
     } // InstructionNum
