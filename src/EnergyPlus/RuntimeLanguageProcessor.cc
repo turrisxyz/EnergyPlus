@@ -122,13 +122,16 @@ void InitializeRuntimeLanguage(EnergyPlusData &state)
 
     if (state.dataRuntimeLangProcessor->InitializeOnce) {
 
+        state.dataRuntimeLang->False = SetErlValueNumber(0.0);
+        state.dataRuntimeLang->True = SetErlValueNumber(1.0);
+
         // Create constant built-in variables
         state.dataRuntimeLangProcessor->NullVariableNum = NewEMSVariable(state, "NULL", 0, SetErlValueNumber(0.0));
         state.dataRuntimeLang->ErlVariable(state.dataRuntimeLangProcessor->NullVariableNum).Value.Type = Value::Null;
-        state.dataRuntimeLangProcessor->FalseVariableNum = NewEMSVariable(state, "FALSE", 0, False);
-        state.dataRuntimeLangProcessor->TrueVariableNum = NewEMSVariable(state, "TRUE", 0, True);
-        state.dataRuntimeLangProcessor->OffVariableNum = NewEMSVariable(state, "OFF", 0, False);
-        state.dataRuntimeLangProcessor->OnVariableNum = NewEMSVariable(state, "ON", 0, True);
+        state.dataRuntimeLangProcessor->FalseVariableNum = NewEMSVariable(state, "FALSE", 0, state.dataRuntimeLang->False);
+        state.dataRuntimeLangProcessor->TrueVariableNum = NewEMSVariable(state, "TRUE", 0, state.dataRuntimeLang->True);
+        state.dataRuntimeLangProcessor->OffVariableNum = NewEMSVariable(state, "OFF", 0, state.dataRuntimeLang->False);
+        state.dataRuntimeLangProcessor->OnVariableNum = NewEMSVariable(state, "ON", 0, state.dataRuntimeLang->True);
         state.dataRuntimeLangProcessor->PiVariableNum = NewEMSVariable(state, "PI", 0, SetErlValueNumber(DataGlobalConstants::Pi));
         state.dataRuntimeLangProcessor->TimeStepsPerHourVariableNum =
             NewEMSVariable(state, "TIMESTEPSPERHOUR", 0, SetErlValueNumber(double(state.dataGlobal->NumOfTimeStepInHour)));
@@ -1837,23 +1840,23 @@ ErlValueType EvaluateExpression(EnergyPlusData &state, int const ExpressionNum, 
             case ErlFunc::Equal: {
                 if (Operand(1).Type == Operand(2).Type) {
                     if (Operand(1).Type == Value::Null) {
-                        ReturnValue = True;
+                        ReturnValue = state.dataRuntimeLang->True;
                     } else if ((Operand(1).Type == Value::Number) && (Operand(1).Number == Operand(2).Number)) {
-                        ReturnValue = True;
+                        ReturnValue = state.dataRuntimeLang->True;
                     } else {
-                        ReturnValue = False;
+                        ReturnValue = state.dataRuntimeLang->False;
                     }
                 } else {
-                    ReturnValue = False;
+                    ReturnValue = state.dataRuntimeLang->False;
                 }
 
             } break;
             case ErlFunc::NotEqual: {
                 if ((Operand(1).Type == Value::Number) && (Operand(2).Type == Value::Number)) {
                     if (Operand(1).Number != Operand(2).Number) {
-                        ReturnValue = True;
+                        ReturnValue = state.dataRuntimeLang->True;
                     } else {
-                        ReturnValue = False;
+                        ReturnValue = state.dataRuntimeLang->False;
                     }
                 }
 
@@ -1861,9 +1864,9 @@ ErlValueType EvaluateExpression(EnergyPlusData &state, int const ExpressionNum, 
             case ErlFunc::LessOrEqual: {
                 if ((Operand(1).Type == Value::Number) && (Operand(2).Type == Value::Number)) {
                     if (Operand(1).Number <= Operand(2).Number) {
-                        ReturnValue = True;
+                        ReturnValue = state.dataRuntimeLang->True;
                     } else {
-                        ReturnValue = False;
+                        ReturnValue = state.dataRuntimeLang->False;
                     }
                 }
 
@@ -1871,27 +1874,27 @@ ErlValueType EvaluateExpression(EnergyPlusData &state, int const ExpressionNum, 
             case ErlFunc::GreaterOrEqual: {
                 if ((Operand(1).Type == Value::Number) && (Operand(2).Type == Value::Number)) {
                     if (Operand(1).Number >= Operand(2).Number) {
-                        ReturnValue = True;
+                        ReturnValue = state.dataRuntimeLang->True;
                     } else {
-                        ReturnValue = False;
+                        ReturnValue = state.dataRuntimeLang->False;
                     }
                 }
             } break;
             case ErlFunc::LessThan: {
                 if ((Operand(1).Type == Value::Number) && (Operand(2).Type == Value::Number)) {
                     if (Operand(1).Number < Operand(2).Number) {
-                        ReturnValue = True;
+                        ReturnValue = state.dataRuntimeLang->True;
                     } else {
-                        ReturnValue = False;
+                        ReturnValue = state.dataRuntimeLang->False;
                     }
                 }
             } break;
             case ErlFunc::GreaterThan: {
                 if ((Operand(1).Type == Value::Number) && (Operand(2).Type == Value::Number)) {
                     if (Operand(1).Number > Operand(2).Number) {
-                        ReturnValue = True;
+                        ReturnValue = state.dataRuntimeLang->True;
                     } else {
-                        ReturnValue = False;
+                        ReturnValue = state.dataRuntimeLang->False;
                     }
                 }
 
@@ -1916,19 +1919,19 @@ ErlValueType EvaluateExpression(EnergyPlusData &state, int const ExpressionNum, 
             } break;
             case ErlFunc::LogicalAND: {
                 if ((Operand(1).Type == Value::Number) && (Operand(2).Type == Value::Number)) {
-                    if ((Operand(1).Number == True.Number) && (Operand(2).Number == True.Number)) {
-                        ReturnValue = True;
+                    if ((Operand(1).Number == state.dataRuntimeLang->True.Number) && (Operand(2).Number == state.dataRuntimeLang->True.Number)) {
+                        ReturnValue = state.dataRuntimeLang->True;
                     } else {
-                        ReturnValue = False;
+                        ReturnValue = state.dataRuntimeLang->False;
                     }
                 }
             } break;
             case ErlFunc::LogicalOR: {
                 if ((Operand(1).Type == Value::Number) && (Operand(2).Type == Value::Number)) {
-                    if ((Operand(1).Number == True.Number) || (Operand(2).Number == True.Number)) {
-                        ReturnValue = True;
+                    if ((Operand(1).Number == state.dataRuntimeLang->True.Number) || (Operand(2).Number == state.dataRuntimeLang->True.Number)) {
+                        ReturnValue = state.dataRuntimeLang->True;
                     } else {
-                        ReturnValue = False;
+                        ReturnValue = state.dataRuntimeLang->False;
                     }
                 }
             } break;
@@ -3870,7 +3873,7 @@ ErlValueType StringValue(std::string const &String)
     return Value;
 }
 
-std::string_view ValueToString(ErlValueType const &Value)
+std::string ValueToString(ErlValueType const &Value)
 {
     // FUNCTION INFORMATION:
     //       AUTHOR         P. Ellis
@@ -3890,23 +3893,23 @@ std::string_view ValueToString(ErlValueType const &Value)
     // Using/Aliasing
 
     // Return value
-    std::string_view stringView;
+    std::string String;
 
     // Locals
     // FUNCTION ARGUMENT DEFINITIONS:
 
-    stringView = "";
+    String = "";
 
     switch (Value.Type) {
     case Value::Number: {
         if (Value.Number == 0.0) {
-            stringView = "0.0";
+            String = "0.0";
         } else {
-            stringView = format("{:.6T}", Value.Number); //(String)
+            String = format("{:.6T}", Value.Number); //(String)
         }
     } break;
     case Value::String: {
-        stringView = Value.String;
+        String = Value.String;
 
     } break;
     case Value::Array: {
@@ -3914,13 +3917,13 @@ std::string_view ValueToString(ErlValueType const &Value)
 
     } break;
     case Value::Error: {
-        stringView = format(" *** Error: {} *** ", Value.Error);
+        String = " *** Error: " + Value.Error + " *** ";
     } break;
     default:
         break;
     }
 
-    return stringView;
+    return String;
 }
 
 int FindEMSVariable(EnergyPlusData &state,

@@ -178,7 +178,7 @@ namespace RuntimeLanguageProcessor {
 
     ErlValueType StringValue(std::string const &String);
 
-    std::string_view ValueToString(ErlValueType const &Value);
+    std::string ValueToString(ErlValueType const &Value);
 
     int FindEMSVariable(EnergyPlusData &state,
                         std::string const &VariableName, // variable name in Erl
