@@ -769,7 +769,7 @@ namespace EMSManager {
                         VariableNum = NewEMSVariable(state, cAlphaArgs(1), 0);
                         state.dataRuntimeLang->EMSActuatorUsed(ActuatorNum).ErlVariableNum = VariableNum;
                         // initialize Erl variable for actuator to null
-                        state.dataRuntimeLang->ErlVariable(VariableNum).Value = state.dataRuntimeLang->Null;
+                        state.dataRuntimeLang->ErlVariable(VariableNum).Value = DataRuntimeLanguage::Null;
                         if (ActuatorNum > state.dataRuntimeLang->numActuatorsUsed) {
                             // Initialize variables for the ExternalInterface variables
                             ExternalInterfaceInitializeErlVariable(state, VariableNum, SetErlValueNumber(rNumericArgs(1)), lNumericFieldBlanks(1));

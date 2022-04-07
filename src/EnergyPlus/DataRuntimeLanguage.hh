@@ -354,13 +354,13 @@ namespace DataRuntimeLanguage {
         // instance data structure for the values taken by Erl variables, nested structure in ErlVariable
         Value Type;         // value type, eg. ValueNumber,
         Real64 Number;      // numeric value instance for Erl variable
-        std::string String; // string data types in Erl (not used yet)
+        std::string_view String; // string data types in Erl (not used yet)
         int Variable;       // Pointer to another Erl variable
         //  Might be good to change names to VariableNum and ExpressionNum just to be clear
         int Expression;      // Pointer to another Erl expression (e.g. compound operators)
         bool TrendVariable;  // true if Erl variable is really a trend variable
         int TrendVarPointer; // index to match in TrendVariable structure
-        std::string Error;   // holds error message string for reporting
+        std::string_view Error;   // holds error message string for reporting
         bool initialized;    // true if number value has been SET (ie. has been on LHS in SET expression)
 
         // Default Constructor
@@ -369,20 +369,28 @@ namespace DataRuntimeLanguage {
         }
 
         // Member Constructor
-        ErlValueType(Value const Type,          // value type, eg. ValueNumber,
+        constexpr ErlValueType(Value const Type,          // value type, eg. ValueNumber,
                      Real64 const Number,       // numeric value instance for Erl variable
-                     std::string const &String, // string data types in Erl (not used yet)
+                     std::string_view const &String, // string data types in Erl (not used yet)
                      int const Variable,        // Pointer to another Erl variable
                      int const Expression,      // Pointer to another Erl expression (e.g. compound operators)
                      bool const TrendVariable,  // true if Erl variable is really a trend variable
                      int const TrendVarPointer, // index to match in TrendVariable structure
-                     std::string const &Error,  // holds error message string for reporting
+                     std::string_view const &Error,  // holds error message string for reporting
                      bool const initialized)
             : Type(Type), Number(Number), String(String), Variable(Variable), Expression(Expression), TrendVariable(TrendVariable),
               TrendVarPointer(TrendVarPointer), Error(Error), initialized(initialized)
         {
         }
     };
+
+    static constexpr DataRuntimeLanguage::ErlValueType Null = DataRuntimeLanguage::ErlValueType(
+        DataRuntimeLanguage::Value::Null, 0.0, "", 0, 0, false, 0, "", true); // special "null" Erl variable value instance
+    static constexpr DataRuntimeLanguage::ErlValueType False = DataRuntimeLanguage::ErlValueType(
+        DataRuntimeLanguage::Value::Null, 0.0, "", 0, 0, false, 0, "", true); // special "false" Erl variable value instance
+    static constexpr DataRuntimeLanguage::ErlValueType True = DataRuntimeLanguage::ErlValueType(
+        DataRuntimeLanguage::Value::Null, 1.0, "", 0, 0, false, 0, "", true); // special "True" Erl variable value instance, gets reset
+
 
     struct ErlVariableType
     {
@@ -574,12 +582,6 @@ struct RuntimeLanguageData : BaseGlobalStruct
     Array1D<DataRuntimeLanguage::InternalVarsAvailableType> EMSInternalVarsAvailable; // internal data that could be used
     Array1D<DataRuntimeLanguage::InternalVarsUsedType> EMSInternalVarsUsed;           // internal data that are used
     Array1D<DataRuntimeLanguage::EMSProgramCallManagementType> EMSProgramCallManager; // program calling managers
-    DataRuntimeLanguage::ErlValueType Null = DataRuntimeLanguage::ErlValueType(
-        DataRuntimeLanguage::Value::Null, 0.0, "", 0, 0, false, 0, "", true); // special "null" Erl variable value instance
-    DataRuntimeLanguage::ErlValueType False = DataRuntimeLanguage::ErlValueType(
-        DataRuntimeLanguage::Value::Null, 0.0, "", 0, 0, false, 0, "", true); // special "false" Erl variable value instance
-    DataRuntimeLanguage::ErlValueType True = DataRuntimeLanguage::ErlValueType(
-        DataRuntimeLanguage::Value::Null, 0.0, "", 0, 0, false, 0, "", true); // special "True" Erl variable value instance, gets reset
 
     // EMS Actuator fast duplicate check lookup support
     std::unordered_set<std::tuple<std::string, std::string, std::string>, DataRuntimeLanguage::EMSActuatorKey_hash>
@@ -634,9 +636,6 @@ struct RuntimeLanguageData : BaseGlobalStruct
         this->EMSInternalVarsUsed.deallocate();
         this->EMSProgramCallManager.deallocate();
         this->EMSActuator_lookup.clear();
-        this->Null = DataRuntimeLanguage::ErlValueType(DataRuntimeLanguage::Value::Null, 0.0, "", 0, 0, false, 0, "", true);
-        this->False = DataRuntimeLanguage::ErlValueType(DataRuntimeLanguage::Value::Null, 0.0, "", 0, 0, false, 0, "", true);
-        this->True = DataRuntimeLanguage::ErlValueType(DataRuntimeLanguage::Value::Null, 0.0, "", 0, 0, false, 0, "", true);
     }
 };
 
