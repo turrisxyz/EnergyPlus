@@ -869,6 +869,7 @@ ErlValueType EvaluateStack(EnergyPlusData &state, int const StackNum)
             // For debug purposes only...
             ReturnValue.Type = Value::String;
             ReturnValue.String = ""; // IntegerToString(InstructionNum)
+            continue;
             // PE if this ever went out of bounds, would the DO loop save it?  or need check here?
 
         } break;
