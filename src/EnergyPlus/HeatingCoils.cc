@@ -1904,34 +1904,34 @@ namespace HeatingCoils {
         Real64 TempSetPoint;
         int Control;
 
-        auto &HeatingCoil(state.dataHeatingCoils->HeatingCoil);
+        auto &CurrentHeatingCoil(state.dataHeatingCoils->HeatingCoil(CoilNum));
 
-        Effic = HeatingCoil(CoilNum).Efficiency;
-        TempAirIn = HeatingCoil(CoilNum).InletAirTemp;
-        Win = HeatingCoil(CoilNum).InletAirHumRat;
-        Control = HeatingCoil(CoilNum).Control;
-        TempSetPoint = HeatingCoil(CoilNum).DesiredOutletTemp;
+        Effic = CurrentHeatingCoil.Efficiency;
+        TempAirIn = CurrentHeatingCoil.InletAirTemp;
+        Win = CurrentHeatingCoil.InletAirHumRat;
+        Control = CurrentHeatingCoil.Control;
+        TempSetPoint = CurrentHeatingCoil.DesiredOutletTemp;
 
         // If there is a fault of coil SAT Sensor
-        if (HeatingCoil(CoilNum).FaultyCoilSATFlag && (!state.dataGlobal->WarmupFlag) && (!state.dataGlobal->DoingSizing) &&
+        if (CurrentHeatingCoil.FaultyCoilSATFlag && (!state.dataGlobal->WarmupFlag) && (!state.dataGlobal->DoingSizing) &&
             (!state.dataGlobal->KickOffSimulation)) {
             // calculate the sensor offset using fault information
-            int FaultIndex = HeatingCoil(CoilNum).FaultyCoilSATIndex;
-            HeatingCoil(CoilNum).FaultyCoilSATOffset = state.dataFaultsMgr->FaultsCoilSATSensor(FaultIndex).CalFaultOffsetAct(state);
+            int FaultIndex = CurrentHeatingCoil.FaultyCoilSATIndex;
+            CurrentHeatingCoil.FaultyCoilSATOffset = state.dataFaultsMgr->FaultsCoilSATSensor(FaultIndex).CalFaultOffsetAct(state);
             // update the TempSetPoint
-            TempSetPoint -= HeatingCoil(CoilNum).FaultyCoilSATOffset;
+            TempSetPoint -= CurrentHeatingCoil.FaultyCoilSATOffset;
         }
 
         //  adjust mass flow rates for cycling fan cycling coil operation
         if (FanOpMode == CycFanCycCoil) {
             if (PartLoadRatio > 0.0) {
-                AirMassFlow = HeatingCoil(CoilNum).InletAirMassFlowRate / PartLoadRatio;
+                AirMassFlow = CurrentHeatingCoil.InletAirMassFlowRate / PartLoadRatio;
                 QCoilReq /= PartLoadRatio;
             } else {
                 AirMassFlow = 0.0;
             }
         } else {
-            AirMassFlow = HeatingCoil(CoilNum).InletAirMassFlowRate;
+            AirMassFlow = CurrentHeatingCoil.InletAirMassFlowRate;
         }
 
         CapacitanceAir = PsyCpAirFnW(Win) * AirMassFlow;
@@ -1941,12 +1941,12 @@ namespace HeatingCoils {
         //  Also the coil has to be scheduled to be available.
 
         // Control output to meet load QCoilReq (QCoilReq is passed in if load controlled, otherwise QCoilReq=-999)
-        if ((AirMassFlow > 0.0 && HeatingCoil(CoilNum).NominalCapacity > 0.0) &&
-            (GetCurrentScheduleValue(state, HeatingCoil(CoilNum).SchedPtr) > 0.0) && (QCoilReq > 0.0)) {
+        if ((AirMassFlow > 0.0 && CurrentHeatingCoil.NominalCapacity > 0.0) &&
+            (GetCurrentScheduleValue(state, CurrentHeatingCoil.SchedPtr) > 0.0) && (QCoilReq > 0.0)) {
 
             // check to see if the Required heating capacity is greater than the user specified capacity.
-            if (QCoilReq > HeatingCoil(CoilNum).NominalCapacity) {
-                QCoilCap = HeatingCoil(CoilNum).NominalCapacity;
+            if (QCoilReq > CurrentHeatingCoil.NominalCapacity) {
+                QCoilCap = CurrentHeatingCoil.NominalCapacity;
             } else {
                 QCoilCap = QCoilReq;
             }
@@ -1955,11 +1955,11 @@ namespace HeatingCoils {
             HeatingCoilLoad = QCoilCap;
 
             // The HeatingCoilLoad is the change in the enthalpy of the Heating
-            HeatingCoil(CoilNum).ElecUseLoad = HeatingCoilLoad / Effic;
+            CurrentHeatingCoil.ElecUseLoad = HeatingCoilLoad / Effic;
 
             // Control coil output to meet a setpoint temperature.
-        } else if ((AirMassFlow > 0.0 && HeatingCoil(CoilNum).NominalCapacity > 0.0) &&
-                   (GetCurrentScheduleValue(state, HeatingCoil(CoilNum).SchedPtr) > 0.0) && (QCoilReq == SensedLoadFlagValue) &&
+        } else if ((AirMassFlow > 0.0 && CurrentHeatingCoil.NominalCapacity > 0.0) &&
+                   (GetCurrentScheduleValue(state, CurrentHeatingCoil.SchedPtr) > 0.0) && (QCoilReq == SensedLoadFlagValue) &&
                    (std::abs(TempSetPoint - TempAirIn) > TempControlTol)) {
 
             QCoilCap = CapacitanceAir * (TempSetPoint - TempAirIn);
@@ -1970,8 +1970,8 @@ namespace HeatingCoils {
                 TempAirOut = TempAirIn;
                 // check to see if the Required heating capacity is greater than the user
                 // specified capacity.
-            } else if (QCoilCap > HeatingCoil(CoilNum).NominalCapacity) {
-                QCoilCap = HeatingCoil(CoilNum).NominalCapacity;
+            } else if (QCoilCap > CurrentHeatingCoil.NominalCapacity) {
+                QCoilCap = CurrentHeatingCoil.NominalCapacity;
                 TempAirOut = TempAirIn + QCoilCap / CapacitanceAir;
             } else {
                 TempAirOut = TempSetPoint;
@@ -1980,52 +1980,52 @@ namespace HeatingCoils {
             HeatingCoilLoad = QCoilCap;
 
             // The HeatingCoilLoad is the change in the enthalpy of the Heating
-            HeatingCoil(CoilNum).ElecUseLoad = HeatingCoilLoad / Effic;
+            CurrentHeatingCoil.ElecUseLoad = HeatingCoilLoad / Effic;
 
         } else { // If not running Conditions do not change across coil from inlet to outlet
 
             TempAirOut = TempAirIn;
             HeatingCoilLoad = 0.0;
-            HeatingCoil(CoilNum).ElecUseLoad = 0.0;
+            CurrentHeatingCoil.ElecUseLoad = 0.0;
         }
 
         if (FanOpMode == CycFanCycCoil) {
-            HeatingCoil(CoilNum).ElecUseLoad *= PartLoadRatio;
+            CurrentHeatingCoil.ElecUseLoad *= PartLoadRatio;
             HeatingCoilLoad *= PartLoadRatio;
         }
 
-        HeatingCoil(CoilNum).HeatingCoilLoad = HeatingCoilLoad;
-        ElecHeatingCoilPower = HeatingCoil(CoilNum).ElecUseLoad;
+        CurrentHeatingCoil.HeatingCoilLoad = HeatingCoilLoad;
+        ElecHeatingCoilPower = CurrentHeatingCoil.ElecUseLoad;
 
         // Set the outlet conditions
-        HeatingCoil(CoilNum).OutletAirTemp = TempAirOut;
+        CurrentHeatingCoil.OutletAirTemp = TempAirOut;
 
         // This HeatingCoil does not change the moisture or Mass Flow across the component
-        HeatingCoil(CoilNum).OutletAirHumRat = HeatingCoil(CoilNum).InletAirHumRat;
-        HeatingCoil(CoilNum).OutletAirMassFlowRate = HeatingCoil(CoilNum).InletAirMassFlowRate;
+        CurrentHeatingCoil.OutletAirHumRat = CurrentHeatingCoil.InletAirHumRat;
+        CurrentHeatingCoil.OutletAirMassFlowRate = CurrentHeatingCoil.InletAirMassFlowRate;
         // Set the outlet enthalpys for air and Heating
-        HeatingCoil(CoilNum).OutletAirEnthalpy = PsyHFnTdbW(HeatingCoil(CoilNum).OutletAirTemp, HeatingCoil(CoilNum).OutletAirHumRat);
+        CurrentHeatingCoil.OutletAirEnthalpy = PsyHFnTdbW(CurrentHeatingCoil.OutletAirTemp, CurrentHeatingCoil.OutletAirHumRat);
 
         QCoilActual = HeatingCoilLoad;
-        if (std::abs(HeatingCoil(CoilNum).NominalCapacity) < 1.e-8) {
-            if (HeatingCoil(CoilNum).AirLoopNum > 0) {
-                state.dataAirLoop->AirLoopAFNInfo(HeatingCoil(CoilNum).AirLoopNum).AFNLoopHeatingCoilMaxRTF =
-                    max(state.dataAirLoop->AirLoopAFNInfo(HeatingCoil(CoilNum).AirLoopNum).AFNLoopHeatingCoilMaxRTF, 0.0);
+        if (std::abs(CurrentHeatingCoil.NominalCapacity) < 1.e-8) {
+            if (CurrentHeatingCoil.AirLoopNum > 0) {
+                state.dataAirLoop->AirLoopAFNInfo(CurrentHeatingCoil.AirLoopNum).AFNLoopHeatingCoilMaxRTF =
+                    max(state.dataAirLoop->AirLoopAFNInfo(CurrentHeatingCoil.AirLoopNum).AFNLoopHeatingCoilMaxRTF, 0.0);
             }
         } else {
-            if (HeatingCoil(CoilNum).AirLoopNum > 0) {
-                state.dataAirLoop->AirLoopAFNInfo(HeatingCoil(CoilNum).AirLoopNum).AFNLoopHeatingCoilMaxRTF =
-                    max(state.dataAirLoop->AirLoopAFNInfo(HeatingCoil(CoilNum).AirLoopNum).AFNLoopHeatingCoilMaxRTF,
-                        HeatingCoilLoad / HeatingCoil(CoilNum).NominalCapacity);
+            if (CurrentHeatingCoil.AirLoopNum > 0) {
+                state.dataAirLoop->AirLoopAFNInfo(CurrentHeatingCoil.AirLoopNum).AFNLoopHeatingCoilMaxRTF =
+                    max(state.dataAirLoop->AirLoopAFNInfo(CurrentHeatingCoil.AirLoopNum).AFNLoopHeatingCoilMaxRTF,
+                        HeatingCoilLoad / CurrentHeatingCoil.NominalCapacity);
             }
         }
 
         // set outlet node temp so parent objects can call calc directly without have to simulate entire model
-        state.dataLoopNodes->Node(HeatingCoil(CoilNum).AirOutletNodeNum).Temp = HeatingCoil(CoilNum).OutletAirTemp;
+        state.dataLoopNodes->Node(CurrentHeatingCoil.AirOutletNodeNum).Temp = CurrentHeatingCoil.OutletAirTemp;
     }
 
     void CalcMultiStageElectricHeatingCoil(EnergyPlusData &state,
-                                           int &CoilNum,            // the number of the electric heating coil to be simulated
+                                           int const CoilNum,       // the number of the electric heating coil to be simulated
                                            Real64 const SpeedRatio, // SpeedRatio varies between 1.0 (maximum speed) and 0.0 (minimum speed)
                                            Real64 const CycRatio,   // cycling part load ratio
                                            int const StageNum,      // Stage number
@@ -2099,37 +2099,37 @@ namespace HeatingCoils {
         Real64 HSElecHeatingPower;   // Full load power at high stage
         Real64 PartLoadRat;          // part load ratio
 
-        auto &HeatingCoil(state.dataHeatingCoils->HeatingCoil);
+        auto &CurrentHeatingCoil(state.dataHeatingCoils->HeatingCoil(CoilNum));
 
         if (StageNum > 1) {
             StageNumLS = StageNum - 1;
             StageNumHS = StageNum;
-            if (StageNum > HeatingCoil(CoilNum).NumOfStages) {
-                StageNumLS = HeatingCoil(CoilNum).NumOfStages - 1;
-                StageNumHS = HeatingCoil(CoilNum).NumOfStages;
+            if (StageNum > CurrentHeatingCoil.NumOfStages) {
+                StageNumLS = CurrentHeatingCoil.NumOfStages - 1;
+                StageNumHS = CurrentHeatingCoil.NumOfStages;
             }
         } else {
             StageNumLS = 1;
             StageNumHS = 1;
         }
 
-        AirMassFlow = HeatingCoil(CoilNum).InletAirMassFlowRate;
-        InletAirDryBulbTemp = HeatingCoil(CoilNum).InletAirTemp;
-        InletAirEnthalpy = HeatingCoil(CoilNum).InletAirEnthalpy;
-        InletAirHumRat = HeatingCoil(CoilNum).InletAirHumRat;
+        AirMassFlow = CurrentHeatingCoil.InletAirMassFlowRate;
+        InletAirDryBulbTemp = CurrentHeatingCoil.InletAirTemp;
+        InletAirEnthalpy = CurrentHeatingCoil.InletAirEnthalpy;
+        InletAirHumRat = CurrentHeatingCoil.InletAirHumRat;
 
         OutdoorPressure = state.dataEnvrn->OutBaroPress;
 
-        if ((AirMassFlow > 0.0) && (GetCurrentScheduleValue(state, HeatingCoil(CoilNum).SchedPtr) > 0.0) &&
+        if ((AirMassFlow > 0.0) && (GetCurrentScheduleValue(state, CurrentHeatingCoil.SchedPtr) > 0.0) &&
             ((CycRatio > 0.0) || (SpeedRatio > 0.0))) {
 
             if (StageNum > 1) {
 
-                TotCapLS = HeatingCoil(CoilNum).MSNominalCapacity(StageNumLS);
-                TotCapHS = HeatingCoil(CoilNum).MSNominalCapacity(StageNumHS);
+                TotCapLS = CurrentHeatingCoil.MSNominalCapacity(StageNumLS);
+                TotCapHS = CurrentHeatingCoil.MSNominalCapacity(StageNumHS);
 
-                EffLS = HeatingCoil(CoilNum).MSEfficiency(StageNumLS);
-                EffHS = HeatingCoil(CoilNum).MSEfficiency(StageNumHS);
+                EffLS = CurrentHeatingCoil.MSEfficiency(StageNumLS);
+                EffHS = CurrentHeatingCoil.MSEfficiency(StageNumHS);
 
                 // Get full load output and power
                 LSFullLoadOutAirEnth = InletAirEnthalpy + TotCapLS / MSHPMassFlowRateLow;
@@ -2142,13 +2142,13 @@ namespace HeatingCoils {
                 // IF (FanOpMode .EQ. CycFanCycCoil) OnOffFanPartLoadFraction = 1.0d0
 
                 // Power calculation
-                HeatingCoil(CoilNum).ElecUseLoad = SpeedRatio * HSElecHeatingPower + (1.0 - SpeedRatio) * LSElecHeatingPower;
+                CurrentHeatingCoil.ElecUseLoad = SpeedRatio * HSElecHeatingPower + (1.0 - SpeedRatio) * LSElecHeatingPower;
 
-                ElecHeatingCoilPower = HeatingCoil(CoilNum).ElecUseLoad;
-                HeatingCoil(CoilNum).HeatingCoilLoad = MSHPMassFlowRateHigh * (HSFullLoadOutAirEnth - InletAirEnthalpy) * SpeedRatio +
+                ElecHeatingCoilPower = CurrentHeatingCoil.ElecUseLoad;
+                CurrentHeatingCoil.HeatingCoilLoad = MSHPMassFlowRateHigh * (HSFullLoadOutAirEnth - InletAirEnthalpy) * SpeedRatio +
                                                        MSHPMassFlowRateLow * (LSFullLoadOutAirEnth - InletAirEnthalpy) * (1.0 - SpeedRatio);
 
-                OutletAirEnthalpy = InletAirEnthalpy + HeatingCoil(CoilNum).HeatingCoilLoad / HeatingCoil(CoilNum).InletAirMassFlowRate;
+                OutletAirEnthalpy = InletAirEnthalpy + CurrentHeatingCoil.HeatingCoilLoad / CurrentHeatingCoil.InletAirMassFlowRate;
                 OutletAirTemp = PsyTdbFnHW(OutletAirEnthalpy, OutletAirHumRat);
                 FullLoadOutAirRH = PsyRhFnTdbWPb(state, OutletAirTemp, OutletAirHumRat, OutdoorPressure, RoutineNameAverageLoad);
 
@@ -2157,10 +2157,10 @@ namespace HeatingCoils {
                     OutletAirHumRat = PsyWFnTdbH(state, OutletAirTemp, OutletAirEnthalpy, RoutineName);
                 }
 
-                HeatingCoil(CoilNum).OutletAirTemp = OutletAirTemp;
-                HeatingCoil(CoilNum).OutletAirHumRat = OutletAirHumRat;
-                HeatingCoil(CoilNum).OutletAirEnthalpy = OutletAirEnthalpy;
-                HeatingCoil(CoilNum).OutletAirMassFlowRate = HeatingCoil(CoilNum).InletAirMassFlowRate;
+                CurrentHeatingCoil.OutletAirTemp = OutletAirTemp;
+                CurrentHeatingCoil.OutletAirHumRat = OutletAirHumRat;
+                CurrentHeatingCoil.OutletAirEnthalpy = OutletAirEnthalpy;
+                CurrentHeatingCoil.OutletAirMassFlowRate = CurrentHeatingCoil.InletAirMassFlowRate;
 
                 // Stage 1
             } else if (CycRatio > 0.0) {
@@ -2171,7 +2171,7 @@ namespace HeatingCoils {
                 if (FanOpMode == CycFanCycCoil) AirMassFlow /= PartLoadRat;
                 if (FanOpMode == ContFanCycCoil) AirMassFlow = MSHPMassFlowRateLow;
 
-                TotCap = HeatingCoil(CoilNum).MSNominalCapacity(StageNumLS);
+                TotCap = CurrentHeatingCoil.MSNominalCapacity(StageNumLS);
 
                 // Calculate full load outlet conditions
                 FullLoadOutAirEnth = InletAirEnthalpy + TotCap / AirMassFlow;
@@ -2197,49 +2197,49 @@ namespace HeatingCoils {
                     OutletAirTemp = PartLoadRat * FullLoadOutAirTemp + (1.0 - PartLoadRat) * InletAirDryBulbTemp;
                 }
 
-                EffLS = HeatingCoil(CoilNum).MSEfficiency(StageNumLS);
+                EffLS = CurrentHeatingCoil.MSEfficiency(StageNumLS);
 
-                //    HeatingCoil(CoilNum)%HeatingCoilLoad = TotCap
+                //    CurrentHeatingCoil%HeatingCoilLoad = TotCap
                 //   This would require a CR to change
-                HeatingCoil(CoilNum).HeatingCoilLoad = TotCap * PartLoadRat;
+                CurrentHeatingCoil.HeatingCoilLoad = TotCap * PartLoadRat;
 
-                HeatingCoil(CoilNum).ElecUseLoad = HeatingCoil(CoilNum).HeatingCoilLoad / EffLS;
+                CurrentHeatingCoil.ElecUseLoad = CurrentHeatingCoil.HeatingCoilLoad / EffLS;
 
-                ElecHeatingCoilPower = HeatingCoil(CoilNum).ElecUseLoad;
+                ElecHeatingCoilPower = CurrentHeatingCoil.ElecUseLoad;
 
-                HeatingCoil(CoilNum).OutletAirTemp = OutletAirTemp;
-                HeatingCoil(CoilNum).OutletAirHumRat = OutletAirHumRat;
-                HeatingCoil(CoilNum).OutletAirEnthalpy = OutletAirEnthalpy;
-                HeatingCoil(CoilNum).OutletAirMassFlowRate = HeatingCoil(CoilNum).InletAirMassFlowRate;
+                CurrentHeatingCoil.OutletAirTemp = OutletAirTemp;
+                CurrentHeatingCoil.OutletAirHumRat = OutletAirHumRat;
+                CurrentHeatingCoil.OutletAirEnthalpy = OutletAirEnthalpy;
+                CurrentHeatingCoil.OutletAirMassFlowRate = CurrentHeatingCoil.InletAirMassFlowRate;
                 // this would require a CR to correct (i.e., calculate outputs when coil is off)
                 //  ELSE
                 //    ! electric coil is off; just pass through conditions
-                //    HeatingCoil(CoilNum)%OutletAirEnthalpy = HeatingCoil(CoilNum)%InletAirEnthalpy
-                //    HeatingCoil(CoilNum)%OutletAirHumRat   = HeatingCoil(CoilNum)%InletAirHumRat
-                //    HeatingCoil(CoilNum)%OutletAirTemp     = HeatingCoil(CoilNum)%InletAirTemp
-                //    HeatingCoil(CoilNum)%OutletAirMassFlowRate = HeatingCoil(CoilNum)%InletAirMassFlowRate
-                //    HeatingCoil(CoilNum)%ElecUseLoad      = 0.0
-                //    HeatingCoil(CoilNum)%HeatingCoilLoad  = 0.0
+                //    CurrentHeatingCoil%OutletAirEnthalpy = CurrentHeatingCoil%InletAirEnthalpy
+                //    CurrentHeatingCoil%OutletAirHumRat   = CurrentHeatingCoil%InletAirHumRat
+                //    CurrentHeatingCoil%OutletAirTemp     = CurrentHeatingCoil%InletAirTemp
+                //    CurrentHeatingCoil%OutletAirMassFlowRate = CurrentHeatingCoil%InletAirMassFlowRate
+                //    CurrentHeatingCoil%ElecUseLoad      = 0.0
+                //    CurrentHeatingCoil%HeatingCoilLoad  = 0.0
                 //    ElecHeatingCoilPower                  = 0.0
             }
 
         } else {
 
             // electric coil is off; just pass through conditions
-            HeatingCoil(CoilNum).OutletAirEnthalpy = HeatingCoil(CoilNum).InletAirEnthalpy;
-            HeatingCoil(CoilNum).OutletAirHumRat = HeatingCoil(CoilNum).InletAirHumRat;
-            HeatingCoil(CoilNum).OutletAirTemp = HeatingCoil(CoilNum).InletAirTemp;
-            HeatingCoil(CoilNum).OutletAirMassFlowRate = HeatingCoil(CoilNum).InletAirMassFlowRate;
+            CurrentHeatingCoil.OutletAirEnthalpy = CurrentHeatingCoil.InletAirEnthalpy;
+            CurrentHeatingCoil.OutletAirHumRat = CurrentHeatingCoil.InletAirHumRat;
+            CurrentHeatingCoil.OutletAirTemp = CurrentHeatingCoil.InletAirTemp;
+            CurrentHeatingCoil.OutletAirMassFlowRate = CurrentHeatingCoil.InletAirMassFlowRate;
 
             // some of these are reset in Init, can be removed to speed up code
-            HeatingCoil(CoilNum).ElecUseLoad = 0.0;
-            HeatingCoil(CoilNum).HeatingCoilLoad = 0.0;
+            CurrentHeatingCoil.ElecUseLoad = 0.0;
+            CurrentHeatingCoil.HeatingCoilLoad = 0.0;
             ElecHeatingCoilPower = 0.0;
 
         } // end of on/off if - else
 
         // set outlet node temp so parent objects can call calc directly without have to simulate entire model
-        state.dataLoopNodes->Node(HeatingCoil(CoilNum).AirOutletNodeNum).Temp = HeatingCoil(CoilNum).OutletAirTemp;
+        state.dataLoopNodes->Node(CurrentHeatingCoil.AirOutletNodeNum).Temp = CurrentHeatingCoil.OutletAirTemp;
     }
 
     void CalcFuelHeatingCoil(EnergyPlusData &state,
@@ -2293,7 +2293,7 @@ namespace HeatingCoils {
         Real64 PartLoadRat;
         Real64 PLF;
 
-        auto &CurrentHeatingCoil(state.dataHeatingCoils->HeatingCoil(CoilNum);
+        auto &CurrentHeatingCoil(state.dataHeatingCoils->HeatingCoil(CoilNum));
 
         Effic = CurrentHeatingCoil.Efficiency;
         TempAirIn = CurrentHeatingCoil.InletAirTemp;
@@ -2459,7 +2459,7 @@ namespace HeatingCoils {
     }
 
     void CalcMultiStageGasHeatingCoil(EnergyPlusData &state,
-                                      int &CoilNum,            // the number of the Gas heating coil to be simulated
+                                      const int CoilNum,            // the number of the Gas heating coil to be simulated
                                       Real64 const SpeedRatio, // SpeedRatio varies between 1.0 (maximum speed) and 0.0 (minimum speed)
                                       Real64 const CycRatio,   // cycling part load ratio
                                       int const StageNum,      // Speed number
@@ -2535,7 +2535,7 @@ namespace HeatingCoils {
         Real64 PartLoadRat(0.0);     // part load ratio
         Real64 PLF;                  // part load factor used to calculate RTF
 
-        auto &CCurrentHeatingCoil(state.dataHeatingCoils->HeatingCoil(CoilNum));
+        auto &CurrentHeatingCoil(state.dataHeatingCoils->HeatingCoil(CoilNum));
 
         if (StageNum > 1) {
             StageNumLS = StageNum - 1;
