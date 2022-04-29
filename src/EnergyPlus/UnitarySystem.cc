@@ -15784,7 +15784,7 @@ namespace UnitarySystems {
                 SpeedNum = int(Par[5]);
                 FanOpMode = int(Par[6]);
 
-                HeatingCoils::CalcMultiStageElectricHeatingCoil(state, CoilIndex, SpeedRatio, CycRatio, SpeedNum, FanOpMode);
+                HeatingCoils::CalcMultiStageElectricHeatingCoil(state, state.dataHeatingCoils->HeatingCoil(CoilIndex), SpeedRatio, CycRatio, SpeedNum, FanOpMode);
 
                 OutletAirTemp = state.dataLoopNodes->Node(thisSys.HeatCoilOutletNodeNum).Temp;
 
@@ -15794,7 +15794,7 @@ namespace UnitarySystems {
                 SpeedNum = int(Par[5]);
                 FanOpMode = int(Par[6]);
 
-                HeatingCoils::CalcMultiStageElectricHeatingCoil(state, CoilIndex, SpeedRatio, CycRatio, SpeedNum, FanOpMode);
+                HeatingCoils::CalcMultiStageElectricHeatingCoil(state, state.dataHeatingCoils->HeatingCoil(CoilIndex), SpeedRatio, CycRatio, SpeedNum, FanOpMode);
 
                 OutletAirTemp = state.dataLoopNodes->Node(thisSys.HeatCoilOutletNodeNum).Temp;
 
@@ -16211,7 +16211,7 @@ namespace UnitarySystems {
                 SpeedNum = int(Par[5]);
                 FanOpMode = int(Par[6]);
 
-                HeatingCoils::CalcMultiStageElectricHeatingCoil(state, CoilIndex, SpeedRatio, CycRatio, SpeedNum, FanOpMode);
+                HeatingCoils::CalcMultiStageElectricHeatingCoil(state, state.dataHeatingCoils->HeatingCoil(CoilIndex), SpeedRatio, CycRatio, SpeedNum, FanOpMode);
 
                 OutletAirTemp = state.dataLoopNodes->Node(thisSys.HeatCoilOutletNodeNum).Temp;
 
@@ -16221,7 +16221,7 @@ namespace UnitarySystems {
                 SpeedNum = int(Par[5]);
                 FanOpMode = int(Par[6]);
 
-                HeatingCoils::CalcMultiStageGasHeatingCoil(state, CoilIndex, SpeedRatio, CycRatio, SpeedNum, FanOpMode);
+                HeatingCoils::CalcMultiStageGasHeatingCoil(state, state.dataHeatingCoils->HeatingCoil(CoilIndex), SpeedRatio, CycRatio, SpeedNum, FanOpMode);
 
                 OutletAirTemp = state.dataLoopNodes->Node(thisSys.HeatCoilOutletNodeNum).Temp;
 
