@@ -378,7 +378,7 @@ namespace VariableSpeedCoils {
                           int const SpeedNum                  // compressor speed number
     );
 
-    void SizeVarSpeedCoil(EnergyPlusData &state, int const DXCoilNum, bool &ErrorsFound);
+    void SizeVarSpeedCoil(EnergyPlusData &state, VariableSpeedCoilData &VarSpeedCoil, bool &ErrorsFound);
 
     void CalcVarSpeedCoilCooling(EnergyPlusData &state,
                                  int const DXCoilNum,       // Heat Pump Number
@@ -394,11 +394,11 @@ namespace VariableSpeedCoils {
     );
 
     void CalcVarSpeedCoilHeating(EnergyPlusData &state,
-                                 int const DXCoilNum,     // Heat Pump Number
+                                 VariableSpeedCoilData &VarSpeedCoil,     // Heat Pump Number
                                  int const CyclingScheme, // Fan/Compressor cycling scheme indicator
                                  Real64 &RuntimeFrac,     // Runtime Fraction of compressor or percent on time (on-time/cycle time)
                                  Real64 const SensDemand, // Cooling Sensible Demand [W] !unused1208
-                                 DataHVACGlobals::CompressorOperation CompressorOp, // compressor operation flag
+                                 const DataHVACGlobals::CompressorOperation CompressorOp, // compressor operation flag
                                  Real64 const PartLoadRatio,                        // compressor part load ratio
                                  Real64 const OnOffAirFlowRatio,                    // ratio of compressor on flow to average flow over time step
                                  Real64 const SpeedRatio, // SpeedRatio varies between 1.0 (higher speed) and 0.0 (lower speed)
@@ -474,10 +474,9 @@ namespace VariableSpeedCoils {
                              Optional_int MSHPDesignSpecIndex = _      // index to UnitarySystemPerformance:Multispeed object
     );
 
-    void UpdateVarSpeedCoil(EnergyPlusData &state, int const DXCoilNum);
+    void UpdateVarSpeedCoil(EnergyPlusData &state, VariableSpeedCoilData &VarSpeedCoil);
 
-    Real64 CalcEffectiveSHR(EnergyPlusData &state,
-                            int const DXCoilNum,     // Index number for cooling coil
+    Real64 CalcEffectiveSHR(VariableSpeedCoilData &Var,     // Index number for cooling coil
                             Real64 const SHRss,      // Steady-state sensible heat ratio
                             int const CyclingScheme, // Fan/compressor cycling scheme indicator
                             Real64 const RTF,        // Compressor run-time fraction
@@ -516,7 +515,7 @@ namespace VariableSpeedCoils {
     );
 
     void CalcVarSpeedHPWH(EnergyPlusData &state,
-                          int const DXCoilNum,        // the number of the DX coil to be simulated
+                          VariableSpeedCoilData &VarSpeedCoil,        // the number of the DX coil to be simulated
                           Real64 &RuntimeFrac,        // Runtime Fraction of compressor or percent on time (on-time/cycle time)
                           Real64 const PartLoadRatio, // sensible water heating load / full load sensible water heating capacity
                           Real64 const SpeedRatio,    // SpeedRatio varies between 1.0 (higher speed) and 0.0 (lower speed)

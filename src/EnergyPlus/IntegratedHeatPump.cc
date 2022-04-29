@@ -1967,7 +1967,7 @@ void SizeIHP(EnergyPlusData &state, int const DXCoilNum)
     };
 
     errFlag = false;
-    SizeVarSpeedCoil(state, ihp.SCCoilIndex, errFlag); // size cooling coil
+    SizeVarSpeedCoil(state, state.dataVariableSpeedCoils->VarSpeedCoil(ihp.SCCoilIndex), errFlag); // size cooling coil
     if (errFlag) {
         ShowSevereError(state, format("SizeIHP: failed to size SC coil\"{}\"", ihp.SCCoilName));
         ErrorsFound = true;
@@ -1976,7 +1976,7 @@ void SizeIHP(EnergyPlusData &state, int const DXCoilNum)
     };
 
     errFlag = false;
-    SizeVarSpeedCoil(state, ihp.SHCoilIndex, errFlag); // size heating coil
+    SizeVarSpeedCoil(state, state.dataVariableSpeedCoils->VarSpeedCoil(ihp.SHCoilIndex), errFlag); // size heating coil
     if (errFlag) {
         ShowSevereError(state, format("SizeIHP: failed to size SH coil\"{}\"", ihp.SHCoilName));
         ErrorsFound = true;
@@ -1991,7 +1991,7 @@ void SizeIHP(EnergyPlusData &state, int const DXCoilNum)
     errFlag = false;
     SetVarSpeedCoilData(state, ihp.SCDWHCoolCoilIndex, errFlag, _, ihp.SHDWHHeatCoilIndex);
     // size SCDWH air coil
-    SizeVarSpeedCoil(state, ihp.SCDWHCoolCoilIndex, errFlag);
+    SizeVarSpeedCoil(state, state.dataVariableSpeedCoils->VarSpeedCoil(ihp.SCDWHCoolCoilIndex), errFlag);
     if (errFlag) {
         ShowSevereError(state, format("SizeIHP: failed to size SCDWH cooling coil\"{}\"", ihp.SCDWHCoolCoilName));
         ErrorsFound = true;
@@ -1999,7 +1999,7 @@ void SizeIHP(EnergyPlusData &state, int const DXCoilNum)
 
     // size SHDWH air coil
     errFlag = false;
-    SizeVarSpeedCoil(state, ihp.SHDWHHeatCoilIndex, errFlag);
+    SizeVarSpeedCoil(state, state.dataVariableSpeedCoils->VarSpeedCoil(ihp.SHDWHHeatCoilIndex), errFlag);
     if (errFlag) {
         ShowSevereError(state, format("SizeIHP: failed to size SHDWH heating coil\"{}\"", ihp.SHDWHHeatCoilName));
         ErrorsFound = true;
@@ -2013,7 +2013,7 @@ void SizeIHP(EnergyPlusData &state, int const DXCoilNum)
     }
 
     errFlag = false;
-    SizeVarSpeedCoil(state, ihp.SCWHCoilIndex, errFlag);
+    SizeVarSpeedCoil(state, state.dataVariableSpeedCoils->VarSpeedCoil(ihp.SCWHCoilIndex), errFlag);
     if (errFlag) {
         ShowSevereError(state, format("SizeIHP: failed to size SCWH coil\"{}\"", ihp.SCWHCoilName));
         ErrorsFound = true;
@@ -2025,7 +2025,7 @@ void SizeIHP(EnergyPlusData &state, int const DXCoilNum)
     }
 
     errFlag = false;
-    SizeVarSpeedCoil(state, ihp.DWHCoilIndex, errFlag);
+    SizeVarSpeedCoil(state, state.dataVariableSpeedCoils->VarSpeedCoil(ihp.DWHCoilIndex), errFlag);
     if (errFlag) {
         ShowSevereError(state, format("SizeIHP: failed to size DWH coil\"{}\"", ihp.DWHCoilName));
         ErrorsFound = true;
@@ -2037,7 +2037,7 @@ void SizeIHP(EnergyPlusData &state, int const DXCoilNum)
     }
 
     errFlag = false;
-    SizeVarSpeedCoil(state, ihp.SCDWHWHCoilIndex, errFlag);
+    SizeVarSpeedCoil(state, state.dataVariableSpeedCoils->VarSpeedCoil(ihp.SCDWHWHCoilIndex), errFlag);
     if (errFlag) {
         ShowSevereError(state, format("SizeIHP: failed to size SCDWH water heating coil\"{}\"", ihp.SCDWHWHCoilName));
         ErrorsFound = true;
@@ -2049,7 +2049,7 @@ void SizeIHP(EnergyPlusData &state, int const DXCoilNum)
     }
 
     errFlag = false;
-    SizeVarSpeedCoil(state, ihp.SHDWHWHCoilIndex, errFlag);
+    SizeVarSpeedCoil(state, state.dataVariableSpeedCoils->VarSpeedCoil(ihp.SHDWHWHCoilIndex), errFlag);
     if (errFlag) {
         ShowSevereError(state, format("SizeIHP: failed to size SHDWH water heating coil\"{}\"", ihp.SHDWHWHCoilName));
         ErrorsFound = true;
