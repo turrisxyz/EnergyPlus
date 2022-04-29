@@ -314,7 +314,7 @@ namespace Furnaces {
     );
 
     void SetOnOffMassFlowRate(EnergyPlusData &state,
-                              int const FurnaceNum,      // index to furnace
+                              FurnaceEquipConditions &Furnace,      // index to furnace
                               int const AirLoopNum,      // index to air loop !unused1208
                               Real64 &OnOffAirFlowRatio, // ratio of coil on to coil off air flow rate
                               int const OpMode,          // fan operating mode
@@ -323,7 +323,7 @@ namespace Furnaces {
                               Real64 const PartLoadRatio // coil part-load ratio
     );
 
-    void SizeFurnace(EnergyPlusData &state, int const FurnaceNum, bool const FirstHVACIteration);
+    void SizeFurnace(EnergyPlusData &state, FurnaceEquipConditions &Furnace, bool const FirstHVACIteration);
 
     // End Initialization Section of the Module
     //******************************************************************************
@@ -390,23 +390,18 @@ namespace Furnaces {
     );
 
     void SetAverageAirFlow(EnergyPlusData &state,
-                           int const FurnaceNum,       // Unit index
+                           FurnaceEquipConditions &Furnace,       // Unit index
                            Real64 const PartLoadRatio, // unit part load ratio
                            Real64 &OnOffAirFlowRatio   // ratio of compressor ON airflow to AVERAGE airflow over timestep
     );
 
-    void HeatPumpRunFrac(EnergyPlusData &state,
-                         int const FurnaceNum, // Furnace Index Number
-                         Real64 const PLR,     // part load ratio
-                         bool &errFlag,        // part load factor out of range flag
-                         Real64 &RuntimeFrac   // the required run time fraction to meet part load
-    );
+    void HeatPumpRunFrac(Furnaces::FurnaceEquipConditions &Furnace, Real64 const PLR, bool &errFlag, Real64 &RuntimeFrac);
 
     // Beginning of Reporting subroutines for the Furnace Module
     // *****************************************************************************
 
     void ReportFurnace(EnergyPlusData &state,
-                       int const FurnaceNum, // Furnace Index Number
+                       FurnaceEquipConditions &Furnace, // Furnace Index Number
                        int const AirLoopNum  // index to air loop
     );
 
@@ -486,7 +481,7 @@ namespace Furnaces {
     );
 
     void SetVSHPAirFlow(EnergyPlusData &state,
-                        int const FurnaceNum,                 // Unit index
+                        FurnaceEquipConditions &Furnace,                 // Unit index
                         Real64 const PartLoadRatio,           // unit part load ratio
                         Real64 &OnOffAirFlowRatio,            // ratio of compressor ON airflow to average airflow over timestep
                         Optional_int_const SpeedNum = _,      // Speed number
@@ -494,7 +489,7 @@ namespace Furnaces {
     );
 
     void SetOnOffMassFlowRateVSCoil(EnergyPlusData &state,
-                                    int const FurnaceNum,          // index to furnace
+                                    FurnaceEquipConditions &Furnace,          // index to furnace
                                     int const ZoneNum,             // index to zone
                                     bool const FirstHVACIteration, // Flag for 1st HVAC iteration
                                     int const AirLoopNum,          // index to air loop !unused1208
@@ -506,7 +501,7 @@ namespace Furnaces {
     );
 
     void SetMinOATCompressor(EnergyPlusData &state,
-                             int const FurnaceNum,                    // index to furnace
+                             FurnaceEquipConditions &Furnace,                    // index to furnace
                              std::string const &FurnaceName,          // name of furnace
                              std::string const &cCurrentModuleObject, // type of furnace
                              int const CoolingCoilIndex,              // index of cooling coil
