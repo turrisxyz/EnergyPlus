@@ -825,7 +825,7 @@ TEST_F(WaterCoilsTest, CoilHeatingWaterUASizingLowHwaterInletTemp)
     Real64 UAMax = state->dataWaterCoils->WaterCoil(CoilNum).DesWaterHeatingCoilRate;
 
     // check if coil design inlet water temperature is increased above the plant loop exit temp
-    EstimateCoilInletWaterTemp(*state, CoilNum, DataFanOpMode, 1.0, UAMax, DesCoilInletWaterTempUsed);
+    EstimateCoilInletWaterTemp(*state, state->dataWaterCoils->WaterCoil(CoilNum), DataFanOpMode, 1.0, UAMax, DesCoilInletWaterTempUsed);
     EXPECT_GT(DesCoilInletWaterTempUsed, state->dataSize->PlantSizData(1).ExitTemp);
     EXPECT_NEAR(48.73, DesCoilInletWaterTempUsed, 0.01);
 }

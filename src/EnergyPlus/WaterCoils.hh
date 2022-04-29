@@ -294,7 +294,7 @@ namespace WaterCoils {
     );
 
     void CoolingCoil(EnergyPlusData &state,
-                     int const CoilNum,
+                     WaterCoilEquipConditions &WaterCoil,
                      bool const FirstHVACIteration,
                      int const CalcMode,
                      int const FanOpMode,       // fan operating mode
@@ -302,7 +302,7 @@ namespace WaterCoils {
     );
 
     void CoilCompletelyDry(EnergyPlusData &state,
-                           int const CoilNum,
+                           WaterCoilEquipConditions &WaterCoil,
                            Real64 const WaterTempIn,  // Entering water temperature
                            Real64 const AirTempIn,    // Entering air dry bulb temperature
                            Real64 const CoilUA,       // Overall heat transfer coefficient
@@ -317,7 +317,7 @@ namespace WaterCoils {
     // Coil Completely Wet Subroutine for Cooling Coil
 
     void CoilCompletelyWet(EnergyPlusData &state,
-                           int const CoilNum,            // Number of Coil
+                           WaterCoilEquipConditions &WaterCoil,            // Number of Coil
                            Real64 const WaterTempIn,     // Water temperature IN to this function (C)
                            Real64 const AirTempIn,       // Air dry bulb temperature IN to this function(C)
                            Real64 const AirHumRat,       // Air Humidity Ratio IN to this funcation (C)
@@ -337,7 +337,7 @@ namespace WaterCoils {
     // Coil Part Wet Part Dry Subroutine for Cooling Coil
 
     void CoilPartWetPartDry(EnergyPlusData &state,
-                            int const CoilNum,             // Number of Coil
+                            WaterCoilEquipConditions &WaterCoil,             // Number of Coil
                             bool const FirstHVACIteration, // Saving Old values
                             Real64 const InletWaterTemp,   // Entering liquid temperature(C)
                             Real64 const InletAirTemp,     // Entering air dry bulb temperature(C)
@@ -355,7 +355,7 @@ namespace WaterCoils {
     // Calculating coil UA for Cooling Coil
 
     Real64 CalcCoilUAbyEffectNTU(EnergyPlusData &state,
-                                 int const CoilNum,
+                                 WaterCoilEquipConditions &WaterCoil,
                                  Real64 const CapacityStream1,     // Capacity rate of stream1.(W/C)
                                  Real64 const EnergyInStreamOne,   // Inlet state of stream1.(C)
                                  Real64 const CapacityStream2,     // Capacity rate of stream2.(W/C)
@@ -366,7 +366,7 @@ namespace WaterCoils {
     // Calculating coil outlet stream conditions and coil UA for Cooling Coil
 
     void CoilOutletStreamCondition(EnergyPlusData &state,
-                                   int const CoilNum,
+                                   WaterCoilEquipConditions &WaterCoil,
                                    Real64 const CapacityStream1,   // Capacity rate of stream1(W/C)
                                    Real64 const EnergyInStreamOne, // Inlet state of stream1 (C)
                                    Real64 const CapacityStream2,   // Capacity rate of stream2 (W/C)
@@ -379,7 +379,7 @@ namespace WaterCoils {
     // Subroutine for caculating outlet condition if coil is wet , for Cooling Coil
 
     void WetCoilOutletCondition(EnergyPlusData &state,
-                                int const CoilNum,
+                                WaterCoilEquipConditions &WaterCoil,
                                 Real64 const AirTempIn,      // Entering air dry bulb temperature(C)
                                 Real64 const EnthAirInlet,   // Entering air enthalpy(J/kg)
                                 Real64 const EnthAirOutlet,  // Leaving air enthalpy(J/kg)
@@ -389,9 +389,9 @@ namespace WaterCoils {
                                 Real64 &SenWaterCoilLoad     // Sensible heat transfer rate(W)
     );
 
-    void UpdateWaterCoil(EnergyPlusData &state, int const CoilNum);
+    void UpdateWaterCoil(EnergyPlusData &state, WaterCoilEquipConditions &WaterCoil);
 
-    void ReportWaterCoil(EnergyPlusData &state, int const CoilNum);
+    void ReportWaterCoil(EnergyPlusData &state, WaterCoilEquipConditions &WaterCoil);
 
     void CalcDryFinEffCoef(EnergyPlusData &state, Real64 const OutTubeEffFinDiamRatio, Array1D<Real64> &PolynomCoef);
 
@@ -492,7 +492,7 @@ namespace WaterCoils {
                             Array1D<Real64> const &Par // Par(1) = desired enthaply H [J/kg]
     );
 
-    Real64 EstimateHEXSurfaceArea(EnergyPlusData &state, int const CoilNum); // coil number, [-]
+    Real64 EstimateHEXSurfaceArea(WaterCoils::WaterCoilEquipConditions &WaterCoil); // coil number, [-]
 
     int GetWaterCoilIndex(EnergyPlusData &state,
                           std::string_view CoilType,   // must match coil types in this module
@@ -536,7 +536,7 @@ namespace WaterCoils {
 
     // estimate heating coil design inlet water temperature for autosizing UA-value
     void EstimateCoilInletWaterTemp(EnergyPlusData &state,
-                                    int const CoilNum,                // index to heating coil
+                                    WaterCoilEquipConditions &WaterCoil,                // index to heating coil
                                     int const FanOpMode,              // fan operating mode
                                     Real64 const PartLoadRatio,       // part-load ratio of heating coil
                                     Real64 const UAMax,               // maximum UA-Value
