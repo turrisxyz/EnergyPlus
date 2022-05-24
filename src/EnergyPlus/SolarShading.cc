@@ -10441,12 +10441,14 @@ void SkyDifSolarShading(EnergyPlusData &state)
 
         if (state.dataSurface->SurfHasSurroundingSurfProperties(SurfNum)) {
             SrdSurfsNum = state.dataSurface->SurfSurroundingSurfacesNum(SurfNum);
-            if (state.dataSurface->SurroundingSurfsProperty(SrdSurfsNum).SkyViewFactor != -1) {
-                state.dataSurface->Surface(SurfNum).ViewFactorSkyIR *= state.dataSurface->SurroundingSurfsProperty(SrdSurfsNum).SkyViewFactor;
-            }
-            if (state.dataSurface->SurroundingSurfsProperty(SrdSurfsNum).GroundViewFactor != -1) {
-                state.dataSurface->Surface(SurfNum).ViewFactorGroundIR *= state.dataSurface->SurroundingSurfsProperty(SrdSurfsNum).GroundViewFactor;
-            }
+            //if (state.dataSurface->SurroundingSurfsProperty(SrdSurfsNum).SkyViewFactor != -1) {
+            //    state.dataSurface->Surface(SurfNum).ViewFactorSkyIR *= state.dataSurface->SurroundingSurfsProperty(SrdSurfsNum).SkyViewFactor;
+            //}
+            //if (state.dataSurface->SurroundingSurfsProperty(SrdSurfsNum).GroundViewFactor != -1) {
+            //    state.dataSurface->Surface(SurfNum).ViewFactorGroundIR *= state.dataSurface->SurroundingSurfsProperty(SrdSurfsNum).GroundViewFactor;
+            //}
+            state.dataSurface->Surface(SurfNum).ViewFactorSkyIR *= state.dataSurface->SurroundingSurfsProperty(SrdSurfsNum).SkyViewFactor;
+            state.dataSurface->Surface(SurfNum).ViewFactorGroundIR *= state.dataSurface->SurroundingSurfsProperty(SrdSurfsNum).GroundViewFactor;
         }
     }
 
