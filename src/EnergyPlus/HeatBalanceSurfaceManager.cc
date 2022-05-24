@@ -8864,7 +8864,7 @@ void InitLocalEnvironmentsViewFactors(EnergyPlusData &state)
         // Check if the sum of all defined view factors > 1.0
         if (SrdSurfsViewFactor > 1.0) {
             ShowSevereError(state, "Illegal surrounding surfaces view factors for " + Surface.Name + ".");
-            ShowContinueError(state, " The sum of sky, ground, and all surrounding surfaces view factors should be less than 1.0.");
+            ShowContinueError(state, " The sum of sky, ground, and all surrounding surfaces view factors should be less than or equal to 1.0.");
         }
         if (SrdSurfsProperty.SkyViewFactor > 0.0 && SrdSurfsProperty.GroundViewFactor > 0.0) {
             // If both surface sky and ground view factor defined, overwrite with the defined value
@@ -8874,14 +8874,18 @@ void InitLocalEnvironmentsViewFactors(EnergyPlusData &state)
             // If only sky view factor defined, ground view factor = 1 - all other defined view factors.
             Surface.ViewFactorSkyIR = SrdSurfsProperty.SkyViewFactor;
             Surface.ViewFactorGroundIR = 1 - SrdSurfsViewFactor;
+            SrdSurfsProperty.GroundViewFactor = Surface.ViewFactorGroundIR;
         } else if (SrdSurfsProperty.SkyViewFactor == 0 && SrdSurfsProperty.GroundViewFactor > 0.0) {
             // If only ground view factor defined, sky view factor = 1 - all other defined view factors.
             Surface.ViewFactorGroundIR = SrdSurfsProperty.GroundViewFactor;
             Surface.ViewFactorSkyIR = 1 - SrdSurfsViewFactor;
+            SrdSurfsProperty.SkyViewFactor = Surface.ViewFactorSkyIR;
         } else {
-            // If neither ground or sky view factor define, continue to use the original proportion.
+            // If neither ground nor sky view factor specified, continue to use the original proportion.
             Surface.ViewFactorSkyIR *= 1 - SrdSurfsViewFactor;
             Surface.ViewFactorGroundIR *= 1 - SrdSurfsViewFactor;
+            SrdSurfsProperty.SkyViewFactor = Surface.ViewFactorSkyIR;
+            SrdSurfsProperty.GroundViewFactor = Surface.ViewFactorGroundIR;
         }
     }
 }
